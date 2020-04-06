@@ -1,7 +1,6 @@
-var whosonfirst = whosonfirst || {};
-whosonfirst.spatial = whosonfirst.spatial || {};
+var geotag = geotag || {};
 
-whosonfirst.spatial.maps = (function(){
+geotag.maps = (function(){
 
     var attribution = '<a href="https://github.com/tangrams" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a> | <a href="https://www.nextzen.org/" target="_blank">Nextzen</a>';
    

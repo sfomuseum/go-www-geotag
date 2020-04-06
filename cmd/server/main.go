@@ -27,6 +27,10 @@ func main() {
 	nextzen_style_url := flag.String("nextzen-style-url", "/tangram/refill-style.zip", "...")
 	nextzen_tile_url := flag.String("nextzen-tile-url", tangramjs.NEXTZEN_MVT_ENDPOINT, "...")
 
+	initial_latitude := flag.Float64("initial-latitude", 37.61799, "...")
+	initial_longitude := flag.Float64("initial-longitude", -122.370943, "...")
+	initial_zoom := flag.Int("initial-zoom", 14, "...")	
+	
 	flag.Parse()
 
 	t := template.New("geotag").Funcs(template.FuncMap{
@@ -71,7 +75,8 @@ func main() {
 	tangramjs_opts.Nextzen.TileURL = *nextzen_tile_url
 
 	geotag_opts := geotag.DefaultLeafletGeotagOptions()
-
+	geotag.INCLUDE_LEAFLET = false	// because the tangramjs stuff will add it
+	
 	err := tangramjs.AppendAssetHandlers(mux)
 
 	if err != nil {
@@ -84,6 +89,12 @@ func main() {
 		log.Fatalf("Failed to append bootstrap assets, %v", err)
 	}
 
+	err = geotag.AppendAssetHandlers(mux)
+
+	if err != nil {
+		log.Fatalf("Failed to append leaflet-geotag assets, %v", err)
+	}
+
 	err = www.AppendStaticAssetHandlers(mux)
 
 	if err != nil {
@@ -92,6 +103,11 @@ func main() {
 
 	index_opts := &www.IndexHandlerOptions{
 		Templates: t,
+		InitialLatitude: *initial_latitude,
+		InitialLongitude: *initial_longitude,
+		InitialZoom: *initial_zoom,	
+	
+		
 	}
 
 	index_handler, err := www.IndexHandler(index_opts)

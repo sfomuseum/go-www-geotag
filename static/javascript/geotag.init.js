@@ -79,7 +79,4 @@ window.addEventListener("load", function load(event){
     }
     
     map.setView([init_lat, init_lon], init_zoom);    
-
-    slippymap.crosshairs.init(map);    
-    
 });

@@ -21,7 +21,7 @@ type IndexHandlerVars struct {
 
 func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
 
-	t := opts.Templates.Lookup("index_2")
+	t := opts.Templates.Lookup("index")
 
 	if t == nil {
 		return nil, errors.New("Missing 'index' template")
