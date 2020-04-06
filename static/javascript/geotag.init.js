@@ -78,5 +78,43 @@ window.addEventListener("load", function load(event){
 	}
     }
     
-    map.setView([init_lat, init_lon], init_zoom);    
+    map.setView([init_lat, init_lon], init_zoom);
+
+    //
+
+    var cameraPoint = [init_lon, init_lat]
+    var targetPoint = [init_lon, init_lat]
+    
+    var points = {
+        type: 'Feature',
+        properties: {
+            angle: 20
+        },
+        geometry: {
+            type: 'GeometryCollection',
+            geometries: [
+		{
+		    type: 'Point',
+		    coordinates: cameraPoint
+		},
+		{
+		    type: 'Point',
+		    coordinates: targetPoint
+		}
+            ]
+        }
+    };
+    
+    var camera = L.geotagPhoto.camera(points, {
+        minAngle: 10
+    });
+
+    var on_update = function(e){
+	var fov = camera.getFieldOfView();
+	console.log("UPDATE", fov);
+    };
+    
+    camera.addTo(map);
+    camera.on('change', on_update);
+    camera.on('input', on_update);
 });
