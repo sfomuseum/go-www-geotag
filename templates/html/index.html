@@ -1,12 +1,17 @@
 {{ define "index" }}
 {{ template "inc_head" . }}
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
 <script type="text/javascript" src="/javascript/geotag.maps.js"></script>
 <script type="text/javascript" src="/javascript/geotag.init.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/index.css" />
 <div class="container">
 
-    <p>Hello</p>
-    <div id="map"></div>
+    <div class="card">
+	
+	<div id="map" class="card-body"></div>
+	<div class="card-footer">
+	    <div id="feature"></div>
+	</div>
+	    
 </div>
 {{ template "inc_foot" . }}
 {{ end }}

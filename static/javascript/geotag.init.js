@@ -110,8 +110,23 @@ window.addEventListener("load", function load(event){
     });
 
     var on_update = function(e){
-	var fov = camera.getFieldOfView();
-	console.log("UPDATE", fov);
+	var f = camera.getFieldOfView();
+
+	var el = document.getElementById("feature");
+
+	if (el){
+	    el.innerHTML = "";
+	    el.appendChild(render_feature(f));
+	}
+    };
+
+    var render_feature = function(f){
+
+	var enc = JSON.stringify(f, null, 2);
+	var pre = document.createElement("pre");
+	pre.appendChild(document.createTextNode(enc));
+
+	return pre;
     };
     
     camera.addTo(map);
