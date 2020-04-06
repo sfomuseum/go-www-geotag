@@ -31,6 +31,9 @@ func main() {
 	initial_longitude := flag.Float64("initial-longitude", -122.370943, "...")
 	initial_zoom := flag.Int("initial-zoom", 14, "...")
 
+	enable_search := flag.Bool("enable-search", false, "...")
+	search_endpoint := flag.String("search-endpoint", "", "...")
+	
 	flag.Parse()
 
 	t := template.New("geotag").Funcs(template.FuncMap{
@@ -106,6 +109,8 @@ func main() {
 		InitialLatitude:  *initial_latitude,
 		InitialLongitude: *initial_longitude,
 		InitialZoom:      *initial_zoom,
+		EnableSearch: *enable_search,
+		SearchEndpoint: *search_endpoint,
 	}
 
 	index_handler, err := www.IndexHandler(index_opts)

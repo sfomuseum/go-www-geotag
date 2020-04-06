@@ -11,12 +11,16 @@ type IndexHandlerOptions struct {
 	InitialLatitude  float64
 	InitialLongitude float64
 	InitialZoom      int
+	EnableSearch bool
+	SearchEndpoint string
 }
 
 type IndexHandlerVars struct {
 	InitialLatitude  float64
 	InitialLongitude float64
 	InitialZoom      int
+	EnableSearch bool
+	SearchEndpoint string
 }
 
 func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
@@ -33,6 +37,8 @@ func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
 			InitialLatitude:  opts.InitialLatitude,
 			InitialLongitude: opts.InitialLongitude,
 			InitialZoom:      opts.InitialZoom,
+			EnableSearch: opts.EnableSearch,
+			SearchEndpoint: opts.SearchEndpoint,			
 		}
 
 		err := t.Execute(rsp, vars)

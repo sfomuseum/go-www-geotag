@@ -1,0 +1,12 @@
+#placeholder-results {
+	position: absolute;
+	z-index: 5000;
+	max-height: 200px;
+	width: 300px;
+	border: solid thin;
+	top: 3.20rem;
+	left: 1.25rem;
+	background-color: #fff;
+	overflow:scroll;
+	display:none;
+}

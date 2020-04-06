@@ -1,17 +1,36 @@
 {{ define "index" }}
 {{ template "inc_head" . }}
 <link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/placeholder.css" />
 <script type="text/javascript" src="/javascript/geotag.maps.js"></script>
-<script type="text/javascript" src="/javascript/geotag.init.js"></script>
+<script type="text/javascript" src="/javascript/geotag.placeholder.js"></script>
+<script type="text/javascript" src="/javascript/geotag.maps.init.js"></script>
+<script type="text/javascript" src="/javascript/geotag.placeholder.init.js"></script>
 <div class="container">
 
+    <nav style="margin-top:1rem;margin-bottom:1rem;">
+    </nav>
+
     <div class="card">
+
+	<div class="card-header text-right">
+
+	    {{ if .EnableSearch }}
+	    <form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search"/>
+		<button class="btn my-2 my-sm-0" type="submit">Search</button>		    
+		</div>
+	    </form>
+	    <div id="placeholder-results"></div>
+	    {{ end }}
+	</div>
 	
 	<div id="map" class="card-body"></div>
 	<div class="card-footer">
 	    <div id="feature"></div>
 	</div>
-	    
+    </div>
+    
 </div>
 {{ template "inc_foot" . }}
 {{ end }}
