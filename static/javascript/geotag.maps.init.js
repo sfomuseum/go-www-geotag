@@ -82,32 +82,7 @@ window.addEventListener("load", function load(event){
 
     //
 
-    var cameraPoint = [init_lon, init_lat]
-    var targetPoint = [init_lon, init_lat]
-    
-    var points = {
-        type: 'Feature',
-        properties: {
-            angle: 20
-        },
-        geometry: {
-            type: 'GeometryCollection',
-            geometries: [
-		{
-		    type: 'Point',
-		    coordinates: cameraPoint
-		},
-		{
-		    type: 'Point',
-		    coordinates: targetPoint
-		}
-            ]
-        }
-    };
-    
-    var camera = L.geotagPhoto.camera(points, {
-        minAngle: 10
-    });
+    var camera = geotag.camera.setLatLon(init_lat, init_lon);
 
     var on_update = function(e){
 	var f = camera.getFieldOfView();
