@@ -33,6 +33,10 @@ func main() {
 
 	enable_search := flag.Bool("enable-search", false, "...")
 	search_endpoint := flag.String("search-endpoint", "", "...")
+
+	enable_oembed := flag.Bool("enable-oembed", false, "...")
+
+	// valid oembed endpoints here...
 	
 	flag.Parse()
 
@@ -111,6 +115,7 @@ func main() {
 		InitialZoom:      *initial_zoom,
 		EnableSearch: *enable_search,
 		SearchEndpoint: *search_endpoint,
+		EnableOEmbed: *enable_oembed,		
 	}
 
 	index_handler, err := www.IndexHandler(index_opts)

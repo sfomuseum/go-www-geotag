@@ -4,16 +4,36 @@
 <link rel="stylesheet" type="text/css" href="/css/placeholder.css" />
 <script type="text/javascript" src="/javascript/geotag.maps.js"></script>
 <script type="text/javascript" src="/javascript/geotag.camera.js"></script>
-<script type="text/javascript" src="/javascript/geotag.placeholder.js"></script>
 <script type="text/javascript" src="/javascript/geotag.camera.init.js"></script>
 <script type="text/javascript" src="/javascript/geotag.maps.init.js"></script>
+{{ if .EnableOEmbed }}
+<script type="text/javascript" src="/javascript/geotag.oembed.js"></script>
+<script type="text/javascript" src="/javascript/geotag.oembed.init.js"></script>
+{{ end }}
+{{ if .EnableSearch }}
+<script type="text/javascript" src="/javascript/geotag.placeholder.js"></script>
 <script type="text/javascript" src="/javascript/geotag.placeholder.init.js"></script>
+{{ end }}
 <div class="container">
 
-    <nav style="margin-top:1rem;margin-bottom:1rem;">
-	<!-- https://millsfield.sfomuseum.org/objects/1511951477/ -->
-    </nav>
+    {{ if .EnableOEmbed }}    
 
+    <div class="card">
+
+	<div class="card-header">
+
+	    <form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch"/>
+		<button class="btn my-2 my-sm-0" type="submit" id="oembed-fetch">Fetch</button>
+	    </form>
+	</div>
+	
+	<div id="oembed-image" class="card-body"></div>
+	<div class="card-footer"></div>
+    </div>
+    
+    {{ end }}
+    
     <div class="card">
 
 	<div class="card-header">

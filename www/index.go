@@ -13,6 +13,8 @@ type IndexHandlerOptions struct {
 	InitialZoom      int
 	EnableSearch bool
 	SearchEndpoint string
+	EnableOEmbed bool
+	OEmbedEndpoints []string
 }
 
 type IndexHandlerVars struct {
@@ -21,6 +23,8 @@ type IndexHandlerVars struct {
 	InitialZoom      int
 	EnableSearch bool
 	SearchEndpoint string
+	EnableOEmbed bool
+	OEmbedEndpoints []string	
 }
 
 func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
@@ -38,7 +42,9 @@ func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
 			InitialLongitude: opts.InitialLongitude,
 			InitialZoom:      opts.InitialZoom,
 			EnableSearch: opts.EnableSearch,
-			SearchEndpoint: opts.SearchEndpoint,			
+			SearchEndpoint: opts.SearchEndpoint,
+			EnableOEmbed: opts.EnableOEmbed,
+			OEmbedEndpoints: opts.OEmbedEndpoints, 			
 		}
 
 		err := t.Execute(rsp, vars)
