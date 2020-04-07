@@ -61,6 +61,14 @@ window.addEventListener("load", function load(event){
 		var value = name + " (" + id + ") " + pt;
 
 		row.appendChild(document.createTextNode(value));
+
+		row.onclick = function(e){
+		    var el = e.target;		    
+		    var id = el.getAttribute("data-whosonfirst-id");
+
+		    console.log("CLICK", id, camera);
+		};
+		
 		wrapper.appendChild(row);
 	    }
 
