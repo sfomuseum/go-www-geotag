@@ -74,8 +74,12 @@ window.addEventListener("load", function load(event){
 		    if (map){
 			map.setView([lat, lon], 13);
 		    }
+
+		    var camera = geotag.camera.getCamera();
 		    
-		    geotag.camera.setLatLon(lat, lon);
+		    camera.setCameraLatLng([lat, lon]);
+		    camera.setTargetLatLng([lat, lon]);    
+		    
 		    r.style.display = "none";
 		    r.innerHTML = "";
 		};

@@ -82,8 +82,12 @@ window.addEventListener("load", function load(event){
 
     //
 
-    var camera = geotag.camera.setLatLon(init_lat, init_lon);
-
+    var camera = geotag.camera.getCamera();
+    camera.addTo(map);
+    
+    camera.setCameraLatLng([init_lat, init_lon]);
+    camera.setTargetLatLng([init_lat, init_lon]);    
+    
     var on_update = function(e){
 	var f = camera.getFieldOfView();
 
@@ -104,7 +108,6 @@ window.addEventListener("load", function load(event){
 	return pre;
     };
     
-    camera.addTo(map);
     camera.on('change', on_update);
     camera.on('input', on_update);
 });

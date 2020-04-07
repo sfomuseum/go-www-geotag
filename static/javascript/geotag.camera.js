@@ -6,12 +6,30 @@ geotag.camera = (function(){
 
     var self = {
 
+	'init': function(lat, lon){
+
+	    lat = parseFloat(lat);
+	    lon = parseFloat(lon);
+	    
+	    if (! lat){
+		lat = 0.0;
+	    }
+
+	    if (! lon){
+		lon = 0.0;
+	    }
+
+	    console.log("INIT CAMERA", lat, lon);
+	    self.initCamera(lat, lon);
+	},
+	
 	'getCamera': function(){
 	    return _camera;
 	},
 
 	'initCamera': function(lat, lon){
 
+	    console.log("I AM HERE", lat, lon);
 	    var cameraPoint = [lon, lat]
 	    var targetPoint = [lon, lat]
 	    
@@ -38,17 +56,16 @@ geotag.camera = (function(){
 	    _camera = L.geotagPhoto.camera(points, {
 		minAngle: 10
 	    });
-
-	    return _camera;
 	},
 	
 	'setLatLon': function(lat, lon){
 
-	    if (! _camera){
-		return self.initCamera(lat, lon);
-	    }
-
+	    console.log("SET", lat, lon);
+	    
 	    _camera.setCameraLatLng([lat, lon]);
+	    _camera.setTargetLatLng([lat, lon]);
+
+	    console.log("WTF", _camera.getCameraLatLng())
 	    return _camera;
 	},
 	
