@@ -66,7 +66,18 @@ window.addEventListener("load", function load(event){
 		    var el = e.target;		    
 		    var id = el.getAttribute("data-whosonfirst-id");
 
-		    console.log("CLICK", id);
+		    var lat = el.getAttribute("data-latitude");
+		    var lon = el.getAttribute("data-longitude");		    
+
+		    var map = geotag.maps.getMapById("map");
+
+		    if (map){
+			map.setView([lat, lon], 13);
+		    }
+		    
+		    geotag.camera.setLatLon(lat, lon);
+		    r.style.display = "none";
+		    r.innerHTML = "";
 		};
 		
 		wrapper.appendChild(row);

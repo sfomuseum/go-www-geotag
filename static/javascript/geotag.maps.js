@@ -46,18 +46,23 @@ geotag.maps = (function(){
 
 	    return parsed;
 	},
+
+	'getMapById': function(map_id, args){
+
+	    var map_el = document.getElementById("map");
+
+	    if (! map_el){
+		return null;
+	    }
+
+	    return self.getMap(map_el);
+	},
 	
 	'getMap': function(map_el, args){
 
 	    if (! args){
 		args = {};
 	    }
-
-	    if (! args["api_key"]){
-		return null;
-	    }
-
-	    var api_key = args["api_key"];
 	    
 	    var map_id = map_el.getAttribute("id");
 
@@ -68,6 +73,12 @@ geotag.maps = (function(){
 	    if (maps[map_id]){
 		return maps[map_id];
 	    }
+
+	    if (! args["api_key"]){
+		return null;
+	    }
+
+	    var api_key = args["api_key"];
 	    
 	    var tangram_opts = self.getTangramOptions(args);	   
 	    var tangramLayer = Tangram.leafletLayer(tangram_opts);
@@ -77,7 +88,8 @@ geotag.maps = (function(){
 
 	    var attribution = self.getAttribution();
 	    map.attributionControl.addAttribution(attribution);
-	    
+
+	    maps[map_id] = map;
 	    return map;
 	},
 
