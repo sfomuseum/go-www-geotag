@@ -10,14 +10,14 @@ geotag.placeholder = (function(){
 	    _endpoint = url;
 	},
 
-	'query': function(text, on_success, on_error) {
+	'search': function(text, on_success, on_error) {
 
 	    var q = {
 		'text': text,
 	    };
 
-	    var q_str = self.query_string(q);
-	    var url = _endpoint + 'query/?' + q_str;
+	    var q_str = self.build_query_string(q);
+	    var url = _endpoint + 'search/?' + q_str;
 
 	    var req = new XMLHttpRequest();
 	    
@@ -41,7 +41,7 @@ geotag.placeholder = (function(){
 	    req.send();	    	    
 	},
 	
-	'query_string': function(args){
+	'build_query_string': function(args){
 
 	    var pairs = [];
 
@@ -58,25 +58,7 @@ geotag.placeholder = (function(){
 
 	    return pairs.join("&");
 	},
-	
-	'render_query_results': function(rsp){
-
-	    var wrapper = document.createElement("div");
-
-	    var count = rsp.length;
-
-	    for (var i=0; i < count; i++){
-
-		var value = rsp[i];
 		
-		var row = document.createElement("div");
-		row.appendChild(document.createTextNode(value));
-		wrapper.appendChild(row);
-	    }
-
-	    return wrapper;
-	},
-	
     };
     
     return self;

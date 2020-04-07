@@ -21,7 +21,7 @@ window.addEventListener("load", function load(event){
     }
 
     geotag.placeholder.set_endpoint(endpoint);
-    
+   
     q.onkeyup = function(e){
 
 	var el = e.target;
@@ -31,10 +31,45 @@ window.addEventListener("load", function load(event){
 	    return;
 	}
 
+	var render_search_results = function(rsp){	   
+
+	    var count = rsp.length;
+
+	    if (count == 0){
+		return;
+	    }
+
+	    var wrapper = document.createElement("div");
+	    
+	    for (var i=0; i < count; i++){
+
+		var row = rsp[i];
+		var id = row["id"];
+		var pt = row["placetype"];
+		var name = row["name"];
+
+		var geom = row["geom"];
+		var lat = geom["lat"];
+		var lon = geom["lon"];
+		
+		var row = document.createElement("div");
+		row.setAttribute("class", "placeholder-row");
+		row.setAttribute("data-whosonfirst-id", id);
+		row.setAttribute("data-latitude", lat);
+		row.setAttribute("data-longitude", lon);
+
+		var value = name + " (" + id + ") " + pt;
+
+		row.appendChild(document.createTextNode(value));
+		wrapper.appendChild(row);
+	    }
+
+	    return wrapper;
+	};
+	
 	var on_success = function(rsp){
 
-	    console.log("SUCCESS", text, rsp);	    
-	    var el = geotag.placeholder.render_query_results(rsp);
+	    var el = render_search_results(rsp);
 	    
 	    r.appendChild(el);
 	    r.style.display = "block";	    
@@ -44,7 +79,8 @@ window.addEventListener("load", function load(event){
 	    console.log("SAD", err);
 	};
 
-	geotag.placeholder.query(text, on_success, on_error);
+	geotag.placeholder.search(text, on_success, on_error);
+	
 	r.style.display = "none";
 	r.innerHTML = "";
     };

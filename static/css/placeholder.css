@@ -10,3 +10,16 @@
 	overflow:scroll;
 	display:none;
 }
+
+.placeholder-row {
+	padding: .5rem;
+	border-bottom: solid thin;
+}
+
+.placeholder-row:hover{
+	background-color:#ccc;
+}
+
+.placeholder-row:last-child {
+	border-bottom:none;
+}
