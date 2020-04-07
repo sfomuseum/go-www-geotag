@@ -1,3 +1,7 @@
+body {
+	margin-top:1.5rem;
+}
+
 #map {
 	border: solid thin;
 	width: 100%;
@@ -6,4 +10,12 @@
 
 .card {
 	margin-bottom:1rem;
+}
+
+#oembed-image {
+	display:none;
+}
+
+#oembed-meta {
+	display:none;
 }

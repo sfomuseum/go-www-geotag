@@ -13,6 +13,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 func main() {
@@ -35,9 +36,8 @@ func main() {
 	search_endpoint := flag.String("search-endpoint", "", "...")
 
 	enable_oembed := flag.Bool("enable-oembed", false, "...")
+	oembed_endpoints := flag.String("oembed-endpoints", "", "...")
 
-	// valid oembed endpoints here...
-	
 	flag.Parse()
 
 	t := template.New("geotag").Funcs(template.FuncMap{
@@ -113,9 +113,26 @@ func main() {
 		InitialLatitude:  *initial_latitude,
 		InitialLongitude: *initial_longitude,
 		InitialZoom:      *initial_zoom,
-		EnableSearch: *enable_search,
-		SearchEndpoint: *search_endpoint,
-		EnableOEmbed: *enable_oembed,		
+		EnableSearch:     *enable_search,
+		SearchEndpoint:   *search_endpoint,
+	}
+
+	if *enable_oembed {
+
+		index_opts.EnableOEmbed = *enable_oembed
+
+		urls := strings.Split(*oembed_endpoints, ",")
+
+		for _, oembed_url := range urls {
+
+			_, err := url.Parse(oembed_url)
+
+			if err != nil {
+				log.Fatalf("Invalid OEmbed URL '%s', %v", oembed_url, err)
+			}
+		}
+
+		index_opts.OEmbedEndpoints = urls
 	}
 
 	index_handler, err := www.IndexHandler(index_opts)

@@ -1,4 +1,14 @@
 window.addEventListener("load", function load(event){
+
+    var endpoints_str = document.body.getAttribute("data-oembed-endpoints");    
+    var endpoints_map = geotag.oembed.endpoints_map_from_string(endpoints_str);
+    
+    if (! endpoints_map){
+	console.log("Unabled to build endpoints map");
+	return;
+    }
+
+    geotag.oembed.set_endpoints_map(endpoints_map);
     
     var q = document.getElementById("oembed-url");
 
@@ -14,6 +24,13 @@ window.addEventListener("load", function load(event){
 	return;
     }
 
+    var m = document.getElementById("oembed-meta");
+
+    if (! i){
+	console.log("Missing oembed-meta element.");
+	return;
+    }
+    
     var f = document.getElementById("oembed-fetch");
 
     if (! f){
@@ -23,20 +40,41 @@ window.addEventListener("load", function load(event){
     
     f.onclick = function(e){
 
-	var el = e.target;
-	var url = el.value;
-
+	var url = q.value;
+	
 	var on_success = function(rsp){
-	    console.log("OKAY", rsp);
+
+	    i.innerHTML = "";
+	    m.innerHTML = "";	
+	    
+	    var img = document.createElement("img");
+	    img.setAttribute("height", rsp["height"]);
+	    img.setAttribute("width", rsp["width"]);	    
+	    img.setAttribute("src", rsp["url"]);
+	    img.setAttribute("class", "card-img-top");
+
+	    i.appendChild(img);
+	    i.style.display = "block";
+	    
+	    var title = rsp["title"];
+
+	    var title = document.createElement("a");
+	    title.setAttribute("href", rsp["author_url"]);
+	    title.appendChild(document.createTextNode(rsp["title"]));
+
+	    m.appendChild(title);
+	    m.style.display = "block";
 	};
 
 	var on_error = function(err){
 	    console.log("ERROR", err);
 	};
 
-	var endpoint = "https://millsfield.sfomuseum.org/oembed/";
-	
-	geotag.oembed.fetch(endpoint, url, on_success, on_error);
+	geotag.oembed.fetch(url, on_success, on_error);
+
+	i.style.display = "none";
+	m.style.display = "none";
+
 	return false;
     };
     
