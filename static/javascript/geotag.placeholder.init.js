@@ -66,7 +66,7 @@ window.addEventListener("load", function load(event){
 		    var el = e.target;		    
 		    var id = el.getAttribute("data-whosonfirst-id");
 
-		    console.log("CLICK", id, camera);
+		    console.log("CLICK", id);
 		};
 		
 		wrapper.appendChild(row);
