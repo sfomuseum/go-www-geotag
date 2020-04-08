@@ -41,6 +41,21 @@ window.addEventListener("load", function load(event){
     f.onclick = function(e){
 
 	var url = q.value;
+
+	var on_success_geojson = function(feature){
+	    var props = feature["properties"];
+	    var lat = props["geom:latitude"];
+	    var lon = props["geom:longitude"];	    
+
+	    var camera = geotag.camera.getCamera();
+		    
+	    camera.setCameraLatLng([lat, lon]);
+	    camera.setTargetLatLng([lat, lon]);    
+	};
+
+	var on_error_geojson = function(err){
+	    console.log("SAD GEOJSON", err);
+	};
 	
 	var on_success = function(rsp){
 
@@ -64,6 +79,11 @@ window.addEventListener("load", function load(event){
 
 	    m.appendChild(title);
 	    m.style.display = "block";
+
+	    if (rsp["geotag:geojson_url"]){
+		whosonfirst.net.fetch(rsp["geotag:geojson_url"], on_success_geojson, on_error_geojson);
+	    }
+	    
 	};
 
 	var on_error = function(err){

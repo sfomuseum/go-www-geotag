@@ -58,6 +58,7 @@ geotag.oembed = (function(){
 	    var q = {
 		'url': url,
 		'format': 'json',
+		'geotag': 1,
 	    };
 
 	    var q_str = self.build_query_string(q);

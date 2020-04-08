@@ -14,10 +14,10 @@
 package geotag
 
 import (
-	"github.com/whosonfirst/go-bindata-assetfs"
 	"bytes"
 	"compress/gzip"
 	"fmt"
+	"github.com/whosonfirst/go-bindata-assetfs"
 	"io"
 	"io/ioutil"
 	"os"
@@ -310,14 +310,14 @@ func AssetNames() []string {
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
 	"static/javascript/Leaflet.GeotagPhoto.js": staticJavascriptLeafletGeotagphotoJs,
-	"static/javascript/highlight.min.js": staticJavascriptHighlightMinJs,
-	"static/css/Leaflet.GeotagPhoto.css": staticCssLeafletGeotagphotoCss,
-	"static/css/highlight.js.default.min.css": staticCssHighlightJsDefaultMinCss,
-	"static/images/camera-icon.svg": staticImagesCameraIconSvg,
-	"static/images/camera.svg": staticImagesCameraSvg,
-	"static/images/crosshair-icon.svg": staticImagesCrosshairIconSvg,
-	"static/images/crosshair.svg": staticImagesCrosshairSvg,
-	"static/images/marker.svg": staticImagesMarkerSvg,
+	"static/javascript/highlight.min.js":       staticJavascriptHighlightMinJs,
+	"static/css/Leaflet.GeotagPhoto.css":       staticCssLeafletGeotagphotoCss,
+	"static/css/highlight.js.default.min.css":  staticCssHighlightJsDefaultMinCss,
+	"static/images/camera-icon.svg":            staticImagesCameraIconSvg,
+	"static/images/camera.svg":                 staticImagesCameraSvg,
+	"static/images/crosshair-icon.svg":         staticImagesCrosshairIconSvg,
+	"static/images/crosshair.svg":              staticImagesCrosshairSvg,
+	"static/images/marker.svg":                 staticImagesMarkerSvg,
 }
 
 // AssetDir returns the file names below a certain
@@ -359,22 +359,23 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
+
 var _bintree = &bintree{nil, map[string]*bintree{
 	"static": &bintree{nil, map[string]*bintree{
 		"css": &bintree{nil, map[string]*bintree{
-			"Leaflet.GeotagPhoto.css": &bintree{staticCssLeafletGeotagphotoCss, map[string]*bintree{}},
+			"Leaflet.GeotagPhoto.css":      &bintree{staticCssLeafletGeotagphotoCss, map[string]*bintree{}},
 			"highlight.js.default.min.css": &bintree{staticCssHighlightJsDefaultMinCss, map[string]*bintree{}},
 		}},
 		"images": &bintree{nil, map[string]*bintree{
-			"camera-icon.svg": &bintree{staticImagesCameraIconSvg, map[string]*bintree{}},
-			"camera.svg": &bintree{staticImagesCameraSvg, map[string]*bintree{}},
+			"camera-icon.svg":    &bintree{staticImagesCameraIconSvg, map[string]*bintree{}},
+			"camera.svg":         &bintree{staticImagesCameraSvg, map[string]*bintree{}},
 			"crosshair-icon.svg": &bintree{staticImagesCrosshairIconSvg, map[string]*bintree{}},
-			"crosshair.svg": &bintree{staticImagesCrosshairSvg, map[string]*bintree{}},
-			"marker.svg": &bintree{staticImagesMarkerSvg, map[string]*bintree{}},
+			"crosshair.svg":      &bintree{staticImagesCrosshairSvg, map[string]*bintree{}},
+			"marker.svg":         &bintree{staticImagesMarkerSvg, map[string]*bintree{}},
 		}},
 		"javascript": &bintree{nil, map[string]*bintree{
 			"Leaflet.GeotagPhoto.js": &bintree{staticJavascriptLeafletGeotagphotoJs, map[string]*bintree{}},
-			"highlight.min.js": &bintree{staticJavascriptHighlightMinJs, map[string]*bintree{}},
+			"highlight.min.js":       &bintree{staticJavascriptHighlightMinJs, map[string]*bintree{}},
 		}},
 	}},
 }}
@@ -425,7 +426,6 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-
 
 func assetFS() *assetfs.AssetFS {
 	assetInfo := func(path string) (os.FileInfo, error) {

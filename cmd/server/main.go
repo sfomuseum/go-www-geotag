@@ -6,6 +6,7 @@ import (
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-server"
 	"github.com/aaronland/go-http-tangramjs"
+	"github.com/pkg/browser"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	"github.com/sfomuseum/go-www-geotag/assets/templates"
 	"github.com/sfomuseum/go-www-geotag/www"
@@ -14,6 +15,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -37,6 +39,8 @@ func main() {
 
 	enable_oembed := flag.Bool("enable-oembed", false, "...")
 	oembed_endpoints := flag.String("oembed-endpoints", "", "...")
+
+	open_browser := flag.Bool("open-browser", false, "...")
 
 	flag.Parse()
 
@@ -161,12 +165,57 @@ func main() {
 		log.Fatalf("Failed to create new server for '%s', %v", u, err)
 	}
 
-	log.Printf("Listening on %s", s.Address())
+	go func() {
 
-	err = s.ListenAndServe(mux)
+		log.Printf("Listening on %s", s.Address())
 
-	if err != nil {
-		log.Fatalf("Failed to start server, %v", err)
+		err = s.ListenAndServe(mux)
+
+		if err != nil {
+			log.Fatalf("Failed to start server, %v", err)
+		}
+	}()
+
+	if *open_browser {
+
+		ticker := time.NewTicker(200 * time.Millisecond)
+
+		available := false
+		attempts := 0
+		
+		for {
+			select {
+			case <-ticker.C:
+
+				rsp, err := http.Get(s.Address())
+
+				if err == nil && rsp.StatusCode == 200 {
+					available = true
+					break
+				}
+
+				attempts += 1
+				
+			default:
+				// pass
+			}
+
+			if available == true {
+				break
+			}
+			
+			if attempts >= 10 {
+				log.Fatalf("Failed to determine whether %s is available", s.Address())
+			}			
+		}
+		
+		err := browser.OpenURL(s.Address())
+
+		if err != nil {
+			log.Fatalf("Failed to open URL %s, %v", s.Address(), err)
+		}
 	}
 
+	for {
+	}
 }

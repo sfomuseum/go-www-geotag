@@ -1,7 +1,7 @@
 package geotag
 
 import (
-	"github.com/aaronland/go-http-leaflet"	
+	"github.com/aaronland/go-http-leaflet"
 	"github.com/aaronland/go-http-rewrite"
 	_ "log"
 	"net/http"
@@ -25,7 +25,7 @@ func DefaultLeafletGeotagOptions() *LeafletGeotagOptions {
 		},
 		JS: []string{
 			"/javascript/Leaflet.GeotagPhoto.js",
-			"/javascript/highlight.min.js",			
+			"/javascript/highlight.min.js",
 		},
 	}
 
@@ -34,21 +34,21 @@ func DefaultLeafletGeotagOptions() *LeafletGeotagOptions {
 
 func AppendResourcesHandler(next http.Handler, opts *LeafletGeotagOptions) http.Handler {
 
-	if INCLUDE_LEAFLET {	
+	if INCLUDE_LEAFLET {
 		leaflet_opts := leaflet.DefaultLeafletOptions()
 		next = leaflet.AppendResourcesHandler(next, leaflet_opts)
 	}
-	
+
 	return AppendResourcesHandlerWithPrefix(next, opts, "")
 }
 
 func AppendResourcesHandlerWithPrefix(next http.Handler, opts *LeafletGeotagOptions, prefix string) http.Handler {
 
 	if INCLUDE_LEAFLET {
-		leaflet_opts := leaflet.DefaultLeafletOptions()	
+		leaflet_opts := leaflet.DefaultLeafletOptions()
 		next = leaflet.AppendResourcesHandlerWithPrefix(next, leaflet_opts, prefix)
 	}
-	
+
 	js := opts.JS
 	css := opts.CSS
 
@@ -107,14 +107,14 @@ func AppendAssetHandlers(mux *http.ServeMux) error {
 func AppendAssetHandlersWithPrefix(mux *http.ServeMux, prefix string) error {
 
 	if INCLUDE_LEAFLET {
-		
+
 		err := leaflet.AppendAssetHandlersWithPrefix(mux, prefix)
-		
+
 		if err != nil {
 			return err
 		}
 	}
-	
+
 	asset_handler, err := AssetsHandlerWithPrefix(prefix)
 
 	if err != nil {
