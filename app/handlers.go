@@ -70,8 +70,8 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 	initial_longitude, _ := flags.Float64Var(fs, "initial-longitudex")
 	initial_zoom, _ := flags.IntVar(fs, "initial-zoom")
 
-	enable_search, _ := flags.BoolVar(fs, "enable-search")
-	search_endpoint, _ := flags.StringVar(fs, "search-endpoint")
+	enable_placeholder, _ := flags.BoolVar(fs, "enable-placeholder")
+	placeholder_endpoint, _ := flags.StringVar(fs, "placeholder-endpoint")
 
 	enable_oembed, _ := flags.BoolVar(fs, "enable-oembed")
 	oembed_endpoints, _ := flags.StringVar(fs, "oembed-endpoints")
@@ -91,8 +91,8 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 		InitialLatitude:  initial_latitude,
 		InitialLongitude: initial_longitude,
 		InitialZoom:      initial_zoom,
-		EnableSearch:     enable_search,
-		SearchEndpoint:   search_endpoint,
+		EnablePlaceholder:     enable_placeholder,
+		PlaceholderEndpoint:   placeholder_endpoint,
 	}
 
 	if enable_oembed {

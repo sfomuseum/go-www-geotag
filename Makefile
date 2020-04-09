@@ -23,4 +23,4 @@ bake-assets:
 
 debug:
 	@make bake
-	go run -mod vendor cmd/server/main.go -nextzen-apikey $(APIKEY) -enable-search -search-endpoint $(SEARCH) -enable-oembed -oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/' -port 8081
+	go run -mod vendor cmd/server/main.go -nextzen-apikey $(APIKEY) -enable-placeholder -placeholder-endpoint $(SEARCH) -enable-oembed -oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/'

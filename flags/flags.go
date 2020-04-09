@@ -71,8 +71,8 @@ func CommonFlags() (*flag.FlagSet, error) {
 
 	fs.String("path-templates", "", "...")
 
-	fs.Bool("enable-search", false, "...")
-	fs.String("search-endpoint", "", "...")
+	fs.Bool("enable-placeholder", false, "...")
+	fs.String("placeholder-endpoint", "", "...")
 
 	fs.Bool("enable-oembed", false, "...")
 	fs.String("oembed-endpoints", "", "...")

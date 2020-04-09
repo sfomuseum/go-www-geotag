@@ -1,6 +1,6 @@
 window.addEventListener("load", function load(event){
 
-    var endpoint = document.body.getAttribute("data-search-endpoint");
+    var endpoint = document.body.getAttribute("data-placeholder-endpoint");
 
     if (! endpoint){
 	return;
