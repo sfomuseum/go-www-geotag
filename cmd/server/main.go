@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"github.com/aaronland/go-http-bootstrap"
@@ -165,6 +166,11 @@ func main() {
 		log.Fatalf("Failed to create new server for '%s', %v", u, err)
 	}
 
+	ctx := context.Background()
+
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
 	go func() {
 
 		log.Printf("Listening on %s", s.Address())
@@ -182,7 +188,7 @@ func main() {
 
 		available := false
 		attempts := 0
-		
+
 		for {
 			select {
 			case <-ticker.C:
@@ -195,7 +201,7 @@ func main() {
 				}
 
 				attempts += 1
-				
+
 			default:
 				// pass
 			}
@@ -203,12 +209,12 @@ func main() {
 			if available == true {
 				break
 			}
-			
+
 			if attempts >= 10 {
 				log.Fatalf("Failed to determine whether %s is available", s.Address())
-			}			
+			}
 		}
-		
+
 		err := browser.OpenURL(s.Address())
 
 		if err != nil {
@@ -216,6 +222,5 @@ func main() {
 		}
 	}
 
-	for {
-	}
+	<-ctx.Done()
 }
