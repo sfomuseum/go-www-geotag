@@ -6,16 +6,9 @@ body {
 	border: solid thin;
 	width: 100%;
 	height: 50vh;
+	max-height:500px !important;
 }
 
 .card {
 	margin-bottom:1rem;
-}
-
-#oembed-image {
-	display:none;
-}
-
-#oembed-meta {
-	display:none;
 }

@@ -10,16 +10,17 @@
 // static/javascript/geotag.placeholder.js
 // static/javascript/whosonfirst.net.js
 // static/css/index.css
+// static/css/oembed.css
 // static/css/placeholder.css
 // DO NOT EDIT!
 
 package www
 
 import (
+	"github.com/whosonfirst/go-bindata-assetfs"
 	"bytes"
 	"compress/gzip"
 	"fmt"
-	"github.com/whosonfirst/go-bindata-assetfs"
 	"io"
 	"io/ioutil"
 	"os"
@@ -214,7 +215,7 @@ func staticJavascriptGeotagPlaceholderInitJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/javascript/geotag.placeholder.init.js", size: 2267, mode: os.FileMode(420), modTime: time.Unix(1586470168, 0)}
+	info := bindataFileInfo{name: "static/javascript/geotag.placeholder.init.js", size: 2267, mode: os.FileMode(420), modTime: time.Unix(1586471433, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -259,7 +260,7 @@ func staticJavascriptWhosonfirstNetJs() (*asset, error) {
 	return a, nil
 }
 
-var _staticCssIndexCss = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x6c\xcc\xb1\xaa\xc3\x30\x0c\x85\xe1\x39\x7e\x0a\xc3\xe5\x8e\x09\xc9\x90\x45\x79\x1a\xb9\x12\xb1\x20\xb2\x8c\x23\x5a\x42\xe9\xbb\x97\x74\x28\x2d\x74\x3e\xdf\xf9\x93\xd1\x11\xef\xa1\x53\x6c\xab\x94\xde\xad\xc2\x34\xcc\x8d\x75\x09\x8f\x10\xfe\x14\xeb\xb9\x26\x6b\xc4\x0d\xe2\x6e\x9b\x50\xf4\x2c\x65\x09\xdd\x4d\xc8\x33\xc4\x69\x1c\xff\x97\xd0\x65\x96\x35\x3b\xc4\x79\xbc\xe6\xd7\x77\xb8\x60\xa3\x8f\x74\x32\x77\x53\x98\xde\x6d\x63\x4d\x4c\xbd\x28\xae\x7c\x3a\x92\xbd\x6e\x78\x40\xb1\xc2\x5f\x42\xd9\xf1\x17\x78\x06\x00\x00\xff\xff\xfb\x92\xe0\xce\xbc\x00\x00\x00")
+var _staticCssIndexCss = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x4c\xcd\x41\x0a\xc2\x30\x10\x85\xe1\x75\xe7\x14\x23\xe2\xb2\x25\x59\x64\x93\x9c\x26\x31\xa1\x19\x30\x99\x30\x0e\x5a\x11\xef\x2e\x95\x2e\xdc\xbe\x07\xff\x97\x38\xbf\xf0\x0d\x53\x8b\xb2\x52\x9f\x95\x87\xb7\x8b\x93\xd2\x02\x7c\x00\xce\x2d\x8e\xfd\x4d\x2c\xb9\x88\xc7\x3b\xdf\x28\xa3\x56\xea\x01\xa6\x27\x65\xad\x1e\xad\x31\x97\x00\x53\x2d\xb4\x56\xf5\xe8\xcc\xa3\x86\xbd\xb7\xcd\xc7\xe4\x8c\x19\x1b\x9e\xa8\x0d\x16\x8d\x5d\x7f\xe5\xe5\x1a\x25\xff\xc1\x89\x55\xb9\x79\x7b\xc8\xdf\x00\x00\x00\xff\xff\x97\x63\x59\xe3\x97\x00\x00\x00")
 
 func staticCssIndexCssBytes() ([]byte, error) {
 	return bindataRead(
@@ -274,7 +275,27 @@ func staticCssIndexCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/index.css", size: 188, mode: os.FileMode(420), modTime: time.Unix(1586294812, 0)}
+	info := bindataFileInfo{name: "static/css/index.css", size: 151, mode: os.FileMode(420), modTime: time.Unix(1586471723, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _staticCssOembedCss = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x52\xce\x4f\xcd\x4d\x4a\x4d\xd1\xcd\xcc\x4d\x4c\x4f\x55\xa8\xe6\xe2\x4c\xc9\x2c\x2e\xc8\x49\xac\xb4\xca\xcb\xcf\x4b\xb5\xe6\xaa\xe5\xe2\x82\xa9\xc8\x4d\x2d\x49\xc4\xab\x00\x62\x84\x5e\x72\x62\x11\x88\x9d\xae\x5b\x92\x5f\x00\x52\x9f\x9b\x58\xa1\x9b\x91\x9a\x99\x9e\x51\x62\xa5\x60\x6c\x64\x50\x50\xa1\xa0\x98\x99\x5b\x90\x5f\x54\x92\x98\x57\x62\x0d\x91\x2e\xcf\x4c\x29\xc9\xb0\x52\x30\xb1\x40\x97\xad\xe5\xe2\xe4\x02\x04\x00\x00\xff\xff\x91\x2a\x49\x89\xa2\x00\x00\x00")
+
+func staticCssOembedCssBytes() ([]byte, error) {
+	return bindataRead(
+		_staticCssOembedCss,
+		"static/css/oembed.css",
+	)
+}
+
+func staticCssOembedCss() (*asset, error) {
+	bytes, err := staticCssOembedCssBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "static/css/oembed.css", size: 162, mode: os.FileMode(420), modTime: time.Unix(1586472001, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -351,17 +372,18 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"static/javascript/geotag.camera.init.js":      staticJavascriptGeotagCameraInitJs,
-	"static/javascript/geotag.camera.js":           staticJavascriptGeotagCameraJs,
-	"static/javascript/geotag.maps.init.js":        staticJavascriptGeotagMapsInitJs,
-	"static/javascript/geotag.maps.js":             staticJavascriptGeotagMapsJs,
-	"static/javascript/geotag.oembed.init.js":      staticJavascriptGeotagOembedInitJs,
-	"static/javascript/geotag.oembed.js":           staticJavascriptGeotagOembedJs,
+	"static/javascript/geotag.camera.init.js": staticJavascriptGeotagCameraInitJs,
+	"static/javascript/geotag.camera.js": staticJavascriptGeotagCameraJs,
+	"static/javascript/geotag.maps.init.js": staticJavascriptGeotagMapsInitJs,
+	"static/javascript/geotag.maps.js": staticJavascriptGeotagMapsJs,
+	"static/javascript/geotag.oembed.init.js": staticJavascriptGeotagOembedInitJs,
+	"static/javascript/geotag.oembed.js": staticJavascriptGeotagOembedJs,
 	"static/javascript/geotag.placeholder.init.js": staticJavascriptGeotagPlaceholderInitJs,
-	"static/javascript/geotag.placeholder.js":      staticJavascriptGeotagPlaceholderJs,
-	"static/javascript/whosonfirst.net.js":         staticJavascriptWhosonfirstNetJs,
-	"static/css/index.css":                         staticCssIndexCss,
-	"static/css/placeholder.css":                   staticCssPlaceholderCss,
+	"static/javascript/geotag.placeholder.js": staticJavascriptGeotagPlaceholderJs,
+	"static/javascript/whosonfirst.net.js": staticJavascriptWhosonfirstNetJs,
+	"static/css/index.css": staticCssIndexCss,
+	"static/css/oembed.css": staticCssOembedCss,
+	"static/css/placeholder.css": staticCssPlaceholderCss,
 }
 
 // AssetDir returns the file names below a certain
@@ -403,23 +425,23 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
-
 var _bintree = &bintree{nil, map[string]*bintree{
 	"static": &bintree{nil, map[string]*bintree{
 		"css": &bintree{nil, map[string]*bintree{
-			"index.css":       &bintree{staticCssIndexCss, map[string]*bintree{}},
+			"index.css": &bintree{staticCssIndexCss, map[string]*bintree{}},
+			"oembed.css": &bintree{staticCssOembedCss, map[string]*bintree{}},
 			"placeholder.css": &bintree{staticCssPlaceholderCss, map[string]*bintree{}},
 		}},
 		"javascript": &bintree{nil, map[string]*bintree{
-			"geotag.camera.init.js":      &bintree{staticJavascriptGeotagCameraInitJs, map[string]*bintree{}},
-			"geotag.camera.js":           &bintree{staticJavascriptGeotagCameraJs, map[string]*bintree{}},
-			"geotag.maps.init.js":        &bintree{staticJavascriptGeotagMapsInitJs, map[string]*bintree{}},
-			"geotag.maps.js":             &bintree{staticJavascriptGeotagMapsJs, map[string]*bintree{}},
-			"geotag.oembed.init.js":      &bintree{staticJavascriptGeotagOembedInitJs, map[string]*bintree{}},
-			"geotag.oembed.js":           &bintree{staticJavascriptGeotagOembedJs, map[string]*bintree{}},
+			"geotag.camera.init.js": &bintree{staticJavascriptGeotagCameraInitJs, map[string]*bintree{}},
+			"geotag.camera.js": &bintree{staticJavascriptGeotagCameraJs, map[string]*bintree{}},
+			"geotag.maps.init.js": &bintree{staticJavascriptGeotagMapsInitJs, map[string]*bintree{}},
+			"geotag.maps.js": &bintree{staticJavascriptGeotagMapsJs, map[string]*bintree{}},
+			"geotag.oembed.init.js": &bintree{staticJavascriptGeotagOembedInitJs, map[string]*bintree{}},
+			"geotag.oembed.js": &bintree{staticJavascriptGeotagOembedJs, map[string]*bintree{}},
 			"geotag.placeholder.init.js": &bintree{staticJavascriptGeotagPlaceholderInitJs, map[string]*bintree{}},
-			"geotag.placeholder.js":      &bintree{staticJavascriptGeotagPlaceholderJs, map[string]*bintree{}},
-			"whosonfirst.net.js":         &bintree{staticJavascriptWhosonfirstNetJs, map[string]*bintree{}},
+			"geotag.placeholder.js": &bintree{staticJavascriptGeotagPlaceholderJs, map[string]*bintree{}},
+			"whosonfirst.net.js": &bintree{staticJavascriptWhosonfirstNetJs, map[string]*bintree{}},
 		}},
 	}},
 }}
@@ -470,6 +492,7 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
+
 
 func assetFS() *assetfs.AssetFS {
 	assetInfo := func(path string) (os.FileInfo, error) {

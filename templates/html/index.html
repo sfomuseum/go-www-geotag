@@ -1,7 +1,6 @@
 {{ define "index" }}
 {{ template "inc_head" . }}
 <link rel="stylesheet" type="text/css" href="/css/index.css" />
-<link rel="stylesheet" type="text/css" href="/css/placeholder.css" />
 <script type="text/javascript" src="/javascript/geotag.maps.js"></script>
 <script type="text/javascript" src="/javascript/geotag.camera.js"></script>
 <script type="text/javascript" src="/javascript/geotag.camera.init.js"></script>
@@ -9,10 +8,12 @@
 {{ if .EnableOEmbed }}
 <script type="text/javascript" src="/javascript/geotag.oembed.js"></script>
 <script type="text/javascript" src="/javascript/geotag.oembed.init.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/oembed.css" />
 {{ end }}
 {{ if .EnablePlaceholder }}
 <script type="text/javascript" src="/javascript/geotag.placeholder.js"></script>
 <script type="text/javascript" src="/javascript/geotag.placeholder.init.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/placeholder.css" />
 {{ end }}
 <div class="container">
 
