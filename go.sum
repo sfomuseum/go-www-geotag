@@ -9,6 +9,8 @@ github.com/aaronland/go-http-server v0.0.0-20200406192045-de2f431abc6e h1:INXG9Q
 github.com/aaronland/go-http-server v0.0.0-20200406192045-de2f431abc6e/go.mod h1:aLVlx8l+Tzrv1YmEDKKeomUj5vWzUfrbC1QB6WUxzN0=
 github.com/aaronland/go-http-tangramjs v0.0.6 h1:Ke2hU/flaO6hmK4AxH6ubKIEtqKItowqaWe4IA/3aFU=
 github.com/aaronland/go-http-tangramjs v0.0.6/go.mod h1:9gLqN7c67fdkshqG5wiSWFZkIJdtbC2uA5kdGGrhLyw=
+github.com/aaronland/go-roster v0.0.1 h1:r1l4n1HfWvEtOXZvhfXX0Won9Xf6QJsigdUdzOtuy/M=
+github.com/aaronland/go-roster v0.0.1/go.mod h1:AcovpxlG1XxJxX2Fjqlm63fEIBhCjEIBV4lP87FZDmI=
 github.com/akrylysov/algnhsa v0.0.0-20190319020909-05b3d192e9a7/go.mod h1:HhzjNA0EjUWcwHTUMwqrpeAdIF3gRmpH0HpWx1hYJSc=
 github.com/aws/aws-lambda-go v1.9.0/go.mod h1:zUsUQhAUjYzR8AuduJPCfhBuKWUaDbQiPOG+ouzmE1A=
 github.com/aws/aws-lambda-go v1.10.0 h1:uafgdfYGQD0UeT7d2uKdyWW8j/ZYRifRPIdmeqLzLCk=
