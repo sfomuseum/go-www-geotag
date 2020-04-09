@@ -46,10 +46,6 @@ func SetFromEnv(fs *flag.FlagSet) {
 	})
 }
 
-func ValidateCommonFlags(fs *flag.FlagSet) error {
-	return nil
-}
-
 func NewFlagSet(name string) *flag.FlagSet {
 
 	fs := flag.NewFlagSet(name, flag.ExitOnError)
