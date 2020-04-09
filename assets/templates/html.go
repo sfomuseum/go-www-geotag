@@ -105,7 +105,7 @@ func templatesHtmlInc_headHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "templates/html/inc_head.html", size: 534, mode: os.FileMode(420), modTime: time.Unix(1586298350, 0)}
+	info := bindataFileInfo{name: "templates/html/inc_head.html", size: 534, mode: os.FileMode(420), modTime: time.Unix(1586456985, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
