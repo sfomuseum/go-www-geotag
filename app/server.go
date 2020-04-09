@@ -9,11 +9,25 @@ import (
 	"net/url"
 )
 
-func NewServerWithFlagSet(ctx context.Context, fs *flag.FlagSet) (server.Server, error) {
+func NewServer(ctx context.Context, fs *flag.FlagSet) (server.Server, error) {
 
-	scheme, _ := flags.StringVar(fs, "scheme")
-	host, _ := flags.StringVar(fs, "host")
-	port, _ := flags.IntVar(fs, "port")
+	scheme, err := flags.StringVar(fs, "scheme")
+
+	if err != nil {
+		return nil, err
+	}
+
+	host, err := flags.StringVar(fs, "host")
+
+	if err != nil {
+		return nil, err
+	}
+
+	port, err := flags.IntVar(fs, "port")
+
+	if err != nil {
+		return nil, err
+	}
 
 	address := fmt.Sprintf("%s://%s:%d", scheme, host, port)
 

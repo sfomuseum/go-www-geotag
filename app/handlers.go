@@ -2,11 +2,13 @@ package app
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-tangramjs"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	"github.com/sfomuseum/go-www-geotag/flags"
+	"github.com/sfomuseum/go-www-geotag/geo"
 	"github.com/sfomuseum/go-www-geotag/www"
 	"net/http"
 	"net/url"
@@ -17,7 +19,7 @@ func init() {
 	geotag.INCLUDE_LEAFLET = false // because the tangramjs stuff will add it
 }
 
-func AppendAssetHandlersWithFlagSet(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
 	err := tangramjs.AppendAssetHandlers(mux)
 
@@ -60,25 +62,83 @@ func AppendApplicationHandler(ctx context.Context, fs *flag.FlagSet, mux *http.S
 
 func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
 
-	t, err := NewApplicationTemplatesWithFlagSet(ctx, fs)
+	t, err := NewApplicationTemplates(ctx, fs)
 
 	if err != nil {
 		return nil, err
 	}
 
-	nextzen_apikey, _ := flags.StringVar(fs, "nextzen-apikey")
-	nextzen_style_url, _ := flags.StringVar(fs, "nextzen-style-url")
-	nextzen_tile_url, _ := flags.StringVar(fs, "nextzen-tile-url")
+	nextzen_apikey, err := flags.StringVar(fs, "nextzen-apikey")
 
-	initial_latitude, _ := flags.Float64Var(fs, "initial-latitude")
-	initial_longitude, _ := flags.Float64Var(fs, "initial-longitudex")
-	initial_zoom, _ := flags.IntVar(fs, "initial-zoom")
+	if err != nil {
+		return nil, err
+	}
 
-	enable_placeholder, _ := flags.BoolVar(fs, "enable-placeholder")
-	placeholder_endpoint, _ := flags.StringVar(fs, "placeholder-endpoint")
+	nextzen_style_url, err := flags.StringVar(fs, "nextzen-style-url")
 
-	enable_oembed, _ := flags.BoolVar(fs, "enable-oembed")
-	oembed_endpoints, _ := flags.StringVar(fs, "oembed-endpoints")
+	if err != nil {
+		return nil, err
+	}
+
+	nextzen_tile_url, err := flags.StringVar(fs, "nextzen-tile-url")
+
+	if err != nil {
+		return nil, err
+	}
+
+	initial_latitude, err := flags.Float64Var(fs, "initial-latitude")
+
+	if err != nil {
+		return nil, err
+	}
+
+	if !geo.IsValidLatitude(initial_latitude) {
+		return nil, errors.New("Invalid latitude")
+	}
+
+	initial_longitude, err := flags.Float64Var(fs, "initial-longitude")
+
+	if err != nil {
+		return nil, err
+	}
+
+	if !geo.IsValidLongitude(initial_longitude) {
+		return nil, errors.New("Invalid longitude")
+	}
+
+	initial_zoom, err := flags.IntVar(fs, "initial-zoom")
+
+	if err != nil {
+		return nil, err
+	}
+
+	if initial_zoom < 1 || initial_zoom > 21 {
+		return nil, errors.New("Invalid zoom")
+	}
+
+	enable_placeholder, err := flags.BoolVar(fs, "enable-placeholder")
+
+	if err != nil {
+		return nil, err
+	}
+
+	placeholder_endpoint, err := flags.StringVar(fs, "placeholder-endpoint")
+
+	if err != nil {
+		return nil, err
+	}
+
+	enable_oembed, err := flags.BoolVar(fs, "enable-oembed")
+
+	if err != nil {
+		return nil, err
+	}
+
+	oembed_endpoints, err := flags.StringVar(fs, "oembed-endpoints")
+
+	if err != nil {
+		return nil, err
+	}
 
 	bootstrap_opts := bootstrap.DefaultBootstrapOptions()
 
@@ -90,12 +150,22 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 	geotag_opts := geotag.DefaultLeafletGeotagOptions()
 
 	index_opts := &www.IndexHandlerOptions{
-		Templates:           t,
-		InitialLatitude:     initial_latitude,
-		InitialLongitude:    initial_longitude,
-		InitialZoom:         initial_zoom,
-		EnablePlaceholder:   enable_placeholder,
-		PlaceholderEndpoint: placeholder_endpoint,
+		Templates:        t,
+		InitialLatitude:  initial_latitude,
+		InitialLongitude: initial_longitude,
+		InitialZoom:      initial_zoom,
+	}
+
+	if enable_placeholder {
+
+		_, err := url.Parse(placeholder_endpoint)
+
+		if err != nil {
+			return nil, err
+		}
+
+		index_opts.EnablePlaceholder = enable_placeholder
+		index_opts.PlaceholderEndpoint = placeholder_endpoint
 	}
 
 	if enable_oembed {

@@ -20,15 +20,9 @@ func main() {
 
 	flags.Parse(fl)
 
-	err = flags.ValidateCommonFlags(fl)
-
-	if err != nil {
-		log.Fatalf("Failed to validate common flags, %v", err)
-	}
-
 	mux := http.NewServeMux()
 
-	err = app.AppendAssetHandlersWithFlagSet(ctx, fl, mux)
+	err = app.AppendAssetHandlers(ctx, fl, mux)
 
 	if err != nil {
 		log.Fatalf("Failed to append asset handlers, %v", err)
@@ -40,7 +34,7 @@ func main() {
 		log.Fatalf("Failed to append application handlers, %v", err)
 	}
 
-	s, err := app.NewServerWithFlagSet(ctx, fl)
+	s, err := app.NewServer(ctx, fl)
 
 	if err != nil {
 		log.Fatalf("Failed to create application server, %v", err)

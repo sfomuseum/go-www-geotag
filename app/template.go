@@ -8,7 +8,7 @@ import (
 	"html/template"
 )
 
-func NewApplicationTemplatesWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*template.Template, error) {
+func NewApplicationTemplates(ctx context.Context, fs *flag.FlagSet) (*template.Template, error) {
 
 	path_templates, err := flags.StringVar(fs, "path-templates")
 
