@@ -8,24 +8,24 @@ import (
 )
 
 type IndexHandlerOptions struct {
-	Templates        *template.Template
-	InitialLatitude  float64
-	InitialLongitude float64
-	InitialZoom      int
-	EnablePlaceholder     bool
-	PlaceholderEndpoint   string
-	EnableOEmbed     bool
-	OEmbedEndpoints  []string
+	Templates           *template.Template
+	InitialLatitude     float64
+	InitialLongitude    float64
+	InitialZoom         int
+	EnablePlaceholder   bool
+	PlaceholderEndpoint string
+	EnableOEmbed        bool
+	OEmbedEndpoints     []string
 }
 
 type IndexHandlerVars struct {
-	InitialLatitude  float64
-	InitialLongitude float64
-	InitialZoom      int
-	EnablePlaceholder     bool
-	PlaceholderEndpoint   string
-	EnableOEmbed     bool
-	OEmbedEndpoints  string
+	InitialLatitude     float64
+	InitialLongitude    float64
+	InitialZoom         int
+	EnablePlaceholder   bool
+	PlaceholderEndpoint string
+	EnableOEmbed        bool
+	OEmbedEndpoints     string
 }
 
 func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
@@ -41,13 +41,13 @@ func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
 	fn := func(rsp http.ResponseWriter, req *http.Request) {
 
 		vars := IndexHandlerVars{
-			InitialLatitude:  opts.InitialLatitude,
-			InitialLongitude: opts.InitialLongitude,
-			InitialZoom:      opts.InitialZoom,
-			EnablePlaceholder:     opts.EnablePlaceholder,
-			PlaceholderEndpoint:   opts.PlaceholderEndpoint,
-			EnableOEmbed:     opts.EnableOEmbed,
-			OEmbedEndpoints:  oembed_endpoints,
+			InitialLatitude:     opts.InitialLatitude,
+			InitialLongitude:    opts.InitialLongitude,
+			InitialZoom:         opts.InitialZoom,
+			EnablePlaceholder:   opts.EnablePlaceholder,
+			PlaceholderEndpoint: opts.PlaceholderEndpoint,
+			EnableOEmbed:        opts.EnableOEmbed,
+			OEmbedEndpoints:     oembed_endpoints,
 		}
 
 		err := t.Execute(rsp, vars)

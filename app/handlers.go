@@ -13,6 +13,10 @@ import (
 	"strings"
 )
 
+func init() {
+	geotag.INCLUDE_LEAFLET = false // because the tangramjs stuff will add it
+}
+
 func AppendAssetHandlersWithFlagSet(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
 	err := tangramjs.AppendAssetHandlers(mux)
@@ -84,15 +88,14 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 	tangramjs_opts.Nextzen.TileURL = nextzen_tile_url
 
 	geotag_opts := geotag.DefaultLeafletGeotagOptions()
-	geotag.INCLUDE_LEAFLET = false // because the tangramjs stuff will add it
 
 	index_opts := &www.IndexHandlerOptions{
-		Templates:        t,
-		InitialLatitude:  initial_latitude,
-		InitialLongitude: initial_longitude,
-		InitialZoom:      initial_zoom,
-		EnablePlaceholder:     enable_placeholder,
-		PlaceholderEndpoint:   placeholder_endpoint,
+		Templates:           t,
+		InitialLatitude:     initial_latitude,
+		InitialLongitude:    initial_longitude,
+		InitialZoom:         initial_zoom,
+		EnablePlaceholder:   enable_placeholder,
+		PlaceholderEndpoint: placeholder_endpoint,
 	}
 
 	if enable_oembed {

@@ -77,8 +77,6 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.Bool("enable-oembed", false, "...")
 	fs.String("oembed-endpoints", "", "...")
 
-	fs.Bool("open-browser", false, "...")
-
 	err := AppendNextzenFlags(fs)
 
 	if err != nil {
