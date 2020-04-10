@@ -24,6 +24,7 @@ type GeotagGeometryCollection struct {
 }
 
 type GeotagFeature struct {
-	Type     string                   `json:"type"`
-	Geometry GeotagGeometryCollection `json:"geometry"`
+	Type       string                   `json:"type"`
+	Geometry   GeotagGeometryCollection `json:"geometry"`
+	Properties GeotagProperties         `json:"properties"`
 }
