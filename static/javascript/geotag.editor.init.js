@@ -97,6 +97,13 @@ window.addEventListener("load", function load(event){
 	    el.innerHTML = "";
 	    el.appendChild(render_feature(f));
 	}
+
+	var out = document.getElementById("output");
+
+	if (out){
+	    out.style.display = "block";
+	}
+	
     };
 
     var render_feature = function(f){
