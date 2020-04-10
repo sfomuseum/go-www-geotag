@@ -7,12 +7,15 @@ import (
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-tangramjs"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
+	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
 	"github.com/sfomuseum/go-www-geotag/flags"
 	"github.com/sfomuseum/go-www-geotag/geo"
 	"github.com/sfomuseum/go-www-geotag/www"
+	"github.com/whosonfirst/go-cache"
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 func init() {
@@ -140,6 +143,12 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 		return nil, err
 	}
 
+	enable_proxy_tiles, err := flags.BoolVar(fs, "enable-proxy-tiles")
+
+	if err != nil {
+		return nil, err
+	}
+
 	bootstrap_opts := bootstrap.DefaultBootstrapOptions()
 
 	tangramjs_opts := tangramjs.DefaultTangramJSOptions()
@@ -154,6 +163,10 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 		InitialLatitude:  initial_latitude,
 		InitialLongitude: initial_longitude,
 		InitialZoom:      initial_zoom,
+	}
+
+	if enable_proxy_tiles {
+		//
 	}
 
 	if enable_placeholder {
@@ -197,4 +210,88 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 	index_handler = geotag.AppendResourcesHandler(index_handler, geotag_opts)
 
 	return index_handler, nil
+}
+
+func AppendProxyTilesHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	path_proxy_tiles, err := flags.StringVar(fs, "path-proxy-tiles")
+
+	if err != nil {
+		return err
+	}
+
+	handler, err := NewProxyTilesHandler(ctx, fs)
+
+	if err != nil {
+		return err
+	}
+
+	// THIS NEEDS TO BE PASSED UP THE CHAIN...
+	// fmt.Sprintf("%s{z}/{x}/{y}.mvt", path_proxy_tiles)
+
+	mux.Handle(path_proxy_tiles, handler)
+	return nil
+}
+
+func NewProxyTilesHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
+
+	proxy_tiles_cache_uri, err := flags.StringVar(fs, "proxy-tiles-cache-uri")
+
+	if err != nil {
+		return nil, err
+	}
+
+	proxy_tiles_timeout, err := flags.IntVar(fs, "proxy-tiles-timeout")
+
+	if err != nil {
+		return nil, err
+	}
+
+	test_proxy_tiles, err := flags.BoolVar(fs, "proxy-tiles-test")
+
+	if err != nil {
+		return nil, err
+	}
+
+	tile_cache, err := cache.NewCache(ctx, proxy_tiles_cache_uri)
+
+	if err != nil {
+		return nil, err
+	}
+
+	timeout := time.Duration(proxy_tiles_timeout) * time.Second
+
+	proxy_opts := &tzhttp.TilezenProxyHandlerOptions{
+		Cache:   tile_cache,
+		Timeout: timeout,
+	}
+
+	proxy_handler, err := tzhttp.TilezenProxyHandler(proxy_opts)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if test_proxy_tiles {
+
+		test_ctx, cancel := context.WithTimeout(ctx, timeout)
+		defer cancel()
+
+		req, err := http.NewRequest("GET", "tile.nextzen.org", nil)
+
+		if err != nil {
+			return nil, err
+		}
+
+		cl := new(http.Client)
+
+		_, err = cl.Do(req.WithContext(test_ctx))
+
+		if err != nil {
+			return nil, err
+		}
+
+	}
+
+	return proxy_handler, nil
 }

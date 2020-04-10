@@ -100,6 +100,21 @@ func AppendNextzenFlags(fs *flag.FlagSet) error {
 	return nil
 }
 
+// because eventually we're going to put this in a sfomuseum/go-http-tilezen specific package
+// (20200410/thisisaaronland)
+
+func AppendTilezenFlags(fs *flag.FlagSet) error {
+
+	fs.Bool("enable-proxy-tiles", false, "...")
+
+	fs.String("path-proxy-tiles", "/tiles/", "The URL (a relative path) for proxied tiles.")
+	fs.String("proxy-tiles-cache-uri", "gocache://", "A valid tile proxy DSN string.")
+	fs.Int("proxy-tiles-timeout", 30, "The maximum number of seconds to allow for fetching a tile from the proxy.")
+	fs.Bool("proxy-tiles-test", false, "Ensure outbound network connectivity for proxy tiles")
+
+	return nil
+}
+
 // because eventually we're going to put this in a go-http-leaflet specific package
 // (20200408/thisisaaronland)
 
