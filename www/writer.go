@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func UpdateHandler(wr writer.Writer) (http.Handler, error) {
+func WriterHandler(wr writer.Writer) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {
 

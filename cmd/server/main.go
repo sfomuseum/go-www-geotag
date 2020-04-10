@@ -28,10 +28,16 @@ func main() {
 		log.Fatalf("Failed to append asset handlers, %v", err)
 	}
 
-	err = app.AppendApplicationHandler(ctx, fl, mux, "/")
+	err = app.AppendEditorHandler(ctx, fl, mux)
 
 	if err != nil {
-		log.Fatalf("Failed to append application handlers, %v", err)
+		log.Fatalf("Failed to append editor handler, %v", err)
+	}
+
+	err = app.AppendWriterHandlerIfEnabled(ctx, fl, mux)
+
+	if err != nil {
+		log.Fatalf("Failed to append writer handler, %v", err)
 	}
 
 	s, err := app.NewServer(ctx, fl)
