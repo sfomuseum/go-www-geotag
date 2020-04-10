@@ -79,13 +79,19 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.String("path-editor", "/", "...")
 	fs.String("path-writer", "/update", "...")
 
-	err := AppendNextzenFlags(fs)
+	err := AppendLeafletFlags(fs)
 
 	if err != nil {
 		return nil, err
 	}
 
-	err = AppendLeafletFlags(fs)
+	err = AppendNextzenFlags(fs)
+
+	if err != nil {
+		return nil, err
+	}
+
+	err = AppendTilezenFlags(fs)
 
 	if err != nil {
 		return nil, err
