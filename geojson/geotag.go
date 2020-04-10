@@ -28,3 +28,8 @@ type GeotagFeature struct {
 	Geometry   GeotagGeometryCollection `json:"geometry"`
 	Properties GeotagProperties         `json:"properties"`
 }
+
+func (f *GeotagFeature) PointOfView() GeotagPoint {
+	pov := f.Geometry.Geometries[0]
+	return pov.(GeotagPoint)
+}
