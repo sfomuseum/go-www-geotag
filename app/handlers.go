@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"flag"
+	"fmt"
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-tangramjs"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
@@ -168,6 +169,17 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	if enable_proxy_tiles {
+
+		path_proxy_tiles, err := flags.StringVar(fs, "path-proxy-tiles")
+
+		if err != nil {
+			return nil, err
+		}
+
+		nextzen_tile_url = fmt.Sprintf("%s{z}/{x}/{y}.mvt", path_proxy_tiles)
+	}
+
 	bootstrap_opts := bootstrap.DefaultBootstrapOptions()
 
 	tangramjs_opts := tangramjs.DefaultTangramJSOptions()
@@ -182,10 +194,6 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		InitialLatitude:  initial_latitude,
 		InitialLongitude: initial_longitude,
 		InitialZoom:      initial_zoom,
-	}
-
-	if enable_proxy_tiles {
-		//
 	}
 
 	if enable_writer {
@@ -286,6 +294,21 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	return www.WriterHandler(wr)
 }
 
+func AppendProxyTilesHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	enable_proxy_tiles, err := flags.BoolVar(fs, "enable-proxy-tiles")
+
+	if err != nil {
+		return err
+	}
+
+	if !enable_proxy_tiles {
+		return nil
+	}
+
+	return AppendProxyTilesHandler(ctx, fs, mux)
+}
+
 func AppendProxyTilesHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
 	path_proxy_tiles, err := flags.StringVar(fs, "path-proxy-tiles")
@@ -299,9 +322,6 @@ func AppendProxyTilesHandler(ctx context.Context, fs *flag.FlagSet, mux *http.Se
 	if err != nil {
 		return err
 	}
-
-	// THIS NEEDS TO BE PASSED UP THE CHAIN...
-	// fmt.Sprintf("%s{z}/{x}/{y}.mvt", path_proxy_tiles)
 
 	mux.Handle(path_proxy_tiles, handler)
 	return nil

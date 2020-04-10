@@ -34,6 +34,12 @@ func main() {
 		log.Fatalf("Failed to append editor handler, %v", err)
 	}
 
+	err = app.AppendProxyTilesHandlerIfEnabled(ctx, fl, mux)
+
+	if err != nil {
+		log.Fatalf("Failed to append proxy tiles handler, %v", err)
+	}
+
 	err = app.AppendWriterHandlerIfEnabled(ctx, fl, mux)
 
 	if err != nil {
