@@ -215,7 +215,6 @@ func FetchTile(t *Tile, opts *Options) (io.ReadCloser, error) {
 
 	cl := new(http.Client)
 
-	log.Println("GET", url)
 	req, err := http.NewRequest("GET", url, nil)
 
 	if err != nil {

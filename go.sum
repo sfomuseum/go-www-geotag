@@ -39,10 +39,14 @@ github.com/sfomuseum/go-http-tilezen v0.0.2 h1:pKqyTtA2v9wZkfWt/L8aXyihi7upSwtbw
 github.com/sfomuseum/go-http-tilezen v0.0.2/go.mod h1:SpWQAUmPnJhjaQuwAT0qbsxBFMUjDhaxsvALFO9IGg0=
 github.com/sfomuseum/go-http-tilezen v0.0.3 h1:rV7V0xlu5qfaUPJIV3oQ39bpk7yzVu7D0YGTK+li2Ds=
 github.com/sfomuseum/go-http-tilezen v0.0.3/go.mod h1:K/N+dMAUE/kS1xrfRTbgoiXXtHL/gxnvzDjqRxK2eu0=
+github.com/sfomuseum/go-http-tilezen v0.0.4 h1:VtgK1o0e4orgLthumMLZ3NcZHHJakixRMPphmSGiKDQ=
+github.com/sfomuseum/go-http-tilezen v0.0.4/go.mod h1:3KWUDN2cHiSWjRaI4wrt5FKa/EEsNcsOeh5GIgWTrBw=
 github.com/sfomuseum/go-tilezen v0.0.1 h1:U8PoDuuFJmy+d9q1n4wzgcgyBzjMxlDNQkvkqr4PnqE=
 github.com/sfomuseum/go-tilezen v0.0.1/go.mod h1:iQu5CGmTlyU25Xt2fdwaMmqLwiVm0+k/rL/5/WljDUo=
 github.com/sfomuseum/go-tilezen v0.0.2 h1:sXJt3HnXZVTyfDjrGhXjC4flBFlJJI2N06faYhcamZw=
 github.com/sfomuseum/go-tilezen v0.0.2/go.mod h1:pA7ltffLr0bGgVQUQH57XlhpsTF/pXbqMfNCny5QSHg=
+github.com/sfomuseum/go-tilezen v0.0.3 h1:B6BSBHTtno1MvtTMyNRhIK+MMaBQOml0AFoz+Uw8u5o=
+github.com/sfomuseum/go-tilezen v0.0.3/go.mod h1:pA7ltffLr0bGgVQUQH57XlhpsTF/pXbqMfNCny5QSHg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/tidwall/gjson v1.3.2 h1:+7p3qQFaH3fOMXAJSrdZwGKcOO/lYdGS0HqGhPqDdTI=

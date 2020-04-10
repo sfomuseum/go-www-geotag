@@ -29,9 +29,9 @@ github.com/paulmach/orb/internal/mercator
 github.com/paulmach/orb/maptile
 # github.com/sfomuseum/go-http-leaflet-geotag v0.0.0-20200408190951-bda80bdc83f4
 github.com/sfomuseum/go-http-leaflet-geotag
-# github.com/sfomuseum/go-http-tilezen v0.0.3
+# github.com/sfomuseum/go-http-tilezen v0.0.4
 github.com/sfomuseum/go-http-tilezen/http
-# github.com/sfomuseum/go-tilezen v0.0.2
+# github.com/sfomuseum/go-tilezen v0.0.3
 github.com/sfomuseum/go-tilezen
 # github.com/tidwall/gjson v1.6.0
 github.com/tidwall/gjson
