@@ -1,5 +1,9 @@
 package geojson
 
+import (
+	"encoding/json"
+)
+
 type GeotagProperties struct {
 	Angle    float64 `json:"angle"`
 	Bearing  float64 `json:"bearing"`
@@ -29,7 +33,24 @@ type GeotagFeature struct {
 	Properties GeotagProperties         `json:"properties"`
 }
 
-func (f *GeotagFeature) PointOfView() GeotagPoint {
-	pov := f.Geometry.Geometries[0]
-	return pov.(GeotagPoint)
+func (f *GeotagFeature) PointOfView() (*GeotagPoint, error) {
+
+	// if there is a better way to do this I wish I
+	// knew what it was... (20200410/thisisaaronland)
+	
+	raw := f.Geometry.Geometries[0]
+	enc, err := json.Marshal(raw)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var pov *GeotagPoint
+	err = json.Unmarshal(enc, &pov)
+
+	if err != nil {
+		return nil, err
+	}
+	
+	return pov, nil
 }
