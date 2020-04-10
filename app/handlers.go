@@ -10,6 +10,7 @@ import (
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
 	"github.com/sfomuseum/go-www-geotag/flags"
 	"github.com/sfomuseum/go-www-geotag/geo"
+	"github.com/sfomuseum/go-www-geotag/writer"
 	"github.com/sfomuseum/go-www-geotag/www"
 	"github.com/whosonfirst/go-cache"
 	"net/http"
@@ -51,9 +52,15 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 	return nil
 }
 
-func AppendApplicationHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux, path string) error {
+func AppendEditorHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
-	handler, err := NewApplicationHandler(ctx, fs)
+	path, err := flags.StringVar(fs, "path-editor")
+
+	if err != nil {
+		return err
+	}
+
+	handler, err := NewEditorHandler(ctx, fs)
 
 	if err != nil {
 		return err
@@ -63,7 +70,7 @@ func AppendApplicationHandler(ctx context.Context, fs *flag.FlagSet, mux *http.S
 	return nil
 }
 
-func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
+func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
 
 	t, err := NewApplicationTemplates(ctx, fs)
 
@@ -149,6 +156,18 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 		return nil, err
 	}
 
+	enable_writer, err := flags.BoolVar(fs, "enable-writer")
+
+	if err != nil {
+		return nil, err
+	}
+
+	path_writer, err := flags.StringVar(fs, "path-writer")
+
+	if err != nil {
+		return nil, err
+	}
+
 	bootstrap_opts := bootstrap.DefaultBootstrapOptions()
 
 	tangramjs_opts := tangramjs.DefaultTangramJSOptions()
@@ -158,7 +177,7 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 
 	geotag_opts := geotag.DefaultLeafletGeotagOptions()
 
-	index_opts := &www.IndexHandlerOptions{
+	editor_opts := &www.EditorHandlerOptions{
 		Templates:        t,
 		InitialLatitude:  initial_latitude,
 		InitialLongitude: initial_longitude,
@@ -169,6 +188,11 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 		//
 	}
 
+	if enable_writer {
+		editor_opts.EnableWriter = enable_writer
+		editor_opts.WriterPath = path_writer
+	}
+
 	if enable_placeholder {
 
 		_, err := url.Parse(placeholder_endpoint)
@@ -177,13 +201,13 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 			return nil, err
 		}
 
-		index_opts.EnablePlaceholder = enable_placeholder
-		index_opts.PlaceholderEndpoint = placeholder_endpoint
+		editor_opts.EnablePlaceholder = enable_placeholder
+		editor_opts.PlaceholderEndpoint = placeholder_endpoint
 	}
 
 	if enable_oembed {
 
-		index_opts.EnableOEmbed = enable_oembed
+		editor_opts.EnableOEmbed = enable_oembed
 
 		urls := strings.Split(oembed_endpoints, ",")
 
@@ -196,20 +220,70 @@ func NewApplicationHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler,
 			}
 		}
 
-		index_opts.OEmbedEndpoints = urls
+		editor_opts.OEmbedEndpoints = urls
 	}
 
-	index_handler, err := www.IndexHandler(index_opts)
+	editor_handler, err := www.EditorHandler(editor_opts)
 
 	if err != nil {
 		return nil, err
 	}
 
-	index_handler = bootstrap.AppendResourcesHandler(index_handler, bootstrap_opts)
-	index_handler = tangramjs.AppendResourcesHandler(index_handler, tangramjs_opts)
-	index_handler = geotag.AppendResourcesHandler(index_handler, geotag_opts)
+	editor_handler = bootstrap.AppendResourcesHandler(editor_handler, bootstrap_opts)
+	editor_handler = tangramjs.AppendResourcesHandler(editor_handler, tangramjs_opts)
+	editor_handler = geotag.AppendResourcesHandler(editor_handler, geotag_opts)
 
-	return index_handler, nil
+	return editor_handler, nil
+}
+
+func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	enable_writer, err := flags.BoolVar(fs, "enable-writer")
+
+	if err != nil {
+		return err
+	}
+
+	if !enable_writer {
+		return nil
+	}
+
+	return AppendWriterHandler(ctx, fs, mux)
+}
+
+func AppendWriterHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	path, err := flags.StringVar(fs, "path-writer")
+
+	if err != nil {
+		return err
+	}
+
+	handler, err := NewWriterHandler(ctx, fs)
+
+	if err != nil {
+		return err
+	}
+
+	mux.Handle(path, handler)
+	return nil
+}
+
+func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
+
+	writer_uri, err := flags.StringVar(fs, "writer-uri")
+
+	if err != nil {
+		return nil, err
+	}
+
+	wr, err := writer.NewWriter(ctx, writer_uri)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return www.WriterHandler(wr)
 }
 
 func AppendProxyTilesHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {

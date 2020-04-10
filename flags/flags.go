@@ -73,6 +73,12 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.Bool("enable-oembed", false, "...")
 	fs.String("oembed-endpoints", "", "...")
 
+	fs.Bool("enable-writer", false, "...")
+	fs.String("writer-uri", "stdout://", "...")
+
+	fs.String("path-editor", "/", "...")
+	fs.String("path-writer", "/update", "...")
+
 	err := AppendNextzenFlags(fs)
 
 	if err != nil {

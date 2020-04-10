@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type IndexHandlerOptions struct {
+type EditorHandlerOptions struct {
 	Templates           *template.Template
 	InitialLatitude     float64
 	InitialLongitude    float64
@@ -16,9 +16,11 @@ type IndexHandlerOptions struct {
 	PlaceholderEndpoint string
 	EnableOEmbed        bool
 	OEmbedEndpoints     []string
+	EnableWriter        bool
+	WriterPath          string
 }
 
-type IndexHandlerVars struct {
+type EditorHandlerVars struct {
 	InitialLatitude     float64
 	InitialLongitude    float64
 	InitialZoom         int
@@ -26,21 +28,23 @@ type IndexHandlerVars struct {
 	PlaceholderEndpoint string
 	EnableOEmbed        bool
 	OEmbedEndpoints     string
+	EnableWriter        bool
+	WriterPath          string
 }
 
-func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
+func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 
-	t := opts.Templates.Lookup("index")
+	t := opts.Templates.Lookup("editor")
 
 	if t == nil {
-		return nil, errors.New("Missing 'index' template")
+		return nil, errors.New("Missing 'editor' template")
 	}
 
 	oembed_endpoints := strings.Join(opts.OEmbedEndpoints, ",")
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {
 
-		vars := IndexHandlerVars{
+		vars := EditorHandlerVars{
 			InitialLatitude:     opts.InitialLatitude,
 			InitialLongitude:    opts.InitialLongitude,
 			InitialZoom:         opts.InitialZoom,
@@ -48,6 +52,8 @@ func IndexHandler(opts *IndexHandlerOptions) (http.Handler, error) {
 			PlaceholderEndpoint: opts.PlaceholderEndpoint,
 			EnableOEmbed:        opts.EnableOEmbed,
 			OEmbedEndpoints:     oembed_endpoints,
+			EnableWriter:        opts.EnableWriter,
+			WriterPath:          opts.WriterPath,
 		}
 
 		err := t.Execute(rsp, vars)

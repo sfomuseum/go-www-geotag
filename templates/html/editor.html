@@ -1,10 +1,10 @@
-{{ define "index" }}
+{{ define "editor" }}
 {{ template "inc_head" . }}
-<link rel="stylesheet" type="text/css" href="/css/index.css" />
 <script type="text/javascript" src="/javascript/geotag.maps.js"></script>
 <script type="text/javascript" src="/javascript/geotag.camera.js"></script>
 <script type="text/javascript" src="/javascript/geotag.camera.init.js"></script>
-<script type="text/javascript" src="/javascript/geotag.maps.init.js"></script>
+<script type="text/javascript" src="/javascript/geotag.editor.init.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/editor.css" />
 {{ if .EnableOEmbed }}
 <script type="text/javascript" src="/javascript/geotag.oembed.js"></script>
 <script type="text/javascript" src="/javascript/geotag.oembed.init.js"></script>
@@ -14,6 +14,12 @@
 <script type="text/javascript" src="/javascript/geotag.placeholder.js"></script>
 <script type="text/javascript" src="/javascript/geotag.placeholder.init.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/placeholder.css" />
+{{ end }}
+{{ if .EnableWriter }}
+<script type="text/javascript" src="/javascript/geotag.api.js"></script>
+<script type="text/javascript" src="/javascript/geotag.writer.js"></script>
+<script type="text/javascript" src="/javascript/geotag.writer.init.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/writer.css" />
 {{ end }}
 <div class="container">
 
@@ -49,7 +55,10 @@
 	</div>
 	
 	<div id="map" class="card-body"></div>
-	<div class="card-footer">
+	<div class="card-footer" id="output">
+	    {{ if .EnableWriter }}
+	    <button id="writer-save" class="btn btn-primary">Save</button>
+	    {{ end }}
 	    <div id="feature"></div>
 	</div>
     </div>
