@@ -19,7 +19,7 @@ func WriterHandler(wr writer.Writer) (http.Handler, error) {
 		}
 
 		defer req.Body.Close()
-		
+
 		geotag_f, err := geotag.NewGeotagFeatureWithReader(req.Body)
 
 		if err != nil {

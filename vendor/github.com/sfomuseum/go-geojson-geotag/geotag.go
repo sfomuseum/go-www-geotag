@@ -25,7 +25,7 @@ type GeotagLineString struct {
 }
 
 type GeotagPolygon struct {
-	Type        string             `json:"type"`
+	Type        string               `json:"type"`
 	Coordinates [][]GeotagCoordinate `json:"coordinates"`
 }
 
@@ -40,10 +40,10 @@ type GeotagFeature struct {
 	Properties GeotagProperties         `json:"properties"`
 }
 
-type FieldOfViewFeature struct {	// this is mostly for testing
-	Type       string                   `json:"type"`
-	Geometry   *GeotagPolygon `json:"geometry"`
-	Properties GeotagProperties         `json:"properties"`
+type FieldOfViewFeature struct { // this is mostly for testing
+	Type       string           `json:"type"`
+	Geometry   *GeotagPolygon   `json:"geometry"`
+	Properties GeotagProperties `json:"properties"`
 }
 
 func NewGeotagFeature(body []byte) (*GeotagFeature, error) {
@@ -64,6 +64,32 @@ func NewGeotagFeatureWithReader(fh io.Reader) (*GeotagFeature, error) {
 	}
 
 	return f, err
+}
+
+func (f *GeotagFeature) Target() (*GeotagPoint, error) {
+
+	hl, err := f.HorizonLine()
+
+	if err != nil {
+		return nil, err
+	}
+
+	coords := hl.Coordinates
+
+	target_lat := (coords[0][1] + coords[1][1]) / 2.0
+	target_lon := (coords[0][0] + coords[1][0]) / 2.0
+
+	target_coords := GeotagCoordinate{
+		target_lon,
+		target_lat,
+	}
+
+	target := &GeotagPoint{
+		Type:        "Point",
+		Coordinates: target_coords,
+	}
+
+	return target, nil
 }
 
 func (f *GeotagFeature) PointOfView() (*GeotagPoint, error) {
@@ -124,12 +150,12 @@ func (f *GeotagFeature) FieldOfView() (*GeotagPolygon, error) {
 	coords := make([]GeotagCoordinate, 0)
 
 	coords = append(coords, pov.Coordinates)
-	coords = append(coords, hl.Coordinates[1])	// right-hand rule
+	coords = append(coords, hl.Coordinates[1]) // right-hand rule
 	coords = append(coords, hl.Coordinates[0])
 	coords = append(coords, pov.Coordinates)
 
-	rings := [][]GeotagCoordinate{ coords }
-	
+	rings := [][]GeotagCoordinate{coords}
+
 	poly := &GeotagPolygon{
 		Type:        "Polygon",
 		Coordinates: rings,
