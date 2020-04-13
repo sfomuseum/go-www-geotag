@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"github.com/sfomuseum/go-www-geotag/geojson"
+	"github.com/sfomuseum/go-geojson-geotag"
 	"io"
 	"os"
 )
@@ -24,7 +24,7 @@ func NewStdoutWriter(ctx context.Context, uri string) (Writer, error) {
 	return wr, nil
 }
 
-func (wr *StdoutWriter) WriteFeature(ctx context.Context, uri string, f *geojson.GeotagFeature) error {
+func (wr *StdoutWriter) WriteFeature(ctx context.Context, uri string, f *geotag.GeotagFeature) error {
 
 	body, err := json.Marshal(f)
 

@@ -31,6 +31,10 @@ github.com/pkg/browser v0.0.0-20180916011732-0a3d74bf9ce4 h1:49lOXmGaUpV9Fz3gd7T
 github.com/pkg/browser v0.0.0-20180916011732-0a3d74bf9ce4/go.mod h1:4OwLy04Bl9Ef3GJJCoec+30X3LQs/0/m4HFRt/2LUSA=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/sfomuseum/go-geojson-geotag v0.0.0-20200413175259-9db8291bba96 h1:fAylrUgiznJLRA5NUhZZG5Eea4a20Jh5MBfYEQpnyIQ=
+github.com/sfomuseum/go-geojson-geotag v0.0.0-20200413175259-9db8291bba96/go.mod h1:KC3HmXH9Aws5v5iPzCukiNGUlLfHITZAqFVLqvi2COg=
+github.com/sfomuseum/go-geojson-geotag v0.0.1 h1:tdcP9EIWHWbyQpsUuI2KMQdCY+NIMslaEJ78zTqw/w4=
+github.com/sfomuseum/go-geojson-geotag v0.0.1/go.mod h1:KC3HmXH9Aws5v5iPzCukiNGUlLfHITZAqFVLqvi2COg=
 github.com/sfomuseum/go-http-leaflet-geotag v0.0.0-20200406183046-8f51a35467b5 h1:p30F3WEYNrY7caa7SusneiBVyYQqAVX/sZhUL3CHag8=
 github.com/sfomuseum/go-http-leaflet-geotag v0.0.0-20200406183046-8f51a35467b5/go.mod h1:R56pMAP2OHurz+bDFkYL3RgISj/SQw2mbgTmL9FZ8WQ=
 github.com/sfomuseum/go-http-leaflet-geotag v0.0.0-20200408190951-bda80bdc83f4 h1:07QxTAGS6K6gfOj3Y8GfUy+Jv5wAygFgMKoVxrhstpc=

@@ -3,12 +3,12 @@ package writer
 import (
 	"context"
 	"github.com/aaronland/go-roster"
-	"github.com/sfomuseum/go-www-geotag/geojson"
+	"github.com/sfomuseum/go-geojson-geotag"
 	"net/url"
 )
 
 type Writer interface {
-	WriteFeature(context.Context, string, *geojson.GeotagFeature) error
+	WriteFeature(context.Context, string, *geotag.GeotagFeature) error
 }
 
 type WriterInitializeFunc func(ctx context.Context, uri string) (Writer, error)

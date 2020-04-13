@@ -1,8 +1,7 @@
 package www
 
 import (
-	"encoding/json"
-	"github.com/sfomuseum/go-www-geotag/geojson"
+	"github.com/sfomuseum/go-geojson-geotag"
 	"github.com/sfomuseum/go-www-geotag/writer"
 	"net/http"
 )
@@ -19,10 +18,9 @@ func WriterHandler(wr writer.Writer) (http.Handler, error) {
 			return
 		}
 
-		var geotag_f *geojson.GeotagFeature
-
-		decoder := json.NewDecoder(req.Body)
-		err := decoder.Decode(&geotag_f)
+		defer req.Body.Close()
+		
+		geotag_f, err := geotag.NewGeotagFeatureWithReader(req.Body)
 
 		if err != nil {
 			http.Error(rsp, err.Error(), http.StatusBadRequest)
