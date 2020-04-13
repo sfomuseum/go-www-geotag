@@ -37,20 +37,46 @@ window.addEventListener("load", function load(event){
 	console.log("Missing oembed-fetch element.");
 	return;
     }
+
+	var handle_geotag_props = function(props){
+
+	    var camera = geotag.camera.getCamera();
+	    
+	    var camera_lat = props["geotag:camera_latitude"];
+	    var camera_lon = props["geotag:longitude"];	    
+
+	    camera_lat = parseFloat(camera_lat);
+	    camera_lon = parseFloat(camera_lon);	    
+
+	    if ((camera_lat) && (camera_lon)){		    
+		camera.setCameraLatLng([camera_lat, camera_lon]);
+	    }
+	    
+	    var target_lat = props["geom:target_latitude"];
+	    var target_lon = props["geom:target_longitude"];	    
+
+	    camera_lat = parseFloat(camera_lat);
+	    camera_lon = parseFloat(camera_lon);	    
+
+	    if ((target_lat) && (target_lon)){		    
+		target.setTargetLatLng([target_lat, target_lon]);
+	    }
+	    
+	    var angle = props["geotag:angle"];
+	    angle = parseFloat(angle);
+
+	    if (angle){
+		camera.setAngle(angle);
+	    }
+	}
     
     f.onclick = function(e){
 
 	var url = q.value;
-
+	
 	var on_success_geojson = function(feature){
 	    var props = feature["properties"];
-	    var lat = props["geom:latitude"];
-	    var lon = props["geom:longitude"];	    
-
-	    var camera = geotag.camera.getCamera();
-		    
-	    camera.setCameraLatLng([lat, lon]);
-	    camera.setTargetLatLng([lat, lon]);    
+	    handle_geotag_props(props);
 	};
 
 	var on_error_geojson = function(err){
@@ -82,8 +108,10 @@ window.addEventListener("load", function load(event){
 
 	    if (rsp["geotag:geojson_url"]){
 		whosonfirst.net.fetch(rsp["geotag:geojson_url"], on_success_geojson, on_error_geojson);
+		return;
 	    }
-	    
+
+	    handle_geotag_props(rsp);
 	};
 
 	var on_error = function(err){
