@@ -39,27 +39,27 @@ window.addEventListener("load", function load(event){
     }
 
     var handle_geotag_props = function(props){
-	
+
 	var camera = geotag.camera.getCamera();
 	
 	var camera_lat = props["geotag:camera_latitude"];
-	var camera_lon = props["geotag:longitude"];	    
-	
+	var camera_lon = props["geotag:camera_longitude"];	    
+
 	camera_lat = parseFloat(camera_lat);
 	camera_lon = parseFloat(camera_lon);	    
-	
-	if ((camera_lat) && (camera_lon)){		    
+
+	if ((camera_lat) && (camera_lon)){
 	    camera.setCameraLatLng([camera_lat, camera_lon]);
 	}
 	
-	var target_lat = props["geom:target_latitude"];
-	var target_lon = props["geom:target_longitude"];	    
+	var target_lat = props["geotag:target_latitude"];
+	var target_lon = props["geotag:target_longitude"];	    
 	
-	camera_lat = parseFloat(camera_lat);
-	camera_lon = parseFloat(camera_lon);	    
-	
-	if ((target_lat) && (target_lon)){		    
-	    target.setTargetLatLng([target_lat, target_lon]);
+	target_lat = parseFloat(target_lat);
+	target_lon = parseFloat(target_lon);	    
+
+	if ((target_lat) && (target_lon)){
+	    camera.setTargetLatLng([target_lat, target_lon]);
 	}
 	
 	var angle = props["geotag:angle"];
