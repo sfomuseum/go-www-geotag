@@ -8,6 +8,7 @@ import (
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-crumb"
 	"github.com/aaronland/go-http-tangramjs"
+	"github.com/aaronland/go-string/dsn"
 	"github.com/aaronland/go-string/random"
 	"github.com/jtacoma/uritemplates"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
@@ -494,6 +495,21 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.Crumb
 
 			crumb_dsn = fmt.Sprintf("extra=%s separator=%s secret=%s ttl=%s", extra, separator, secret, ttl)
 		}
+
+		dsn_map, err := dsn.StringToDSN(crumb_dsn)
+
+		if err != nil {
+			crumb_err = err
+			return
+		}
+
+		k, ok := dsn_map["key"]
+
+		if !ok || k == "" {
+			dsn_map["key"] = "geotag"
+		}
+
+		crumb_dsn = dsn_map.String()
 
 		crumb_config, crumb_err = crumb.NewCrumbConfigFromDSN(crumb_dsn)
 	}
