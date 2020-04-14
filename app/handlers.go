@@ -78,9 +78,9 @@ func AppendEditorHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 	handler, err = AppendCrumbHandler(ctx, fs, handler)
 
 	if err != nil {
-		return nil
+		return err
 	}
-
+	
 	mux.Handle(path, handler)
 	return nil
 }
@@ -432,6 +432,17 @@ func NewProxyTilesHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, 
 
 func AppendCrumbHandler(ctx context.Context, fs *flag.FlagSet, handler http.Handler) (http.Handler, error) {
 
+	crumb_dsn, err := flags.StringVar(fs, "crumb-dsn")
+
+	if err != nil {
+		return nil, err
+	}
+
+	if crumb_dsn == "disabled" {
+		log.Printf("[WARNING] -crumb-dsn explicitly disabled for %T.\n", handler)
+		return handler, nil
+	}
+	
 	crumb_config, err := crumbConfigWithFlagSet(ctx, fs)
 
 	if err != nil {
@@ -448,7 +459,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.Crumb
 	var crumb_err error
 
 	crumb_func := func() {
-		
+
 		crumb_dsn, err := flags.StringVar(fs, "crumb-dsn")
 
 		if err != nil {
@@ -468,7 +479,15 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.Crumb
 				return
 			}
 
-			extra := ""
+			r_opts.Length = 8
+			e, err := random.String(r_opts)
+
+			if err != nil {
+				crumb_err = err
+				return
+			}
+			
+			extra := e
 			separator := ":"
 			secret := s
 			ttl := "3600" // 60 * 60

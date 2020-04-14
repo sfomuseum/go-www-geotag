@@ -45,21 +45,25 @@
 
 	<div class="card-header">
 
+	    {{ if .EnableWriter }}
+	    <button id="writer-save" class="btn btn-primary">Save</button>
+	    {{ end }}
+	    
 	    {{ if .EnablePlaceholder }}
 	    <form class="form-inline">
 		<input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search"/>
 		<button class="btn my-2 my-sm-0" type="submit">Search</button>
 	    </form>
 	    <div id="placeholder-results"></div>
-	    {{ end }}
+	    {{ end }}	    
 	</div>
 	
 	<div id="map" class="card-body"></div>
 	<div class="card-footer" id="output">
-	    {{ if .EnableWriter }}
-	    <button id="writer-save" class="btn btn-primary">Save</button>
-	    {{ end }}
-	    <div id="feature"></div>
+	    <details>
+		<summary>GeoJSON</summary>
+		<div id="feature"></div>
+	    </details>
 	</div>
     </div>
     

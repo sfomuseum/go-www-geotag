@@ -103,6 +103,12 @@ window.addEventListener("load", function load(event){
 	if (out){
 	    out.style.display = "block";
 	}
+
+	var save = document.getElementById("writer-save");
+
+	if (save){
+	    save.style.display = "block";
+	}
 	
     };
 
