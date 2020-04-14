@@ -18,7 +18,7 @@ import (
 	"github.com/sfomuseum/go-www-geotag/writer"
 	"github.com/sfomuseum/go-www-geotag/www"
 	"github.com/whosonfirst/go-cache"
-	_ "log"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
