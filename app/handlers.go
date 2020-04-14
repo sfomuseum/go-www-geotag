@@ -97,12 +97,6 @@ func AppendEditorHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 		return err
 	}
 
-	handler, err = AppendCrumbHandler(ctx, fs, handler)
-
-	if err != nil {
-		return err
-	}
-
 	mux.Handle(path, handler)
 	return nil
 }
@@ -308,6 +302,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		editor_handler = layers.AppendResourcesHandler(editor_handler, layers_opts)
 	}
 
+	editor_handler, err = AppendCrumbHandler(ctx, fs, editor_handler)
+
+	if err != nil {
+		return nil, err
+	}
+	
 	return editor_handler, nil
 }
 
@@ -340,12 +340,6 @@ func AppendWriterHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 		return err
 	}
 
-	handler, err = AppendCrumbHandler(ctx, fs, handler)
-
-	if err != nil {
-		return err
-	}
-
 	mux.Handle(path, handler)
 	return nil
 }
@@ -364,7 +358,19 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
-	return api.WriterHandler(wr)
+	handler, err := api.WriterHandler(wr)
+
+	if err != nil {
+		return nil, err
+	}
+	
+	handler, err = AppendCrumbHandler(ctx, fs, handler)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return handler, nil
 }
 
 func AppendProxyTilesHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
