@@ -28,6 +28,9 @@ import (
 
 var crumb_init sync.Once
 
+var crumb_config *crumb.CrumbConfig
+var crumb_err error
+
 func init() {
 	geotag.INCLUDE_LEAFLET = false // because the tangramjs stuff will add it
 }
@@ -80,7 +83,7 @@ func AppendEditorHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 	if err != nil {
 		return err
 	}
-	
+
 	mux.Handle(path, handler)
 	return nil
 }
@@ -442,7 +445,7 @@ func AppendCrumbHandler(ctx context.Context, fs *flag.FlagSet, handler http.Hand
 		log.Printf("[WARNING] -crumb-dsn explicitly disabled for %T.\n", handler)
 		return handler, nil
 	}
-	
+
 	crumb_config, err := crumbConfigWithFlagSet(ctx, fs)
 
 	if err != nil {
@@ -454,9 +457,6 @@ func AppendCrumbHandler(ctx context.Context, fs *flag.FlagSet, handler http.Hand
 }
 
 func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.CrumbConfig, error) {
-
-	var crumb_config *crumb.CrumbConfig
-	var crumb_err error
 
 	crumb_func := func() {
 
@@ -486,7 +486,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.Crumb
 				crumb_err = err
 				return
 			}
-			
+
 			extra := e
 			separator := ":"
 			secret := s
@@ -502,6 +502,10 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.Crumb
 
 	if crumb_err != nil {
 		return nil, crumb_err
+	}
+
+	if crumb_config == nil {
+		return nil, errors.New("Failed to construct crumb config")
 	}
 
 	return crumb_config, nil
