@@ -7,7 +7,7 @@ go-bindata:
 	curl -s -o cmd/go-bindata-assetfs/main.go https://raw.githubusercontent.com/whosonfirst/go-bindata-assetfs/master/cmd/go-bindata-assetfs/main.go
 
 bake:
-	@make bake-templates
+	# @make bake-templates
 	@make bake-assets
 
 bake-templates:
@@ -18,9 +18,8 @@ bake-templates:
 bake-assets:	
 	go build -o bin/go-bindata cmd/go-bindata/main.go
 	go build -o bin/go-bindata-assetfs cmd/go-bindata-assetfs/main.go
-	rm -f static/*~ static/css/*~ static/images/*~ static/javascript/*~
-	@PATH=$(PATH):$(CWD)/bin bin/go-bindata-assetfs -pkg www -o www/assetsfs.go static static/javascript static/css static/images
+	rm -f static/*~ static/css/*~ static/javascript/*~
+	@PATH=$(PATH):$(CWD)/bin bin/go-bindata-assetfs -pkg layers -o assets.go static static/javascript static/css
 
 debug:
-	@make bake
-	go run -mod vendor cmd/server/main.go -nextzen-apikey $(APIKEY) -enable-placeholder -placeholder-endpoint $(SEARCH) -enable-oembed -oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' -enable-writer -enable-proxy-tiles -proxy-tiles-cache-uri fs:///tmp/tiles -crumb-dsn debug -enable-map-layers
+	go run -mod vendor cmd/example/main.go -templates 'templates/html/*.html'

@@ -76,6 +76,8 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.Bool("enable-writer", false, "...")
 	fs.String("writer-uri", "stdout://", "...")
 
+	fs.Bool("enable-map-layers", false, "...")
+
 	fs.String("path-editor", "/", "...")
 	fs.String("path-writer", "/update", "...")
 

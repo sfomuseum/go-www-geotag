@@ -161,7 +161,7 @@ func staticJavascriptGeotagEditorInitJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/javascript/geotag.editor.init.js", size: 2793, mode: os.FileMode(420), modTime: time.Unix(1586894824, 0)}
+	info := bindataFileInfo{name: "static/javascript/geotag.editor.init.js", size: 2793, mode: os.FileMode(420), modTime: time.Unix(1586894915, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -321,7 +321,7 @@ func staticJavascriptLeafletLayersControlJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/javascript/leaflet.layers.control.js", size: 3069, mode: os.FileMode(420), modTime: time.Unix(1586894618, 0)}
+	info := bindataFileInfo{name: "static/javascript/leaflet.layers.control.js", size: 3069, mode: os.FileMode(420), modTime: time.Unix(1586894915, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -381,7 +381,7 @@ func staticCssLeafletLayersControlCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/leaflet.layers.control.css", size: 19863, mode: os.FileMode(420), modTime: time.Unix(1586887835, 0)}
+	info := bindataFileInfo{name: "static/css/leaflet.layers.control.css", size: 19863, mode: os.FileMode(420), modTime: time.Unix(1586894915, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

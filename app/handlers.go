@@ -12,6 +12,7 @@ import (
 	"github.com/aaronland/go-string/random"
 	"github.com/jtacoma/uritemplates"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
+	"github.com/sfomuseum/go-http-leaflet-layers"
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
 	"github.com/sfomuseum/go-www-geotag/api"
 	"github.com/sfomuseum/go-www-geotag/flags"
@@ -33,7 +34,9 @@ var crumb_config *crumb.CrumbConfig
 var crumb_err error
 
 func init() {
-	geotag.INCLUDE_LEAFLET = false // because the tangramjs stuff will add it
+	// because the tangramjs stuff will add it
+	geotag.INCLUDE_LEAFLET = false
+	layers.INCLUDE_LEAFLET = false
 }
 
 func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
@@ -54,6 +57,21 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 
 	if err != nil {
 		return err
+	}
+
+	enable_map_layers, err := flags.BoolVar(fs, "enable-map-layers")
+
+	if err != nil {
+		return err
+	}
+
+	if enable_map_layers {
+
+		err = layers.AppendAssetHandlers(mux)
+
+		if err != nil {
+			return err
+		}
 	}
 
 	err = www.AppendStaticAssetHandlers(mux)
