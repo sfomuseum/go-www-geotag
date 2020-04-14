@@ -237,7 +237,8 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 			has_url := false
 
-			for _, n := range t.Names(){
+			for _, n := range t.Names() {
+
 				if n == "url" {
 					has_url = true
 					break
