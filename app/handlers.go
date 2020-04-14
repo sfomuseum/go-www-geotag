@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-tangramjs"
+	"github.com/jtacoma/uritemplates"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
 	"github.com/sfomuseum/go-www-geotag/flags"
@@ -14,6 +15,7 @@ import (
 	"github.com/sfomuseum/go-www-geotag/writer"
 	"github.com/sfomuseum/go-www-geotag/www"
 	"github.com/whosonfirst/go-cache"
+	_ "log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -225,6 +227,25 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 			if err != nil {
 				return nil, err
+			}
+
+			t, err := uritemplates.Parse(oembed_url)
+
+			if err != nil {
+				return nil, err
+			}
+
+			has_url := false
+
+			for _, n := range t.Names(){
+				if n == "url" {
+					has_url = true
+					break
+				}
+			}
+
+			if !has_url {
+				return nil, errors.New("Invalid oEmbed endpoint URL template")
 			}
 		}
 

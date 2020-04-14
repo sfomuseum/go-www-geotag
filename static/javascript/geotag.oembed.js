@@ -48,21 +48,16 @@ geotag.oembed = (function(){
 	
 	'fetch': function(url, on_success, on_error) {
 
-	    var endpoint = self.derive_endpoint(url);
+	    var endpoint_template = self.derive_endpoint(url);
 
-	    if (! endpoint){
+	    if (! endpoint_template){
 		on_error("Unable able to derive oEmbed endpoint");
 		return;
 	    }
-	    
-	    var q = {
-		'url': url,
-		'format': 'json',
-	    };
 
-	    var q_str = self.build_query_string(q);
-	    var url = endpoint + '?' + q_str;
-	    
+	    var enc_url = encodeURIComponent(url);
+	    var oembed_url = endpoint_template.replace("{url}", enc_url);
+
 	    var req = new XMLHttpRequest();
 	    
 	    req.onload = function(){
@@ -81,7 +76,7 @@ geotag.oembed = (function(){
 		on_success(rsp);
        	    };
 	    
-	    req.open("get", url, true);
+	    req.open("get", oembed_url, true);
 	    req.send();	    	    
 	},
 	
