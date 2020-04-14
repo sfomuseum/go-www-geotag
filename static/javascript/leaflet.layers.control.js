@@ -1,12 +1,16 @@
 L.Control.Layers = L.Control.extend({
+    _map: null,
+    _layer: null,
+    _current: -1,
     options: {
 	position: 'bottomright',
 	catalog: [],
-	current_layer: null,
 	on_change: null,
     },
     onAdd: function(map) {
 
+	this._map = map;
+	
 	this.div = L.DomUtil.create('div','leaflet-layers-container');
 
 	this.select = L.DomUtil.create('select','leaflet-layers-select',this.div);
@@ -23,10 +27,6 @@ L.Control.Layers = L.Control.extend({
 	    var opt = L.DomUtil.create('option', '', this.select);
 	    opt.setAttribute("value", idx);
 	    opt.innerText = label;
-
-	    if (idx == this.options.current_layer){
-		opt.setAttribute("selected", "selected");
-	    }
 	}
 
 	var _this = this;
@@ -37,29 +37,14 @@ L.Control.Layers = L.Control.extend({
 	    var offset;
 
 	    if (e.keyCode == 37){
-		layer = self.get_previous_layer();
+		layer = _this.get_previous_layer();
 	    }
 	    
 	    if (e.keyCode == 39){
-		layer = self.map.get_next_layer();	    
+		layer = _this.get_next_layer();	    
 	    }	
 
-	    if (! layer){
-		return;
-	    }
-	    
-	    for (var idx in _this.options.layers){
-
-		idx = parseInt(idx);
-
-		if (layer == _this.options.layers[idx]){
-
-		    // console.log("FUU", idx, _this.options.layers[idx], _this.select.options[idx+1].value);
-		    _this.select.selectedIndex = idx + 1;
-		}
-	    }
-
-	    _this.options.on_change(layer);
+	    _this.on_change(layer);
 	});
 
         L.DomEvent.on(this.select, 'change', this._change, this);
@@ -68,7 +53,32 @@ L.Control.Layers = L.Control.extend({
 
     'on_change': function(layer){
 
-	console.log("CHANGE", layer);
+	if (this._layer != null){
+	    this._map.removeLayer(this._layer);
+	    this._layer = null;
+	}
+
+	if (! layer){
+	    return;
+	}
+	
+	var url = layer["url"];
+	var args = {};	 // min,max zoom...
+
+	if (layer["min_zoom"]){
+	    args["minZoom"] = parseInt(layer["min_zoom"]);
+	}
+
+	if (layer["max_zoom"]){
+	    args["maxZoom"] = parseInt(layer["max_zoom"]);
+	}
+	
+	var layer = L.tileLayer(url, args);
+	layer.addTo(this._map);
+
+	this._layer = layer;
+
+	// user defined stuff
 	
 	if (this.options.on_change){
 	    this.options.on_change(layer);
@@ -78,7 +88,11 @@ L.Control.Layers = L.Control.extend({
     
     _change: function(e) {
 
-	var idx = this.select.options[this.select.selectedIndex].value;	
+	var idx = this.select.options[this.select.selectedIndex].value;
+	idx = parseInt(idx);
+
+	this._current = idx;
+	
 	var layer = this.get_layer(idx);
 	this.on_change(layer);
     },
@@ -86,7 +100,6 @@ L.Control.Layers = L.Control.extend({
     'get_layer': function(idx){
 
 	idx = parseInt(idx);	
-	console.log("GET LAYER", idx);
 	
 	if (idx < 0){
 	    return null;
@@ -101,10 +114,38 @@ L.Control.Layers = L.Control.extend({
     
     'get_next_layer': function(){
 
+	var current = this._current;
+	current = parseInt(current);
+
+	var count_layers = this.options.catalog.length;
+	var next = current + 1;
+
+	if (next >= count_layers){
+	    next = 0;
+	}
+	
+	this.select.selectedIndex = next + 1;
+	this._current = next;
+	
+	return this.get_layer(next);
     },
 
     'get_previous_layer': function(){
 
+	var current = this._current;	
+	current = parseInt(current);
+
+	var count_layers = this.options.catalog.length;
+	var prev = current - 1;
+
+	if (prev < 0){
+	    prev = count_layers - 1;
+	} 
+
+	this.select.selectedIndex = prev + 1;
+	this._current = prev;
+	
+	return this.get_layer(prev);		
     },
 });
 

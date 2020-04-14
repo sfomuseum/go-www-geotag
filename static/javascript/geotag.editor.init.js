@@ -63,21 +63,17 @@ window.addEventListener("load", function load(event){
 	return;
     }
 
-    //
+    /*
 
-    var catalog = [
-	{"label": "hello"},
-	{"label": "world"},
-    ];
-    
+       // how/where should this be defined?
+
     var layers_control = new L.Control.Layers({
 	catalog: catalog,
     });
 
     map.addControl(layers_control);
 
-
-    //
+    */
     
     var hash = new L.Hash(map);
 
