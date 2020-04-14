@@ -1,4 +1,4 @@
-package www
+package api
 
 import (
 	"github.com/sfomuseum/go-geojson-geotag"

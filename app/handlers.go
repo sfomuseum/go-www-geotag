@@ -6,10 +6,12 @@ import (
 	"flag"
 	"fmt"
 	"github.com/aaronland/go-http-bootstrap"
+	"github.com/aaronland/go-http-crumb"
 	"github.com/aaronland/go-http-tangramjs"
 	"github.com/jtacoma/uritemplates"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
+	"github.com/sfomuseum/go-www-geotag/api"
 	"github.com/sfomuseum/go-www-geotag/flags"
 	"github.com/sfomuseum/go-www-geotag/geo"
 	"github.com/sfomuseum/go-www-geotag/writer"
@@ -67,6 +69,12 @@ func AppendEditorHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 
 	if err != nil {
 		return err
+	}
+
+	handler, err = AppendCrumbHandler(ctx, fs, handler)
+
+	if err != nil {
+		return nil
 	}
 
 	mux.Handle(path, handler)
@@ -295,6 +303,12 @@ func AppendWriterHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 		return err
 	}
 
+	handler, err = AppendCrumbHandler(ctx, fs, handler)
+
+	if err != nil {
+		return err
+	}
+
 	mux.Handle(path, handler)
 	return nil
 }
@@ -313,7 +327,7 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
-	return www.WriterHandler(wr)
+	return api.WriterHandler(wr)
 }
 
 func AppendProxyTilesHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
@@ -410,4 +424,27 @@ func NewProxyTilesHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, 
 	}
 
 	return proxy_handler, nil
+}
+
+func AppendCrumbHandler(ctx context.Context, fs *flag.FlagSet, handler http.Handler) (http.Handler, error) {
+
+	crumb_config, err := crumbConfigWithFlagSet(ctx, fs)
+
+	if err != nil {
+		return nil, err
+	}
+
+	handler = crumb.EnsureCrumbHandler(crumb_config, handler)
+	return handler, nil
+}
+
+func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.CrumbConfig, error) {
+
+	crumb_dsn, err := flags.StringVar(fs, "crumb-dsn")
+
+	if err != nil {
+		return nil, err
+	}
+
+	return crumb.NewCrumbConfigFromDSN(crumb_dsn)
 }
