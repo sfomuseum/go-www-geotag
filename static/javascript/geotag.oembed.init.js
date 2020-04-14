@@ -106,6 +106,11 @@ window.addEventListener("load", function load(event){
 	    m.appendChild(title);
 	    m.style.display = "block";
 
+	    // 
+
+	    var uri = rsp["geotag:uri"];
+	    document.body.setAttribute("data-geotag-uri", uri);
+	    
 	    if (rsp["geotag:geojson_url"]){
 		whosonfirst.net.fetch(rsp["geotag:geojson_url"], on_success_geojson, on_error_geojson);
 		return;

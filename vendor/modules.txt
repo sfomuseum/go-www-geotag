@@ -27,7 +27,7 @@ github.com/paulmach/orb/clip
 github.com/paulmach/orb/geojson
 github.com/paulmach/orb/internal/mercator
 github.com/paulmach/orb/maptile
-# github.com/sfomuseum/go-geojson-geotag v0.0.2
+# github.com/sfomuseum/go-geojson-geotag v0.0.3
 github.com/sfomuseum/go-geojson-geotag
 # github.com/sfomuseum/go-http-leaflet-geotag v1.0.0
 github.com/sfomuseum/go-http-leaflet-geotag

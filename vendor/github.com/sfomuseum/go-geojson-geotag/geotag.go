@@ -35,6 +35,7 @@ type GeotagGeometryCollection struct {
 }
 
 type GeotagFeature struct {
+	Id         string                   `json:"id,omitempty"`
 	Type       string                   `json:"type"`
 	Geometry   GeotagGeometryCollection `json:"geometry"`
 	Properties GeotagProperties         `json:"properties"`

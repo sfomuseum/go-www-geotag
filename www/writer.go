@@ -29,7 +29,13 @@ func WriterHandler(wr writer.Writer) (http.Handler, error) {
 
 		ctx := req.Context()
 
-		uri := "fixme"
+		uri := geotag_f.Id
+
+		if uri == "" {
+			http.Error(rsp, err.Error(), http.StatusBadRequest)
+			return
+		}
+
 		err = wr.WriteFeature(ctx, uri, geotag_f)
 
 		if err != nil {

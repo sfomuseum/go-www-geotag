@@ -9,7 +9,7 @@ require (
 	github.com/aaronland/go-http-tangramjs v0.0.6
 	github.com/aaronland/go-roster v0.0.1
 	github.com/jtacoma/uritemplates v1.0.0
-	github.com/sfomuseum/go-geojson-geotag v0.0.2
+	github.com/sfomuseum/go-geojson-geotag v0.0.3
 	github.com/sfomuseum/go-http-leaflet-geotag v1.0.0
 	github.com/sfomuseum/go-http-tilezen v0.0.4
 	github.com/whosonfirst/go-bindata v0.1.0
