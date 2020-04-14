@@ -79,7 +79,7 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.String("path-editor", "/", "...")
 	fs.String("path-writer", "/update", "...")
 
-	fs.String("crumb-dsn", "", "...")	
+	fs.String("crumb-dsn", "", "...")
 
 	err := AppendLeafletFlags(fs)
 

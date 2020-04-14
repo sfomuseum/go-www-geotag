@@ -8,6 +8,7 @@ import (
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-crumb"
 	"github.com/aaronland/go-http-tangramjs"
+	"github.com/aaronland/go-string/random"
 	"github.com/jtacoma/uritemplates"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
@@ -21,8 +22,11 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"sync"
 	"time"
 )
+
+var crumb_init sync.Once
 
 func init() {
 	geotag.INCLUDE_LEAFLET = false // because the tangramjs stuff will add it
@@ -440,11 +444,46 @@ func AppendCrumbHandler(ctx context.Context, fs *flag.FlagSet, handler http.Hand
 
 func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.CrumbConfig, error) {
 
-	crumb_dsn, err := flags.StringVar(fs, "crumb-dsn")
+	var crumb_config *crumb.CrumbConfig
+	var crumb_err error
 
-	if err != nil {
-		return nil, err
+	crumb_func := func() {
+		
+		crumb_dsn, err := flags.StringVar(fs, "crumb-dsn")
+
+		if err != nil {
+			crumb_err = err
+			return
+		}
+
+		if crumb_dsn == "debug" {
+
+			r_opts := random.DefaultOptions()
+			r_opts.AlphaNumeric = true
+
+			s, err := random.String(r_opts)
+
+			if err != nil {
+				crumb_err = err
+				return
+			}
+
+			extra := ""
+			separator := ":"
+			secret := s
+			ttl := "3600" // 60 * 60
+
+			crumb_dsn = fmt.Sprintf("extra=%s separator=%s secret=%s ttl=%s", extra, separator, secret, ttl)
+		}
+
+		crumb_config, crumb_err = crumb.NewCrumbConfigFromDSN(crumb_dsn)
 	}
 
-	return crumb.NewCrumbConfigFromDSN(crumb_dsn)
+	crumb_init.Do(crumb_func)
+
+	if crumb_err != nil {
+		return nil, crumb_err
+	}
+
+	return crumb_config, nil
 }
