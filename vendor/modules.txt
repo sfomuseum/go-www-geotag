@@ -38,7 +38,7 @@ github.com/paulmach/orb/maptile
 github.com/sfomuseum/go-geojson-geotag
 # github.com/sfomuseum/go-http-leaflet-geotag v1.0.0
 github.com/sfomuseum/go-http-leaflet-geotag
-# github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414201802-5fda66c75776
+# github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414210451-02713825ca94
 github.com/sfomuseum/go-http-leaflet-layers
 # github.com/sfomuseum/go-http-tilezen v0.0.4
 github.com/sfomuseum/go-http-tilezen/http

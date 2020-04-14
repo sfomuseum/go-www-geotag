@@ -11,14 +11,14 @@ import (
 
 var INCLUDE_LEAFLET = true
 
-type LeafletGeotagOptions struct {
+type LeafletLayersOptions struct {
 	JS  []string
 	CSS []string
 }
 
-func DefaultLeafletGeotagOptions() *LeafletGeotagOptions {
+func DefaultLeafletLayersOptions() *LeafletLayersOptions {
 
-	opts := &LeafletGeotagOptions{
+	opts := &LeafletLayersOptions{
 		CSS: []string{
 			"/css/leaflet.layers.control.css",
 		},
@@ -30,7 +30,7 @@ func DefaultLeafletGeotagOptions() *LeafletGeotagOptions {
 	return opts
 }
 
-func AppendResourcesHandler(next http.Handler, opts *LeafletGeotagOptions) http.Handler {
+func AppendResourcesHandler(next http.Handler, opts *LeafletLayersOptions) http.Handler {
 
 	if INCLUDE_LEAFLET {
 		leaflet_opts := leaflet.DefaultLeafletOptions()
@@ -40,7 +40,7 @@ func AppendResourcesHandler(next http.Handler, opts *LeafletGeotagOptions) http.
 	return AppendResourcesHandlerWithPrefix(next, opts, "")
 }
 
-func AppendResourcesHandlerWithPrefix(next http.Handler, opts *LeafletGeotagOptions, prefix string) http.Handler {
+func AppendResourcesHandlerWithPrefix(next http.Handler, opts *LeafletLayersOptions, prefix string) http.Handler {
 
 	if INCLUDE_LEAFLET {
 		leaflet_opts := leaflet.DefaultLeafletOptions()

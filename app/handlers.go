@@ -205,6 +205,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	enable_map_layers, err := flags.BoolVar(fs, "enable-map-layers")
+
+	if err != nil {
+		return nil, err
+	}
+
 	if enable_proxy_tiles {
 
 		path_proxy_tiles, err := flags.StringVar(fs, "path-proxy-tiles")
@@ -296,6 +302,11 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	editor_handler = bootstrap.AppendResourcesHandler(editor_handler, bootstrap_opts)
 	editor_handler = tangramjs.AppendResourcesHandler(editor_handler, tangramjs_opts)
 	editor_handler = geotag.AppendResourcesHandler(editor_handler, geotag_opts)
+
+	if enable_map_layers {
+		layers_opts := layers.DefaultLeafletLayersOptions()
+		editor_handler = layers.AppendResourcesHandler(editor_handler, layers_opts)
+	}
 
 	return editor_handler, nil
 }

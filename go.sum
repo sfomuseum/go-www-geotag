@@ -53,6 +53,10 @@ github.com/sfomuseum/go-http-leaflet-geotag v1.0.0 h1:LGW8CpUhwkQ7+4DewziLI5ueF1
 github.com/sfomuseum/go-http-leaflet-geotag v1.0.0/go.mod h1:R56pMAP2OHurz+bDFkYL3RgISj/SQw2mbgTmL9FZ8WQ=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414201802-5fda66c75776 h1:9ChL0DMbVvTX1MhZcJz5TkoeNXgQaUQYsx8P4js3RI4=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414201802-5fda66c75776/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
+github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414205627-552b259c074e h1:7Ea9zUKqNrvkQN+0Xx+R66kKR5CShFjtIbZ6QW6Szvc=
+github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414205627-552b259c074e/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
+github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414210451-02713825ca94 h1:5xUNau9W+JYKE3ZLo/VgavjX3bNiqUO4gQPgqAVkj7c=
+github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414210451-02713825ca94/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
 github.com/sfomuseum/go-http-tilezen v0.0.2 h1:pKqyTtA2v9wZkfWt/L8aXyihi7upSwtbwTMxKF6Ey7U=
 github.com/sfomuseum/go-http-tilezen v0.0.2/go.mod h1:SpWQAUmPnJhjaQuwAT0qbsxBFMUjDhaxsvALFO9IGg0=
 github.com/sfomuseum/go-http-tilezen v0.0.3 h1:rV7V0xlu5qfaUPJIV3oQ39bpk7yzVu7D0YGTK+li2Ds=
