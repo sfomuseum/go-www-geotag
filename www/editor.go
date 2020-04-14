@@ -21,6 +21,7 @@ type EditorHandlerOptions struct {
 }
 
 type EditorHandlerVars struct {
+	PageContext         string
 	InitialLatitude     float64
 	InitialLongitude    float64
 	InitialZoom         int
@@ -45,6 +46,7 @@ func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 	fn := func(rsp http.ResponseWriter, req *http.Request) {
 
 		vars := EditorHandlerVars{
+			PageContext:         "Editor",
 			InitialLatitude:     opts.InitialLatitude,
 			InitialLongitude:    opts.InitialLongitude,
 			InitialZoom:         opts.InitialZoom,
