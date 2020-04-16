@@ -20,6 +20,12 @@ func main() {
 
 	flags.Parse(fl)
 
+	err = flags.SetFlagsFromEnvVars(fl, "GEOTAG")
+
+	if err != nil {
+		log.Fatalf("Failed to set flags from env vars, %v", err)
+	}
+	
 	mux := http.NewServeMux()
 
 	err = app.AppendAssetHandlers(ctx, fl, mux)

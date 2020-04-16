@@ -43,6 +43,10 @@ github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sfomuseum/go-flags v0.0.0-20200416180755-b77d83edf7f9 h1:9fAYKZ+t6mUUZAEj/A61To7cPhTu01pUBIF2v3mdCx4=
 github.com/sfomuseum/go-flags v0.0.0-20200416180755-b77d83edf7f9/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
+github.com/sfomuseum/go-flags v0.0.1 h1:IWPefQGqTLX1YayFlEShPKhqIFIZvobxFVYXTQ1dZxE=
+github.com/sfomuseum/go-flags v0.0.1/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
+github.com/sfomuseum/go-flags v0.0.2 h1:gdhf3A8oxHACAeFQpEHUplfLjkBCb6dILaftSSMD5Mk=
+github.com/sfomuseum/go-flags v0.0.2/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
 github.com/sfomuseum/go-geojson-geotag v0.0.0-20200413175259-9db8291bba96 h1:fAylrUgiznJLRA5NUhZZG5Eea4a20Jh5MBfYEQpnyIQ=
 github.com/sfomuseum/go-geojson-geotag v0.0.0-20200413175259-9db8291bba96/go.mod h1:KC3HmXH9Aws5v5iPzCukiNGUlLfHITZAqFVLqvi2COg=
 github.com/sfomuseum/go-geojson-geotag v0.0.1 h1:tdcP9EIWHWbyQpsUuI2KMQdCY+NIMslaEJ78zTqw/w4=

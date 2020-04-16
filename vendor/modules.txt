@@ -34,7 +34,7 @@ github.com/paulmach/orb/clip
 github.com/paulmach/orb/geojson
 github.com/paulmach/orb/internal/mercator
 github.com/paulmach/orb/maptile
-# github.com/sfomuseum/go-flags v0.0.0-20200416180755-b77d83edf7f9
+# github.com/sfomuseum/go-flags v0.0.2
 github.com/sfomuseum/go-flags
 # github.com/sfomuseum/go-geojson-geotag v0.0.3
 github.com/sfomuseum/go-geojson-geotag
