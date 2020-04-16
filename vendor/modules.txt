@@ -9,13 +9,13 @@ github.com/aaronland/go-http-leaflet
 github.com/aaronland/go-http-rewrite
 # github.com/aaronland/go-http-sanitize v0.0.1
 github.com/aaronland/go-http-sanitize
-# github.com/aaronland/go-http-server v0.0.0-20200406192045-de2f431abc6e
+# github.com/aaronland/go-http-server v0.0.1
 github.com/aaronland/go-http-server
 # github.com/aaronland/go-http-tangramjs v0.0.6
 github.com/aaronland/go-http-tangramjs
 # github.com/aaronland/go-roster v0.0.1
 github.com/aaronland/go-roster
-# github.com/aaronland/go-string v0.1.0
+# github.com/aaronland/go-string v0.1.1
 github.com/aaronland/go-string/dsn
 github.com/aaronland/go-string/random
 # github.com/aws/aws-lambda-go v1.10.0
@@ -34,6 +34,8 @@ github.com/paulmach/orb/clip
 github.com/paulmach/orb/geojson
 github.com/paulmach/orb/internal/mercator
 github.com/paulmach/orb/maptile
+# github.com/sfomuseum/go-flags v0.0.0-20200416180755-b77d83edf7f9
+github.com/sfomuseum/go-flags
 # github.com/sfomuseum/go-geojson-geotag v0.0.3
 github.com/sfomuseum/go-geojson-geotag
 # github.com/sfomuseum/go-http-leaflet-geotag v1.0.0

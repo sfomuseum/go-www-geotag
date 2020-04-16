@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
+	"github.com/sfomuseum/go-flags"
 	"github.com/sfomuseum/go-www-geotag/app"
-	"github.com/sfomuseum/go-www-geotag/flags"
 	"log"
 	"net/http"
 )
@@ -12,7 +12,7 @@ func main() {
 
 	ctx := context.Background()
 
-	fl, err := flags.CommonFlags()
+	fl, err := app.CommonFlags()
 
 	if err != nil {
 		log.Fatalf("Failed to instantiate common flags, %v", err)
@@ -54,7 +54,7 @@ func main() {
 
 	log.Printf("Listening on %s", s.Address())
 
-	err = s.ListenAndServe(mux)
+	err = s.ListenAndServe(ctx, mux)
 
 	if err != nil {
 		log.Fatalf("Failed to start server, %v", err)

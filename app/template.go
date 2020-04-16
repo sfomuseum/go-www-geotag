@@ -3,8 +3,8 @@ package app
 import (
 	"context"
 	"flag"
+	"github.com/sfomuseum/go-flags"
 	"github.com/sfomuseum/go-www-geotag/assets/templates"
-	"github.com/sfomuseum/go-www-geotag/flags"
 	"html/template"
 )
 

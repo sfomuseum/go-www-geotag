@@ -339,7 +339,7 @@ func staticCssEditorCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/editor.css", size: 179, mode: os.FileMode(420), modTime: time.Unix(1586547389, 0)}
+	info := bindataFileInfo{name: "static/css/editor.css", size: 179, mode: os.FileMode(420), modTime: time.Unix(1586908803, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

@@ -11,11 +11,11 @@ import (
 	"github.com/aaronland/go-string/dsn"
 	"github.com/aaronland/go-string/random"
 	"github.com/jtacoma/uritemplates"
+	"github.com/sfomuseum/go-flags"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	"github.com/sfomuseum/go-http-leaflet-layers"
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
 	"github.com/sfomuseum/go-www-geotag/api"
-	"github.com/sfomuseum/go-www-geotag/flags"
 	"github.com/sfomuseum/go-www-geotag/geo"
 	"github.com/sfomuseum/go-www-geotag/writer"
 	"github.com/sfomuseum/go-www-geotag/www"
@@ -307,7 +307,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return editor_handler, nil
 }
 
@@ -363,7 +363,7 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if err != nil {
 		return nil, err
 	}
-	
+
 	handler, err = AppendCrumbHandler(ctx, fs, handler)
 
 	if err != nil {
