@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/aaronland/go-http-bootstrap v0.0.5
-	github.com/aaronland/go-http-crumb v0.0.5
+	github.com/aaronland/go-http-crumb v0.0.6
 	github.com/aaronland/go-http-rewrite v0.0.4
 	github.com/aaronland/go-http-server v0.0.2
 	github.com/aaronland/go-http-tangramjs v0.0.6

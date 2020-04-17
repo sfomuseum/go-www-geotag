@@ -8,7 +8,6 @@ import (
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-crumb"
 	"github.com/aaronland/go-http-tangramjs"
-	"github.com/aaronland/go-string/dsn"
 	"github.com/aaronland/go-string/random"
 	"github.com/jtacoma/uritemplates"
 	"github.com/sfomuseum/go-flags"
@@ -30,7 +29,7 @@ import (
 
 var crumb_init sync.Once
 
-var crumb_config *crumb.CrumbConfig
+var cr crumb.Crumb
 var crumb_err error
 
 func init() {
@@ -492,18 +491,18 @@ func AppendCrumbHandler(ctx context.Context, fs *flag.FlagSet, handler http.Hand
 	return handler, nil
 }
 
-func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.CrumbConfig, error) {
+func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb, error) {
 
 	crumb_func := func() {
 
-		crumb_dsn, err := flags.StringVar(fs, "crumb-dsn")
+		crumb_uri, err := flags.StringVar(fs, "crumb-uri")
 
 		if err != nil {
 			crumb_err = err
 			return
 		}
 
-		if crumb_dsn == "debug" {
+		if crumb_uri == "debug" {
 
 			r_opts := random.DefaultOptions()
 			r_opts.AlphaNumeric = true
@@ -523,30 +522,16 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.Crumb
 				return
 			}
 
-			extra := e
-			separator := ":"
-			secret := s
-			ttl := "3600" // 60 * 60
+			params := url.Values{}
+			params.Set("extra", e)
+			params.Set("separator", ":")
+			params.Set("secret", s)
+			params.Set("ttl", "3600")
 
-			crumb_dsn = fmt.Sprintf("extra=%s separator=%s secret=%s ttl=%s", extra, separator, secret, ttl)
+			crumb_uri = fmt.Sprintf("encrypted://?%s", params.Encode())
 		}
 
-		dsn_map, err := dsn.StringToDSN(crumb_dsn)
-
-		if err != nil {
-			crumb_err = err
-			return
-		}
-
-		k, ok := dsn_map["key"]
-
-		if !ok || k == "" {
-			dsn_map["key"] = "geotag"
-		}
-
-		crumb_dsn = dsn_map.String()
-
-		crumb_config, crumb_err = crumb.NewCrumbConfigFromDSN(crumb_dsn)
+		cr, crumb_err = crumb.NewCrumb(ctx, crumb_uri)
 	}
 
 	crumb_init.Do(crumb_func)
@@ -555,9 +540,9 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (*crumb.Crumb
 		return nil, crumb_err
 	}
 
-	if crumb_config == nil {
-		return nil, errors.New("Failed to construct crumb config")
+	if cr == nil {
+		return nil, errors.New("Failed to generate new crumb")
 	}
 
-	return crumb_config, nil
+	return cr, nil
 }

@@ -25,7 +25,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to set flags from env vars, %v", err)
 	}
-	
+
 	mux := http.NewServeMux()
 
 	err = app.AppendAssetHandlers(ctx, fl, mux)

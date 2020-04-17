@@ -10,7 +10,7 @@ func CommonFlags() (*flag.FlagSet, error) {
 
 	fs := flags.NewFlagSet("common")
 
-	fs.String("server-uri", "http://localhost:8080", "...")
+	fs.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server.Server URI for creating an application server.")
 
 	fs.String("path-templates", "", "...")
 
@@ -28,7 +28,7 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.String("path-editor", "/", "...")
 	fs.String("path-writer", "/update", "...")
 
-	fs.String("crumb-dsn", "", "...")
+	fs.String("crumb-uri", "", "A valid aaronland/go-http-crumb.Crumb URI for generating (CSRF) crumbs.")
 
 	err := AppendLeafletFlags(fs)
 
