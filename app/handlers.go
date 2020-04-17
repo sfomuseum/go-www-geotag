@@ -470,14 +470,14 @@ func NewProxyTilesHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, 
 
 func AppendCrumbHandler(ctx context.Context, fs *flag.FlagSet, handler http.Handler) (http.Handler, error) {
 
-	crumb_dsn, err := flags.StringVar(fs, "crumb-dsn")
+	crumb_uri, err := flags.StringVar(fs, "crumb-uri")
 
 	if err != nil {
 		return nil, err
 	}
 
-	if crumb_dsn == "disabled" {
-		log.Printf("[WARNING] -crumb-dsn explicitly disabled for %T.\n", handler)
+	if crumb_uri == "disabled" {
+		log.Printf("[WARNING] -crumb-uri explicitly disabled. This is probably insecure.")
 		return handler, nil
 	}
 
@@ -527,6 +527,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 			params.Set("separator", ":")
 			params.Set("secret", s)
 			params.Set("ttl", "3600")
+			params.Set("key", "geotag")
 
 			crumb_uri = fmt.Sprintf("encrypted://?%s", params.Encode())
 		}

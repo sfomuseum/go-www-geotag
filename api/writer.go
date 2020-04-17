@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/sfomuseum/go-geojson-geotag"
 	"github.com/sfomuseum/go-www-geotag/writer"
+	_ "log"
 	"net/http"
 )
 
