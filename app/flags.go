@@ -57,8 +57,8 @@ func CommonFlags() (*flag.FlagSet, error) {
 func AppendNextzenFlags(fs *flag.FlagSet) error {
 
 	fs.String("nextzen-apikey", "", "A valid Nextzen API key")
-	fs.String("nextzen-style-url", "/tangram/refill-style.zip", "...")
-	fs.String("nextzen-tile-url", tangramjs.NEXTZEN_MVT_ENDPOINT, "...")
+	fs.String("nextzen-style-url", "/tangram/refill-style.zip", "A valid URL for loading a Tangram.js style bundle.")
+	fs.String("nextzen-tile-url", tangramjs.NEXTZEN_MVT_ENDPOINT, "A valid Nextzen tile URL template for loading map tiles.")
 
 	return nil
 }
@@ -68,7 +68,7 @@ func AppendNextzenFlags(fs *flag.FlagSet) error {
 
 func AppendTilezenFlags(fs *flag.FlagSet) error {
 
-	fs.Bool("enable-proxy-tiles", false, "...")
+	fs.Bool("enable-proxy-tiles", false, "Enable the use of a local tile proxy for Nextzen map tiles.")
 
 	fs.String("path-proxy-tiles", "/tiles/", "The URL (a relative path) for proxied tiles.")
 	fs.String("proxy-tiles-cache-uri", "gocache://", "A valid tile proxy DSN string.")
@@ -83,9 +83,9 @@ func AppendTilezenFlags(fs *flag.FlagSet) error {
 
 func AppendLeafletFlags(fs *flag.FlagSet) error {
 
-	fs.Float64("initial-latitude", 37.61799, "...")
-	fs.Float64("initial-longitude", -122.370943, "...")
-	fs.Int("initial-zoom", 14, "...")
+	fs.Float64("initial-latitude", 37.61799, "A valid latitude for the map's initial view.")
+	fs.Float64("initial-longitude", -122.370943, "A valid longitude for the map's initial view.")
+	fs.Int("initial-zoom", 14, "A valid zoom level for the map's initial view.")
 
 	return nil
 }
