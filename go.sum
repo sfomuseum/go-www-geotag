@@ -55,6 +55,10 @@ github.com/sfomuseum/go-flags v0.0.1 h1:IWPefQGqTLX1YayFlEShPKhqIFIZvobxFVYXTQ1d
 github.com/sfomuseum/go-flags v0.0.1/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
 github.com/sfomuseum/go-flags v0.0.2 h1:gdhf3A8oxHACAeFQpEHUplfLjkBCb6dILaftSSMD5Mk=
 github.com/sfomuseum/go-flags v0.0.2/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
+github.com/sfomuseum/go-flags v0.0.3 h1:WOk0t4Z/HBm2tA8EnPtazDFcNGxtawREEFhAkPCIuD8=
+github.com/sfomuseum/go-flags v0.0.3/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
+github.com/sfomuseum/go-flags v0.0.4 h1:dCyG9891QspfnSVtZI/ueEJ/LYweHtXPv2yubqUsH+I=
+github.com/sfomuseum/go-flags v0.0.4/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
 github.com/sfomuseum/go-geojson-geotag v0.0.0-20200413175259-9db8291bba96 h1:fAylrUgiznJLRA5NUhZZG5Eea4a20Jh5MBfYEQpnyIQ=
 github.com/sfomuseum/go-geojson-geotag v0.0.0-20200413175259-9db8291bba96/go.mod h1:KC3HmXH9Aws5v5iPzCukiNGUlLfHITZAqFVLqvi2COg=
 github.com/sfomuseum/go-geojson-geotag v0.0.1 h1:tdcP9EIWHWbyQpsUuI2KMQdCY+NIMslaEJ78zTqw/w4=

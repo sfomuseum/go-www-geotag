@@ -21,6 +21,10 @@ func Parse(fs *flag.FlagSet) {
 }
 
 func SetFlagsFromEnvVars(fs *flag.FlagSet, prefix string) error {
+	return SetFlagsFromEnvVarsWithFeedback(fs, prefix, false)
+}
+
+func SetFlagsFromEnvVarsWithFeedback(fs *flag.FlagSet, prefix string, feedback bool) error {
 
 	prefix = normalize(prefix)
 
@@ -34,8 +38,8 @@ func SetFlagsFromEnvVars(fs *flag.FlagSet, prefix string) error {
 
 		val, ok := os.LookupEnv(env)
 
-		if ok {
-			log.Printf("set -%s flag (%s) from %s environment variable\n", name, val, env)
+		if ok && feedback {
+			log.Printf("set -%s flag from %s environment variable\n", name, env)
 			fs.Set(name, val)
 		}
 	})

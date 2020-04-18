@@ -11,7 +11,7 @@ require (
 	github.com/aaronland/go-roster v0.0.1
 	github.com/aaronland/go-string v0.1.2
 	github.com/jtacoma/uritemplates v1.0.0
-	github.com/sfomuseum/go-flags v0.0.2
+	github.com/sfomuseum/go-flags v0.0.4
 	github.com/sfomuseum/go-geojson-geotag v0.0.3
 	github.com/sfomuseum/go-http-leaflet-geotag v1.0.0
 	github.com/sfomuseum/go-http-leaflet-layers v0.0.1
