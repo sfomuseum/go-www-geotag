@@ -19,6 +19,8 @@ github.com/aaronland/go-http-server v0.0.1 h1:EwVy+yIzzvGLubffF0hUEdlKHfh3sD6wMH
 github.com/aaronland/go-http-server v0.0.1/go.mod h1:i7CG6Q9iRKZX4qonIYr73GtJpVHV8T31eZ4Ug44zOTU=
 github.com/aaronland/go-http-server v0.0.2 h1:N2V3NVXOoYL3iEwXAd9d1A39e3z7+9lGlyjXvwOT5YI=
 github.com/aaronland/go-http-server v0.0.2/go.mod h1:i7CG6Q9iRKZX4qonIYr73GtJpVHV8T31eZ4Ug44zOTU=
+github.com/aaronland/go-http-server v0.0.3 h1:VyiOxUqgJccamLQNOx7p0D3qE9K5RUe3TKe8vy3gZa4=
+github.com/aaronland/go-http-server v0.0.3/go.mod h1:i7CG6Q9iRKZX4qonIYr73GtJpVHV8T31eZ4Ug44zOTU=
 github.com/aaronland/go-http-tangramjs v0.0.6 h1:Ke2hU/flaO6hmK4AxH6ubKIEtqKItowqaWe4IA/3aFU=
 github.com/aaronland/go-http-tangramjs v0.0.6/go.mod h1:9gLqN7c67fdkshqG5wiSWFZkIJdtbC2uA5kdGGrhLyw=
 github.com/aaronland/go-roster v0.0.1 h1:r1l4n1HfWvEtOXZvhfXX0Won9Xf6QJsigdUdzOtuy/M=
