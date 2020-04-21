@@ -28,7 +28,7 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.String("path-editor", "/", "A relative path for the geotag editor application.")
 	fs.String("path-writer", "/update", "A relative path for sending write updates.")
 
-	fs.String("crumb-uri", "", "A valid aaronland/go-http-crumb.Crumb URI for generating (CSRF) crumbs.")
+	fs.String("crumb-uri", "auto", "A valid aaronland/go-http-crumb.Crumb URI for generating (CSRF) crumbs. If the value is 'auto' then a random crumb URI will be generated.")
 
 	err := AppendLeafletFlags(fs)
 

@@ -8,7 +8,6 @@ import (
 	"github.com/aaronland/go-http-bootstrap"
 	"github.com/aaronland/go-http-crumb"
 	"github.com/aaronland/go-http-tangramjs"
-	"github.com/aaronland/go-string/random"
 	"github.com/jtacoma/uritemplates"
 	"github.com/sfomuseum/go-flags"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
@@ -502,34 +501,19 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 			return
 		}
 
-		if crumb_uri == "debug" {
+		if crumb_uri == "auto" {
 
-			r_opts := random.DefaultOptions()
-			r_opts.AlphaNumeric = true
-
-			s, err := random.String(r_opts)
-
-			if err != nil {
-				crumb_err = err
-				return
-			}
-
-			r_opts.Length = 8
-			e, err := random.String(r_opts)
+			ttl := 3600
+			key := "geotag"
+			
+			uri, err := crumb.NewRandomEncryptedCrumbURI(ctx, ttl, key)
 
 			if err != nil {
 				crumb_err = err
 				return
 			}
 
-			params := url.Values{}
-			params.Set("extra", e)
-			params.Set("separator", ":")
-			params.Set("secret", s)
-			params.Set("ttl", "3600")
-			params.Set("key", "geotag")
-
-			crumb_uri = fmt.Sprintf("encrypted://?%s", params.Encode())
+			crumb_uri = uri
 			
 		} else {
 

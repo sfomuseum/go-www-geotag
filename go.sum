@@ -4,6 +4,8 @@ github.com/aaronland/go-http-crumb v0.0.5 h1:ZhBkvWUW9wsw+KYnOu0sHAeRpsfY9kj0wh7
 github.com/aaronland/go-http-crumb v0.0.5/go.mod h1:tzp6zHKE/pojVXQhcS1J5x5qQkhhxOTvJS2N7S1VVuY=
 github.com/aaronland/go-http-crumb v0.0.6 h1:R+hGU1SdkKxLqKIuabBwXpemo7VqFaCVYg4YK13JOnw=
 github.com/aaronland/go-http-crumb v0.0.6/go.mod h1:mf4QGr+5Mraf6ta1CwLJHSe31yWgDgmM8OxcLilnrpY=
+github.com/aaronland/go-http-crumb v0.1.0 h1:YfsCDZMZQWvkBvrre5TVrA1Kbkmxc3ZzbpDej/vCX8E=
+github.com/aaronland/go-http-crumb v0.1.0/go.mod h1:/9rG/lnTmpoVDr4gv2m9zCJjvgrscnntKmgY9l5PYEo=
 github.com/aaronland/go-http-leaflet v0.0.3 h1:moAjSThtakdpdZ9zr6po11XeIyksYfe+BaH+tfdrnsM=
 github.com/aaronland/go-http-leaflet v0.0.3/go.mod h1:jUzEnGKezjceuNtQJIZWy2nXMhuteRSK0BPIjSSniBw=
 github.com/aaronland/go-http-rewrite v0.0.3/go.mod h1:g62jjXpsArD0lzJLs9bVLR9Locdt3f4OmqFkkJL2rQU=

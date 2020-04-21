@@ -1,7 +1,7 @@
 # github.com/aaronland/go-http-bootstrap v0.0.5
 github.com/aaronland/go-http-bootstrap
 github.com/aaronland/go-http-bootstrap/resources
-# github.com/aaronland/go-http-crumb v0.0.6
+# github.com/aaronland/go-http-crumb v0.1.0
 github.com/aaronland/go-http-crumb
 # github.com/aaronland/go-http-leaflet v0.0.3
 github.com/aaronland/go-http-leaflet
