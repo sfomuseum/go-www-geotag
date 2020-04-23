@@ -85,6 +85,8 @@ github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414210451-02713825ca94 h
 github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414210451-02713825ca94/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.1 h1:o5qCG4Xp/wuO4uJ+3V+nKXqOH/iv4ziIPLTQsgXSozw=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.1/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
+github.com/sfomuseum/go-http-leaflet-layers v0.0.2 h1:+50AXlMioejRz4K+KKs0+MiaopiP1ehnHlcc4OTHRrk=
+github.com/sfomuseum/go-http-leaflet-layers v0.0.2/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
 github.com/sfomuseum/go-http-tilezen v0.0.2 h1:pKqyTtA2v9wZkfWt/L8aXyihi7upSwtbwTMxKF6Ey7U=
 github.com/sfomuseum/go-http-tilezen v0.0.2/go.mod h1:SpWQAUmPnJhjaQuwAT0qbsxBFMUjDhaxsvALFO9IGg0=
 github.com/sfomuseum/go-http-tilezen v0.0.3 h1:rV7V0xlu5qfaUPJIV3oQ39bpk7yzVu7D0YGTK+li2Ds=

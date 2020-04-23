@@ -39,7 +39,7 @@ github.com/sfomuseum/go-flags
 github.com/sfomuseum/go-geojson-geotag
 # github.com/sfomuseum/go-http-leaflet-geotag v1.0.0
 github.com/sfomuseum/go-http-leaflet-geotag
-# github.com/sfomuseum/go-http-leaflet-layers v0.0.1
+# github.com/sfomuseum/go-http-leaflet-layers v0.0.2
 github.com/sfomuseum/go-http-leaflet-layers
 # github.com/sfomuseum/go-http-tilezen v0.0.4
 github.com/sfomuseum/go-http-tilezen/http
