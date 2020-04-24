@@ -1,5 +1,7 @@
 # go-www-geotag
 
+![](docs/images/geotag-responsive.png)
+
 ## Important
 
 This is work in progress, including the documentation. In the meantime please have a look at the [Geotagging at SFO Museum](https://millsfield.sfomuseum.org/blog/tags/geotagging) series of blog posts.
@@ -61,3 +63,4 @@ This is work in progress, including the documentation. In the meantime please ha
 ## See also
 
 * https://github.com/sfomuseum/go-http-leaflet-geotag
+* https://github.com/nypl-spacetime/Leaflet.GeotagPhoto
