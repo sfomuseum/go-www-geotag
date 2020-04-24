@@ -1,12 +1,12 @@
 {{ define "editor" }}
 {{ template "inc_head" . }}
-<div class="container">
+<div class="container" id="editor">
 
     {{ if .EnableOEmbed }}    
 
-    <div class="card">
+    <div class="card oembed-card">
 
-	<div class="card-header">
+	<div class="card-header oembed-card-header">
 
 	    <form class="form-inline">
 		<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" size="30" />
@@ -14,14 +14,15 @@
 	    </form>
 	</div>
 	
-	<div id="oembed-image" class="card-body"></div>
-	<div class="card-footer" id="oembed-meta"></div>
+	<div id="oembed-image" class="card-body oembed-card-body"></div>
+	<div class="card-footer oembed-card-footer" id="oembed-meta"></div>
     </div>
     
     {{ end }}
     
     <div class="card">
 
+	{{ if or .EnableWriter .EnablePlaceholder }}	
 	<div class="card-header">
 
 	    {{ if .EnableWriter }}
@@ -36,6 +37,7 @@
 	    <div id="placeholder-results"></div>
 	    {{ end }}	    
 	</div>
+	{{ end }}
 	
 	<div id="map" class="card-body"></div>
 	<div class="card-footer" id="output">

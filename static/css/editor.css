@@ -2,6 +2,10 @@ body {
 	margin-top:1.5rem;
 }
 
+#editor {
+	margin-top:1rem;
+}
+
 #map {
 	border: solid thin;
 	width: 100%;
@@ -15,4 +19,12 @@ body {
 
 #output {
 	display:none;
+}
+
+.leaflet-control-geotag-photo-camera img {
+	vertical-align: top !important;
+}
+
+.leaflet-control-geotag-photo-crosshair img {
+	vertical-align: top !important;
 }
