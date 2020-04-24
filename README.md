@@ -1,6 +1,6 @@
 # go-www-geotag
 
-![](docs/images/geotag-responsive.png)
+![](docs/images/geotag-simple.png)
 
 ## Important
 

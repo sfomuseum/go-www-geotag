@@ -13,6 +13,11 @@ body {
 	max-height:500px !important;
 }
 
+#feature {
+	max-height:30vh !important; 
+	overflow:scroll;
+}
+
 .card {
 	margin-bottom:1rem;
 }
