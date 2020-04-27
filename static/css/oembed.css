@@ -7,7 +7,10 @@
 }
 
 #oembed-image .card-img-top {
-	max-height: 320px !important;
-	max-width: 480px !important;
+	display: block;
+	max-width:600px;
+	max-height:400px;
+	width: auto;
+	height: auto;
 }
 	
