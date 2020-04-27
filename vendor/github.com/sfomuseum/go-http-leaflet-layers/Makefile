@@ -6,6 +6,10 @@ go-bindata:
 	curl -s -o cmd/go-bindata/main.go https://raw.githubusercontent.com/whosonfirst/go-bindata/master/cmd/go-bindata/main.go
 	curl -s -o cmd/go-bindata-assetfs/main.go https://raw.githubusercontent.com/whosonfirst/go-bindata-assetfs/master/cmd/go-bindata-assetfs/main.go
 
+src:
+	curl -s -o static/javascript/leaflet.layers.control.js https://raw.githubusercontent.com/sfomuseum/leaflet-layers-control/master/src/leaflet.layers.control.js
+	curl -s -o static/css/leaflet.layers.control.css https://raw.githubusercontent.com/sfomuseum/leaflet-layers-control/master/src/leaflet.layers.control.css
+
 bake:
 	# @make bake-templates
 	@make bake-assets
