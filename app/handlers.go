@@ -173,6 +173,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	oembed_allow_any, err := flags.BoolVar(fs, "oembed-allow-any")
+
+	if err != nil {
+		return nil, err
+	}
+
 	oembed_endpoints, err := flags.StringVar(fs, "oembed-endpoints")
 
 	if err != nil {
@@ -251,38 +257,43 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 		editor_opts.EnableOEmbed = enable_oembed
 
-		urls := strings.Split(oembed_endpoints, ",")
+		if oembed_allow_any {
 
-		for _, oembed_url := range urls {
+			//
+		} else {
+			urls := strings.Split(oembed_endpoints, ",")
 
-			_, err := url.Parse(oembed_url)
+			for _, oembed_url := range urls {
 
-			if err != nil {
-				return nil, err
-			}
+				_, err := url.Parse(oembed_url)
 
-			t, err := uritemplates.Parse(oembed_url)
+				if err != nil {
+					return nil, err
+				}
 
-			if err != nil {
-				return nil, err
-			}
+				t, err := uritemplates.Parse(oembed_url)
 
-			has_url := false
+				if err != nil {
+					return nil, err
+				}
 
-			for _, n := range t.Names() {
+				has_url := false
 
-				if n == "url" {
-					has_url = true
-					break
+				for _, n := range t.Names() {
+
+					if n == "url" {
+						has_url = true
+						break
+					}
+				}
+
+				if !has_url {
+					return nil, errors.New("Invalid oEmbed endpoint URL template")
 				}
 			}
 
-			if !has_url {
-				return nil, errors.New("Invalid oEmbed endpoint URL template")
-			}
+			editor_opts.OEmbedEndpoints = urls
 		}
-
-		editor_opts.OEmbedEndpoints = urls
 	}
 
 	editor_handler, err := www.EditorHandler(editor_opts)
@@ -505,7 +516,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 
 			ttl := 3600
 			key := "geotag"
-			
+
 			uri, err := crumb.NewRandomEncryptedCrumbURI(ctx, ttl, key)
 
 			if err != nil {
@@ -514,7 +525,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 			}
 
 			crumb_uri = uri
-			
+
 		} else {
 
 			u, err := url.Parse(crumb_uri)
@@ -525,7 +536,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 			}
 
 			q := u.Query()
-			
+
 			if q.Get("key") == "" {
 				crumb_err = errors.New("Required key= property for crumb URI missing")
 				return

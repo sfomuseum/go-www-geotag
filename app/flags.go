@@ -18,6 +18,7 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.String("placeholder-endpoint", "", "A valid Placeholder API endpoint to query.")
 
 	fs.Bool("enable-oembed", false, "Enable oEmbed lookups for images.")
+	fs.Bool("oembed-allow-any", false, "Allow any endpoint to be queried for oEmbed resources.")
 	fs.String("oembed-endpoints", "", "A comma-separated list of valid oEmbed endpoints to query.")
 
 	fs.Bool("enable-writer", false, "Enable output of the leaflet-geotag plugin to be written to a go-www-geotag/writer.Writer instance.")
