@@ -48,6 +48,18 @@ geotag.oembed = (function(){
 	
 	'fetch': function(url, on_success, on_error) {
 
+	    // URLs with #hash compotents trigger CORS errors
+	    // I don't know why... (20200427/thisisaaronland)
+	    
+	    var u = new URL(url);
+
+	    if (! u){
+		on_error("Invalid URL");
+		return;
+	    }
+	    
+	    url = u.href.replace(u.hash, "")
+
 	    var endpoint_template = self.derive_endpoint(url);
 
 	    if (! endpoint_template){
@@ -61,9 +73,9 @@ geotag.oembed = (function(){
 	    var req = new XMLHttpRequest();
 	    
 	    req.onload = function(){
-		
+
 		var rsp;
-		
+
 		try {
 		    rsp = JSON.parse(this.responseText);
             	}
