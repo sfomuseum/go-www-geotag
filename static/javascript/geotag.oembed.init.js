@@ -162,9 +162,15 @@ window.addEventListener("load", function load(event){
 
     if (query["oembed-url"]){
 
-	var url = query["oembed-url"][0];
-	q_el.value = url;
-	f_el.click();
+	var str_url = query["oembed-url"][0];
+	var url = new URL(str_url);
+
+	if (url){
+	    q_el.value = url.toString();
+	    f_el.click();
+	} else {
+	    console.log("Invalid oembed-url parameter");
+	}
     }   
 
 });
