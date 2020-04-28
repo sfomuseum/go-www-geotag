@@ -10,30 +10,30 @@ window.addEventListener("load", function load(event){
 
     geotag.oembed.set_endpoints_map(endpoints_map);
     
-    var q = document.getElementById("oembed-url");
+    var q_el = document.getElementById("oembed-url");
 
-    if (! q){
+    if (! q_el){
 	console.log("Missing oembed-url element.");
 	return;
     }
 
-    var i = document.getElementById("oembed-image");
+    var i_el = document.getElementById("oembed-image");
 
-    if (! i){
+    if (! i_el){
 	console.log("Missing oembed-image element.");
 	return;
     }
 
-    var m = document.getElementById("oembed-meta");
+    var m_el = document.getElementById("oembed-meta");
 
-    if (! i){
+    if (! m_el){
 	console.log("Missing oembed-meta element.");
 	return;
     }
     
-    var f = document.getElementById("oembed-fetch");
+    var f_el = document.getElementById("oembed-fetch");
 
-    if (! f){
+    if (! f_el){
 	console.log("Missing oembed-fetch element.");
 	return;
     }
@@ -70,9 +70,9 @@ window.addEventListener("load", function load(event){
 	}
     };
     
-    f.onclick = function(e){
+    f_el.onclick = function(e){
 
-	var url = q.value;
+	var url = q_el.value;
 	
 	var on_success_geojson = function(feature){
 	    var props = feature["properties"];
@@ -85,8 +85,8 @@ window.addEventListener("load", function load(event){
 	
 	var on_success = function(rsp){
 
-	    i.innerHTML = "";
-	    m.innerHTML = "";	
+	    i_el.innerHTML = "";
+	    m_el.innerHTML = "";	
 	    
 	    var img = document.createElement("img");
 	    img.setAttribute("height", rsp["height"]);
@@ -94,8 +94,8 @@ window.addEventListener("load", function load(event){
 	    img.setAttribute("src", rsp["url"]);
 	    img.setAttribute("class", "card-img-top");
 
-	    i.appendChild(img);
-	    i.style.display = "block";
+	    i_el.appendChild(img);
+	    i_el.style.display = "block";
 	    
 	    var title = rsp["title"];
 
@@ -103,8 +103,8 @@ window.addEventListener("load", function load(event){
 	    title.setAttribute("href", rsp["author_url"]);
 	    title.appendChild(document.createTextNode(rsp["title"]));
 
-	    m.appendChild(title);
-	    m.style.display = "block";
+	    m_el.appendChild(title);
+	    m_el.style.display = "block";
 
 	    // 
 
@@ -125,10 +125,46 @@ window.addEventListener("load", function load(event){
 
 	geotag.oembed.fetch(url, on_success, on_error);
 
-	i.style.display = "none";
-	m.style.display = "none";
+	i_el.style.display = "none";
+	m_el.style.display = "none";
 
 	return false;
     };
+
+    var query_str = location.search;
+
+    if (query_str.indexOf("?") === 0) {
+	query_str = query_str.substr(1);
+    }
+
+    var query_pairs = query_str.split("&");
+    var count_pairs = query_pairs.length;
+
+    var query = {};
     
+    for (var i=0; i < count_pairs; i++){
+	
+	var str_pair = query_pairs[i];
+	var pair = str_pair.split("=");
+
+	var key = pair[0];
+	var value = pair[1];
+
+	var values = query[key];
+
+	if (! values){
+	    values = [];
+	}
+
+	values.push(value);
+	query[key] = values;
+    }
+
+    if (query["oembed-url"]){
+
+	var url = query["oembed-url"][0];
+	q_el.value = url;
+	f_el.click();
+    }   
+
 });
