@@ -505,7 +505,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 
 			ttl := 3600
 			key := "geotag"
-			
+
 			uri, err := crumb.NewRandomEncryptedCrumbURI(ctx, ttl, key)
 
 			if err != nil {
@@ -514,7 +514,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 			}
 
 			crumb_uri = uri
-			
+
 		} else {
 
 			u, err := url.Parse(crumb_uri)
@@ -525,7 +525,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 			}
 
 			q := u.Query()
-			
+
 			if q.Get("key") == "" {
 				crumb_err = errors.New("Required key= property for crumb URI missing")
 				return

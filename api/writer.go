@@ -1,9 +1,9 @@
 package api
 
 import (
+	"github.com/aaronland/go-http-sanitize"
 	"github.com/sfomuseum/go-geojson-geotag"
 	"github.com/sfomuseum/go-www-geotag/writer"
-	"github.com/aaronland/go-http-sanitize"	
 	_ "log"
 	"net/http"
 )
@@ -28,7 +28,7 @@ func WriterHandler(wr writer.Writer) (http.Handler, error) {
 			http.Error(rsp, err.Error(), http.StatusBadRequest)
 			return
 		}
-		
+
 		geotag_f, err := geotag.NewGeotagFeatureWithReader(req.Body)
 
 		if err != nil {

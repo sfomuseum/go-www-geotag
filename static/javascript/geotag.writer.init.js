@@ -24,7 +24,6 @@ window.addEventListener("load", function load(event){
 	}
 	
 	var fov = camera.getFieldOfView();
-	fov.id = uri;
 
 	var on_success = function(rsp){
 	    console.log("WRITE OKAY", rsp);
@@ -34,7 +33,7 @@ window.addEventListener("load", function load(event){
 	    console.log("WRITE ERROR", err);
 	};
 
-	geotag.writer.write_geotag(fov, on_success, on_error);
+	geotag.writer.write_geotag(uri, fov, on_success, on_error);
 	return false;
     };
     
