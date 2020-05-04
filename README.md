@@ -2,6 +2,8 @@
 
 ![](docs/images/geotag-simple.png)
 
+A web application, written in Go, for geotagging images.
+
 ## Important
 
 This is work in progress, including the documentation. In the meantime please have a look at the [Geotagging at SFO Museum](https://millsfield.sfomuseum.org/blog/tags/geotagging) series of blog posts.
