@@ -355,7 +355,7 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if err != nil {
 		return nil, err
 	}
-	
+
 	wr, err := writer.NewWriter(ctx, writer_uri)
 
 	if err != nil {
@@ -369,14 +369,14 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	}
 
 	if !disable_writer_crumb {
-		
+
 		handler, err = AppendCrumbHandler(ctx, fs, handler)
 
 		if err != nil {
 			return nil, err
 		}
 	}
-	
+
 	return handler, nil
 }
 

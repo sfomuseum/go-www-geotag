@@ -38,6 +38,13 @@ func WriterHandler(wr writer.Writer) (http.Handler, error) {
 
 		ctx := req.Context()
 
+		ctx, err = writer.SetIOWriterWithContext(ctx, rsp)
+
+		if err != nil {
+			http.Error(rsp, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
 		err = wr.WriteFeature(ctx, uid, geotag_f)
 
 		if err != nil {
