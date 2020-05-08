@@ -23,6 +23,8 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.Bool("enable-writer", false, "Enable output of the leaflet-geotag plugin to be written to a go-www-geotag/writer.Writer instance.")
 	fs.String("writer-uri", "stdout://", "A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance.")
 
+	fs.Bool("disable-writer-crumb", false, "Do not require a valid CSRF crumb for all writes")
+	
 	fs.Bool("enable-map-layers", false, "Enable use of the leaflet-layers-control Leaflet control element for custom custom map overlays.")
 
 	fs.String("path-editor", "/", "A relative path for the geotag editor application.")
