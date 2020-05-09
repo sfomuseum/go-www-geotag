@@ -396,6 +396,7 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 		cors_handler := cors.New(cors.Options{
 			AllowedOrigins: allowed_origins,
+			AllowedMethods: []string{"PUT"},
 		})
 
 		handler = cors_handler.Handler(handler)
