@@ -9,6 +9,7 @@ import (
 	"github.com/aaronland/go-http-crumb"
 	"github.com/aaronland/go-http-tangramjs"
 	"github.com/jtacoma/uritemplates"
+	"github.com/rs/cors"
 	"github.com/sfomuseum/go-flags"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	"github.com/sfomuseum/go-http-leaflet-layers"
@@ -356,6 +357,18 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	enable_writer_cors, err := flags.BoolVar(fs, "enable-writer-cors")
+
+	if err != nil {
+		return nil, err
+	}
+
+	allowed_origins_str, err := flags.StringVar(fs, "writer-cors-allowed-origins")
+
+	if err != nil {
+		return nil, err
+	}
+
 	wr, err := writer.NewWriter(ctx, writer_uri)
 
 	if err != nil {
@@ -375,6 +388,17 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		if err != nil {
 			return nil, err
 		}
+	}
+
+	if enable_writer_cors {
+
+		allowed_origins := strings.Split(allowed_origins_str, ",")
+
+		cors_handler := cors.New(cors.Options{
+			AllowedOrigins: allowed_origins,
+		})
+
+		handler = cors_handler.Handler(handler)
 	}
 
 	return handler, nil

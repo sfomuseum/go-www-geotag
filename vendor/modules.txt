@@ -33,6 +33,8 @@ github.com/paulmach/orb/clip
 github.com/paulmach/orb/geojson
 github.com/paulmach/orb/internal/mercator
 github.com/paulmach/orb/maptile
+# github.com/rs/cors v1.7.0
+github.com/rs/cors
 # github.com/sfomuseum/go-flags v0.1.0
 github.com/sfomuseum/go-flags
 # github.com/sfomuseum/go-geojson-geotag v0.0.3
