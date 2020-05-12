@@ -14,6 +14,8 @@ func CommonFlags() (*flag.FlagSet, error) {
 
 	fs.String("path-templates", "", "Path to a directory containing custom templates. If empty built-in templates will be used.")
 
+	fs.Bool("enable-editor", true, "Enable the geotagging editor interface.")
+
 	fs.Bool("enable-placeholder", false, "Enable use of the Placeholder API for location searches.")
 	fs.String("placeholder-endpoint", "", "A valid Placeholder API endpoint to query.")
 

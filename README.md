@@ -18,6 +18,8 @@ This is work in progress, including the documentation. In the meantime please ha
     	A valid aaronland/go-http-crumb.Crumb URI for generating (CSRF) crumbs. If the value is 'auto' then a random crumb URI will be generated. (default "auto")
   -disable-writer-crumb
     	Do not require a valid CSRF crumb for all writes.
+  -enable-editor
+    	Enable the geotagging editor interface. (default true)
   -enable-map-layers
     	Enable use of the leaflet-layers-control Leaflet control element for custom custom map overlays.
   -enable-oembed

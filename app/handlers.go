@@ -82,7 +82,17 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 	return nil
 }
 
-func AppendEditorHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+func AppendEditorHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	enable_editor, err := flags.BoolVar(fs, "enable-editor")
+
+	if err != nil {
+		return err
+	}
+
+	if !enable_editor {
+		return nil
+	}
 
 	path, err := flags.StringVar(fs, "path-editor")
 
