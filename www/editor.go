@@ -58,6 +58,8 @@ func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 			WriterPath:          opts.WriterPath,
 		}
 
+		rsp.Header().Set("Content-Type", "text/html; charset=utf-8")
+
 		err := t.Execute(rsp, vars)
 
 		if err != nil {

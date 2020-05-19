@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/sfomuseum/go-flags"
+	"github.com/sfomuseum/go-flags/flagset"
 	"github.com/sfomuseum/go-www-geotag/app"
 	"log"
 	"net/http"
@@ -18,9 +18,9 @@ func main() {
 		log.Fatalf("Failed to instantiate common flags, %v", err)
 	}
 
-	flags.Parse(fl)
+	flagset.Parse(fl)
 
-	err = flags.SetFlagsFromEnvVars(fl, "GEOTAG")
+	err = flagset.SetFlagsFromEnvVars(fl, "GEOTAG")
 
 	if err != nil {
 		log.Fatalf("Failed to set flags from env vars, %v", err)

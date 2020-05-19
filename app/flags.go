@@ -3,12 +3,12 @@ package app
 import (
 	"flag"
 	"github.com/aaronland/go-http-tangramjs"
-	"github.com/sfomuseum/go-flags"
+	"github.com/sfomuseum/go-flags/flagset"
 )
 
 func CommonFlags() (*flag.FlagSet, error) {
 
-	fs := flags.NewFlagSet("geotag")
+	fs := flagset.NewFlagSet("geotag")
 
 	fs.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server.Server URI for creating an application server.")
 

@@ -4,7 +4,7 @@ import (
 	"github.com/aaronland/go-http-sanitize"
 	"github.com/sfomuseum/go-geojson-geotag"
 	"github.com/sfomuseum/go-www-geotag/writer"
-	_ "log"
+	"log"
 	"net/http"
 )
 
@@ -35,6 +35,10 @@ func WriterHandler(wr writer.Writer) (http.Handler, error) {
 			http.Error(rsp, err.Error(), http.StatusBadRequest)
 			return
 		}
+
+		rsp.Header().Set("Content-Type", "text/plain")
+
+		log.Println("WHAT", rsp.Header().Get("Content-Type"))
 
 		ctx := req.Context()
 

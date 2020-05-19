@@ -6,11 +6,15 @@ github.com/aaronland/go-http-crumb v0.0.6 h1:R+hGU1SdkKxLqKIuabBwXpemo7VqFaCVYg4
 github.com/aaronland/go-http-crumb v0.0.6/go.mod h1:mf4QGr+5Mraf6ta1CwLJHSe31yWgDgmM8OxcLilnrpY=
 github.com/aaronland/go-http-crumb v0.1.0 h1:YfsCDZMZQWvkBvrre5TVrA1Kbkmxc3ZzbpDej/vCX8E=
 github.com/aaronland/go-http-crumb v0.1.0/go.mod h1:/9rG/lnTmpoVDr4gv2m9zCJjvgrscnntKmgY9l5PYEo=
+github.com/aaronland/go-http-crumb v0.1.1 h1:iwN8JdObGw8olgvXnGTIVM/vIozUk3TfelVX3CdiKjY=
+github.com/aaronland/go-http-crumb v0.1.1/go.mod h1:SSHOHwYW+5mTBjCE/A5kFwCjXA53cXZ2VAFXZSAcfgA=
 github.com/aaronland/go-http-leaflet v0.0.3 h1:moAjSThtakdpdZ9zr6po11XeIyksYfe+BaH+tfdrnsM=
 github.com/aaronland/go-http-leaflet v0.0.3/go.mod h1:jUzEnGKezjceuNtQJIZWy2nXMhuteRSK0BPIjSSniBw=
 github.com/aaronland/go-http-rewrite v0.0.3/go.mod h1:g62jjXpsArD0lzJLs9bVLR9Locdt3f4OmqFkkJL2rQU=
 github.com/aaronland/go-http-rewrite v0.0.4 h1:lI8cDF/nINjuSPrYpwvlJLa1cC32h1nvmBwRRHs9sow=
 github.com/aaronland/go-http-rewrite v0.0.4/go.mod h1:g62jjXpsArD0lzJLs9bVLR9Locdt3f4OmqFkkJL2rQU=
+github.com/aaronland/go-http-rewrite v0.0.5 h1:QA1AE5IVDi76FeFBGlomyKlwMfcaIhBvLzFGNsO/2Co=
+github.com/aaronland/go-http-rewrite v0.0.5/go.mod h1:HdrFqPsolWHaLgDliK+HUuhuJaJM7YaN7q1fCMEqjYQ=
 github.com/aaronland/go-http-sanitize v0.0.1 h1:35rmeJh9Kx9mphGJXitQ6dOsC2fEPdn9sJa6JpYPd/c=
 github.com/aaronland/go-http-sanitize v0.0.1/go.mod h1:qUi4rzUPcpMntpUFnHK00yQI5vd/Q7x9MFYwX91/ygI=
 github.com/aaronland/go-http-sanitize v0.0.4 h1:oAYe5DbtbDS6x5Rygv5II6fDHzATGIAyY4/ZDZ63G2w=
@@ -27,6 +31,8 @@ github.com/aaronland/go-http-tangramjs v0.0.6 h1:Ke2hU/flaO6hmK4AxH6ubKIEtqKItow
 github.com/aaronland/go-http-tangramjs v0.0.6/go.mod h1:9gLqN7c67fdkshqG5wiSWFZkIJdtbC2uA5kdGGrhLyw=
 github.com/aaronland/go-roster v0.0.1 h1:r1l4n1HfWvEtOXZvhfXX0Won9Xf6QJsigdUdzOtuy/M=
 github.com/aaronland/go-roster v0.0.1/go.mod h1:AcovpxlG1XxJxX2Fjqlm63fEIBhCjEIBV4lP87FZDmI=
+github.com/aaronland/go-roster v0.0.2 h1:2Fu7v4VQLRLRL/Zgr6R9S5JxsW75Ab/K88QtMVX532s=
+github.com/aaronland/go-roster v0.0.2/go.mod h1:AcovpxlG1XxJxX2Fjqlm63fEIBhCjEIBV4lP87FZDmI=
 github.com/aaronland/go-string v0.1.0 h1:HU6OHmEpN2m9b5SOIwU6HoOq87Fvemj/0g6DTp8yzpk=
 github.com/aaronland/go-string v0.1.0/go.mod h1:2aMIWdTqk63jZsaLLy+p9dsB1MDRqx4sHYoLtkwyYUo=
 github.com/aaronland/go-string v0.1.1 h1:btdr18owWCBN14ojKx3p+PBCKfm9qIggYEguPLUb2wE=
@@ -67,6 +73,10 @@ github.com/sfomuseum/go-flags v0.0.4 h1:dCyG9891QspfnSVtZI/ueEJ/LYweHtXPv2yubqUs
 github.com/sfomuseum/go-flags v0.0.4/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
 github.com/sfomuseum/go-flags v0.1.0 h1:iXE7KG28aMNuMnxqeQq1cmA12xCe/eX57bU9b370FGk=
 github.com/sfomuseum/go-flags v0.1.0/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
+github.com/sfomuseum/go-flags v0.2.0 h1:XijV3kH3SQJshkVLUWFqqX7i3BOWdXkqkD/iLAdifY4=
+github.com/sfomuseum/go-flags v0.2.0/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
+github.com/sfomuseum/go-flags v0.2.1 h1:rrn2xVEuUzxdhQ8CFaHMmNwJsE03bmOBNbvkVKSX7oM=
+github.com/sfomuseum/go-flags v0.2.1/go.mod h1:54KCZIGmvZkIOrSCHSNMvgSTKH2gJRJyISH+AiI+55w=
 github.com/sfomuseum/go-geojson-geotag v0.0.0-20200413175259-9db8291bba96 h1:fAylrUgiznJLRA5NUhZZG5Eea4a20Jh5MBfYEQpnyIQ=
 github.com/sfomuseum/go-geojson-geotag v0.0.0-20200413175259-9db8291bba96/go.mod h1:KC3HmXH9Aws5v5iPzCukiNGUlLfHITZAqFVLqvi2COg=
 github.com/sfomuseum/go-geojson-geotag v0.0.1 h1:tdcP9EIWHWbyQpsUuI2KMQdCY+NIMslaEJ78zTqw/w4=
@@ -134,6 +144,8 @@ golang.org/x/net v0.0.0-20190628185345-da137c7871d7 h1:rTIdg5QFRR7XCaK4LCjBiPbx8
 golang.org/x/net v0.0.0-20190628185345-da137c7871d7/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
 golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e h1:3G+cUijn7XD+S4eJFddp53Pv7+slrESplyjG25HgL+k=
 golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e/go.mod h1:qpuaurCH72eLCgpAm/N6yyVIVM9cpaDIP3A8BGJEC5A=
+golang.org/x/net v0.0.0-20200519113804-d87ec0cfa476 h1:E7ct1C6/33eOdrGZKMoyntcEvs2dwZnDe30crG5vpYU=
+golang.org/x/net v0.0.0-20200519113804-d87ec0cfa476/go.mod h1:qpuaurCH72eLCgpAm/N6yyVIVM9cpaDIP3A8BGJEC5A=
 golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=

@@ -3,14 +3,14 @@ package app
 import (
 	"context"
 	"flag"
-	"github.com/sfomuseum/go-flags"
+	"github.com/sfomuseum/go-flags/lookup"
 	"github.com/sfomuseum/go-www-geotag/assets/templates"
 	"html/template"
 )
 
 func NewApplicationTemplates(ctx context.Context, fs *flag.FlagSet) (*template.Template, error) {
 
-	path_templates, err := flags.StringVar(fs, "path-templates")
+	path_templates, err := lookup.StringVar(fs, "path-templates")
 
 	if err != nil {
 		return nil, err

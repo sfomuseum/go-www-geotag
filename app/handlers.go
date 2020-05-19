@@ -10,7 +10,7 @@ import (
 	"github.com/aaronland/go-http-tangramjs"
 	"github.com/jtacoma/uritemplates"
 	"github.com/rs/cors"
-	"github.com/sfomuseum/go-flags"
+	"github.com/sfomuseum/go-flags/lookup"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	"github.com/sfomuseum/go-http-leaflet-layers"
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
@@ -58,7 +58,7 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 		return err
 	}
 
-	enable_map_layers, err := flags.BoolVar(fs, "enable-map-layers")
+	enable_map_layers, err := lookup.BoolVar(fs, "enable-map-layers")
 
 	if err != nil {
 		return err
@@ -84,7 +84,7 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 
 func AppendEditorHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
-	enable_editor, err := flags.BoolVar(fs, "enable-editor")
+	enable_editor, err := lookup.BoolVar(fs, "enable-editor")
 
 	if err != nil {
 		return err
@@ -94,7 +94,7 @@ func AppendEditorHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 		return nil
 	}
 
-	path, err := flags.StringVar(fs, "path-editor")
+	path, err := lookup.StringVar(fs, "path-editor")
 
 	if err != nil {
 		return err
@@ -118,25 +118,25 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
-	nextzen_apikey, err := flags.StringVar(fs, "nextzen-apikey")
+	nextzen_apikey, err := lookup.StringVar(fs, "nextzen-apikey")
 
 	if err != nil {
 		return nil, err
 	}
 
-	nextzen_style_url, err := flags.StringVar(fs, "nextzen-style-url")
+	nextzen_style_url, err := lookup.StringVar(fs, "nextzen-style-url")
 
 	if err != nil {
 		return nil, err
 	}
 
-	nextzen_tile_url, err := flags.StringVar(fs, "nextzen-tile-url")
+	nextzen_tile_url, err := lookup.StringVar(fs, "nextzen-tile-url")
 
 	if err != nil {
 		return nil, err
 	}
 
-	initial_latitude, err := flags.Float64Var(fs, "initial-latitude")
+	initial_latitude, err := lookup.Float64Var(fs, "initial-latitude")
 
 	if err != nil {
 		return nil, err
@@ -146,7 +146,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, errors.New("Invalid latitude")
 	}
 
-	initial_longitude, err := flags.Float64Var(fs, "initial-longitude")
+	initial_longitude, err := lookup.Float64Var(fs, "initial-longitude")
 
 	if err != nil {
 		return nil, err
@@ -156,7 +156,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, errors.New("Invalid longitude")
 	}
 
-	initial_zoom, err := flags.IntVar(fs, "initial-zoom")
+	initial_zoom, err := lookup.IntVar(fs, "initial-zoom")
 
 	if err != nil {
 		return nil, err
@@ -166,49 +166,49 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, errors.New("Invalid zoom")
 	}
 
-	enable_placeholder, err := flags.BoolVar(fs, "enable-placeholder")
+	enable_placeholder, err := lookup.BoolVar(fs, "enable-placeholder")
 
 	if err != nil {
 		return nil, err
 	}
 
-	placeholder_endpoint, err := flags.StringVar(fs, "placeholder-endpoint")
+	placeholder_endpoint, err := lookup.StringVar(fs, "placeholder-endpoint")
 
 	if err != nil {
 		return nil, err
 	}
 
-	enable_oembed, err := flags.BoolVar(fs, "enable-oembed")
+	enable_oembed, err := lookup.BoolVar(fs, "enable-oembed")
 
 	if err != nil {
 		return nil, err
 	}
 
-	oembed_endpoints, err := flags.StringVar(fs, "oembed-endpoints")
+	oembed_endpoints, err := lookup.StringVar(fs, "oembed-endpoints")
 
 	if err != nil {
 		return nil, err
 	}
 
-	enable_proxy_tiles, err := flags.BoolVar(fs, "enable-proxy-tiles")
+	enable_proxy_tiles, err := lookup.BoolVar(fs, "enable-proxy-tiles")
 
 	if err != nil {
 		return nil, err
 	}
 
-	enable_writer, err := flags.BoolVar(fs, "enable-writer")
+	enable_writer, err := lookup.BoolVar(fs, "enable-writer")
 
 	if err != nil {
 		return nil, err
 	}
 
-	path_writer, err := flags.StringVar(fs, "path-writer")
+	path_writer, err := lookup.StringVar(fs, "path-writer")
 
 	if err != nil {
 		return nil, err
 	}
 
-	enable_map_layers, err := flags.BoolVar(fs, "enable-map-layers")
+	enable_map_layers, err := lookup.BoolVar(fs, "enable-map-layers")
 
 	if err != nil {
 		return nil, err
@@ -216,7 +216,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 	if enable_proxy_tiles {
 
-		path_proxy_tiles, err := flags.StringVar(fs, "path-proxy-tiles")
+		path_proxy_tiles, err := lookup.StringVar(fs, "path-proxy-tiles")
 
 		if err != nil {
 			return nil, err
@@ -322,7 +322,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
-	enable_writer, err := flags.BoolVar(fs, "enable-writer")
+	enable_writer, err := lookup.BoolVar(fs, "enable-writer")
 
 	if err != nil {
 		return err
@@ -337,7 +337,7 @@ func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 
 func AppendWriterHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
-	path, err := flags.StringVar(fs, "path-writer")
+	path, err := lookup.StringVar(fs, "path-writer")
 
 	if err != nil {
 		return err
@@ -355,25 +355,25 @@ func AppendWriterHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 
 func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
 
-	writer_uri, err := flags.StringVar(fs, "writer-uri")
+	writer_uri, err := lookup.StringVar(fs, "writer-uri")
 
 	if err != nil {
 		return nil, err
 	}
 
-	disable_writer_crumb, err := flags.BoolVar(fs, "disable-writer-crumb")
+	disable_writer_crumb, err := lookup.BoolVar(fs, "disable-writer-crumb")
 
 	if err != nil {
 		return nil, err
 	}
 
-	enable_writer_cors, err := flags.BoolVar(fs, "enable-writer-cors")
+	enable_writer_cors, err := lookup.BoolVar(fs, "enable-writer-cors")
 
 	if err != nil {
 		return nil, err
 	}
 
-	allowed_origins_str, err := flags.StringVar(fs, "writer-cors-allowed-origins")
+	allowed_origins_str, err := lookup.StringVar(fs, "writer-cors-allowed-origins")
 
 	if err != nil {
 		return nil, err
@@ -417,7 +417,7 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 func AppendProxyTilesHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
-	enable_proxy_tiles, err := flags.BoolVar(fs, "enable-proxy-tiles")
+	enable_proxy_tiles, err := lookup.BoolVar(fs, "enable-proxy-tiles")
 
 	if err != nil {
 		return err
@@ -432,7 +432,7 @@ func AppendProxyTilesHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux
 
 func AppendProxyTilesHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
-	path_proxy_tiles, err := flags.StringVar(fs, "path-proxy-tiles")
+	path_proxy_tiles, err := lookup.StringVar(fs, "path-proxy-tiles")
 
 	if err != nil {
 		return err
@@ -450,19 +450,19 @@ func AppendProxyTilesHandler(ctx context.Context, fs *flag.FlagSet, mux *http.Se
 
 func NewProxyTilesHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
 
-	proxy_tiles_cache_uri, err := flags.StringVar(fs, "proxy-tiles-cache-uri")
+	proxy_tiles_cache_uri, err := lookup.StringVar(fs, "proxy-tiles-cache-uri")
 
 	if err != nil {
 		return nil, err
 	}
 
-	proxy_tiles_timeout, err := flags.IntVar(fs, "proxy-tiles-timeout")
+	proxy_tiles_timeout, err := lookup.IntVar(fs, "proxy-tiles-timeout")
 
 	if err != nil {
 		return nil, err
 	}
 
-	test_proxy_tiles, err := flags.BoolVar(fs, "proxy-tiles-test")
+	test_proxy_tiles, err := lookup.BoolVar(fs, "proxy-tiles-test")
 
 	if err != nil {
 		return nil, err
@@ -513,7 +513,7 @@ func NewProxyTilesHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, 
 
 func AppendCrumbHandler(ctx context.Context, fs *flag.FlagSet, handler http.Handler) (http.Handler, error) {
 
-	crumb_uri, err := flags.StringVar(fs, "crumb-uri")
+	crumb_uri, err := lookup.StringVar(fs, "crumb-uri")
 
 	if err != nil {
 		return nil, err
@@ -538,7 +538,7 @@ func crumbConfigWithFlagSet(ctx context.Context, fs *flag.FlagSet) (crumb.Crumb,
 
 	crumb_func := func() {
 
-		crumb_uri, err := flags.StringVar(fs, "crumb-uri")
+		crumb_uri, err := lookup.StringVar(fs, "crumb-uri")
 
 		if err != nil {
 			crumb_err = err
