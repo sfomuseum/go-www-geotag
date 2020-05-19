@@ -9,6 +9,7 @@ import (
 
 type Writer interface {
 	WriteFeature(context.Context, string, *geotag.GeotagFeature) error
+	Close(context.Context) error
 }
 
 type WriterInitializeFunc func(ctx context.Context, uri string) (Writer, error)

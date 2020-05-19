@@ -51,8 +51,8 @@ func (wr *IOWriter) WriteFeature(ctx context.Context, uri string, f *geotag.Geot
 	return err
 }
 
-func (wr *IOWriter) URI(uri string) string {
-	return uri
+func (wr *IOWriter) Close(ctx context.Context) error {
+	return nil
 }
 
 func SetIOWriterWithContext(ctx context.Context, wr io.Writer) (context.Context, error) {

@@ -4,7 +4,7 @@ import (
 	"github.com/aaronland/go-http-sanitize"
 	"github.com/sfomuseum/go-geojson-geotag"
 	"github.com/sfomuseum/go-www-geotag/writer"
-	"log"
+	_ "log"
 	"net/http"
 )
 
@@ -36,9 +36,7 @@ func WriterHandler(wr writer.Writer) (http.Handler, error) {
 			return
 		}
 
-		rsp.Header().Set("Content-Type", "text/plain")
-
-		log.Println("WHAT", rsp.Header().Get("Content-Type"))
+		rsp.Header().Set("Content-Type", "application/json")
 
 		ctx := req.Context()
 
@@ -50,6 +48,13 @@ func WriterHandler(wr writer.Writer) (http.Handler, error) {
 		}
 
 		err = wr.WriteFeature(ctx, uid, geotag_f)
+
+		if err != nil {
+			http.Error(rsp, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		err = wr.Close(ctx)
 
 		if err != nil {
 			http.Error(rsp, err.Error(), http.StatusInternalServerError)

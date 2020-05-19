@@ -19,7 +19,6 @@ geotag.camera = (function(){
 		lon = 0.0;
 	    }
 
-	    console.log("INIT CAMERA", lat, lon);
 	    self.initCamera(lat, lon);
 	},
 	
@@ -29,7 +28,6 @@ geotag.camera = (function(){
 
 	'initCamera': function(lat, lon){
 
-	    console.log("I AM HERE", lat, lon);
 	    var cameraPoint = [lon, lat]
 	    var targetPoint = [lon, lat]
 	    

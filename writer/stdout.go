@@ -41,3 +41,7 @@ func (wr *StdoutWriter) WriteFeature(ctx context.Context, uri string, f *geotag.
 
 	return nil
 }
+
+func (wr *StdoutWriter) Close(ctx context.Context) error {
+	return nil
+}
