@@ -28,6 +28,8 @@ window.addEventListener("load", function load(event){
 	var text = el.value;
 	
 	if (text.length < 3){
+	    r.style.display = "none";
+	    r.innerHTML = "";
 	    return;
 	}
 
