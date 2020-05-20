@@ -1,37 +1,84 @@
+/* Tags */
+
 body {
-	margin-top:1.5rem;
+	background-color:#fff;
 }
 
-#editor {
-	margin-top:1rem;
-}
-
-#map {
-	border: solid thin;
-	width: 100%;
-	height: 75vh;
-}
-
-#feature {
-	max-height:30vh !important; 
-	overflow:scroll;
-}
-
-.card {
-	margin-bottom:1rem;
-	border-radius: 0px !important;
-}
-
-#col-oembed {
-	display:none;
-}
+/* IDs */
 
 #col-map {
 	min-width: 50%;
 }
 
+#col-oembed {
+	display:none;
+	border-right: none !important;
+	padding:1rem !important;
+}
+
+#editor-navbar {
+	margin-top:.5rem;
+	margin-bottom:1rem;	
+}
+
+#feature {
+	max-height:30vh !important; 
+	overflow:scroll;
+	border:solid thin;
+	font-family:monospace;
+	font-size:small;
+	padding:1rem;
+}
+
+#map {
+	border-bottom: solid thin;
+	width: 100%;
+	height: 75vh;
+}
+
+#output {
+	display:none;
+}
+
+/* Classes */
+
+.card {
+	margin-bottom:1rem;
+	border-radius: 0px !important;
+	border: none !important;
+}
+
+.card-body {
+	padding-top:0px !important;
+	padding-bottom:2rem !important;
+}
+
+.card-footer {
+	background-color:transparent !important;
+	border: none !important;
+}
+
+.col {
+	border:solid thin;
+	padding:0px !important;
+}
+
 .container {
 	max-width: none !important;
+	padding:0px !important;
+}
+
+.leaflet-control-geotag-photo-camera img {
+	vertical-align: top !important;
+}
+
+.leaflet-control-geotag-photo-crosshair img {
+	vertical-align: top !important;
+}
+
+.oembed-card {
+	display:grid;
+	justify-content: center;
 }
 
 .oembed-card-body {
@@ -43,22 +90,11 @@ body {
 	margin-top:1rem;
 }
 
-
 .oembed-form {
-	margin-top:.5rem;
+	padding:.5rem;
 }
 
-#output {
-	display:none;
-}
-
-.leaflet-control-geotag-photo-camera img {
-	vertical-align: top !important;
-}
-
-.leaflet-control-geotag-photo-crosshair img {
-	vertical-align: top !important;
-}
+/* Media queries */
 
 @media (max-width: 1240px) {
 
@@ -71,6 +107,18 @@ body {
 	}
 }
 
+@media (max-width: 950px) {
+
+	#oembed-image .card-img-top {
+		max-width:400px !important;
+	}
+
+	.oembed-card-footer {
+		max-width:400px !important;
+	}
+	
+}
+
 @media (max-width: 900px) {
 
 	#oembed-image .card-img-top {
@@ -79,6 +127,18 @@ body {
 
 	.oembed-card-footer {
 		max-width:350px !important;
+	}
+	
+}
+
+@media (max-width: 750px) {
+
+	#oembed-image .card-img-top {
+		max-width:320px !important;
+	}
+
+	.oembed-card-footer {
+		max-width:320px !important;
 	}
 	
 }

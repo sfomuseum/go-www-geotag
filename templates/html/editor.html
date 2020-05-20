@@ -1,15 +1,9 @@
 {{ define "editor" }}
 {{ template "inc_head" . }}
-<div class="container" id="editor">
-    
-    <div class="card">
+
+<nav class="navbar" id="editor-navbar">
 
 	{{ if or .EnableWriter .EnablePlaceholder }}	
-	<div class="card-header">
-
-	    {{ if .EnableWriter }}
-	    <button id="writer-save" class="btn btn-primary">Save</button>
-	    {{ end }}
 	    
 	    {{ if .EnablePlaceholder }}
 	    <form class="form-inline">
@@ -18,8 +12,18 @@
 	    </form>
 	    <div id="placeholder-results"></div>
 	    {{ end }}	    
-	</div>
+
+	    {{ if .EnableWriter }}
+	    <button id="writer-save" class="btn btn-primary">Save</button>
+	    {{ end }}
+	    
 	{{ end }}
+    
+</nav>
+
+<div class="container" id="editor">
+    
+    <div class="card">
 
 	<div class="card-body">
 
