@@ -9,8 +9,7 @@ body {
 #map {
 	border: solid thin;
 	width: 100%;
-	height: 50vh;
-	max-height:500px !important;
+	height: 75vh;
 }
 
 #feature {
@@ -20,6 +19,33 @@ body {
 
 .card {
 	margin-bottom:1rem;
+	border-radius: 0px !important;
+}
+
+#col-oembed {
+	display:none;
+}
+
+#col-map {
+	min-width: 50%;
+}
+
+.container {
+	max-width: none !important;
+}
+
+.oembed-card-body {
+	padding: 0px !important;
+}
+
+.oembed-card-footer {
+	font-size:small;
+	margin-top:1rem;
+}
+
+
+.oembed-form {
+	margin-top:.5rem;
 }
 
 #output {
@@ -33,3 +59,40 @@ body {
 .leaflet-control-geotag-photo-crosshair img {
 	vertical-align: top !important;
 }
+
+@media (max-width: 1240px) {
+
+	#oembed-image .card-img-top {
+		max-width:450px !important;
+	}
+
+	.oembed-card-footer {
+		max-width:450px !important;
+	}
+}
+
+@media (max-width: 900px) {
+
+	#oembed-image .card-img-top {
+		max-width:350px !important;
+	}
+
+	.oembed-card-footer {
+		max-width:350px !important;
+	}
+	
+}
+
+@media (max-width: 320px) {
+
+	#oembed-image .card-img-top {
+		max-width:280px !important;
+	}
+
+	.oembed-card-footer {
+		max-width:280px !important;
+	}
+	
+}
+
+	

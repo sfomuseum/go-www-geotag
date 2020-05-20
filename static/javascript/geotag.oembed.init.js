@@ -106,6 +106,9 @@ window.addEventListener("load", function load(event){
 	    m_el.appendChild(title);
 	    m_el.style.display = "block";
 
+	    var col = document.getElementById("col-oembed");
+	    col.style.display = "block";
+	    
 	    // 
 
 	    var uri = rsp["geotag:uri"];

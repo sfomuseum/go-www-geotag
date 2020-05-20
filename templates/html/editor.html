@@ -1,24 +1,6 @@
 {{ define "editor" }}
 {{ template "inc_head" . }}
 <div class="container" id="editor">
-
-    {{ if .EnableOEmbed }}    
-
-    <div class="card oembed-card">
-
-	<div class="card-header oembed-card-header">
-
-	    <form class="form-inline">
-		<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" size="30" />
-		<button class="btn my-2 my-sm-0" type="submit" id="oembed-fetch">Fetch</button>
-	    </form>
-	</div>
-	
-	<div id="oembed-image" class="card-body oembed-card-body"></div>
-	<div class="card-footer oembed-card-footer" id="oembed-meta"></div>
-    </div>
-    
-    {{ end }}
     
     <div class="card">
 
@@ -38,8 +20,43 @@
 	    {{ end }}	    
 	</div>
 	{{ end }}
+
+	<div class="card-body">
+
+	    <div class="container">
+	    <div class="row">
+		
+	    {{ if .EnableOEmbed }}    
+
+		<div class="col" id="col-oembed">
+		    <div class="oembed-card">
+
+		<div id="oembed-image" class="card-body oembed-card-body"></div>
+		<div class="oembed-card-footer" id="oembed-meta"></div>
+	    </div>
+
+		</div>
+		
+	    {{ end }}
+
+		<div class="col" id="col-map">
+		    <div id="map"></div>
+
+		    {{ if .EnableOEmbed }}    		    
+		    <div class="oembed-form">
+		    <form class="form-inline">
+			<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" size="30" />
+			<button class="btn btn-primary" type="submit" id="oembed-fetch">Fetch image</button>
+		    </form>
+		    </div>
+		    {{ end }}
+		</div>
+		
+	    </div>
+	    </div>
+	    
+	</div>
 	
-	<div id="map" class="card-body"></div>
 	<div class="card-footer" id="output">
 	    <details>
 		<summary>GeoJSON</summary>
