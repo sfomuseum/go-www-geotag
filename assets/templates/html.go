@@ -85,7 +85,7 @@ func templatesHtmlEditorHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "templates/html/editor.html", size: 1793, mode: os.FileMode(420), modTime: time.Unix(1589997667, 0)}
+	info := bindataFileInfo{name: "templates/html/editor.html", size: 1793, mode: os.FileMode(420), modTime: time.Unix(1590000322, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

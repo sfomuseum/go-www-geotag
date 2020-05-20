@@ -199,7 +199,7 @@ func staticJavascriptGeotagOembedInitJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/javascript/geotag.oembed.init.js", size: 3948, mode: os.FileMode(420), modTime: time.Unix(1589996413, 0)}
+	info := bindataFileInfo{name: "static/javascript/geotag.oembed.init.js", size: 3948, mode: os.FileMode(420), modTime: time.Unix(1590000322, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -239,7 +239,7 @@ func staticJavascriptGeotagPlaceholderInitJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/javascript/geotag.placeholder.init.js", size: 2321, mode: os.FileMode(420), modTime: time.Unix(1590000212, 0)}
+	info := bindataFileInfo{name: "static/javascript/geotag.placeholder.init.js", size: 2321, mode: os.FileMode(420), modTime: time.Unix(1590000322, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -339,7 +339,7 @@ func staticCssEditorCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "static/css/editor.css", size: 2028, mode: os.FileMode(420), modTime: time.Unix(1589999937, 0)}
+	info := bindataFileInfo{name: "static/css/editor.css", size: 2028, mode: os.FileMode(420), modTime: time.Unix(1590000322, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

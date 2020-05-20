@@ -1,6 +1,6 @@
 # go-www-geotag
 
-![](docs/images/geotag-simple.png)
+![](docs/images/geotag-twopane.png)
 
 A web application, written in Go, for geotagging images.
 
