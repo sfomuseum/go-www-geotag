@@ -56,6 +56,12 @@ func AppendMapFlags(fs *flag.FlagSet) error {
 		return err
 	}
 
+	err = AppendProtomapsFlags(fs)
+
+	if err != nil {
+		return err
+	}
+
 	err = AppendNextzenFlags(fs)
 
 	if err != nil {
@@ -67,6 +73,13 @@ func AppendMapFlags(fs *flag.FlagSet) error {
 	if err != nil {
 		return err
 	}
+
+	return nil
+}
+
+func AppendProtomapsFlags(fs *flag.FlagSet) error {
+
+	fs.String("protomaps-tile-url", "", "A valid Protomaps tile URL for loading map tiles.")
 
 	return nil
 }

@@ -18,7 +18,8 @@ type EditorHandlerOptions struct {
 	OEmbedEndpoints     []string
 	EnableWriter        bool
 	WriterPath          string
-	MapRenderer string
+	MapRenderer         string
+	ProtomapsTileURL    string
 }
 
 type EditorHandlerVars struct {
@@ -32,7 +33,8 @@ type EditorHandlerVars struct {
 	OEmbedEndpoints     string
 	EnableWriter        bool
 	WriterPath          string
-	MapRenderer string
+	MapRenderer         string
+	ProtomapsTileURL    string
 }
 
 func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
@@ -58,7 +60,8 @@ func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 			OEmbedEndpoints:     oembed_endpoints,
 			EnableWriter:        opts.EnableWriter,
 			WriterPath:          opts.WriterPath,
-			MapRenderer: opts.MapRenderer,
+			MapRenderer:         opts.MapRenderer,
+			ProtomapsTileURL:    opts.ProtomapsTileURL,
 		}
 
 		rsp.Header().Set("Content-Type", "text/html; charset=utf-8")
