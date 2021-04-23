@@ -23,6 +23,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"path/filepath"
 	"strings"
 	"sync"
 	"time"
@@ -227,6 +228,27 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	if map_renderer == "protomaps" {
+
+		u, err := url.Parse(protomaps_tile_url)
+
+		if err != nil {
+			return nil, err
+		}
+
+		if u.Scheme == "file" {
+
+			abs_path, err := filepath.Abs(u.Path)
+
+			if err != nil {
+				return nil, err
+			}
+
+			fname := filepath.Base(abs_path)
+			protomaps_tile_url = fmt.Sprintf("/pmtiles/%s", fname)
+		}
+	}
+
 	geotag_opts := geotag.DefaultLeafletGeotagOptions()
 
 	editor_opts := &www.EditorHandlerOptions{
@@ -346,6 +368,52 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	}
 
 	return editor_handler, nil
+}
+
+func AppendProtomapsTilesHandlerIfNecessary(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	protomaps_tile_url, err := lookup.StringVar(fs, "protomaps-tile-url")
+
+	if err != nil {
+		return err
+	}
+
+	map_renderer, err := lookup.StringVar(fs, "map-renderer")
+
+	if err != nil {
+		return err
+	}
+
+	if map_renderer != "protomaps" {
+		return nil
+	}
+
+	u, err := url.Parse(protomaps_tile_url)
+
+	if err != nil {
+		return err
+	}
+
+	if u.Scheme != "file" {
+		return nil
+	}
+
+	abs_path, err := filepath.Abs(u.Path)
+
+	if err != nil {
+		return err
+	}
+
+	root := filepath.Dir(abs_path)
+	fname := filepath.Base(abs_path)
+
+	tile_dir := http.Dir(root)
+	tile_handler := http.FileServer(tile_dir)
+
+	path := fmt.Sprintf("/pmtiles/%s", fname)
+
+	mux.Handle(path, http.StripPrefix("/pmtiles", tile_handler))
+	return nil
 }
 
 func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {

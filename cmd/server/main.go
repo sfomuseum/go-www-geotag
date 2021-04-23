@@ -46,6 +46,12 @@ func main() {
 		log.Fatalf("Failed to append proxy tiles handler, %v", err)
 	}
 
+	err = app.AppendProtomapsTilesHandlerIfNecessary(ctx, fl, mux)
+
+	if err != nil {
+		log.Fatalf("Failed to append protomaps tiles handler, %v", err)
+	}
+
 	err = app.AppendWriterHandlerIfEnabled(ctx, fl, mux)
 
 	if err != nil {
