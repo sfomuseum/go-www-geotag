@@ -12,8 +12,6 @@ func CommonFlags() (*flag.FlagSet, error) {
 
 	fs.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server.Server URI for creating an application server.")
 
-	fs.String("path-templates", "", "Path to a directory containing custom templates. If empty built-in templates will be used.")
-
 	fs.Bool("enable-editor", true, "Enable the geotagging editor interface.")
 
 	fs.Bool("enable-placeholder", false, "Enable use of the Placeholder API for location searches.")

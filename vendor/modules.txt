@@ -1,19 +1,29 @@
-# github.com/aaronland/go-http-bootstrap v0.0.5
+# github.com/aaronland/go-http-bootstrap v0.0.10
+## explicit
 github.com/aaronland/go-http-bootstrap
 github.com/aaronland/go-http-bootstrap/resources
-# github.com/aaronland/go-http-crumb v0.1.1
+github.com/aaronland/go-http-bootstrap/static
+# github.com/aaronland/go-http-crumb v0.1.2
+## explicit
 github.com/aaronland/go-http-crumb
-# github.com/aaronland/go-http-leaflet v0.0.3
+# github.com/aaronland/go-http-leaflet v0.0.6
 github.com/aaronland/go-http-leaflet
-# github.com/aaronland/go-http-rewrite v0.0.5
+github.com/aaronland/go-http-leaflet/static
+# github.com/aaronland/go-http-rewrite v0.0.6
+## explicit
 github.com/aaronland/go-http-rewrite
-# github.com/aaronland/go-http-sanitize v0.0.4
+# github.com/aaronland/go-http-sanitize v0.0.5
+## explicit
 github.com/aaronland/go-http-sanitize
-# github.com/aaronland/go-http-server v0.0.3
+# github.com/aaronland/go-http-server v0.0.6
+## explicit
 github.com/aaronland/go-http-server
-# github.com/aaronland/go-http-tangramjs v0.0.6
+# github.com/aaronland/go-http-tangramjs v0.0.9
+## explicit
 github.com/aaronland/go-http-tangramjs
+github.com/aaronland/go-http-tangramjs/static
 # github.com/aaronland/go-roster v0.0.2
+## explicit
 github.com/aaronland/go-roster
 # github.com/aaronland/go-string v0.1.2
 github.com/aaronland/go-string/random
@@ -24,6 +34,7 @@ github.com/aws/aws-lambda-go/lambda/handlertrace
 github.com/aws/aws-lambda-go/lambda/messages
 github.com/aws/aws-lambda-go/lambdacontext
 # github.com/jtacoma/uritemplates v1.0.0
+## explicit
 github.com/jtacoma/uritemplates
 # github.com/patrickmn/go-cache v2.1.0+incompatible
 github.com/patrickmn/go-cache
@@ -34,17 +45,25 @@ github.com/paulmach/orb/geojson
 github.com/paulmach/orb/internal/mercator
 github.com/paulmach/orb/maptile
 # github.com/rs/cors v1.7.0
+## explicit
 github.com/rs/cors
-# github.com/sfomuseum/go-flags v0.2.1
+# github.com/sfomuseum/go-flags v0.8.2
+## explicit
 github.com/sfomuseum/go-flags/flagset
 github.com/sfomuseum/go-flags/lookup
+github.com/sfomuseum/go-flags/multi
 # github.com/sfomuseum/go-geojson-geotag v0.0.3
+## explicit
 github.com/sfomuseum/go-geojson-geotag
-# github.com/sfomuseum/go-http-leaflet-geotag v1.0.0
+# github.com/sfomuseum/go-http-leaflet-geotag v1.1.0
+## explicit
 github.com/sfomuseum/go-http-leaflet-geotag
+github.com/sfomuseum/go-http-leaflet-geotag/static
 # github.com/sfomuseum/go-http-leaflet-layers v0.0.4
+## explicit
 github.com/sfomuseum/go-http-leaflet-layers
 # github.com/sfomuseum/go-http-tilezen v0.0.4
+## explicit
 github.com/sfomuseum/go-http-tilezen/http
 # github.com/sfomuseum/go-tilezen v0.0.3
 github.com/sfomuseum/go-tilezen
@@ -56,14 +75,13 @@ github.com/tidwall/match
 github.com/tidwall/pretty
 # github.com/whosonfirst/algnhsa v0.1.0
 github.com/whosonfirst/algnhsa
-# github.com/whosonfirst/go-bindata v0.1.0
-github.com/whosonfirst/go-bindata
 # github.com/whosonfirst/go-bindata-assetfs v1.0.1
 github.com/whosonfirst/go-bindata-assetfs
-# github.com/whosonfirst/go-cache v0.0.2
+# github.com/whosonfirst/go-cache v0.2.0
+## explicit
 github.com/whosonfirst/go-cache
 # github.com/whosonfirst/go-sanitize v0.1.0
 github.com/whosonfirst/go-sanitize
-# golang.org/x/net v0.0.0-20200519113804-d87ec0cfa476
+# golang.org/x/net v0.0.0-20210316092652-d523dce5a7f4
 golang.org/x/net/html
 golang.org/x/net/html/atom

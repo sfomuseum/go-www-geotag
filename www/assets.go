@@ -1,21 +1,29 @@
 package www
 
 import (
+	"fmt"
 	"github.com/aaronland/go-http-rewrite"
+	"github.com/sfomuseum/go-www-geotag/static"
 	gohttp "net/http"
 	"path/filepath"
 	"strings"
+	"io/fs"
 )
 
 func StaticFileSystem() (gohttp.FileSystem, error) {
-	fs := assetFS()
-	return fs, nil
+	http_fs := gohttp.FS(static.FS)	
+	return http_fs, nil
 }
 
 func StaticAssetsHandler() (gohttp.Handler, error) {
 
-	fs := assetFS()
-	return gohttp.FileServer(fs), nil
+	http_fs, err := StaticFileSystem()
+
+	if err != nil {
+		return nil, err
+	}
+	
+	return gohttp.FileServer(http_fs), nil
 }
 
 func StaticAssetsHandlerWithPrefix(prefix string) (gohttp.Handler, error) {
@@ -53,18 +61,31 @@ func AppendStaticAssetHandlersWithPrefix(mux *gohttp.ServeMux, prefix string) er
 		return nil
 	}
 
-	for _, path := range AssetNames() {
+	walk_func := func(path string, info fs.DirEntry, err error) error {
 
-		path = strings.Replace(path, "static", "", 1)
+		if path == "." {
+			return nil
+		}
+
+		if info.IsDir() {
+			return nil
+		}
 
 		if prefix != "" {
 			path = appendPrefix(prefix, path)
 		}
 
+		if !strings.HasPrefix(path, "/") {
+			path = fmt.Sprintf("/%s", path)
+		}
+
+		// log.Println("APPEND", path)
+
 		mux.Handle(path, asset_handler)
+		return nil
 	}
 
-	return nil
+	return fs.WalkDir(static.FS, ".", walk_func)
 }
 
 func appendPrefix(prefix string, path string) string {
