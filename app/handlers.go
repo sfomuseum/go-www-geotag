@@ -12,6 +12,7 @@ import (
 	"github.com/rs/cors"
 	"github.com/sfomuseum/go-flags/lookup"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
+	"github.com/sfomuseum/go-http-leaflet-protomaps"	
 	"github.com/sfomuseum/go-http-leaflet-layers"
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
 	"github.com/sfomuseum/go-www-geotag/api"
@@ -33,7 +34,7 @@ var cr crumb.Crumb
 var crumb_err error
 
 func init() {
-	// because the tangramjs stuff will add it
+	// because the tangramjs or the protomaps stuff will add it
 	geotag.INCLUDE_LEAFLET = false
 	layers.INCLUDE_LEAFLET = false
 }
@@ -118,6 +119,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	map_renderer, err := lookup.StringVar(fs, "map-renderer")
+
+	if err != nil {
+		return nil, err
+	}
+	
 	nextzen_apikey, err := lookup.StringVar(fs, "nextzen-apikey")
 
 	if err != nil {
@@ -213,25 +220,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if err != nil {
 		return nil, err
 	}
-
-	if enable_proxy_tiles {
-
-		path_proxy_tiles, err := lookup.StringVar(fs, "path-proxy-tiles")
-
-		if err != nil {
-			return nil, err
-		}
-
-		nextzen_tile_url = fmt.Sprintf("%s{z}/{x}/{y}.mvt", path_proxy_tiles)
-	}
-
-	bootstrap_opts := bootstrap.DefaultBootstrapOptions()
-
-	tangramjs_opts := tangramjs.DefaultTangramJSOptions()
-	tangramjs_opts.Nextzen.APIKey = nextzen_apikey
-	tangramjs_opts.Nextzen.StyleURL = nextzen_style_url
-	tangramjs_opts.Nextzen.TileURL = nextzen_tile_url
-
+	
 	geotag_opts := geotag.DefaultLeafletGeotagOptions()
 
 	editor_opts := &www.EditorHandlerOptions{
@@ -302,8 +291,40 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	bootstrap_opts := bootstrap.DefaultBootstrapOptions()	
 	editor_handler = bootstrap.AppendResourcesHandler(editor_handler, bootstrap_opts)
-	editor_handler = tangramjs.AppendResourcesHandler(editor_handler, tangramjs_opts)
+
+	switch map_renderer {
+	case "protomaps":
+
+		protomaps_opts := protomaps.DefaultLeafletProtomapsOptions()			
+		editor_handler = protomaps.AppendResourcesHandler(editor_handler, protomaps_opts)		
+
+	case "tangramjs":
+		
+		if enable_proxy_tiles {
+			
+			path_proxy_tiles, err := lookup.StringVar(fs, "path-proxy-tiles")
+			
+			if err != nil {
+				return nil, err
+			}
+			
+			nextzen_tile_url = fmt.Sprintf("%s{z}/{x}/{y}.mvt", path_proxy_tiles)
+		}
+
+		
+		tangramjs_opts := tangramjs.DefaultTangramJSOptions()
+		tangramjs_opts.Nextzen.APIKey = nextzen_apikey
+		tangramjs_opts.Nextzen.StyleURL = nextzen_style_url
+		tangramjs_opts.Nextzen.TileURL = nextzen_tile_url
+
+		editor_handler = tangramjs.AppendResourcesHandler(editor_handler, tangramjs_opts)
+		
+	default:
+		return nil, fmt.Errorf("Invalid or unsupported -map-renderer flag ('%s')", map_renderer)
+	}
+
 	editor_handler = geotag.AppendResourcesHandler(editor_handler, geotag_opts)
 
 	if enable_map_layers {
