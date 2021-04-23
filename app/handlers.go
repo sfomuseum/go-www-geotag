@@ -42,10 +42,31 @@ func init() {
 
 func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
-	err := tangramjs.AppendAssetHandlers(mux)
+	map_renderer, err := lookup.StringVar(fs, "map-renderer")
 
 	if err != nil {
 		return err
+	}
+
+	switch map_renderer {
+	case "protomaps":
+
+		err := protomaps.AppendAssetHandlers(mux)
+
+		if err != nil {
+			return err
+		}
+
+	case "tangramjs":
+
+		err := tangramjs.AppendAssetHandlers(mux)
+
+		if err != nil {
+			return err
+		}
+
+	default:
+		// pass
 	}
 
 	err = bootstrap.AppendAssetHandlers(mux)

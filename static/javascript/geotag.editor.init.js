@@ -4,6 +4,9 @@ window.addEventListener("load", function load(event){
     var style_url = document.body.getAttribute("data-nextzen-style-url");
     var tile_url = document.body.getAttribute("data-nextzen-tile-url");    
 
+    // FIX ME... this needs to be optional to account for Tangram + Nextzen or Protomaps
+    
+    /*
     if (! api_key){
 	console.log("Missing API key");
 	return;
@@ -18,6 +21,7 @@ window.addEventListener("load", function load(event){
 	console.log("Missing tile URL");
 	return;
     }
+     */
     
     var init_lat = document.body.getAttribute("data-initial-latitude");
 
