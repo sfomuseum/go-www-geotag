@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"github.com/aaronland/go-http-rewrite"
 	"github.com/sfomuseum/go-www-geotag/static"
+	"io/fs"
 	gohttp "net/http"
 	"path/filepath"
 	"strings"
-	"io/fs"
 )
 
 func StaticFileSystem() (gohttp.FileSystem, error) {
-	http_fs := gohttp.FS(static.FS)	
+	http_fs := gohttp.FS(static.FS)
 	return http_fs, nil
 }
 
@@ -22,7 +22,7 @@ func StaticAssetsHandler() (gohttp.Handler, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return gohttp.FileServer(http_fs), nil
 }
 

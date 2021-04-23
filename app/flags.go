@@ -35,25 +35,40 @@ func CommonFlags() (*flag.FlagSet, error) {
 
 	fs.String("crumb-uri", "auto", "A valid aaronland/go-http-crumb.Crumb URI for generating (CSRF) crumbs. If the value is 'auto' then a random crumb URI will be generated.")
 
-	err := AppendLeafletFlags(fs)
-
-	if err != nil {
-		return nil, err
-	}
-
-	err = AppendNextzenFlags(fs)
-
-	if err != nil {
-		return nil, err
-	}
-
-	err = AppendTilezenFlags(fs)
+	err := AppendMapFlags(fs)
 
 	if err != nil {
 		return nil, err
 	}
 
 	return fs, nil
+}
+
+func AppendMapFlags(fs *flag.FlagSet) error {
+
+	fs.String("map-renderer", "", "Valid options are: protomaps, tangram")
+
+	// fs.String("tile-source", "", "Valid options are: protomaps, tangram")
+
+	err := AppendLeafletFlags(fs)
+
+	if err != nil {
+		return err
+	}
+
+	err = AppendNextzenFlags(fs)
+
+	if err != nil {
+		return err
+	}
+
+	err = AppendTilezenFlags(fs)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // because eventually we're going to put this in a nextzen specific package
