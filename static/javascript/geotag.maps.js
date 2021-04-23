@@ -74,21 +74,44 @@ geotag.maps = (function(){
 		return maps[map_id];
 	    }
 
-	    if (! args["api_key"]){
-		return null;
+	    var map = L.map("map");
+
+	    var map_renderer = map_el.getAttribute("data-map-renderer");
+	    
+	    if (map_renderer == "protomaps"){
+		
+		var pm_uri = map_el.getAttribute("data-protomaps-uri");
+		var pm = pmtiles.PMTiles(pm_uri);
+		
+		pm.metadata(m => {
+                    let bounds_str = m.bounds.split(',')
+                    let bounds = [[+bounds_str[1],+bounds_str[0]],[+bounds_str[3],+bounds_str[2]]]
+                    let url = pm_uri;
+                    layer = new protomaps.LeafletLayer({url:url,bounds:bounds})
+                    layer.addTo(map)
+                    map.fitBounds(bounds)
+
+		    // FIX ME: attribution
+		});
 	    }
 
-	    var api_key = args["api_key"];
+	    if (map_renderer == "tangramjs"){
+		
+		if (! args["api_key"]){
+		    return null;
+		}
+		
+		var api_key = args["api_key"];
+		
+		var tangram_opts = self.getTangramOptions(args);	   
+		var tangramLayer = Tangram.leafletLayer(tangram_opts);
+		
+		tangramLayer.addTo(map);
+
+		var attribution = self.getAttribution();
+		map.attributionControl.addAttribution(attribution);
+	    }
 	    
-	    var tangram_opts = self.getTangramOptions(args);	   
-	    var tangramLayer = Tangram.leafletLayer(tangram_opts);
-
-	    var map = L.map("map");	    
-	    tangramLayer.addTo(map);
-
-	    var attribution = self.getAttribution();
-	    map.attributionControl.addAttribution(attribution);
-
 	    maps[map_id] = map;
 	    return map;
 	},

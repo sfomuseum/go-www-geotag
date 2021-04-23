@@ -46,9 +46,9 @@ func CommonFlags() (*flag.FlagSet, error) {
 
 func AppendMapFlags(fs *flag.FlagSet) error {
 
-	fs.String("map-renderer", "", "Valid options are: protomaps, tangram")
+	fs.String("map-renderer", "tangramjs", "Valid options are: protomaps, tangramjs")
 
-	// fs.String("tile-source", "", "Valid options are: protomaps, tangram")
+	// fs.String("tile-source", "", "Valid options are: protomaps, tangramjs")
 
 	err := AppendLeafletFlags(fs)
 

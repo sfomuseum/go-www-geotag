@@ -44,7 +44,7 @@
 	    {{ end }}
 
 		<div class="col" id="col-map">
-		    <div id="map"></div>
+		    <div id="map" data-map-renderer="{{ .MapRenderer }}"></div>
 
 		    {{ if .EnableOEmbed }}    		    
 		    <div class="oembed-form">
