@@ -1,11 +1,19 @@
 window.addEventListener("load", function load(event){
 
+    // PROTOMAPS: TBD is whether or not we want to be looking for or validating
+    // map-related properties here rather than in geotag.maps.js - the reason
+    // being that we are introducing support for multiple map renderers: Tangram.js
+    // + Nextzen or Protomaps. Support for these renderers is handled by their
+    // respective go-http-leaflet-{RENDERER} middleware packages. As of this writing
+    // the Protomaps handlers don't append properties to data.body yet. Regardless
+    // the flag to signal which renderer to use is specific to this application
+    // and currently being assigned to the <div id="map"> element and processed in
+    // geotag.maps.js (20210423/thisisaaronland)
+    
     var api_key = document.body.getAttribute("data-nextzen-api-key");
     var style_url = document.body.getAttribute("data-nextzen-style-url");
     var tile_url = document.body.getAttribute("data-nextzen-tile-url");    
 
-    // FIX ME... this needs to be optional to account for Tangram + Nextzen or Protomaps
-    
     /*
     if (! api_key){
 	console.log("Missing API key");

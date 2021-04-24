@@ -48,6 +48,10 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 		return err
 	}
 
+	// PROTOMAPS: this remains to be reconciled with the Tangram.js + Nextzen stuff
+	// In the end what you see below might just be the simplest way to "reconcile"
+	// things (20210423/thisisaaronland)
+	
 	switch map_renderer {
 	case "protomaps":
 
@@ -249,6 +253,14 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	// PROTOMAPS: this needs to stay in sync with code in AppendProtomapsTilesHandlerIfNecessary
+	// This takes a singular protomaps-tile-url and if it is a file:// URI
+	// its filename is joined with protomaps-tiles-path to create a new path and this
+	// path is registered with the http.ServeMux (and handled by the http.Dir
+	// instance). It would be nice if this could just be handled by / hidden in
+	// sfomuseum/go-http-leaflet-protomaps but I am not sure if that actually
+	// makes sense yet (20210423/thisisaaronland)
+	
 	if map_renderer == "protomaps" {
 
 		u, err := url.Parse(protomaps_tile_url)
@@ -259,6 +271,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 		if u.Scheme == "file" {
 
+			protomaps_tiles_path, err := lookup.StringVar(fs, "protomaps-tiles-path")
+			
+			if err != nil {
+				return nil, err
+			}
+			
 			abs_path, err := filepath.Abs(u.Path)
 
 			if err != nil {
@@ -266,7 +284,8 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 			}
 
 			fname := filepath.Base(abs_path)
-			protomaps_tile_url = fmt.Sprintf("/pmtiles/%s", fname)
+			
+			protomaps_tile_url = filepath.Join(protomaps_tiles_path, fname)
 		}
 	}
 
@@ -277,6 +296,10 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		InitialLatitude:  initial_latitude,
 		InitialLongitude: initial_longitude,
 		InitialZoom:      initial_zoom,
+
+		// PROTOMAPS: this remains to be reconciled with the Tangram.js + Nextzen stuff
+		// See notes in editor.go
+		
 		MapRenderer:      map_renderer,
 		ProtomapsTileURL: protomaps_tile_url,
 	}
@@ -391,6 +414,15 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	return editor_handler, nil
 }
 
+// PROTOMAPS: this needs to stay in sync with code in NewEditorHandler
+// This takes a singular protomaps-tile-url and if it is a file:// URI
+// creates an http.Dir instance for its parent directory. The filename (for protomaps-tile-url)
+// is joined with protomaps-tiles-path to create a new path and this
+// path is registered with the http.ServeMux (and handled by the http.Dir
+// instance). It would be nice if this could just be handled by / hidden in
+// sfomuseum/go-http-leaflet-protomaps but I am not sure if that actually
+// makes sense yet (20210423/thisisaaronland)
+
 func AppendProtomapsTilesHandlerIfNecessary(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
 	protomaps_tile_url, err := lookup.StringVar(fs, "protomaps-tile-url")
@@ -399,6 +431,12 @@ func AppendProtomapsTilesHandlerIfNecessary(ctx context.Context, fs *flag.FlagSe
 		return err
 	}
 
+	protomaps_tiles_path, err := lookup.StringVar(fs, "protomaps-tiles-path")
+
+	if err != nil {
+		return err
+	}
+	
 	map_renderer, err := lookup.StringVar(fs, "map-renderer")
 
 	if err != nil {
@@ -425,15 +463,15 @@ func AppendProtomapsTilesHandlerIfNecessary(ctx context.Context, fs *flag.FlagSe
 		return err
 	}
 
+	fname := filepath.Base(abs_path)	
 	root := filepath.Dir(abs_path)
-	fname := filepath.Base(abs_path)
-
+	
 	tile_dir := http.Dir(root)
 	tile_handler := http.FileServer(tile_dir)
 
-	path := fmt.Sprintf("/pmtiles/%s", fname)
-
-	mux.Handle(path, http.StripPrefix("/pmtiles", tile_handler))
+	path := filepath.Join(protomaps_tiles_path, fname)
+	
+	mux.Handle(path, http.StripPrefix(protomaps_tiles_path, tile_handler))
 	return nil
 }
 

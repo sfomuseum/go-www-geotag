@@ -18,6 +18,11 @@ type EditorHandlerOptions struct {
 	OEmbedEndpoints     []string
 	EnableWriter        bool
 	WriterPath          string
+
+	// PROTOMAPS: this remains to be reconciled with the Tangram.js + Nextzen stuff	
+	// These flags are assigned to the <div id="map"> element in templates/html/editor.html
+	// and are handled by the Javascript code static/javascript/geotag.maps.js
+	
 	MapRenderer         string
 	ProtomapsTileURL    string
 }
@@ -33,6 +38,7 @@ type EditorHandlerVars struct {
 	OEmbedEndpoints     string
 	EnableWriter        bool
 	WriterPath          string
+	// PROTOMAPS: See notes above
 	MapRenderer         string
 	ProtomapsTileURL    string
 }
