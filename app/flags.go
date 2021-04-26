@@ -4,6 +4,7 @@ import (
 	"flag"
 	"github.com/aaronland/go-http-tangramjs"
 	"github.com/sfomuseum/go-flags/flagset"
+	spatial_flags "github.com/whosonfirst/go-whosonfirst-spatial/flags"
 )
 
 func CommonFlags() (*flag.FlagSet, error) {
@@ -41,7 +42,26 @@ func CommonFlags() (*flag.FlagSet, error) {
 		return nil, err
 	}
 
+	err = AppendPointInPolygonFlags(fs)
+
+	if err != nil {
+		return nil, err
+	}
+	
 	return fs, nil
+}
+
+func AppendPointInPolygonFlags(fs *flag.FlagSet) error {
+
+	fs.Bool("enable-point-in-polygon", false, "Enable point-in-polygon lookups for results.")
+	
+	err := spatial_flags.AppendCommonFlags(fs)
+
+	if err != nil {
+		return err
+	}
+	
+	return nil
 }
 
 func AppendMapFlags(fs *flag.FlagSet) error {

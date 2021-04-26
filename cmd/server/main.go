@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/sfomuseum/go-flags/flagset"
 	"github.com/sfomuseum/go-www-geotag/app"
+	 _ "github.com/whosonfirst/go-whosonfirst-spatial-sqlite"
 	"log"
 	"net/http"
 )

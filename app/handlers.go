@@ -117,11 +117,15 @@ func AppendPointInPolygonHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet,
 
 func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
-	var spatial_app *spatial_app.SpatialApplication
+	app, err := spatial_app.NewSpatialApplicationWithFlagSet(ctx, fs)
+
+	if err != nil {
+		return fmt.Errorf("Failed to create new spatial application, %v", err)
+	}
 	
 	pip_opts := &pip_api.PointInPolygonHandlerOptions{}
 	
-	pip_handler, err := pip_api.PointInPolygonHandler(spatial_app, pip_opts)
+	pip_handler, err := pip_api.PointInPolygonHandler(app, pip_opts)
 
 	if err != nil {
 		return fmt.Errorf("Failed to create PointInPolygonHandler handler, %v", err)
