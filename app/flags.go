@@ -61,6 +61,12 @@ func AppendPointInPolygonFlags(fs *flag.FlagSet) error {
 		return err
 	}
 
+	err = spatial_flags.AppendIndexingFlags(fs)
+
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 

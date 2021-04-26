@@ -134,7 +134,9 @@ func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *htt
 		return fmt.Errorf("Failed to create new spatial application, %v", err)
 	}
 
-	pip_opts := &pip_api.PointInPolygonHandlerOptions{}
+	pip_opts := &pip_api.PointInPolygonHandlerOptions{
+		// EnableGeoJSON:
+	}
 
 	pip_handler, err := pip_api.PointInPolygonHandler(app, pip_opts)
 
