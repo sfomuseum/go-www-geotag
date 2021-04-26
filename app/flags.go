@@ -48,8 +48,6 @@ func AppendMapFlags(fs *flag.FlagSet) error {
 
 	fs.String("map-renderer", "tangramjs", "Valid options are: protomaps, tangramjs")
 
-	// fs.String("tile-source", "", "Valid options are: protomaps, tangramjs")
-
 	err := AppendLeafletFlags(fs)
 
 	if err != nil {
@@ -80,7 +78,7 @@ func AppendMapFlags(fs *flag.FlagSet) error {
 func AppendProtomapsFlags(fs *flag.FlagSet) error {
 
 	fs.String("protomaps-tile-url", "", "A valid Protomaps tile URL for loading map tiles.")
-	fs.String("protomaps-tiles-path", "/pmtiles/", "...")
+	fs.String("protomaps-tiles-path", "/pmtiles/", "The leading prefix for Protomap tile URLs.")
 
 	return nil
 }

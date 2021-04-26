@@ -13,7 +13,7 @@ This is work in progress, including the documentation. In the meantime please ha
 ### server
 
 ```
-> ./bin/server -h
+$> ./bin/server -h
   -crumb-uri string
     	A valid aaronland/go-http-crumb.Crumb URI for generating (CSRF) crumbs. If the value is 'auto' then a random crumb URI will be generated. (default "auto")
   -disable-writer-crumb
@@ -38,6 +38,8 @@ This is work in progress, including the documentation. In the meantime please ha
     	A valid longitude for the map's initial view. (default -122.370943)
   -initial-zoom int
     	A valid zoom level for the map's initial view. (default 14)
+  -map-renderer string
+    	Valid options are: protomaps, tangramjs (default "tangramjs")
   -nextzen-apikey string
     	A valid Nextzen API key
   -nextzen-style-url string
@@ -50,12 +52,14 @@ This is work in progress, including the documentation. In the meantime please ha
     	A relative path for the geotag editor application. (default "/")
   -path-proxy-tiles string
     	The URL (a relative path) for proxied tiles. (default "/tiles/")
-  -path-templates string
-    	Path to a directory containing custom templates. If empty built-in templates will be used.
   -path-writer string
     	A relative path for sending write updates. (default "/update")
   -placeholder-endpoint string
     	A valid Placeholder API endpoint to query.
+  -protomaps-tile-url string
+    	A valid Protomaps tile URL for loading map tiles.
+  -protomaps-tiles-path string
+    	The leading prefix for Protomap tile URLs. (default "/pmtiles/")
   -proxy-tiles-cache-uri string
     	A valid tile proxy DSN string. (default "gocache://")
   -proxy-tiles-test
@@ -73,4 +77,8 @@ This is work in progress, including the documentation. In the meantime please ha
 ## See also
 
 * https://github.com/sfomuseum/go-http-leaflet-geotag
+* https://github.com/sfomuseum/go-http-protomaps
 * https://github.com/nypl-spacetime/Leaflet.GeotagPhoto
+* https://github.com/aaronland/go-http-tangramjs
+* https://github.com/aaronland/go-http-leaflet
+* https://github.com/aaronland/go-http-bootstrap
