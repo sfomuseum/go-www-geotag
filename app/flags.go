@@ -47,20 +47,20 @@ func CommonFlags() (*flag.FlagSet, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return fs, nil
 }
 
 func AppendPointInPolygonFlags(fs *flag.FlagSet) error {
 
 	fs.Bool("enable-point-in-polygon", false, "Enable point-in-polygon lookups for results.")
-	
+
 	err := spatial_flags.AppendCommonFlags(fs)
 
 	if err != nil {
 		return err
 	}
-	
+
 	return nil
 }
 

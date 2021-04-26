@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/sfomuseum/go-flags/flagset"
 	"github.com/sfomuseum/go-www-geotag/app"
-	 _ "github.com/whosonfirst/go-whosonfirst-spatial-sqlite"
+	_ "github.com/whosonfirst/go-whosonfirst-spatial-sqlite"
 	"log"
 	"net/http"
 )
@@ -39,6 +39,12 @@ func main() {
 
 	if err != nil {
 		log.Fatalf("Failed to append editor handler, %v", err)
+	}
+
+	err = app.AppendPointInPolygonHandlerIfEnabled(ctx, fl, mux)
+
+	if err != nil {
+		log.Fatalf("Failed to append point-in-polygon handler, %v", err)
 	}
 
 	err = app.AppendProxyTilesHandlerIfEnabled(ctx, fl, mux)
