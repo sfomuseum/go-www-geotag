@@ -20,6 +20,8 @@ import (
 	"github.com/sfomuseum/go-www-geotag/writer"
 	"github.com/sfomuseum/go-www-geotag/www"
 	"github.com/whosonfirst/go-cache"
+	spatial_app "github.com/whosonfirst/go-whosonfirst-spatial/app"
+	pip_api "github.com/whosonfirst/go-whosonfirst-spatial-pip/api"	
 	"log"
 	"net/http"
 	"net/url"
@@ -106,6 +108,28 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 		return err
 	}
 
+	return nil
+}
+
+func AppendPointInPolygonHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+	return AppendPointInPolygonHandler(ctx, fs, mux)
+}
+
+func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	var spatial_app *spatial_app.SpatialApplication
+	
+	pip_opts := &pip_api.PointInPolygonHandlerOptions{}
+	
+	pip_handler, err := pip_api.PointInPolygonHandler(spatial_app, pip_opts)
+
+	if err != nil {
+		return fmt.Errorf("Failed to create PointInPolygonHandler handler, %v", err)
+	}
+
+	path_pip := "/api/point-in-polygon"
+	
+	mux.Handle(path_pip, pip_handler)
 	return nil
 }
 

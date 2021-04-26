@@ -20,4 +20,6 @@ require (
 	github.com/sfomuseum/go-http-protomaps v0.0.3
 	github.com/sfomuseum/go-http-tilezen v0.0.4
 	github.com/whosonfirst/go-cache v0.2.0
+	github.com/whosonfirst/go-whosonfirst-spatial v0.0.55
+	github.com/whosonfirst/go-whosonfirst-spatial-pip v0.0.10
 )
