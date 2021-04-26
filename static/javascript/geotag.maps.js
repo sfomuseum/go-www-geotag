@@ -2,8 +2,6 @@ var geotag = geotag || {};
 
 geotag.maps = (function(){
 
-    var attribution = '<a href="https://github.com/tangrams" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a> | <a href="https://www.nextzen.org/" target="_blank">Nextzen</a>';
-   
     var maps = {};
 
     var self = {
@@ -84,14 +82,13 @@ geotag.maps = (function(){
 		var pm = new pmtiles.PMTiles(pm_uri);
 		
 		pm.metadata(m => {
-                    let bounds_str = m.bounds.split(',')
-                    let bounds = [[+bounds_str[1],+bounds_str[0]],[+bounds_str[3],+bounds_str[2]]]
+                    let bounds_str = m.bounds.split(',');
+                    let bounds = [[+bounds_str[1],+bounds_str[0]],[+bounds_str[3],+bounds_str[2]]];
                     let url = pm_uri;
-                    layer = new protomaps.LeafletLayer({url:url,bounds:bounds})
-                    layer.addTo(map)
-                    map.fitBounds(bounds)
-
-		    // FIX ME: attribution
+                    layer = new protomaps.LeafletLayer({url:url,bounds:bounds});
+                    layer.addTo(map);
+                    map.fitBounds(bounds);
+		    map.setMaxBounds(bounds);
 		});
 	    }
 
@@ -107,10 +104,10 @@ geotag.maps = (function(){
 		var tangramLayer = Tangram.leafletLayer(tangram_opts);
 		
 		tangramLayer.addTo(map);
-
-		var attribution = self.getAttribution();
-		map.attributionControl.addAttribution(attribution);
 	    }
+
+	    var attribution = self.getAttribution(map_renderer);
+	    map.attributionControl.addAttribution(attribution);
 	    
 	    maps[map_id] = map;
 	    return map;
@@ -156,8 +153,17 @@ geotag.maps = (function(){
 	    return tangram_opts;
 	},
 
-	'getAttribution': function(){
-	    return attribution;
+	'getAttribution': function(map_renderer){
+
+	    if (map_renderer == "tangramjs"){
+		return '<a href="https://github.com/tangrams" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a> | <a href="https://www.nextzen.org/" target="_blank">Nextzen</a>';
+	    }
+
+	    if (map_renderer == "protomaps"){
+		return '<a href="https://github.com/protomaps" target="_blank">Protomaps</a> | <a href="http://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
+	    }
+	    
+	    return '<a href="http://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
 	},
     };
 
