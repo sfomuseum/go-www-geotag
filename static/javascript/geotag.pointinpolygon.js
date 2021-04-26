@@ -1,6 +1,6 @@
 var geotag = geotag || {};
 
-geotag.pip = (function(){
+geotag.pointinpolygon = (function(){
 
     var _endpoint = null;
     
@@ -12,6 +12,8 @@ geotag.pip = (function(){
 
 	'query': function(args, on_success, on_error) {
 
+	    var enc_args = JSON.stringify(args);
+	    
 	    var url = _endpoint;
 
 	    var req = new XMLHttpRequest();
@@ -33,7 +35,7 @@ geotag.pip = (function(){
        	    };
 	    
 	    req.open("POST", url, true);
-	    req.send();	    	    
+	    req.send(args);
 	},
 			
     };

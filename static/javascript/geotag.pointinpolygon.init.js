@@ -1,10 +1,16 @@
 window.addEventListener("load", function load(event){
 
-    var endpoint = document.body.getAttribute("data-point-in-polygon-endpoint");
+    var ed = document.getElementById("editor");
+
+    if (! ed){
+	return;
+    }
+    
+    var endpoint = ed.getAttribute("data-point-in-polygon-endpoint");
 
     if (! endpoint){
 	return;
     }
-    
-    geotag.pointinpolygon.set_endpoint(endpoint);
+
+    geotag.pointinpolygon.set_endpoint(endpoint);    
 });
