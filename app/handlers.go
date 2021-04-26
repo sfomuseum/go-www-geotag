@@ -144,7 +144,11 @@ func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *htt
 		return fmt.Errorf("Failed to create PointInPolygonHandler handler, %v", err)
 	}
 
-	path_pip := "/api/point-in-polygon"
+	path_pip, err := lookup.StringVar(fs, "path-point-in-polygon")
+
+	if err != nil {
+		return fmt.Errorf("Failed to Failed to create PointInPolygonHandler handler - unable to lookup -path-point-in-polygon flag, %v", err)
+	}
 
 	mux.Handle(path_pip, pip_handler)
 	return nil
@@ -258,6 +262,18 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	enable_pip, err := lookup.BoolVar(fs, "enable-point-in-polygon")
+
+	if err != nil {
+		return nil, err
+	}
+
+	path_pip, err := lookup.StringVar(fs, "path-point-in-polygon")
+
+	if err != nil {
+		return nil, err
+	}
+
 	enable_oembed, err := lookup.BoolVar(fs, "enable-oembed")
 
 	if err != nil {
@@ -355,6 +371,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 		editor_opts.EnablePlaceholder = enable_placeholder
 		editor_opts.PlaceholderEndpoint = placeholder_endpoint
+	}
+
+	if enable_pip {
+
+		editor_opts.EnablePointInPolygon = enable_pip
+		editor_opts.PointInPolygonEndpoint = path_pip
 	}
 
 	if enable_oembed {

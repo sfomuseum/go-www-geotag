@@ -21,7 +21,7 @@
     
 </nav>
 
-<div class="container" id="editor">
+<div class="container" id="editor" {{ if .EnablePointInPolygon}}data-point-in-polygon="true" data-point-in-polygon-endpoint="{{ .PointInPolygonEndpoint }}"{{ end }}>
 
     <div class="card">
 
