@@ -80,7 +80,7 @@ geotag.maps = (function(){
 	    
 	    if (map_renderer == "protomaps"){
 		
-		var pm_uri = map_el.getAttribute("data-protomaps-tile-url");		
+		var pm_uri = document.body.getAttribute("data-protomaps-tile-url");		
 		var pm = new pmtiles.PMTiles(pm_uri);
 		
 		pm.metadata(m => {

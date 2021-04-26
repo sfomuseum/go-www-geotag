@@ -13,7 +13,7 @@ import (
 	"github.com/sfomuseum/go-flags/lookup"
 	"github.com/sfomuseum/go-http-leaflet-geotag"
 	"github.com/sfomuseum/go-http-leaflet-layers"
-	"github.com/sfomuseum/go-http-leaflet-protomaps"
+	"github.com/sfomuseum/go-http-protomaps"
 	tzhttp "github.com/sfomuseum/go-http-tilezen/http"
 	"github.com/sfomuseum/go-www-geotag/api"
 	"github.com/sfomuseum/go-www-geotag/geo"
@@ -51,7 +51,7 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 	// PROTOMAPS: this remains to be reconciled with the Tangram.js + Nextzen stuff
 	// In the end what you see below might just be the simplest way to "reconcile"
 	// things (20210423/thisisaaronland)
-	
+
 	switch map_renderer {
 	case "protomaps":
 
@@ -260,7 +260,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	// instance). It would be nice if this could just be handled by / hidden in
 	// sfomuseum/go-http-leaflet-protomaps but I am not sure if that actually
 	// makes sense yet (20210423/thisisaaronland)
-	
+
 	if map_renderer == "protomaps" {
 
 		u, err := url.Parse(protomaps_tile_url)
@@ -272,11 +272,11 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		if u.Scheme == "file" {
 
 			protomaps_tiles_path, err := lookup.StringVar(fs, "protomaps-tiles-path")
-			
+
 			if err != nil {
 				return nil, err
 			}
-			
+
 			abs_path, err := filepath.Abs(u.Path)
 
 			if err != nil {
@@ -284,7 +284,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 			}
 
 			fname := filepath.Base(abs_path)
-			
+
 			protomaps_tile_url = filepath.Join(protomaps_tiles_path, fname)
 		}
 	}
@@ -296,12 +296,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		InitialLatitude:  initial_latitude,
 		InitialLongitude: initial_longitude,
 		InitialZoom:      initial_zoom,
-
-		// PROTOMAPS: this remains to be reconciled with the Tangram.js + Nextzen stuff
-		// See notes in editor.go
-		
 		MapRenderer:      map_renderer,
-		ProtomapsTileURL: protomaps_tile_url,
 	}
 
 	if enable_writer {
@@ -371,8 +366,10 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	switch map_renderer {
 	case "protomaps":
 
-		protomaps_opts := protomaps.DefaultLeafletProtomapsOptions()
-		editor_handler = protomaps.AppendResourcesHandler(editor_handler, protomaps_opts)
+		pm_opts := protomaps.DefaultProtomapsOptions()
+		pm_opts.TileURL = protomaps_tile_url
+
+		editor_handler = protomaps.AppendResourcesHandler(editor_handler, pm_opts)
 
 	case "tangramjs":
 
@@ -436,7 +433,7 @@ func AppendProtomapsTilesHandlerIfNecessary(ctx context.Context, fs *flag.FlagSe
 	if err != nil {
 		return err
 	}
-	
+
 	map_renderer, err := lookup.StringVar(fs, "map-renderer")
 
 	if err != nil {
@@ -457,21 +454,13 @@ func AppendProtomapsTilesHandlerIfNecessary(ctx context.Context, fs *flag.FlagSe
 		return nil
 	}
 
-	abs_path, err := filepath.Abs(u.Path)
+	mux_url, mux_handler, err := protomaps.FileHandlerFromPath(u.Path, protomaps_tiles_path)
 
 	if err != nil {
 		return err
 	}
 
-	fname := filepath.Base(abs_path)	
-	root := filepath.Dir(abs_path)
-	
-	tile_dir := http.Dir(root)
-	tile_handler := http.FileServer(tile_dir)
-
-	path := filepath.Join(protomaps_tiles_path, fname)
-	
-	mux.Handle(path, http.StripPrefix(protomaps_tiles_path, tile_handler))
+	mux.Handle(mux_url, mux_handler)
 	return nil
 }
 

@@ -18,13 +18,7 @@ type EditorHandlerOptions struct {
 	OEmbedEndpoints     []string
 	EnableWriter        bool
 	WriterPath          string
-
-	// PROTOMAPS: this remains to be reconciled with the Tangram.js + Nextzen stuff	
-	// These flags are assigned to the <div id="map"> element in templates/html/editor.html
-	// and are handled by the Javascript code static/javascript/geotag.maps.js
-	
 	MapRenderer         string
-	ProtomapsTileURL    string
 }
 
 type EditorHandlerVars struct {
@@ -38,9 +32,7 @@ type EditorHandlerVars struct {
 	OEmbedEndpoints     string
 	EnableWriter        bool
 	WriterPath          string
-	// PROTOMAPS: See notes above
 	MapRenderer         string
-	ProtomapsTileURL    string
 }
 
 func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
@@ -67,7 +59,6 @@ func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 			EnableWriter:        opts.EnableWriter,
 			WriterPath:          opts.WriterPath,
 			MapRenderer:         opts.MapRenderer,
-			ProtomapsTileURL:    opts.ProtomapsTileURL,
 		}
 
 		rsp.Header().Set("Content-Type", "text/html; charset=utf-8")

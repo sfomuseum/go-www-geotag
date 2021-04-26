@@ -1,4 +1,4 @@
-module github.com/sfomuseum/go-http-leaflet-protomaps
+module github.com/sfomuseum/go-http-protomaps
 
 go 1.16
 

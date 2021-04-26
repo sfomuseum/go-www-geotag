@@ -64,8 +64,10 @@ github.com/sfomuseum/go-http-leaflet-geotag/static
 github.com/sfomuseum/go-http-leaflet-layers
 # github.com/sfomuseum/go-http-leaflet-protomaps v0.0.1
 ## explicit
-github.com/sfomuseum/go-http-leaflet-protomaps
-github.com/sfomuseum/go-http-leaflet-protomaps/static
+# github.com/sfomuseum/go-http-protomaps v0.0.3
+## explicit
+github.com/sfomuseum/go-http-protomaps
+github.com/sfomuseum/go-http-protomaps/static
 # github.com/sfomuseum/go-http-tilezen v0.0.4
 ## explicit
 github.com/sfomuseum/go-http-tilezen/http

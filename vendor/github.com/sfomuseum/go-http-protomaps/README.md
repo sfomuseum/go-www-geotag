@@ -1,4 +1,4 @@
-# go-http-leaflet-protomaps
+# go-http-protomaps
 
 ![](docs/images/go-http-leaflet-protomaps-sfo.png)
 
