@@ -74,16 +74,6 @@ window.addEventListener("load", function load(event){
 	console.log("Unable to instantiate map");
 	return;
     }
-
-    /*
-    var catalog = {};
-
-    var layers_control = new L.Control.Layers({
-	catalog: catalog,
-    });
-
-    map.addControl(layers_control);
-    */
     
     var hash = new L.Hash(map);
 
@@ -112,6 +102,8 @@ window.addEventListener("load", function load(event){
 	pip_enabled = true;
     }
 
+    var pip_layer = "";
+    
     var pip_update = function(){
 
 	var f = camera.getFieldOfView();
@@ -243,11 +235,20 @@ window.addEventListener("load", function load(event){
 
     var data_onsuccess = function(f){
 
-	    var props = {
-		"wof:hierarchy": f.properties["wof:hierarchy"],  
-	    };
+	if (pip_layer){
+	    map.removeLayer(pip_layer);
+	}
 
-	    update_feature_properties(props);
+	pip_layer = L.geoJSON(f);
+	pip_layer.addTo(map);
+
+	pip_layer.bringToBack();
+	
+	var props = {
+	    "wof:hierarchy": f.properties["wof:hierarchy"],  
+	};
+	
+	update_feature_properties(props);
     };
 
     var data_onerror = function(err){
@@ -268,6 +269,10 @@ window.addEventListener("load", function load(event){
 
 	// START OF point in polygon
 
+	if (pip_layer){
+	    map.removeLayer(pip_layer);
+	}
+	
 	if (pip_enabled){
 	    pip_update();
 	}

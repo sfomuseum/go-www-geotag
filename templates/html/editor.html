@@ -55,17 +55,20 @@
 		<summary>Point in polygon</summary>
 		<form id="point-in-polygon">
 		    <div id="point-in-polygon-candidates" class="form-group">&#160;</div>
-		    <p style="font-weight:700;">Filters</p>
-		    <div class="form-group">
-			<label for="inception">Inception date</label>
-			<input type="text" value="" id="point-in-polygon-inception" placeholder="inception" class="form-control" aria-describedby="inception-help"/>
-			<small id="inception-help" class="form-text text-muted">A valid EDTF string to filter result's inception date with.</small>
-		    </div>
-		    <div class="form-group">
-			<label for="cessation">Cessation date</label>			
-			<input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" class="form-control" aria-describedby="cessation-help"/>
-			<small id="cessation-help" class="form-text text-muted">A valid EDTF string to filter result's cessation date with.</small>			
-		    </div>
+
+		    <details class="control">
+			<summary>Filter</summary>
+			<div class="form-group">
+			    <label for="inception">Inception date</label>
+			    <input type="text" value="" id="point-in-polygon-inception" placeholder="inception" class="form-control" aria-describedby="inception-help"/>
+			    <small id="inception-help" class="form-text text-muted">A valid EDTF string to filter result's inception date with.</small>
+			</div>
+			<div class="form-group">
+			    <label for="cessation">Cessation date</label>			
+			    <input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" class="form-control" aria-describedby="cessation-help"/>
+			    <small id="cessation-help" class="form-text text-muted">A valid EDTF string to filter result's cessation date with.</small>			
+			</div>
+		    </details>
 		</form>
 	</details>
 	{{ end }}
