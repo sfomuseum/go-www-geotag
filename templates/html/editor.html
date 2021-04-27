@@ -24,8 +24,12 @@
 		
 		<div class="oembed-form">
 		    <form class="form">
-			<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" />
-			<button class="btn btn-primary pull-right" type="submit" id="oembed-fetch">Fetch image</button>
+		    <div class="form-group">
+			<label for="oembed-url">Display an image</label>					
+			<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" aria-describedby="oembed-url-help" />
+			<small id="oembed-url-help" class="form-text text-muted">A valid OEmbed URL for retrieving an image to display.</small>		
+		    </div>
+		    <button class="btn btn-primary pull-right" type="submit" id="oembed-fetch">Fetch</button>
 		    </form>
 		</div>
 	    </div>
@@ -37,7 +41,8 @@
 	<details class="control">
 	    <summary>Search</summary>
 	    <form class="form-inline">
-		<input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search"/>
+			<input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search" />
+		    </div>		    
 		<button class="btn my-2 my-sm-0" type="submit">Search</button>
 	    </form>
 	    <div id="placeholder-results"></div>
@@ -48,11 +53,19 @@
 
 	<details class="control">
 		<summary>Point in polygon</summary>
-		<div id="point-in-polygon">
+		<form id="point-in-polygon">
 		    <div id="point-in-polygon-candidates" />
-		    <input type="text" value="" id="point-in-polygon-inception" placeholder="inception" />
-		    <input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" />		
-		</div>
+		    <div class="form-group">
+			<label for="inception">Inception date</label>
+			<input type="text" value="" id="point-in-polygon-inception" placeholder="inception" class="form-control" aria-describedby="inception-help"/>
+			<small id="inception-help" class="form-text text-muted">A valid EDTF string to filter result's inception date with.</small>
+		    </div>
+		    <div class="form-group">
+			<label for="cessation">Cessation date</label>			
+			<input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" class="form-control" aria-describedby="cessation-help"/>
+			<small id="cessation-help" class="form-text text-muted">A valid EDTF string to filter result's cessation date with.</small>			
+		    </div>
+		</form>
 	</details>
 	{{ end }}
 
