@@ -15,7 +15,11 @@
 
 	    {{ if .EnablePointInPolygon }}
 
-	    <div id="point-in-polygon-candidates" />
+	    <div id="point-in-polygon">
+		<div id="point-in-polygon-candidates" />
+		<input type="text" value="" id="point-in-polygon-inception" placeholder="inception" />
+		<input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" />		
+	    </div>
 	    {{ end }}
 	    
 	    {{ if .EnableWriter }}

@@ -112,8 +112,39 @@ window.addEventListener("load", function load(event){
 	pip_enabled = true;
     }
 
-    var pip_candidates = document.getElementById("point-in-polygon-candidates");
+    var pip_update = function(){
 
+	var f = camera.getFieldOfView();
+	
+	var geoms = f.geometry.geometries;
+	var pos = geoms[0];
+	
+	var pip_q = {
+	    "longitude": pos.coordinates[0],	    
+	    "latitude": pos.coordinates[1],
+	    // Other filters go here...
+	};
+	
+	if (pip_inception.value != ""){
+	    pip_q.inception = pip_inception.value;
+	}
+	
+	if (pip_cessation.value != ""){
+	    pip_q.cessation = pip_cessation.value;
+	}
+	
+	geotag.pointinpolygon.query(pip_q, pip_onsuccess, pip_onerror);
+	pip_candidates.innerHTML = "";	    
+    };
+    
+    var pip_candidates = document.getElementById("point-in-polygon-candidates");
+    
+    var pip_inception = document.getElementById("point-in-polygon-inception");
+    pip_inception.onchange = pip_update;
+    
+    var pip_cessation = document.getElementById("point-in-polygon-cessation");    
+    pip_cessation.onchange = pip_update;
+        
     var pip_onsuccess = function(rsp){
 
 	pip_candidates.innerHTML = "";
@@ -230,18 +261,7 @@ window.addEventListener("load", function load(event){
 	// START OF point in polygon
 
 	if (pip_enabled){
-	    
-	    var geoms = f.geometry.geometries;
-	    var pos = geoms[0];
-	    	    
-	    var pip_q = {
-		"longitude": pos.coordinates[0],	    
-		"latitude": pos.coordinates[1],
-		// Other filters go here...
-	    };
-	    
-	    geotag.pointinpolygon.query(pip_q, pip_onsuccess, pip_onerror);
-	    pip_candidates.innerHTML = "";	    
+	    pip_update();
 	}
 	
 	// END OF point in polygon	
