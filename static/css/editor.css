@@ -6,23 +6,15 @@ body {
 
 /* IDs */
 
-#col-map {
-	min-width: 50%;
-}
-
-#col-oembed {
-	display:none;
-	border-right: none !important;
-	padding:1rem !important;
-}
-
-#editor-navbar {
-	margin-top:.5rem;
-	margin-bottom:1rem;	
+#editor {
+	display:grid;
+	grid-template-columns:33% 33% 33%;
+	margin-top:2rem;
 }
 
 #feature {
-	max-height:30vh !important; 
+	min-height:80vh !important;	
+	max-height:80vh !important;
 	overflow:scroll;
 	border:solid thin;
 	font-family:monospace;
@@ -31,41 +23,21 @@ body {
 }
 
 #map {
-	border-bottom: solid thin;
+	border: solid thin;
 	width: 100%;
-	height: 75vh;
+	height: 80vh;
 }
 
-#output {
-	display:none;
+#oembed-image img {
+	width: -moz-available;
+	height: -moz-available;	
 }
+
 
 /* Classes */
 
-.card {
-	margin-bottom:1rem;
-	border-radius: 0px !important;
-	border: none !important;
-}
-
-.card-body {
-	padding-top:0px !important;
-	padding-bottom:2rem !important;
-}
-
-.card-footer {
-	background-color:transparent !important;
-	border: none !important;
-}
-
 .col {
-	border:solid thin;
-	padding:0px !important;
-}
-
-.container {
-	max-width: none !important;
-	padding:0px !important;
+	// border: solid thin;
 }
 
 .leaflet-control-geotag-photo-camera img {
@@ -76,20 +48,6 @@ body {
 	vertical-align: top !important;
 }
 
-.oembed-card {
-	display:grid;
-	justify-content: center;
-}
-
-.oembed-card-body {
-	padding: 0px !important;
-}
-
-.oembed-card-footer {
-	font-size:small;
-	margin-top:1rem;
-}
-
 .oembed-form {
 	padding:.5rem;
 }
@@ -98,60 +56,23 @@ body {
 
 @media (max-width: 1240px) {
 
-	#oembed-image .card-img-top {
-		max-width:450px !important;
-	}
-
-	.oembed-card-footer {
-		max-width:450px !important;
-	}
 }
 
 @media (max-width: 950px) {
 
-	#oembed-image .card-img-top {
-		max-width:400px !important;
-	}
-
-	.oembed-card-footer {
-		max-width:400px !important;
-	}
 	
 }
 
 @media (max-width: 900px) {
-
-	#oembed-image .card-img-top {
-		max-width:350px !important;
-	}
-
-	.oembed-card-footer {
-		max-width:350px !important;
-	}
 	
 }
 
 @media (max-width: 750px) {
-
-	#oembed-image .card-img-top {
-		max-width:320px !important;
-	}
-
-	.oembed-card-footer {
-		max-width:320px !important;
-	}
 	
 }
 
 @media (max-width: 320px) {
 
-	#oembed-image .card-img-top {
-		max-width:280px !important;
-	}
-
-	.oembed-card-footer {
-		max-width:280px !important;
-	}
 	
 }
 

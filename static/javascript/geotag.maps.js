@@ -87,7 +87,7 @@ geotag.maps = (function(){
                     let url = pm_uri;
                     layer = new protomaps.LeafletLayer({url:url,bounds:bounds});
                     layer.addTo(map);
-                    map.fitBounds(bounds);
+                    // map.fitBounds(bounds);
 		    map.setMaxBounds(bounds);
 		});
 	    }

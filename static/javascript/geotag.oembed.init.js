@@ -89,10 +89,7 @@ window.addEventListener("load", function load(event){
 	    m_el.innerHTML = "";	
 	    
 	    var img = document.createElement("img");
-	    img.setAttribute("height", rsp["height"]);
-	    img.setAttribute("width", rsp["width"]);	    
 	    img.setAttribute("src", rsp["url"]);
-	    img.setAttribute("class", "card-img-top");
 
 	    i_el.appendChild(img);
 	    i_el.style.display = "block";

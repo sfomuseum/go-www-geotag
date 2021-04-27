@@ -1,83 +1,62 @@
 {{ define "editor" }}
 {{ template "inc_head" . }}
 
-<nav class="navbar" id="editor-navbar">
-
-	{{ if or .EnableWriter .EnablePlaceholder .EnablePointInPolygon }}	
-	    
-	    {{ if .EnablePlaceholder }}
-	    <form class="form-inline">
-		<input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search"/>
-		<button class="btn my-2 my-sm-0" type="submit">Search</button>
-	    </form>
-	    <div id="placeholder-results"></div>
-	    {{ end }}	    
-
-	    {{ if .EnablePointInPolygon }}
-
-	    <div id="point-in-polygon">
-		<div id="point-in-polygon-candidates" />
-		<input type="text" value="" id="point-in-polygon-inception" placeholder="inception" />
-		<input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" />		
-	    </div>
-	    {{ end }}
-	    
-	    {{ if .EnableWriter }}
-	    <button id="writer-save" class="btn btn-primary">Save</button>
-	    {{ end }}
-	    
-	{{ end }}
-    
-</nav>
-
 <div class="container" id="editor" {{ if .EnablePointInPolygon}}data-point-in-polygon="enabled" data-point-in-polygon-endpoint="{{ .PointInPolygonEndpoint }}" data-point-in-polygon-data-endpoint="{{ .PointInPolygonDataEndpoint }}"{{ end }}>
 
-    <div class="card">
 
-	<div class="card-body">
+    <div class="col" id="col-map">
 
-	    <div class="container">
-	    <div class="row">
-		
-	    {{ if .EnableOEmbed }}    
+	{{ if .EnablePlaceholder }}
+	<form class="form-inline">
+	    <input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search"/>
+	    <button class="btn my-2 my-sm-0" type="submit">Search</button>
+	</form>
+	<div id="placeholder-results"></div>
+	{{ end }}	    
+	
+	<div id="map" data-map-renderer="{{ .MapRenderer }}"></div>		
+    </div>
 
-		<div class="col" id="col-oembed">
-		    <div class="oembed-card">
+    <div class="col" id="col-controls">
 
-		<div id="oembed-image" class="card-body oembed-card-body"></div>
-		<div class="oembed-card-footer" id="oembed-meta"></div>
-	    </div>
+	{{ if .EnableOEmbed }}
 
-		</div>
-		
-	    {{ end }}
-
-		<div class="col" id="col-map">
-		    <div id="map" data-map-renderer="{{ .MapRenderer }}"></div>
-
-		    {{ if .EnableOEmbed }}    		    
-		    <div class="oembed-form">
-		    <form class="form-inline">
-			<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" size="30" />
-			<button class="btn btn-primary" type="submit" id="oembed-fetch">Fetch image</button>
-		    </form>
-		    </div>
-		    {{ end }}
-		</div>
-		
-	    </div>
-	    </div>
-	    
+	<div id="col-oembed">
+	    <div id="oembed-image"></div>
+	    <div id="oembed-meta"></div>
 	</div>
 	
-	<div class="card-footer" id="output">
-	    <details>
-		<summary>GeoJSON</summary>
-		<div id="feature"></div>
-	    </details>
+	<div class="oembed-form">
+	    <form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" size="30" />
+		<button class="btn btn-primary pull-right" type="submit" id="oembed-fetch">Fetch image</button>
+	    </form>
 	</div>
+	
+	{{ end }}
+	
+	{{ if .EnablePointInPolygon }}
+
+	<div id="point-in-polygon">
+	    <div id="point-in-polygon-candidates" />
+	    <input type="text" value="" id="point-in-polygon-inception" placeholder="inception" />
+	    <input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" />		
+	</div>
+	{{ end }}
+	    
     </div>
-    
 </div>
+
+    <div class="col" id="col-output">    
+	<div id="feature"></div>
+	
+    	{{ if .EnableWriter }}
+	<button id="writer-save" class="btn btn-primary">Save</button>
+	{{ end }}
+	
+    </div>
+
+</div>
+
 {{ template "inc_foot" . }}
 {{ end }}

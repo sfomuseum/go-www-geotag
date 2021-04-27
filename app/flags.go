@@ -146,7 +146,7 @@ func AppendLeafletFlags(fs *flag.FlagSet) error {
 
 	fs.Float64("initial-latitude", 37.61799, "A valid latitude for the map's initial view.")
 	fs.Float64("initial-longitude", -122.370943, "A valid longitude for the map's initial view.")
-	fs.Int("initial-zoom", 14, "A valid zoom level for the map's initial view.")
+	fs.Int("initial-zoom", 15, "A valid zoom level for the map's initial view.")
 
 	return nil
 }
