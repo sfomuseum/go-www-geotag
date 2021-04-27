@@ -113,7 +113,7 @@ window.addEventListener("load", function load(event){
     }
 
     var pip_candidates = document.getElementById("point-in-polygon-candidates");
-    
+
     var pip_onsuccess = function(rsp){
 
 	pip_candidates.innerHTML = "";
@@ -166,14 +166,32 @@ window.addEventListener("load", function load(event){
 	sel.onchange = function(e){
 	    
 	    var el = e.target;
-	    var parent_id = parseInt(el.value);
+	    var str_id = el.value;
+
+	    // Remove any existing wof: properties
+	    // ... is a special flag to remove this property
+
+	    if (str_id == ""){
+		
+		var props = {
+		    "wof:parent_id":"...",
+		    "wof:hierarchy":"...",
+		};
+
+		update_feature_properties(props);
+		return;
+	    }
+	    
+	    var parent_id = parseInt(str_id);
 
 	    var props = {
-		"wof:parent_id": parent_id,		    
+		    "wof:parent_id": parent_id,		    
 	    };
 
-	    console.log("UPDATE", props);
 	    update_feature_properties(props);
+
+            // fetch the hierarchy for this feature asychronously		
+	    geotag.data.fetch(parent_id, data_onsuccess, data_onerror);
 	};
 	
 	pip_candidates.appendChild(sel);
@@ -184,6 +202,19 @@ window.addEventListener("load", function load(event){
 	pip_candidates.innerHTML = "";	
     };
 
+    var data_onsuccess = function(f){
+
+	    var props = {
+		"wof:hierarchy": f.properties["wof:hierarchy"],  
+	    };
+
+	    update_feature_properties(props);
+    };
+
+    var data_onerror = function(err){
+	console.log("ERROR", err);
+    };
+        
     // END OF point in polygon    
     
     var camera = geotag.camera.getCamera();
@@ -255,6 +286,16 @@ window.addEventListener("load", function load(event){
 	var f = JSON.parse(str_f);
 
 	for (var k in props){
+
+	    var v = props[k];
+
+	    // ... is a special flag to remove this property
+	    
+	    if (v == "..."){
+		delete f.properties[k];
+		continue;
+	    }
+
 	    f.properties[k] = props[k];
 	}
 

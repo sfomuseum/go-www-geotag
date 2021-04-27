@@ -164,7 +164,7 @@ func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *htt
 	if err != nil {
 		return fmt.Errorf("Failed to create DataHandler handler - unable to lookup -path-point-in-polygon-data flag, %v", err)
 	}
-	
+
 	mux.Handle(path_pip_data, data_handler)
 	return nil
 }

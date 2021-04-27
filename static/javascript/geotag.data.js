@@ -1,6 +1,6 @@
 var geotag = geotag || {};
 
-geotag.pointinpolygon = (function(){
+geotag.data = (function(){
 
     var _endpoint = null;
     
@@ -10,9 +10,9 @@ geotag.pointinpolygon = (function(){
 	    _endpoint = url;
 	},
 
-	'query': function(args, on_success, on_error) {
+	'fetch': function(id, on_success, on_error) {
 	    
-	    var url = _endpoint;
+	    var url = _endpoint + id;
 
 	    var req = new XMLHttpRequest();
 	    
@@ -32,11 +32,8 @@ geotag.pointinpolygon = (function(){
 		on_success(rsp);
        	    };
 
-	    var enc_args = JSON.stringify(args);
-	    req.open("POST", url, true);
-
-	    // req.setRequestHeader("Accept", "application/geo+json");
-	    req.send(enc_args);
+	    req.open("GET", url, true);
+	    req.send();
 	},
     };
     
