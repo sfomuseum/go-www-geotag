@@ -76,7 +76,7 @@ github.com/sfomuseum/go-edtf/tests
 github.com/sfomuseum/go-flags/flagset
 github.com/sfomuseum/go-flags/lookup
 github.com/sfomuseum/go-flags/multi
-# github.com/sfomuseum/go-geojson-geotag v0.0.3
+# github.com/sfomuseum/go-geojson-geotag v0.0.4
 ## explicit
 github.com/sfomuseum/go-geojson-geotag
 # github.com/sfomuseum/go-http-leaflet-geotag v1.1.0

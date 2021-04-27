@@ -13,7 +13,7 @@ require (
 	github.com/jtacoma/uritemplates v1.0.0
 	github.com/rs/cors v1.7.0
 	github.com/sfomuseum/go-flags v0.8.2
-	github.com/sfomuseum/go-geojson-geotag v0.0.3
+	github.com/sfomuseum/go-geojson-geotag v0.0.4
 	github.com/sfomuseum/go-http-leaflet-geotag v1.1.0
 	github.com/sfomuseum/go-http-leaflet-layers v0.0.4
 	github.com/sfomuseum/go-http-protomaps v0.0.3

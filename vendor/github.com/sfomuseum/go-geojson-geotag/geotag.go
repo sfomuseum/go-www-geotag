@@ -7,9 +7,11 @@ import (
 )
 
 type GeotagProperties struct {
-	Angle    float64 `json:"angle"`
-	Bearing  float64 `json:"bearing"`
-	Distance float64 `json:"distance"`
+	Angle     float64            `json:"angle"`
+	Bearing   float64            `json:"bearing"`
+	Distance  float64            `json:"distance"`
+	ParentId  int64              `json:"wof:parent_id,omitempty"`
+	Hierarchy []map[string]int64 `json:"wof:hierarchy,omitempty"`
 }
 
 type GeotagCoordinate [2]float64

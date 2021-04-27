@@ -9,22 +9,19 @@ window.addEventListener("load", function load(event){
 
     save.onclick = function(){
 
-	var camera = geotag.camera.getCamera();
-
-	if (! camera){
-	    console.log("Unable to retrieve camera");
-	    return false;
-	}
+	var wrapper_el = document.getElementById("feature");	
+	var body_el = document.getElementById("feature-body");
+	
+	var str_f = body_el.innerText;
+	var f = JSON.parse(str_f);
 
 	var uri = document.body.getAttribute("data-geotag-uri", uri);
 
 	if (! uri){
 	    console.log("Missing data-geotag-uri attribute");
-	    return false;
+	    // return false;
 	}
 	
-	var fov = camera.getFieldOfView();
-
 	var on_success = function(rsp){
 	    console.log("WRITE OKAY", rsp);
 	};
@@ -33,7 +30,7 @@ window.addEventListener("load", function load(event){
 	    console.log("WRITE ERROR", err);
 	};
 
-	geotag.writer.write_geotag(uri, fov, on_success, on_error);
+	geotag.writer.write_geotag(uri, f, on_success, on_error);
 	return false;
     };
     
