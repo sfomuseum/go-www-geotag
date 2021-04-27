@@ -21,6 +21,7 @@ type EditorHandlerOptions struct {
 	MapRenderer            string
 	EnablePointInPolygon   bool
 	PointInPolygonEndpoint string
+	PointInPolygonDataEndpoint string	
 }
 
 type EditorHandlerVars struct {
@@ -37,6 +38,7 @@ type EditorHandlerVars struct {
 	MapRenderer            string
 	EnablePointInPolygon   bool
 	PointInPolygonEndpoint string
+	PointInPolygonDataEndpoint string	
 }
 
 func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
@@ -62,6 +64,7 @@ func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 			OEmbedEndpoints:        oembed_endpoints,
 			EnablePointInPolygon:   opts.EnablePointInPolygon,
 			PointInPolygonEndpoint: opts.PointInPolygonEndpoint,
+			PointInPolygonDataEndpoint: opts.PointInPolygonDataEndpoint,			
 			EnableWriter:           opts.EnableWriter,
 			WriterPath:             opts.WriterPath,
 			MapRenderer:            opts.MapRenderer,

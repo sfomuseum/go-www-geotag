@@ -22,4 +22,5 @@ require (
 	github.com/whosonfirst/go-whosonfirst-spatial v0.0.56
 	github.com/whosonfirst/go-whosonfirst-spatial-pip v0.0.10
 	github.com/whosonfirst/go-whosonfirst-spatial-sqlite v0.0.38
+	github.com/whosonfirst/go-whosonfirst-spatial-www v0.0.30
 )

@@ -103,7 +103,7 @@ window.addEventListener("load", function load(event){
     map.setView([init_lat, init_lon], init_zoom);
 
     // START OF point in polygon
-
+    
     var ed = document.getElementById("editor");
 
     var pip_enabled = false;
@@ -163,6 +163,19 @@ window.addEventListener("load", function load(event){
 	    sel.appendChild(opt);
 	}
 
+	sel.onchange = function(e){
+	    
+	    var el = e.target;
+	    var parent_id = parseInt(el.value);
+
+	    var props = {
+		"wof:parent_id": parent_id,		    
+	    };
+
+	    console.log("UPDATE", props);
+	    update_feature_properties(props);
+	};
+	
 	pip_candidates.appendChild(sel);
     };
     
@@ -227,9 +240,28 @@ window.addEventListener("load", function load(event){
 
 	var enc = JSON.stringify(f, null, 2);
 	var pre = document.createElement("pre");
+	pre.setAttribute("id", "feature-body");
 	pre.appendChild(document.createTextNode(enc));
 
 	return pre;
+    };
+
+    var update_feature_properties = function(props){
+
+	var wrapper_el = document.getElementById("feature");	
+	var body_el = document.getElementById("feature-body");
+	
+	var str_f = body_el.innerText;
+	var f = JSON.parse(str_f);
+
+	for (var k in props){
+	    f.properties[k] = props[k];
+	}
+
+	body_el = render_feature(f);
+
+	wrapper_el.innerHTML = "";
+	wrapper_el.appendChild(body_el);
     };
     
     camera.on('change', on_update);

@@ -33,8 +33,9 @@ geotag.pointinpolygon = (function(){
        	    };
 
 	    var enc_args = JSON.stringify(args);
-	    
 	    req.open("POST", url, true);
+
+	    // req.setRequestHeader("Accept", "application/geo+json");
 	    req.send(enc_args);
 	},
 			

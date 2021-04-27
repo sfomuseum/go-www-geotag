@@ -22,6 +22,7 @@ import (
 	"github.com/whosonfirst/go-cache"
 	pip_api "github.com/whosonfirst/go-whosonfirst-spatial-pip/api"
 	spatial_app "github.com/whosonfirst/go-whosonfirst-spatial/app"
+	spatial_www "github.com/whosonfirst/go-whosonfirst-spatial-www/http"	
 	"log"
 	"net/http"
 	"net/url"
@@ -135,7 +136,7 @@ func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *htt
 	}
 
 	pip_opts := &pip_api.PointInPolygonHandlerOptions{
-		// EnableGeoJSON:
+		// EnableGeoJSON: true,
 	}
 
 	pip_handler, err := pip_api.PointInPolygonHandler(app, pip_opts)
@@ -147,10 +148,24 @@ func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *htt
 	path_pip, err := lookup.StringVar(fs, "path-point-in-polygon")
 
 	if err != nil {
-		return fmt.Errorf("Failed to Failed to create PointInPolygonHandler handler - unable to lookup -path-point-in-polygon flag, %v", err)
+		return fmt.Errorf("Failed to create PointInPolygonHandler handler - unable to lookup -path-point-in-polygon flag, %v", err)
 	}
 
 	mux.Handle(path_pip, pip_handler)
+
+	data_handler, err := spatial_www.NewDataHandler(app.SpatialDatabase)
+
+	if err != nil {
+		return fmt.Errorf("Failed to create DataHandler, %v", err)
+	}
+
+	path_pip_data, err := lookup.StringVar(fs, "path-point-in-polygon-data")
+
+	if err != nil {
+		return fmt.Errorf("Failed to create DataHandler handler - unable to lookup -path-point-in-polygon-data flag, %v", err)
+	}
+	
+	mux.Handle(path_pip_data, data_handler)
 	return nil
 }
 
@@ -274,6 +289,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	path_pip_data, err := lookup.StringVar(fs, "path-point-in-polygon-data")
+
+	if err != nil {
+		return nil, err
+	}
+	
 	enable_oembed, err := lookup.BoolVar(fs, "enable-oembed")
 
 	if err != nil {
@@ -377,6 +398,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 		editor_opts.EnablePointInPolygon = enable_pip
 		editor_opts.PointInPolygonEndpoint = path_pip
+		editor_opts.PointInPolygonDataEndpoint = path_pip_data
 	}
 
 	if enable_oembed {
