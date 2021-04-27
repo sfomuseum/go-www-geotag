@@ -29,7 +29,6 @@ geotag.pointinpolygon = (function(){
 		    return false;
 		}
 
-		console.log("OKAY", rsp);
 		on_success(rsp);
        	    };
 
