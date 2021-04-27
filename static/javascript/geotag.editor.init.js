@@ -102,8 +102,28 @@ window.addEventListener("load", function load(event){
     
     map.setView([init_lat, init_lon], init_zoom);
 
-    //
+    // START OF point in polygon
 
+    var ed = document.getElementById("editor");
+
+    var pip_enabled = false;
+
+    if (ed.getAttribute("data-point-in-polygon") == "enabled"){
+	pip_enabled = true;
+    }
+
+    var pip_onsuccess = function(rsp){
+	// console.log("PIP OKAY", rsp);
+	// Now what? (20210426/thisisaaronland)
+	// Populate select menu, on select update feature?
+    };
+    
+    var pip_onerror  = function(err){
+	console.log("PIP ERROR", err);
+    };
+
+    // END OF point in polygon    
+    
     var camera = geotag.camera.getCamera();
     camera.addTo(map);
     
@@ -115,25 +135,21 @@ window.addEventListener("load", function load(event){
 	var f = camera.getFieldOfView();
 
 	// START OF point in polygon
+
+	if (pip_enabled){
+	    
+	    var geoms = f.geometry.geometries;
+	    var pos = geoms[0];
+	    	    
+	    var pip_q = {
+		"longitude": pos.coordinates[0],	    
+		"latitude": pos.coordinates[1],
+		// Other filters go here...
+	    };
+	    
+	    geotag.pointinpolygon.query(pip_q, pip_onsuccess, pip_onerror);
+	}
 	
-	var geoms = f.geometry.geometries;
-	var pos = geoms[0];
-
-	var pip_onsuccess = function(rsp){
-	    console.log("PIP OKAY", rsp);
-	};
-
-	var pip_onerror  = function(err){
-	    console.log("PIP ERROR", err);
-	};
-
-	var pip_q = {
-	    "longitude": pos.coordinates[0],	    
-	    "latitude": pos.coordinates[1],
-	};
-	
-	geotag.pointinpolygon.query(pip_q, pip_onsuccess, pip_onerror);
-
 	// END OF point in polygon	
 	
 	var el = document.getElementById("feature");
