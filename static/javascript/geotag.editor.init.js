@@ -122,7 +122,6 @@ window.addEventListener("load", function load(event){
 	var pip_q = {
 	    "longitude": pos.coordinates[0],	    
 	    "latitude": pos.coordinates[1],
-	    // Other filters go here...
 	};
 	
 	if (pip_inception.value != ""){
@@ -134,7 +133,9 @@ window.addEventListener("load", function load(event){
 	}
 	
 	geotag.pointinpolygon.query(pip_q, pip_onsuccess, pip_onerror);
-	pip_candidates.innerHTML = "";	    
+
+	// pip_candidates.style.display = "none";	
+	// pip_candidates.innerHTML = "";	    
     };
     
     var pip_candidates = document.getElementById("point-in-polygon-candidates");
@@ -147,11 +148,9 @@ window.addEventListener("load", function load(event){
         
     var pip_onsuccess = function(rsp){
 
-	pip_candidates.innerHTML = "";
+	// pip_candidates.style.display = "none";
+	// pip_candidates.innerHTML = "";
 	
-	// Now what? (20210426/thisisaaronland)
-	// Populate select menu, on select update feature?
-
 	var places = rsp.places;
 	var count = places.length;
 
@@ -177,7 +176,7 @@ window.addEventListener("load", function load(event){
 	labels = labels.sort();
 	
 	var sel = document.createElement("select");
-	sel.setAttribute("id", "wof_parent_id");
+	sel.setAttribute("id", "point-in-polygon-parent-id");
 
 	var opt = document.createElement("option");
 	sel.appendChild(opt);
@@ -224,13 +223,22 @@ window.addEventListener("load", function load(event){
             // fetch the hierarchy for this feature asychronously		
 	    geotag.data.fetch(parent_id, data_onsuccess, data_onerror);
 	};
-	
+
+	var label = document.createElement("label");
+	label.setAttribute("for", "point-in-polygon-parent-id");
+	label.appendChild(document.createTextNode("Candidates"));
+
+	pip_candidates.innerHTML = "";
+	pip_candidates.appendChild(label);
 	pip_candidates.appendChild(sel);
+
+	pip_candidates.style.display = "block";
     };
     
     var pip_onerror  = function(err){	
 	console.log("PIP ERROR", err);
 	pip_candidates.innerHTML = "";	
+	pip_candidates.style.display = "none";
     };
 
     var data_onsuccess = function(f){

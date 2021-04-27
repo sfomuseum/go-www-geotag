@@ -4,8 +4,13 @@ body {
 	background-color:#fff;
 }
 
+label {
+	font-style: italic;
+}
+
 summary {
 	margin-bottom:1rem;
+	font-weight:700;
 }
 
 /* IDs */
