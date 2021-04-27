@@ -6,11 +6,7 @@
 	display:none;
 }
 
-#oembed-image .card-img-top {
-	display: block;
-	max-width:600px;
-	max-height:400px;
-	width: auto;
-	height: auto;
+#oembed-url {
+	display:block;
+	margin-bottom: .5rem;
 }
-	

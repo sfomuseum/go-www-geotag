@@ -4,48 +4,61 @@
 <div class="container" id="editor" {{ if .EnablePointInPolygon}}data-point-in-polygon="enabled" data-point-in-polygon-endpoint="{{ .PointInPolygonEndpoint }}" data-point-in-polygon-data-endpoint="{{ .PointInPolygonDataEndpoint }}"{{ end }}>
 
 
-    <div class="col" id="col-map">
-
-	{{ if .EnablePlaceholder }}
-	<form class="form-inline">
-	    <input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search"/>
-	    <button class="btn my-2 my-sm-0" type="submit">Search</button>
-	</form>
-	<div id="placeholder-results"></div>
-	{{ end }}	    
-	
+    <div class="col" id="col-map">	
 	<div id="map" data-map-renderer="{{ .MapRenderer }}"></div>		
     </div>
 
     <div class="col" id="col-controls">
 
+	<div id="controls">
+	    
 	{{ if .EnableOEmbed }}
 
-	<div id="col-oembed">
-	    <div id="oembed-image"></div>
-	    <div id="oembed-meta"></div>
-	</div>
-	
-	<div class="oembed-form">
-	    <form class="form-inline">
-		<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" size="30" />
-		<button class="btn btn-primary pull-right" type="submit" id="oembed-fetch">Fetch image</button>
-	    </form>
-	</div>
-	
+	<details class="control">
+	    <summary>Image</summary>
+	    <div>
+		<div id="col-oembed">
+		    <div id="oembed-image"></div>
+		    <div id="oembed-meta"></div>
+		</div>
+		
+		<div class="oembed-form">
+		    <form class="form">
+			<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" />
+			<button class="btn btn-primary pull-right" type="submit" id="oembed-fetch">Fetch image</button>
+		    </form>
+		</div>
+	    </div>
+	</details>
 	{{ end }}
 	
+	{{ if .EnablePlaceholder }}
+
+	<details class="control">
+	    <summary>Search</summary>
+	    <form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search"/>
+		<button class="btn my-2 my-sm-0" type="submit">Search</button>
+	    </form>
+	    <div id="placeholder-results"></div>
+	</div>
+	{{ end }}	    
+
 	{{ if .EnablePointInPolygon }}
 
-	<div id="point-in-polygon">
-	    <div id="point-in-polygon-candidates" />
-	    <input type="text" value="" id="point-in-polygon-inception" placeholder="inception" />
-	    <input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" />		
-	</div>
+	<details class="control">
+		<summary>Point in polygon</summary>
+		<div id="point-in-polygon">
+		    <div id="point-in-polygon-candidates" />
+		    <input type="text" value="" id="point-in-polygon-inception" placeholder="inception" />
+		    <input type="text" value="" id="point-in-polygon-cessation" placeholder="cessation" />		
+		</div>
+	</details>
 	{{ end }}
-	    
+
+	</div>
+	
     </div>
-</div>
 
     <div class="col" id="col-output">    
 	<div id="feature"></div>

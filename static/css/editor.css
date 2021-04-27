@@ -6,6 +6,11 @@ body {
 
 /* IDs */
 
+#controls {
+	max-height: 80vh;
+	overflow:auto;
+}
+
 #editor {
 	display:grid;
 	grid-template-columns:33% 33% 33%;
@@ -15,11 +20,12 @@ body {
 #feature {
 	min-height:80vh !important;	
 	max-height:80vh !important;
-	overflow:scroll;
+	overflow:auto;
 	border:solid thin;
 	font-family:monospace;
 	font-size:small;
 	padding:1rem;
+	margin-bottom:1rem;
 }
 
 #map {
@@ -40,6 +46,10 @@ body {
 	// border: solid thin;
 }
 
+.control {
+	margin-bottom: 1rem;
+}
+
 .leaflet-control-geotag-photo-camera img {
 	vertical-align: top !important;
 }
@@ -55,25 +65,25 @@ body {
 /* Media queries */
 
 @media (max-width: 1240px) {
+	#editor {
+		grid-template-columns: 50% 50% !important;
+	}
 
+	#col-output {
+		grid-column-start: 1;
+		grid-column-end: span col2-start;
+	}
 }
 
-@media (max-width: 950px) {
+@media (max-width: 800px) {
+	#editor {
+		grid-template-columns: 100% !important;
+	}
 
+	#col-output {
+		grid-column-start: 1;
+		grid-column-end: 1 !important;
+	}
 	
 }
 
-@media (max-width: 900px) {
-	
-}
-
-@media (max-width: 750px) {
-	
-}
-
-@media (max-width: 320px) {
-
-	
-}
-
-	
