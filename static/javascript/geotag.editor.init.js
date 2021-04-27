@@ -125,9 +125,7 @@ window.addEventListener("load", function load(event){
 	}
 	
 	geotag.pointinpolygon.query(pip_q, pip_onsuccess, pip_onerror);
-
-	// pip_candidates.style.display = "none";	
-	// pip_candidates.innerHTML = "";	    
+	pip_reset_candidates();
     };
     
     var pip_candidates = document.getElementById("point-in-polygon-candidates");
@@ -229,8 +227,7 @@ window.addEventListener("load", function load(event){
     
     var pip_onerror  = function(err){	
 	console.log("PIP ERROR", err);
-	pip_candidates.innerHTML = "";	
-	pip_candidates.style.display = "none";
+	pip_reset_candidates();
     };
 
     var data_onsuccess = function(f){
@@ -254,7 +251,16 @@ window.addEventListener("load", function load(event){
     var data_onerror = function(err){
 	console.log("ERROR", err);
     };
-        
+
+    var pip_reset_candidates = function(){
+
+	var el = document.getElementById("point-in-polygon-parent-id");
+
+	if (el){
+	    el.innerHTML = "";
+	}
+    };
+    
     // END OF point in polygon    
     
     var camera = geotag.camera.getCamera();
@@ -262,6 +268,8 @@ window.addEventListener("load", function load(event){
     
     camera.setCameraLatLng([init_lat, init_lon]);
     camera.setTargetLatLng([init_lat, init_lon]);    
+
+    var last_pos;
     
     var on_update = function(e){
 	
@@ -269,12 +277,20 @@ window.addEventListener("load", function load(event){
 
 	// START OF point in polygon
 
-	if (pip_layer){
-	    map.removeLayer(pip_layer);
-	}
-	
 	if (pip_enabled){
-	    pip_update();
+
+	    var this_pos = JSON.stringify(f.geometry.geometries[0]);
+
+	    if ((! last_pos) || (last_pos != this_pos)){
+		
+		if (pip_layer){
+		    map.removeLayer(pip_layer);
+		}
+	    	
+		pip_update();
+	    }
+
+	    last_pos = this_pos;
 	}
 	
 	// END OF point in polygon	
