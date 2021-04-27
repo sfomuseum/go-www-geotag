@@ -112,14 +112,63 @@ window.addEventListener("load", function load(event){
 	pip_enabled = true;
     }
 
+    var pip_candidates = document.getElementById("point-in-polygon-candidates");
+    
     var pip_onsuccess = function(rsp){
-	// console.log("PIP OKAY", rsp);
+
+	pip_candidates.innerHTML = "";
+	
 	// Now what? (20210426/thisisaaronland)
 	// Populate select menu, on select update feature?
+
+	var places = rsp.places;
+	var count = places.length;
+
+	var options = {};
+	var labels = [];
+
+	for (var i=0; i < count; i++){
+
+	    var pl = places[i];
+
+	    var id = pl["wof:id"];
+	    var name = pl["wof:name"];
+	    var placetype = pl["wof:placetype"];
+	    var inception = pl["edtf:inception"];
+	    var cessation = pl["edtf:cessation"];
+
+	    var label = name + " (" + inception + "/" + cessation + ")";
+
+	    labels.push(label);
+	    options[label] = id;
+	}
+
+	labels = labels.sort();
+	
+	var sel = document.createElement("select");
+	sel.setAttribute("id", "wof_parent_id");
+
+	var opt = document.createElement("option");
+	sel.appendChild(opt);
+	
+	for (var i=0; i < count; i++){
+
+	    var label = labels[i];
+	    var id = options[label];
+	    
+	    var opt = document.createElement("option");
+	    opt.setAttribute("value", id);
+
+	    opt.appendChild(document.createTextNode(label));
+	    sel.appendChild(opt);
+	}
+
+	pip_candidates.appendChild(sel);
     };
     
-    var pip_onerror  = function(err){
+    var pip_onerror  = function(err){	
 	console.log("PIP ERROR", err);
+	pip_candidates.innerHTML = "";	
     };
 
     // END OF point in polygon    
@@ -148,6 +197,7 @@ window.addEventListener("load", function load(event){
 	    };
 	    
 	    geotag.pointinpolygon.query(pip_q, pip_onsuccess, pip_onerror);
+	    pip_candidates.innerHTML = "";	    
 	}
 	
 	// END OF point in polygon	

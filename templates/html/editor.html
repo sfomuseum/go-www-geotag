@@ -3,7 +3,7 @@
 
 <nav class="navbar" id="editor-navbar">
 
-	{{ if or .EnableWriter .EnablePlaceholder }}	
+	{{ if or .EnableWriter .EnablePlaceholder .EnablePointInPolygon }}	
 	    
 	    {{ if .EnablePlaceholder }}
 	    <form class="form-inline">
@@ -13,6 +13,11 @@
 	    <div id="placeholder-results"></div>
 	    {{ end }}	    
 
+	    {{ if .EnablePointInPolygon }}
+
+	    <div id="point-in-polygon-candidates" />
+	    {{ end }}
+	    
 	    {{ if .EnableWriter }}
 	    <button id="writer-save" class="btn btn-primary">Save</button>
 	    {{ end }}
