@@ -11,15 +11,13 @@ geotag.pointinpolygon = (function(){
 	},
 
 	'query': function(args, on_success, on_error) {
-
-	    var enc_args = JSON.stringify(args);
 	    
 	    var url = _endpoint;
 
 	    var req = new XMLHttpRequest();
 	    
 	    req.onload = function(){
-		
+
 		var rsp;
 		
 		try {
@@ -30,12 +28,15 @@ geotag.pointinpolygon = (function(){
 		    on_error(e);
 		    return false;
 		}
-		
+
+		console.log("OKAY", rsp);
 		on_success(rsp);
        	    };
+
+	    var enc_args = JSON.stringify(args);
 	    
 	    req.open("POST", url, true);
-	    req.send(args);
+	    req.send(enc_args);
 	},
 			
     };
