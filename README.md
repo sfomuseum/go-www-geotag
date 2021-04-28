@@ -121,6 +121,18 @@ If you visit `http://localhost:8080` in your web browser you'll see something li
 
 ![](docs/images/geotag-three-columns.png)
 
+In this configuration the `server` application a simple three-pane interface for geotagging images.
+
+* The left-hand panel contains a map a `Leaflet.GeotagPhoto` camera for defining a focal point and field of view.
+
+* The middle panel contains controls for loading images and for filtering and selecting reverse-geocoding results (that are updated as the camera's focal point changes).
+
+* The right-hand panels contains GeoJSON `Feature` data containing information about the camera's focal point and field of view as well as any reverse-geocoding data, if present, encoded in the `wof:parent_id` and `wof:hierarchy` properties. 
+
+This example application does not have any way to publish data outside of copy-pasting the raw GeoJSON data in to another document. That will be addressed in subsequent examples.
+
+_Related: [Geotagging at SFO Museum, Part 3 – What Is the Simplest Thing?](https://millsfield.sfomuseum.org/blog/2020/04/27/geotagging-simple/)_
+
 Watching through the parameters step-by-step the first being defined is the toolchain for rendering map tiles. In this example we're using [Protomaps.js](https://github.com/protomaps/protomaps.js) which renders maps tiles using a single "PMTiles" database file, specified in the `-protomaps-tile-url` flag, which can be hosted locally or on a remote file-server.
 
 ```
