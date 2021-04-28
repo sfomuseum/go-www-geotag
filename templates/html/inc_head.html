@@ -6,37 +6,6 @@
     <title>Geotag</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="/javascript/whosonfirst.net.js"></script>
-    {{ if eq .PageContext "Editor" }}
-    <script type="text/javascript" src="/javascript/geotag.maps.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.camera.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/editor.css" />
-    {{ if .EnableOEmbed }}
-    <script type="text/javascript" src="/javascript/geotag.oembed.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.oembed.init.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/oembed.css" />
-    {{ end }}
-    {{ if .EnablePlaceholder }}
-    <script type="text/javascript" src="/javascript/leaflet.control.geocoder.js"></script>
-    <script type="text/javascript" src="/javascript/leaflet.control.geocoder.placeholder.js"></script>
-    <script type="text/javascript" src="/javascript/leaflet.control.geocoder.placeholder.init.js"></script>    
-    <link rel="stylesheet" type="text/css" href="/css/leaflet.control.geocoder.placeholder.css" />
-    {{ end }}
-    {{ if .EnablePointInPolygon }}
-    <script type="text/javascript" src="/javascript/geotag.pointinpolygon.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.pointinpolygon.init.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.data.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.data.init.js"></script>    
-    <link rel="stylesheet" type="text/css" href="/css/pointinpolygon.css" />
-    {{ end }}    
-    {{ if .EnableWriter }}
-    <script type="text/javascript" src="/javascript/geotag.api.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.writer.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.writer.init.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/writer.css" />
-    {{ end }}
-    <script type="text/javascript" src="/javascript/geotag.camera.init.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.editor.init.js"></script>
-    {{ end }}
   </head>
   <body data-initial-latitude="{{ .InitialLatitude }}" data-initial-longitude="{{ .InitialLongitude }}" data-initial-zoom="{{ .InitialZoom }}" data-placeholder-endpoint="{{ .PlaceholderEndpoint }}" data-oembed-endpoints="{{ .OEmbedEndpoints }}">
 {{ end }}

@@ -74,6 +74,12 @@ geotag.maps = (function(){
 
 	    var map = L.map("map");
 
+	    // START OF geocoder/placeholder stuff
+
+	    L.Control.geocoder().addTo(map);
+		
+	    // END OF geocoder/placeholder stuff
+
 	    var map_renderer = map_el.getAttribute("data-map-renderer");
 	    
 	    if (map_renderer == "protomaps"){
