@@ -76,7 +76,11 @@ geotag.maps = (function(){
 
 	    // START OF geocoder/placeholder stuff
 
-	    L.Control.geocoder().addTo(map);
+	    var ph = new Placeholder();
+	    console.log("PH", ph);
+	    
+	    var geocoder = L.Control.geocoder({geocoder: ph});
+	    geocoder.addTo(map);
 		
 	    // END OF geocoder/placeholder stuff
 
