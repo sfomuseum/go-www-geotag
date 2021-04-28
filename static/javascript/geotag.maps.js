@@ -79,13 +79,13 @@ geotag.maps = (function(){
 	    if (map_renderer == "protomaps"){
 		
 		var pm_uri = document.body.getAttribute("data-protomaps-tile-url");		
-		var pm = new pmtiles.PMTiles(pm_uri);
+		var pm = new pmtiles.PMTiles(pm_uri, {allow_200: true});
 		
 		pm.metadata(m => {
                     let bounds_str = m.bounds.split(',');
                     let bounds = [[+bounds_str[1],+bounds_str[0]],[+bounds_str[3],+bounds_str[2]]];
                     let url = pm_uri;
-                    layer = new protomaps.LeafletLayer({url:url,bounds:bounds});
+                    layer = new protomaps.LeafletLayer({url:url, bounds:bounds, allow_200: true});
                     layer.addTo(map);
                     // map.fitBounds(bounds);
 		    map.setMaxBounds(bounds);

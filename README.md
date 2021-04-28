@@ -6,8 +6,12 @@ A web application, written in Go, for geotagging images.
 
 ## Important
 
-This is work in progress, including the documentation. In the meantime please have a look at the [Geotagging at SFO Museum](https://millsfield.sfomuseum.org/blog/tags/geotagging) series of blog posts.
+This is work in progress, documentation is incomplete.
 
+## Background
+
+Have a look at the [Geotagging at SFO Museum](https://millsfield.sfomuseum.org/blog/tags/geotagging) series of blog posts.
+ 
 ## Tools
 
 ```
@@ -99,11 +103,67 @@ $> ./bin/server -h
     	A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance. (default "stdout://")
 ```
 
+For example:
+
+```
+$> bin/server \
+	-map-renderer protomaps \
+	-protomaps-tile-url file:///usr/local/data/pmtiles/sfo.pmtiles \
+	-enable-oembed \
+	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
+	-enable-point-in-polygon \
+	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db'
+	
+2021/04/28 13:14:41 Listening on http://localhost:8080
+```
+
+If you visit `http://localhost:8080` in your web browser you'll see something like this:
+
+![](docs/images/geotag-three-columns.png)
+
+Watching through the parameters step-by-step the first being defined is the toolchain for rendering map tiles. In this example we're using [Protomaps.js](https://github.com/protomaps/protomaps.js) which renders maps tiles using a single "PMTiles" database file, specified in the `-protomaps-tile-url` flag, which can be hosted locally or on a remote file-server.
+
+```
+	-map-renderer protomaps \
+	-protomaps-tile-url file:///usr/local/data/pmtiles/sfo.pmtiles \
+```
+
+_Related: [Protomaps: A new way to make maps with OpenStreetMap](https://protomaps.com/blog/new-way-to-make-maps/). To make your Protomaps database files try the [Protomaps bundle/download tool](https://protomaps.com/bundles)._
+
+The second set of options enable controls in the user interface for loading images from a remote OEmbed endpoint. The URI in the `-oembed-endpoints` is where the application will resolve image requests.
+
+```
+	-enable-oembed \
+	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
+```
+
+_Related: [Geotagging at SFO Museum, Part 5 – Images](https://millsfield.sfomuseum.org/blog/2020/04/29/geotagging-images/)_
+
+The final set of flags enabled "reverse geocoding" (sometimes called "point-in-polygon") lookups whenever you move the camera's focal point. These lookups are performed using the [go-whosonfirst-spatial](https://github.com/whosonfirst/go-whosonfirst-spatial) packages reading data stored in a SQLite database, specified by the `-spatial-database-uri`. flag
+
+```
+	-enable-point-in-polygon \
+	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db'
+```
+
+The SQLite databases are created using the `wof-sqlite-index-features` tool in the [go-whosonfirst-sqlite-features-index](https://github.com/whosonfirst/go-whosonfirst-sqlite-features-index) package, reading data from one or more Who's On First style repositories of data. For examples, this is how the `sfomuseum-architecture.db` database would be created reading data from the [sfomuseum-data-architecture](https://github.com/sfomuseum-data/sfomuseum-data-architecture) repository:
+
+```
+$> ./bin/wof-sqlite-index-features \
+	-all \
+	-dsn /usr/local/data/sfomuseum-architecture.db \
+	/usr/local/data/sfomuseum-data-architecture/
+	
+2021/04/22 12:49:41 time to index paths (1) 2.702893585s
+```
+
+_Related: [Reverse-Geocoding in Time at SFO Museum](https://millsfield.sfomuseum.org/blog/2021/03/26/spatial/)_
+
 ## See also
 
-* https://github.com/sfomuseum/go-http-leaflet-geotag
 * https://github.com/nypl-spacetime/Leaflet.GeotagPhoto
+* https://github.com/sfomuseum/go-http-leaflet-geotag
+* https://github.com/aaronland/go-http-leaflet
 * https://github.com/aaronland/go-http-tangramjs
 * https://github.com/sfomuseum/go-http-protomaps
-* https://github.com/aaronland/go-http-leaflet
 * https://github.com/aaronland/go-http-bootstrap
