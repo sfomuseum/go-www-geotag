@@ -12,9 +12,10 @@
     _proto.geocode = function geocode(query, cb, context) {
       var _this = this;
 
-      var params = geocodingParams(this.options, {
-        text: query
+      var params {
+          text: query
       });
+	
       getJSON(this.options.serviceUrl + '/search', params, function (data) {
         cb.call(context, _this._parseResults(data, 'bbox'));
       });
@@ -48,7 +49,11 @@
       });
     };
 
-    _proto._parseResults = function _parseResults(data, bboxname) {
+      _proto._parseResults = function _parseResults(data, bboxname) {
+
+	  console.log("PARSE", data);
+	  return;
+	  
       var results = [];
       L.geoJSON(data, {
         pointToLayer: function pointToLayer(feature, latlng) {
