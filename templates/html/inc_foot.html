@@ -1,5 +1,6 @@
 {{ define "inc_foot" }}
   </body>
+    <script type="text/javascript" src="/javascript/whosonfirst.net.js"></script>  
     {{ if eq .PageContext "Editor" }}
     <script type="text/javascript" src="/javascript/geotag.maps.js"></script>
     <script type="text/javascript" src="/javascript/geotag.camera.js"></script>
@@ -30,7 +31,6 @@
     {{ end }}
     <script type="text/javascript" src="/javascript/geotag.camera.init.js"></script>
     <script type="text/javascript" src="/javascript/geotag.editor.init.js"></script>
-    {{ end }}
-  
+    {{ end }}  
 </html>
 {{ end }}
