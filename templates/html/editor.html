@@ -36,19 +36,6 @@
 	</details>
 	{{ end }}
 	
-	{{ if .EnablePlaceholder }}
-
-	<details class="control">
-	    <summary>Search</summary>
-	    <form class="form-inline">
-			<input class="form-control mr-sm-2" type="search" name="placeholder-query" id="placeholder-query" placeholder="Enter a place name to search for" value="" aria-label="Search" />
-		    </div>		    
-		<button class="btn my-2 my-sm-0" type="submit">Search</button>
-	    </form>
-	    <div id="placeholder-results"></div>
-	</div>
-	{{ end }}	    
-
 	{{ if .EnablePointInPolygon }}
 
 	<details class="control">
