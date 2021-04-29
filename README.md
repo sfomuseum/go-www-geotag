@@ -185,15 +185,21 @@ $> bin/server \
 	-placeholder-endpoint http://localhost:3000
 ```
 
+![](docs/images/geotag-three-columns-tangram.png)
+
 ```
 	-map-renderer tangramjs \
 	-nextzen-apikey {NEXTZEN_APIKEY} \
 ```
 
+![](docs/images/geotag-three-columns-placeholder.png)
+
 ```
 	-enable-placeholder \
 	-placeholder-endpoint http://localhost:3000
 ```
+
+![](docs/images/geotag-three-columns-gowanus.png)
 
 ## See also
 
