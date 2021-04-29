@@ -211,15 +211,15 @@ The second difference is that the map has a search box in the upper right-hand c
 
 Searching for places, also called "geocoding", is assumed to be handled by the [Placeholder](https://github.com/pelias/placeholder) search engine. In future releases other search engines may also be supported. You'll need to set up and run the Placeholder service separately.
 
-![](docs/images/geotag-three-columns-placeholder.png)
-
 Enabling and specifying the Placeholder endpoint are handled by the `-enable-placeholder` and `-placeholder-endpoint` flags, respectively.
 
 _Related: [Using the Placeholder Geocoder at SFO Museum](https://millsfield.sfomuseum.org/blog/2019/11/04/placeholder/) and [Geotagging at SFO Museum, Part 4 – Search](https://millsfield.sfomuseum.org/blog/2020/04/28/geotagging-search/)._
 
-![](docs/images/geotag-three-columns-gowanus.png)
+![](docs/images/geotag-three-columns-placeholder.png)
 
 In this example we are searching for the [Gowanus](https://spelunker.whosonfirst.org/search/?q=Gowanus&is_current=1) neighbourhood in Brooklyn. In the first example we were using Protomaps and geocoding results for "Gowanus" would yield an empty map since the `sfo.pmtile` PMTiles database only contains data for the area around [SFO](https://millsfield.sfomuseum.org/map).
+
+![](docs/images/geotag-three-columns-gowanus.png)
 
 In this second example we are using Nextzen map tiles which have global coverage but if you look closely at the screenshot above you'll see that the _reverse_ -geocoding (or "point in polygon") query doesn't return any results.
 
