@@ -209,7 +209,7 @@ The second difference is that the map has a search box in the upper right-hand c
 	-placeholder-endpoint http://localhost:3000
 ```
 
-Searching for places, also called "geocoding", is assumed to be handled by the [Placeholder](#) search engine. In future releases other search engines may also be supported. You'll need to set up and run the Placeholder service separately.
+Searching for places, also called "geocoding", is assumed to be handled by the [Placeholder](https://github.com/pelias/placeholder) search engine. In future releases other search engines may also be supported. You'll need to set up and run the Placeholder service separately.
 
 Enabling and specifying the Placeholder endpoint are handled by the `-enable-placeholder` and `-placeholder-endpoint` flags, respectively.
 
@@ -217,11 +217,11 @@ _Related: [Using the Placeholder Geocoder at SFO Museum](https://millsfield.sfom
 
 ![](docs/images/geotag-three-columns-gowanus.png)
 
-In this example we are searching for the [Gowanus](#) neighbourhood in New York City. In the first example we were using Protomaps and geocoding results for "Gowanus" would yield an empty map since the `sfo.pmtile` PMTiles database only contains data for the area around [SFO](#).
+In this example we are searching for the [Gowanus](https://spelunker.whosonfirst.org/search/?q=Gowanus&is_current=1) neighbourhood in Brooklyn. In the first example we were using Protomaps and geocoding results for "Gowanus" would yield an empty map since the `sfo.pmtile` PMTiles database only contains data for the area around [SFO](https://millsfield.sfomuseum.org/map).
 
 In this second example we are using Nextzen map tiles which have global coverage but if you look closely at the screenshot above you'll see that the _reverse_ -geocoding (or "point in polygon") query doesn't return any results.
 
-That's because the database we are using for reverse-geocoding only contains data from the [sfomuseum-data-architecture](#) repository. The reverse-geocoding databases are made using the [wof-sqlite-index-features](#) tool which we can use to create a new database of architectural elements at SFO _and_ all the neighbourhoods (and microhoods) in the United States. For example:
+That's because the database we are using for reverse-geocoding only contains data from the [sfomuseum-data-architecture](https://github.com/sfomuseum-data/sfomuseum-data-architecture) repository. The reverse-geocoding databases are made using the [wof-sqlite-index-features](https://github.com/whosonfirst/go-whosonfirst-sqlite-features-index) tool which we can use to create a new database of architectural elements at SFO _and_ all the neighbourhoods (and microhoods) in the United States. For example:
 
 ```
 > ./bin/wof-sqlite-index-features \
@@ -233,7 +233,7 @@ That's because the database we are using for reverse-geocoding only contains dat
 	https://github.com/sfomuseum-data/sfomuseum-data-architecture.git
 ```
 
-The `wof-sqlite-index-features` tool does all the work of building the database but the `-iterator-uri` flag specifies where and which data to include in the database. In this example we are specifying that the data will come from one or more Git repositories and that only records with a `wof:placetype` property of "neighbourhood" or "microhood" _or_ any `sfomuseum:placetype` property should be included:
+The `wof-sqlite-index-features` tool does all the work of building the database but the `-iterator-uri` flag specifies where and which data to include in the database. In this example we are specifying that the data will come from one or more Git repositories and that only records with a `wof:placetype` property of "neighbourhood" or "microhood" _or_ records with any `sfomuseum:placetype` property should be included:
 
 ```
 git:// \
@@ -249,12 +249,25 @@ The data themselves are downloaded directly from GitHub:
 	https://github.com/sfomuseum-data/sfomuseum-data-architecture.git
 ```
 
-This new database will take a little while to create because the [whosonfirst-data-admin-us](#) repository contains a lot of data and is very large. The exact amount of time it takes to create will depend on your computer.
+This new database will take a little while to create because the [whosonfirst-data-admin-us](https://github.com/whosonfirst-data/whosonfirst-data-admin-us) repository contains a lot of data and is very large. The exact amount of time it takes to create will depend on your computer.
 
 ```
+11:11:19.951935 [wof-sqlite-index-features] STATUS time to index geojson (1079) : 189.07048ms
+11:11:19.952052 [wof-sqlite-index-features] STATUS time to index supersedes (1079) : 94.258935ms
+11:11:19.952056 [wof-sqlite-index-features] STATUS time to index spr (1079) : 536.995955ms
+11:11:19.952058 [wof-sqlite-index-features] STATUS time to index names (1079) : 151.432221ms
+11:11:19.952060 [wof-sqlite-index-features] STATUS time to index ancestors (1079) : 406.869715ms
+11:11:19.952062 [wof-sqlite-index-features] STATUS time to index concordances (1079) : 99.121624ms
+11:11:19.952065 [wof-sqlite-index-features] STATUS time to index rtree (1079) : 352.037044ms
+11:11:19.952067 [wof-sqlite-index-features] STATUS time to index geometry (1079) : 145.196466ms
+11:11:19.952069 [wof-sqlite-index-features] STATUS time to index properties (1079) : 131.172357ms
+11:11:19.952071 [wof-sqlite-index-features] STATUS time to index all (1079) : 1m0.000279428s
+
+...time passes
+
 ```
 
-Once created we can spin up the `server` tool again, and specifying the new database in the `-spatial-database-uri` flag and perform our search for "Gowanus" again. For example:
+Once created we can spin up the `server` tool again, and specifying the new database in the `-spatial-database-uri` flag:
 
 ```
 $> bin/server \
@@ -266,9 +279,10 @@ $> bin/server \
 	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/us-neighbourhoods-sfo.db' \
 	-enable-placeholder \
 	-placeholder-endpoint http://localhost:3000
-
 ```
 
+Now when we perform our geocoding query for "Gowanus" and the map jumps to Brooklyn there are reverse-geoding results for that location:
+ 
 ![](docs/images/geotag-three-columns-gowanus-heights.png)
 
 ## See also
