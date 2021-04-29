@@ -74,18 +74,6 @@ geotag.maps = (function(){
 
 	    var map = L.map("map");
 
-	    // START OF geocoder/placeholder stuff
-
-	    var ph_endpoint = document.body.getAttribute("data-placeholder-endpoint");
-
-	    if (ph_endpoint){	    
-		var ph = new Placeholder({'serviceUrl': ph_endpoint});		
-		var geocoder = L.Control.geocoder({geocoder: ph});
-		geocoder.addTo(map);
-	    }
-	    
-	    // END OF geocoder/placeholder stuff
-
 	    var map_renderer = map_el.getAttribute("data-map-renderer");
 	    
 	    if (map_renderer == "protomaps"){

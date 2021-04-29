@@ -171,6 +171,30 @@ $> ./bin/wof-sqlite-index-features \
 
 _Related: [Reverse-Geocoding in Time at SFO Museum](https://millsfield.sfomuseum.org/blog/2021/03/26/spatial/)_
 
+...
+
+```
+$> bin/server \
+	-map-renderer tangramjs \
+	-nextzen-apikey {NEXTZEN_APIKEY} \
+	-enable-oembed \
+	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
+	-enable-point-in-polygon \
+	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db' \
+	-enable-placeholder \
+	-placeholder-endpoint http://localhost:3000
+```
+
+```
+	-map-renderer tangramjs \
+	-nextzen-apikey {NEXTZEN_APIKEY} \
+```
+
+```
+	-enable-placeholder \
+	-placeholder-endpoint http://localhost:3000
+```
+
 ## See also
 
 * https://github.com/nypl-spacetime/Leaflet.GeotagPhoto

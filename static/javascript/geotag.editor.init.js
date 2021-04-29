@@ -74,6 +74,44 @@ window.addEventListener("load", function load(event){
 	console.log("Unable to instantiate map");
 	return;
     }
+
+    // START OF geocoder/placeholder stuff
+    
+    var ph_endpoint = document.body.getAttribute("data-placeholder-endpoint");
+    
+    if (ph_endpoint){
+
+	var ph_opts = {
+	    serviceUrl: ph_endpoint
+	};
+	
+	var ph = new Placeholder(ph_opts);
+	
+	var geocoder_opts = {
+	    geocoder: ph,
+	    defaultMarkGeocode: false,
+	};
+	
+	var geocoder = L.Control.geocoder(geocoder_opts);
+	
+	geocoder.on('markgeocode', function(e){
+	    
+	    var bbox = e.geocode.bbox;		    
+	    map.fitBounds(bbox);
+	    
+	    var camera = geotag.camera.getCamera();
+
+	    if (camera){		
+		var center = e.geocode.center;
+		camera.setCameraLatLng(center);
+		camera.setTargetLatLng(center);		
+	    }
+	});
+	
+	geocoder.addTo(map);
+    }
+    
+    // END OF geocoder/placeholder stuff
     
     var hash = new L.Hash(map);
 

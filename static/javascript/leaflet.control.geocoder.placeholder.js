@@ -48,7 +48,9 @@ var Placeholder = function () {
 		    var nelat = parseFloat(bounds[3]);
 		    
 		    bounds = L.latLngBounds([swlat, swlon], [nelat, nelon]);
-		    
+
+		    var center = L.latLng( pl.geom.lat, pl.geom.lon );
+		   
 		    var placetype = pl.placetype;
 		    var lineage = pl.lineage[0];
 		    
@@ -91,9 +93,12 @@ var Placeholder = function () {
 		    
 		    name = name + " (" + placetype + ")";
 		    result.name = name;
+
+		    result.center = center;
+		    result.bbox = bounds;
 		    
-		    result.center = [ pl.geom.latitude, pl.geom.longitude ];
-		    result.bounds = bounds;
+		    result.placetype = placetype;
+		    result.id = pl.id;
 		    
 		    results.push(result);		
 		}
