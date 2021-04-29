@@ -129,9 +129,9 @@ In this configuration the `server` application a simple three-pane interface for
 
 * The right-hand panels contains GeoJSON `Feature` data containing information about the camera's focal point and field of view as well as any reverse-geocoding data, if present, encoded in the `wof:parent_id` and `wof:hierarchy` properties. 
 
-This example application does not have any way to publish data outside of copy-pasting the raw GeoJSON data in to another document. That will be addressed in subsequent examples.
+The `server` application as configured does not have any way to publish data outside of copy-pasting the raw GeoJSON data in to another document. That will be addressed in subsequent examples.
 
-_Related: [Geotagging at SFO Museum, Part 3 – What Is the Simplest Thing?](https://millsfield.sfomuseum.org/blog/2020/04/27/geotagging-simple/)_
+_Related: [Geotagging at SFO Museum, Part 3 – What Is the Simplest Thing?](https://millsfield.sfomuseum.org/blog/2020/04/27/geotagging-simple/), [Geotagging at SFO Museum, Part 6 – Writers](https://millsfield.sfomuseum.org/blog/2020/04/30/geotagging-writers/), [Geotagging at SFO Museum, Part 7 – Custom Writers](https://millsfield.sfomuseum.org/blog/2020/05/01/geotagging-custom-writers/) and [Geotagging at SFO Museum, part 9 – Publishing Data](https://millsfield.sfomuseum.org/blog/2020/05/07/geotagging-publishing/)._
 
 Watching through the parameters step-by-step the first being defined is the toolchain for rendering map tiles. In this example we're using [Protomaps.js](https://github.com/protomaps/protomaps.js) which renders maps tiles using a single "PMTiles" database file, specified in the `-protomaps-tile-url` flag, which can be hosted locally or on a remote file-server.
 
@@ -200,7 +200,7 @@ Enabling the use of maps using Tangram and Nextzen is done using the `-map-rende
 
 _Related: [Maps (and map tiles) at SFO Museum](https://millsfield.sfomuseum.org/blog/2018/07/31/maps/) and [More recent old maps (and the shapes in the details)](https://millsfield.sfomuseum.org/blog/2019/11/06/maps/)._
 
-![](docs/images/geotag-three-columns-placeholder.png)
+![](docs/images/geotag-three-columns-search.png)
 
 The second difference is that the map has a search box in the upper right-hand corner.
 
@@ -210,6 +210,8 @@ The second difference is that the map has a search box in the upper right-hand c
 ```
 
 Searching for places, also called "geocoding", is assumed to be handled by the [Placeholder](https://github.com/pelias/placeholder) search engine. In future releases other search engines may also be supported. You'll need to set up and run the Placeholder service separately.
+
+![](docs/images/geotag-three-columns-placeholder.png)
 
 Enabling and specifying the Placeholder endpoint are handled by the `-enable-placeholder` and `-placeholder-endpoint` flags, respectively.
 
