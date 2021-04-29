@@ -198,7 +198,7 @@ There are two important differences in the left-hand panel containing the map. T
 
 Enabling the use of maps using Tangram and Nextzen is done using the `-map-renderer` and `-nextzen-apikey` flags respectively. In order to use Nextzen tiles you'll need to provide a valid Nextzen developer API key which can be done at [https://developers.nextzen.org/](https://developers.nextzen.org/).
 
-_Related: [Maps (and map tiles) at SFO Museum](https://millsfield.sfomuseum.org/blog/2018/07/31/maps/) and [More recent old maps (and the shapes in the details)](https://millsfield.sfomuseum.org/blog/2019/11/06/maps/).
+_Related: [Maps (and map tiles) at SFO Museum](https://millsfield.sfomuseum.org/blog/2018/07/31/maps/) and [More recent old maps (and the shapes in the details)](https://millsfield.sfomuseum.org/blog/2019/11/06/maps/)._
 
 ![](docs/images/geotag-three-columns-placeholder.png)
 
@@ -249,7 +249,7 @@ The data themselves are downloaded directly from GitHub:
 	https://github.com/sfomuseum-data/sfomuseum-data-architecture.git
 ```
 
-This new database will take a little while to create because the [whosonfirst-data-admin-us](https://github.com/whosonfirst-data/whosonfirst-data-admin-us) repository contains a lot of data and is very large. The exact amount of time it takes to create will depend on your computer.
+This new database will take a little while to create because the [whosonfirst-data-admin-us](https://github.com/whosonfirst-data/whosonfirst-data-admin-us) repository contains a lot of data and is very large.
 
 ```
 11:11:19.951935 [wof-sqlite-index-features] STATUS time to index geojson (1079) : 189.07048ms
@@ -265,9 +265,24 @@ This new database will take a little while to create because the [whosonfirst-da
 
 ...time passes
 
+11:41:20.059914 [wof-sqlite-index-features] STATUS time to index names (58231) : 1m11.517203469s
+11:41:20.059983 [wof-sqlite-index-features] STATUS time to index ancestors (58231) : 22.195950963s
+11:41:20.060000 [wof-sqlite-index-features] STATUS time to index concordances (58231) : 13.403236529s
+11:41:20.060006 [wof-sqlite-index-features] STATUS time to index geojson (58231) : 56.432229907s
+11:41:20.060010 [wof-sqlite-index-features] STATUS time to index supersedes (58231) : 5.666788336s
+11:41:20.060014 [wof-sqlite-index-features] STATUS time to index spr (58231) : 39.016328041s
+11:41:20.060017 [wof-sqlite-index-features] STATUS time to index rtree (58231) : 18.685345583s
+11:41:20.060021 [wof-sqlite-index-features] STATUS time to index geometry (58231) : 13.182348266s
+11:41:20.060025 [wof-sqlite-index-features] STATUS time to index properties (58231) : 35.27526872s
+11:41:20.060029 [wof-sqlite-index-features] STATUS time to index all (58231) : 31m0.139303097s
+2021/04/29 11:42:09 time to index paths (2) 31m50.004958231s
 ```
 
-Once created we can spin up the `server` tool again, and specifying the new database in the `-spatial-database-uri` flag:
+The exact amount of time it takes to create will depend on your computer.
+ 
+_Related: [Reverse-Geocoding in Time at SFO Museum](https://millsfield.sfomuseum.org/blog/2021/03/26/spatial/) and [Updating (and reverse-geocoding) GPS EXIF metadata](https://millsfield.sfomuseum.org/blog/2021/04/26/exif-gps/)._
+
+Once created we can spin up the `server` tool again, specifying the new database in the `-spatial-database-uri` flag:
 
 ```
 $> bin/server \
