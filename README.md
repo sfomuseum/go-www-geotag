@@ -209,11 +209,11 @@ The second difference is that the map has a search box in the upper right-hand c
 	-placeholder-endpoint http://localhost:3000
 ```
 
-Searching for places, also called "geocoding", is assumed to be handled by the [Placeholder](#) search engine. In future releases other search engines may also be supported. You'll need to set up and run the Placeholder service separately. This is discussed in the [Using the Placeholder Geocoder at SFO Museum](https://millsfield.sfomuseum.org/blog/2019/11/04/placeholder/) blog post.
+Searching for places, also called "geocoding", is assumed to be handled by the [Placeholder](#) search engine. In future releases other search engines may also be supported. You'll need to set up and run the Placeholder service separately.
 
 Enabling and specifying the Placeholder endpoint are handled by the `-enable-placeholder` and `-placeholder-endpoint` flags, respectively.
 
-_Related: [Geotagging at SFO Museum, Part 4 – Search](https://millsfield.sfomuseum.org/blog/2020/04/28/geotagging-search/).
+_Related: [Using the Placeholder Geocoder at SFO Museum](https://millsfield.sfomuseum.org/blog/2019/11/04/placeholder/) and [Geotagging at SFO Museum, Part 4 – Search](https://millsfield.sfomuseum.org/blog/2020/04/28/geotagging-search/)._
 
 ![](docs/images/geotag-three-columns-gowanus.png)
 
