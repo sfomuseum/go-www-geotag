@@ -217,9 +217,11 @@ _Related: [Using the Placeholder Geocoder at SFO Museum](https://millsfield.sfom
 
 ![](docs/images/geotag-three-columns-gowanus.png)
 
-In this example we are searching for the [Gowanus](#) neighbourhood in New York City. In the first example we were using Protomaps and geocoding results for "Gowanus" would yield an empty map since the `sfo.pmtile` PMTiles database only contains data for the area around [SFO](#). In this second example we are using Nextzen map tiles which have global coverage but if you look closely at the screenshot above you'll see that the _reverse_-geocoding query doesn't return any results.
+In this example we are searching for the [Gowanus](#) neighbourhood in New York City. In the first example we were using Protomaps and geocoding results for "Gowanus" would yield an empty map since the `sfo.pmtile` PMTiles database only contains data for the area around [SFO](#).
 
-That's because the database we are using for reverse-geocoding only contains data from the [sfomuseum-data-architecture](#) repository. The reverse-geocoding databases are made using the [wof-sqlite-index-features](#) tool which we can use to create a new database of architectural elements at SFO and all the neighbourhoods (and microhoods) in the United States. For example:
+In this second example we are using Nextzen map tiles which have global coverage but if you look closely at the screenshot above you'll see that the _reverse_ -geocoding (or "point in polygon") query doesn't return any results.
+
+That's because the database we are using for reverse-geocoding only contains data from the [sfomuseum-data-architecture](#) repository. The reverse-geocoding databases are made using the [wof-sqlite-index-features](#) tool which we can use to create a new database of architectural elements at SFO _and_ all the neighbourhoods (and microhoods) in the United States. For example:
 
 ```
 > ./bin/wof-sqlite-index-features \
@@ -231,7 +233,7 @@ That's because the database we are using for reverse-geocoding only contains dat
 	https://github.com/sfomuseum-data/sfomuseum-data-architecture.git
 ```
 
-The `wof-sqlite-index-features` tool does all the work of building the database but the `-iterator-uri` flag specifies where and which data to include in the database. In this example we are specifying that the data will come from a Git repository and that records with a `wof:placetype` property of "neighbourhood" or "microhood" _or_ any `sfomuseum:placetype` property be included:
+The `wof-sqlite-index-features` tool does all the work of building the database but the `-iterator-uri` flag specifies where and which data to include in the database. In this example we are specifying that the data will come from one or more Git repositories and that only records with a `wof:placetype` property of "neighbourhood" or "microhood" _or_ any `sfomuseum:placetype` property should be included:
 
 ```
 git:// \
