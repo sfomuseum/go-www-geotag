@@ -257,23 +257,9 @@ This new database will take a little while to create because the [whosonfirst-da
 11:11:19.951935 [wof-sqlite-index-features] STATUS time to index geojson (1079) : 189.07048ms
 11:11:19.952052 [wof-sqlite-index-features] STATUS time to index supersedes (1079) : 94.258935ms
 11:11:19.952056 [wof-sqlite-index-features] STATUS time to index spr (1079) : 536.995955ms
-11:11:19.952058 [wof-sqlite-index-features] STATUS time to index names (1079) : 151.432221ms
-11:11:19.952060 [wof-sqlite-index-features] STATUS time to index ancestors (1079) : 406.869715ms
-11:11:19.952062 [wof-sqlite-index-features] STATUS time to index concordances (1079) : 99.121624ms
-11:11:19.952065 [wof-sqlite-index-features] STATUS time to index rtree (1079) : 352.037044ms
-11:11:19.952067 [wof-sqlite-index-features] STATUS time to index geometry (1079) : 145.196466ms
-11:11:19.952069 [wof-sqlite-index-features] STATUS time to index properties (1079) : 131.172357ms
-11:11:19.952071 [wof-sqlite-index-features] STATUS time to index all (1079) : 1m0.000279428s
 
 ...time passes
 
-11:41:20.059914 [wof-sqlite-index-features] STATUS time to index names (58231) : 1m11.517203469s
-11:41:20.059983 [wof-sqlite-index-features] STATUS time to index ancestors (58231) : 22.195950963s
-11:41:20.060000 [wof-sqlite-index-features] STATUS time to index concordances (58231) : 13.403236529s
-11:41:20.060006 [wof-sqlite-index-features] STATUS time to index geojson (58231) : 56.432229907s
-11:41:20.060010 [wof-sqlite-index-features] STATUS time to index supersedes (58231) : 5.666788336s
-11:41:20.060014 [wof-sqlite-index-features] STATUS time to index spr (58231) : 39.016328041s
-11:41:20.060017 [wof-sqlite-index-features] STATUS time to index rtree (58231) : 18.685345583s
 11:41:20.060021 [wof-sqlite-index-features] STATUS time to index geometry (58231) : 13.182348266s
 11:41:20.060025 [wof-sqlite-index-features] STATUS time to index properties (58231) : 35.27526872s
 11:41:20.060029 [wof-sqlite-index-features] STATUS time to index all (58231) : 31m0.139303097s
