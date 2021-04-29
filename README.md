@@ -171,7 +171,7 @@ $> ./bin/wof-sqlite-index-features \
 
 _Related: [Reverse-Geocoding in Time at SFO Museum](https://millsfield.sfomuseum.org/blog/2021/03/26/spatial/)_
 
-...
+Here's another example:
 
 ```
 $> bin/server \
@@ -185,19 +185,35 @@ $> bin/server \
 	-placeholder-endpoint http://localhost:3000
 ```
 
+Visiting `http://localhost:8080` in your web browser, you'll see something like this:
+
 ![](docs/images/geotag-three-columns-tangram.png)
+
+There are two important differences in the left-hand panel containing the map. The first is that the map tiles look different. That's because we are using the [Tangram.js](https://github.com/tangrams/tangram) library to render the map. The map data itself is provided by the [Nextzen](https://nextzen.org) project while provides global coverage.
 
 ```
 	-map-renderer tangramjs \
 	-nextzen-apikey {NEXTZEN_APIKEY} \
 ```
 
+Enabling the use of maps using Tangram and Nextzen is done using the `-map-renderer` and `-nextzen-apikey` flags respectively. In order to use Nextzen tiles you'll need to provide a valid Nextzen developer API key which can be done at [https://developers.nextzen.org/](https://developers.nextzen.org/).
+
+_Related: [Maps (and map tiles) at SFO Museum](https://millsfield.sfomuseum.org/blog/2018/07/31/maps/) and [More recent old maps (and the shapes in the details)](https://millsfield.sfomuseum.org/blog/2019/11/06/maps/).
+
 ![](docs/images/geotag-three-columns-placeholder.png)
+
+The second difference is that the map has a search box in the upper right-hand corner.
 
 ```
 	-enable-placeholder \
 	-placeholder-endpoint http://localhost:3000
 ```
+
+Searching for places, also called "geocoding", is assumed to be handled by the [Placeholder](#) search engine. In future releases other search engines may also be supported. You'll need to set up and run the Placeholder service separately. This is discussed in the [Using the Placeholder Geocoder at SFO Museum](https://millsfield.sfomuseum.org/blog/2019/11/04/placeholder/) blog post.
+
+Enabling and specifying the Placeholder endpoint are handled by the `-enable-placeholder` and `-placeholder-endpoint` flags, respectively.
+
+_Related: [Geotagging at SFO Museum, Part 4 – Search](https://millsfield.sfomuseum.org/blog/2020/04/28/geotagging-search/).
 
 ![](docs/images/geotag-three-columns-gowanus.png)
 
