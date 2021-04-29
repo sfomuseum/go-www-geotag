@@ -200,8 +200,6 @@ Enabling the use of maps using Tangram and Nextzen is done using the `-map-rende
 
 _Related: [Maps (and map tiles) at SFO Museum](https://millsfield.sfomuseum.org/blog/2018/07/31/maps/) and [More recent old maps (and the shapes in the details)](https://millsfield.sfomuseum.org/blog/2019/11/06/maps/)._
 
-![](docs/images/geotag-three-columns-search.png)
-
 The second difference is that the map has a search box in the upper right-hand corner.
 
 ```
