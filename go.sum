@@ -214,6 +214,8 @@ github.com/sfomuseum/go-http-protomaps v0.0.3 h1:x6wItqmXONhTGMaUks/SthpRkaGA7S0
 github.com/sfomuseum/go-http-protomaps v0.0.3/go.mod h1:2u3FpBd9VlU8lHIc5WhpfIPh6J/2EKuv9LGdwUhC0sc=
 github.com/sfomuseum/go-http-protomaps v0.0.4 h1:e/8Sjt5bfWbbxc1tJEBUY/IM0Zcs5d610E353vW9JNA=
 github.com/sfomuseum/go-http-protomaps v0.0.4/go.mod h1:2u3FpBd9VlU8lHIc5WhpfIPh6J/2EKuv9LGdwUhC0sc=
+github.com/sfomuseum/go-http-protomaps v0.0.5 h1:bMGJFuR/KkYvf8aJWxCt5TustGLVbErzoXTMrtUm7ks=
+github.com/sfomuseum/go-http-protomaps v0.0.5/go.mod h1:2u3FpBd9VlU8lHIc5WhpfIPh6J/2EKuv9LGdwUhC0sc=
 github.com/sfomuseum/go-http-tilezen v0.0.2 h1:pKqyTtA2v9wZkfWt/L8aXyihi7upSwtbwTMxKF6Ey7U=
 github.com/sfomuseum/go-http-tilezen v0.0.2/go.mod h1:SpWQAUmPnJhjaQuwAT0qbsxBFMUjDhaxsvALFO9IGg0=
 github.com/sfomuseum/go-http-tilezen v0.0.3 h1:rV7V0xlu5qfaUPJIV3oQ39bpk7yzVu7D0YGTK+li2Ds=

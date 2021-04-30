@@ -12,14 +12,20 @@ import (
 	"strings"
 )
 
+// By default the go-http-protomaps package will also include and reference Leaflet.js assets and resources using the aaronland/go-http-leaflet package. If you want or need to disable this behaviour set the INCLUDE_LEAFLET variable to false.
 var INCLUDE_LEAFLET = true
 
+// ProtomapsOptions provides a list of JavaScript and CSS link to include with HTML output as well as a URL referencing a specific Protomaps PMTiles database to include a data attribute.
 type ProtomapsOptions struct {
+	// A list of relative JavaScript files to reference in one or more <script> tags
 	JS      []string
+	// A list of relative CSS files to reference in one or more <link rel="stylesheet"> tags	
 	CSS     []string
+	// A URL for a specific PMTiles database to include as a 'data-protomaps-tile-url' attribute on the <body> tag.
 	TileURL string
 }
 
+// Return a *ProtomapsOptions struct with default paths and URIs.
 func DefaultProtomapsOptions() *ProtomapsOptions {
 
 	opts := &ProtomapsOptions{
@@ -33,6 +39,7 @@ func DefaultProtomapsOptions() *ProtomapsOptions {
 	return opts
 }
 
+// AppendResourcesHandler will rewrite any HTML produced by previous handler to include the necessary markup to load Protomaps JavaScript files and related assets.
 func AppendResourcesHandler(next http.Handler, opts *ProtomapsOptions) http.Handler {
 
 	if INCLUDE_LEAFLET {
@@ -43,6 +50,7 @@ func AppendResourcesHandler(next http.Handler, opts *ProtomapsOptions) http.Hand
 	return AppendResourcesHandlerWithPrefix(next, opts, "")
 }
 
+// AppendResourcesHandlerWithPrefix will rewrite any HTML produced by previous handler to include the necessary markup to load Protomaps JavaScript files and related assets ensuring that all URIs are prepended with a prefix.
 func AppendResourcesHandlerWithPrefix(next http.Handler, opts *ProtomapsOptions, prefix string) http.Handler {
 
 	if INCLUDE_LEAFLET {
@@ -84,12 +92,13 @@ func AppendResourcesHandlerWithPrefix(next http.Handler, opts *ProtomapsOptions,
 	return rewrite.AppendResourcesHandler(next, ext_opts)
 }
 
+// AssetsHandler returns a net/http FS instance containing the embedded Protomaps assets that are included with this package.
 func AssetsHandler() (http.Handler, error) {
-
 	http_fs := http.FS(static.FS)
 	return http.FileServer(http_fs), nil
 }
 
+// AssetsHandler returns a net/http FS instance containing the embedded Protomaps assets that are included with this package ensuring that all URLs are stripped of prefix.
 func AssetsHandlerWithPrefix(prefix string) (http.Handler, error) {
 
 	fs_handler, err := AssetsHandler()
@@ -113,10 +122,12 @@ func AssetsHandlerWithPrefix(prefix string) (http.Handler, error) {
 	return rewrite_handler, nil
 }
 
+// Append all the files in the net/http FS instance containing the embedded Protomaps assets to an *http.ServeMux instance.
 func AppendAssetHandlers(mux *http.ServeMux) error {
 	return AppendAssetHandlersWithPrefix(mux, "")
 }
 
+// Append all the files in the net/http FS instance containing the embedded Protomaps assets to an *http.ServeMux instance ensuring that all URLs are prepended with prefix.
 func AppendAssetHandlersWithPrefix(mux *http.ServeMux, prefix string) error {
 
 	if INCLUDE_LEAFLET {

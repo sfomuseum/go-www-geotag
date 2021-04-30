@@ -71,6 +71,7 @@
         }
 
         metadata = func => {
+	    console.log("WHAT", func);
             this.root.then(root => {
                 func(root.metadata)
             })

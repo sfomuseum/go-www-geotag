@@ -2,11 +2,57 @@
 
 ![](docs/images/go-http-leaflet-protomaps-sfo.png)
 
-Go HTTP middleware for the Protomaps Leaflet package.
+`go-http-protomaps` is an HTTP middleware package for including Protomaps.js (v0.1.0) assets in web applications.
 
 ## Documentation
 
-Documentation remains to be written. In the meantime have a look at the [cmd/example/main.go](cmd/example/main.go) application.
+[![Go Reference](https://pkg.go.dev/badge/github.com/sfomuseum/go-http-protomaps.svg)](https://pkg.go.dev/github.com/sfomuseum/go-http-protomaps)
+
+`go-http-protomaps` is an HTTP middleware package for including Protomaps.js assets in web applications. It exports two principal methods: 
+
+* `protomaps.AppendAssetHandlers(*http.ServeMux)` which is used to append HTTP handlers to a `http.ServeMux` instance for serving Protomaps JavaScript files, and related assets.
+* `protomaps.AppendResourcesHandler(http.Handler, *ProtomapsOptions)` which is used to rewrite any HTML produced by previous handler to include the necessary markup to load Protomaps JavaScript files and related assets.
+
+## Example
+
+```
+package main
+
+import (
+	"embed"
+	"github.com/sfomuseum/go-http-protomaps"
+	"log"
+	"net/http"
+	"net/url"
+)
+
+//go:embed index.html sfo.pmtiles
+var staticFS embed.FS
+
+func main() {
+
+	tile_url := "/sfo.pmtiles"
+
+	static_fs := http.FS(staticFS)
+	static_handler := http.FileServer(static_fs)
+
+	mux := http.NewServeMux()
+
+	mux.Handle(*tile_url, static_handler)
+
+	protomaps.AppendAssetHandlers(mux)
+	
+	pm_opts := protomaps.DefaultProtomapsOptions()
+	pm_opts.TileURL = *tile_url
+
+	index_handler := protomaps.AppendResourcesHandler(static_handler, pm_opts)
+	mux.Handle("/", index_handler)
+
+	err = http.ListenAndServe(":8080", mux)
+}
+```
+
+_Error handling omitted for brevity._
 
 ## Tools
 
@@ -54,6 +100,43 @@ $> ./bin/example -protomaps-tile-url file:///usr/local/data/sfo.pmtiles
 ```
 
 In the case of `file://` URLs the `example` application will create an `http.Dir` handler for the root folder of the URL (`/usr/local/data/)` and then route the filename (`/sfo.pmtiles`) to that handler.
+
+## AWS
+
+### S3
+
+If you are serving your Protomaps `.pmtiles` databases from an S3 bucket you'll need to make that you have `CORS` enabled for that bucket. For example:
+
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "HEAD"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": [],
+        "MaxAgeSeconds": 3000
+    }
+]
+```
+
+_Be sure to allow the `HEAD` method. It took me a while to remember this was necessary the first time I set things up._
+
+### CloudFront
+
+If you are serving your Protomaps `.pmtiles` databases from a CloudFront endpoint you'll need to make sure you do the following:
+
+* Ensure that the `Allowed HTTP Methods` setting is configured to allow "GET, HEAD, OPTIONS".
+* Ensure that the `Cache Based on Selected Request Headers` setting is configured to use a "whitelist".
+* Add the following default headers to the whitelist: `Access-Control-Request-Headers`, `Access-Control-Request-Method`, `Origin`.
+* Add the following custom headers to the whitelist: `Range`.
+
 
 ## See also
 
