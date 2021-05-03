@@ -169,11 +169,16 @@ window.addEventListener("load", function load(event){
     var pip_candidates = document.getElementById("point-in-polygon-candidates");
     
     var pip_inception = document.getElementById("point-in-polygon-inception");
-    pip_inception.onchange = pip_update;
+    var pip_cessation = document.getElementById("point-in-polygon-cessation");
     
-    var pip_cessation = document.getElementById("point-in-polygon-cessation");    
-    pip_cessation.onchange = pip_update;
-        
+    if (pip_inception){
+	pip_inception.onchange = pip_update;
+    }
+
+    if (pip_cessation){
+	pip_cessation.onchange = pip_update;
+    }
+    
     var pip_onsuccess = function(rsp){
 
 	// pip_candidates.style.display = "none";

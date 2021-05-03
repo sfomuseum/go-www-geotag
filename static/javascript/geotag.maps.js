@@ -79,9 +79,9 @@ geotag.maps = (function(){
 	    if (map_renderer == "protomaps"){
 		
 		var pm_uri = document.body.getAttribute("data-protomaps-tile-url");		
-		var pm = new pmtiles.PMTiles(pm_uri, {allow_200: true});
+		var pm = new protomaps.PMTiles(pm_uri, {allow_200: true});
 		
-		pm.metadata(m => {
+		pm.metadata().then(m => {
                     let bounds_str = m.bounds.split(',');
                     let bounds = [[+bounds_str[1],+bounds_str[0]],[+bounds_str[3],+bounds_str[2]]];
                     let url = pm_uri;

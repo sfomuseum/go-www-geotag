@@ -18,9 +18,9 @@ var INCLUDE_LEAFLET = true
 // ProtomapsOptions provides a list of JavaScript and CSS link to include with HTML output as well as a URL referencing a specific Protomaps PMTiles database to include a data attribute.
 type ProtomapsOptions struct {
 	// A list of relative JavaScript files to reference in one or more <script> tags
-	JS      []string
-	// A list of relative CSS files to reference in one or more <link rel="stylesheet"> tags	
-	CSS     []string
+	JS []string
+	// A list of relative CSS files to reference in one or more <link rel="stylesheet"> tags
+	CSS []string
 	// A URL for a specific PMTiles database to include as a 'data-protomaps-tile-url' attribute on the <body> tag.
 	TileURL string
 }
@@ -32,7 +32,6 @@ func DefaultProtomapsOptions() *ProtomapsOptions {
 		CSS: []string{},
 		JS: []string{
 			"/javascript/protomaps.min.js",
-			"/javascript/pmtiles.js",
 		},
 	}
 

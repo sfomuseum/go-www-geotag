@@ -16,7 +16,7 @@ require (
 	github.com/sfomuseum/go-geojson-geotag v0.0.4
 	github.com/sfomuseum/go-http-leaflet-geotag v1.1.0
 	github.com/sfomuseum/go-http-leaflet-layers v0.0.4
-	github.com/sfomuseum/go-http-protomaps v0.0.5
+	github.com/sfomuseum/go-http-protomaps v0.0.6
 	github.com/sfomuseum/go-http-tilezen v0.0.4
 	github.com/whosonfirst/go-cache v0.2.0
 	github.com/whosonfirst/go-whosonfirst-spatial v0.0.56
