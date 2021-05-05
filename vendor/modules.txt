@@ -1,12 +1,11 @@
-# github.com/aaronland/go-http-bootstrap v0.0.10
+# github.com/aaronland/go-http-bootstrap v0.1.0
 ## explicit
 github.com/aaronland/go-http-bootstrap
-github.com/aaronland/go-http-bootstrap/resources
 github.com/aaronland/go-http-bootstrap/static
 # github.com/aaronland/go-http-crumb v0.1.2
 ## explicit
 github.com/aaronland/go-http-crumb
-# github.com/aaronland/go-http-leaflet v0.0.6
+# github.com/aaronland/go-http-leaflet v0.1.0
 github.com/aaronland/go-http-leaflet
 github.com/aaronland/go-http-leaflet/static
 # github.com/aaronland/go-http-rewrite v0.0.6
@@ -18,7 +17,7 @@ github.com/aaronland/go-http-sanitize
 # github.com/aaronland/go-http-server v0.0.6
 ## explicit
 github.com/aaronland/go-http-server
-# github.com/aaronland/go-http-tangramjs v0.0.9
+# github.com/aaronland/go-http-tangramjs v0.1.0
 ## explicit
 github.com/aaronland/go-http-tangramjs
 github.com/aaronland/go-http-tangramjs/static
@@ -86,7 +85,7 @@ github.com/sfomuseum/go-http-leaflet-geotag/static
 # github.com/sfomuseum/go-http-leaflet-layers v0.0.4
 ## explicit
 github.com/sfomuseum/go-http-leaflet-layers
-# github.com/sfomuseum/go-http-protomaps v0.0.6
+# github.com/sfomuseum/go-http-protomaps v0.0.9
 ## explicit
 github.com/sfomuseum/go-http-protomaps
 github.com/sfomuseum/go-http-protomaps/static

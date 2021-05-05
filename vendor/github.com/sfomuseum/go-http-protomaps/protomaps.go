@@ -12,8 +12,11 @@ import (
 	"strings"
 )
 
-// By default the go-http-protomaps package will also include and reference Leaflet.js assets and resources using the aaronland/go-http-leaflet package. If you want or need to disable this behaviour set the INCLUDE_LEAFLET variable to false.
-var INCLUDE_LEAFLET = true
+// By default the go-http-protomaps package will also include and reference Leaflet.js resources using the aaronland/go-http-leaflet package. If you want or need to disable this behaviour set this variable to false.
+var APPEND_LEAFLET_RESOURCES = true
+
+// By default the go-http-protomaps package will also include and reference Leaflet.js assets using the aaronland/go-http-leaflet package. If you want or need to disable this behaviour set this variable to false.
+var APPEND_LEAFLET_ASSETS = true
 
 // ProtomapsOptions provides a list of JavaScript and CSS link to include with HTML output as well as a URL referencing a specific Protomaps PMTiles database to include a data attribute.
 type ProtomapsOptions struct {
@@ -23,16 +26,21 @@ type ProtomapsOptions struct {
 	CSS []string
 	// A URL for a specific PMTiles database to include as a 'data-protomaps-tile-url' attribute on the <body> tag.
 	TileURL string
+	// A leaflet.LeafletOptions struct
+	LeafletOptions *leaflet.LeafletOptions
 }
 
 // Return a *ProtomapsOptions struct with default paths and URIs.
 func DefaultProtomapsOptions() *ProtomapsOptions {
+
+	leaflet_opts := leaflet.DefaultLeafletOptions()
 
 	opts := &ProtomapsOptions{
 		CSS: []string{},
 		JS: []string{
 			"/javascript/protomaps.min.js",
 		},
+		LeafletOptions: leaflet_opts,
 	}
 
 	return opts
@@ -41,9 +49,8 @@ func DefaultProtomapsOptions() *ProtomapsOptions {
 // AppendResourcesHandler will rewrite any HTML produced by previous handler to include the necessary markup to load Protomaps JavaScript files and related assets.
 func AppendResourcesHandler(next http.Handler, opts *ProtomapsOptions) http.Handler {
 
-	if INCLUDE_LEAFLET {
-		leaflet_opts := leaflet.DefaultLeafletOptions()
-		next = leaflet.AppendResourcesHandler(next, leaflet_opts)
+	if APPEND_LEAFLET_RESOURCES {
+		next = leaflet.AppendResourcesHandler(next, opts.LeafletOptions)
 	}
 
 	return AppendResourcesHandlerWithPrefix(next, opts, "")
@@ -52,9 +59,8 @@ func AppendResourcesHandler(next http.Handler, opts *ProtomapsOptions) http.Hand
 // AppendResourcesHandlerWithPrefix will rewrite any HTML produced by previous handler to include the necessary markup to load Protomaps JavaScript files and related assets ensuring that all URIs are prepended with a prefix.
 func AppendResourcesHandlerWithPrefix(next http.Handler, opts *ProtomapsOptions, prefix string) http.Handler {
 
-	if INCLUDE_LEAFLET {
-		leaflet_opts := leaflet.DefaultLeafletOptions()
-		next = leaflet.AppendResourcesHandlerWithPrefix(next, leaflet_opts, prefix)
+	if APPEND_LEAFLET_RESOURCES {
+		next = leaflet.AppendResourcesHandlerWithPrefix(next, opts.LeafletOptions, prefix)
 	}
 
 	js := opts.JS
@@ -129,7 +135,7 @@ func AppendAssetHandlers(mux *http.ServeMux) error {
 // Append all the files in the net/http FS instance containing the embedded Protomaps assets to an *http.ServeMux instance ensuring that all URLs are prepended with prefix.
 func AppendAssetHandlersWithPrefix(mux *http.ServeMux, prefix string) error {
 
-	if INCLUDE_LEAFLET {
+	if APPEND_LEAFLET_ASSETS {
 
 		err := leaflet.AppendAssetHandlersWithPrefix(mux, prefix)
 

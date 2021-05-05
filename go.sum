@@ -12,6 +12,8 @@ github.com/aaronland/go-http-bootstrap v0.0.5 h1:g6PehLzQcQjUiXQdYPrl3ZQuNRYTsR6
 github.com/aaronland/go-http-bootstrap v0.0.5/go.mod h1:r8XhNGVceWoc7iwamnU0IIw5RyNyfMmGvcxLA/lQfek=
 github.com/aaronland/go-http-bootstrap v0.0.10 h1:+gIJRVGegIQlEA4qDyoxxyWrjyHF0R8x3da1NnjRRZg=
 github.com/aaronland/go-http-bootstrap v0.0.10/go.mod h1:c4TEIXKCMI9gq8VxDmQL+o960u84j0Jxn0vCd0qJhc0=
+github.com/aaronland/go-http-bootstrap v0.1.0 h1:ayVCu88SDUyptVN/scPMtC8jUor0h2lcoN/3ulfuwwo=
+github.com/aaronland/go-http-bootstrap v0.1.0/go.mod h1:LBQ4TNCD74+4KKEmBIIzrMxeAksRp/wQ7FPA8VZ/v4E=
 github.com/aaronland/go-http-crumb v0.0.5 h1:ZhBkvWUW9wsw+KYnOu0sHAeRpsfY9kj0wh7yA8qGA0M=
 github.com/aaronland/go-http-crumb v0.0.5/go.mod h1:tzp6zHKE/pojVXQhcS1J5x5qQkhhxOTvJS2N7S1VVuY=
 github.com/aaronland/go-http-crumb v0.0.6 h1:R+hGU1SdkKxLqKIuabBwXpemo7VqFaCVYg4YK13JOnw=
@@ -26,6 +28,8 @@ github.com/aaronland/go-http-leaflet v0.0.3 h1:moAjSThtakdpdZ9zr6po11XeIyksYfe+B
 github.com/aaronland/go-http-leaflet v0.0.3/go.mod h1:jUzEnGKezjceuNtQJIZWy2nXMhuteRSK0BPIjSSniBw=
 github.com/aaronland/go-http-leaflet v0.0.6 h1:8pLfLudvmids0v+B86Y3tL2Q3EUJjidjV/diJqrJdyg=
 github.com/aaronland/go-http-leaflet v0.0.6/go.mod h1:M6Brt/UMWXsT+3qK5idwxr3y6kELHHi7OhgoiecMt6U=
+github.com/aaronland/go-http-leaflet v0.1.0 h1:F9ofV2yRZdP9NCSW8GXfDNNbiQD5na0oylKLbbwG9u4=
+github.com/aaronland/go-http-leaflet v0.1.0/go.mod h1:M6Brt/UMWXsT+3qK5idwxr3y6kELHHi7OhgoiecMt6U=
 github.com/aaronland/go-http-ping v1.0.0/go.mod h1:zU9CSFLh2XzPlrFgoyCysNED+DoLRioCKaa2Kl+O6DA=
 github.com/aaronland/go-http-rewrite v0.0.3/go.mod h1:g62jjXpsArD0lzJLs9bVLR9Locdt3f4OmqFkkJL2rQU=
 github.com/aaronland/go-http-rewrite v0.0.4 h1:lI8cDF/nINjuSPrYpwvlJLa1cC32h1nvmBwRRHs9sow=
@@ -55,6 +59,8 @@ github.com/aaronland/go-http-tangramjs v0.0.6 h1:Ke2hU/flaO6hmK4AxH6ubKIEtqKItow
 github.com/aaronland/go-http-tangramjs v0.0.6/go.mod h1:9gLqN7c67fdkshqG5wiSWFZkIJdtbC2uA5kdGGrhLyw=
 github.com/aaronland/go-http-tangramjs v0.0.9 h1:eFFTL6EQ+L430r5X4/blbQtYRr4HKpQdhAvYGEg+S5I=
 github.com/aaronland/go-http-tangramjs v0.0.9/go.mod h1:OiKvYX9HV8165IEIqQ/xnZVFPuEedOOG5Wke6tuwZAc=
+github.com/aaronland/go-http-tangramjs v0.1.0 h1:cCEUObJVWG2ewNYW1zfdcvS+fNqYTsAR2+JT7gPsI6g=
+github.com/aaronland/go-http-tangramjs v0.1.0/go.mod h1:WgtxBvBN6LR65g5OpjUiu0LPvj+/+S69bBdpOZ14l4M=
 github.com/aaronland/go-json-query v0.0.2 h1:cKw/DnxtGaPsClb78ONgmXPOJkqHhaBMU2RTBbPoXos=
 github.com/aaronland/go-json-query v0.0.2/go.mod h1:dGc7y824R93ugQMTldL7PFD/SPVGPwKdqrUJFLE/ILU=
 github.com/aaronland/go-roster v0.0.1 h1:r1l4n1HfWvEtOXZvhfXX0Won9Xf6QJsigdUdzOtuy/M=
@@ -218,6 +224,8 @@ github.com/sfomuseum/go-http-protomaps v0.0.5 h1:bMGJFuR/KkYvf8aJWxCt5TustGLVbEr
 github.com/sfomuseum/go-http-protomaps v0.0.5/go.mod h1:2u3FpBd9VlU8lHIc5WhpfIPh6J/2EKuv9LGdwUhC0sc=
 github.com/sfomuseum/go-http-protomaps v0.0.6 h1:tSUqtXJ63MFzKrPI6n6FG/0lzIGBI4Pkhlj3phafLxM=
 github.com/sfomuseum/go-http-protomaps v0.0.6/go.mod h1:2u3FpBd9VlU8lHIc5WhpfIPh6J/2EKuv9LGdwUhC0sc=
+github.com/sfomuseum/go-http-protomaps v0.0.9 h1:4oB4u1B7tT8n/mW9JRM07tt2r/jCcPC6ri2cPscFwNE=
+github.com/sfomuseum/go-http-protomaps v0.0.9/go.mod h1:jMeHqPpNoO30nMX3PaHuI2D+n2vXQScUZ3v9SeRv0/I=
 github.com/sfomuseum/go-http-tilezen v0.0.2 h1:pKqyTtA2v9wZkfWt/L8aXyihi7upSwtbwTMxKF6Ey7U=
 github.com/sfomuseum/go-http-tilezen v0.0.2/go.mod h1:SpWQAUmPnJhjaQuwAT0qbsxBFMUjDhaxsvALFO9IGg0=
 github.com/sfomuseum/go-http-tilezen v0.0.3 h1:rV7V0xlu5qfaUPJIV3oQ39bpk7yzVu7D0YGTK+li2Ds=
