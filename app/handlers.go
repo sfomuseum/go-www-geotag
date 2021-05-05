@@ -454,6 +454,8 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		pm_opts := protomaps.DefaultProtomapsOptions()
 		pm_opts.TileURL = protomaps_tile_url
 
+		pm_opts.LeafletOptions.EnableHash()
+		
 		editor_handler = protomaps.AppendResourcesHandler(editor_handler, pm_opts)
 
 	case "tangramjs":
@@ -470,10 +472,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		}
 
 		tangramjs_opts := tangramjs.DefaultTangramJSOptions()
-		tangramjs_opts.Nextzen.APIKey = nextzen_apikey
-		tangramjs_opts.Nextzen.StyleURL = nextzen_style_url
-		tangramjs_opts.Nextzen.TileURL = nextzen_tile_url
+		tangramjs_opts.NextzenOptions.APIKey = nextzen_apikey
+		tangramjs_opts.NextzenOptions.StyleURL = nextzen_style_url
+		tangramjs_opts.NextzenOptions.TileURL = nextzen_tile_url
 
+		tangramjs_opts.LeafletOptions.EnableHash()
+		
 		editor_handler = tangramjs.AppendResourcesHandler(editor_handler, tangramjs_opts)
 
 	default:
