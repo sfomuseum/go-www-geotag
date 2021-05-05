@@ -75,6 +75,15 @@ window.addEventListener("load", function load(event){
 	return;
     }
 
+    // START OF file-attachment stuff
+
+    document.addEventListener('file-attachment-accepted', function(event) {
+
+	console.log("ATTACH", event.detail);
+    })
+
+    // END OF file-attachment stuff
+    
     // START OF geocoder/placeholder stuff
     
     var ph_endpoint = document.body.getAttribute("data-placeholder-endpoint");
