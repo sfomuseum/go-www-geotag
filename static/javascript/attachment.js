@@ -243,5 +243,5 @@ if (!window.customElements.get('file-attachment')) {
     window.customElements.define('file-attachment', FileAttachmentElement);
 }
 
-export default FileAttachmentElement;
-export { Attachment };
+//export default FileAttachmentElement;
+//export { Attachment };
