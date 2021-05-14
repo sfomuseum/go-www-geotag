@@ -56,7 +56,7 @@ func AppendPointInPolygonFlags(fs *flag.FlagSet) error {
 	fs.Bool("enable-point-in-polygon", false, "Enable point-in-polygon lookups for results.")
 
 	fs.String("path-point-in-polygon", "/point-in-polygon/", "The URI for point-in-polygon API requests.")
-	fs.String("path-point-in-polygon-data", "/point-in-polygon/data/", "The URI for point-in-polygon data requests.")	
+	fs.String("path-point-in-polygon-data", "/point-in-polygon/data/", "The URI for point-in-polygon data requests.")
 
 	err := spatial_flags.AppendCommonFlags(fs)
 

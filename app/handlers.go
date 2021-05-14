@@ -21,8 +21,8 @@ import (
 	"github.com/sfomuseum/go-www-geotag/www"
 	"github.com/whosonfirst/go-cache"
 	pip_api "github.com/whosonfirst/go-whosonfirst-spatial-pip/api"
+	spatial_www "github.com/whosonfirst/go-whosonfirst-spatial-www/http"
 	spatial_app "github.com/whosonfirst/go-whosonfirst-spatial/app"
-	spatial_www "github.com/whosonfirst/go-whosonfirst-spatial-www/http"	
 	"log"
 	"net/http"
 	"net/url"
@@ -294,7 +294,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if err != nil {
 		return nil, err
 	}
-	
+
 	enable_oembed, err := lookup.BoolVar(fs, "enable-oembed")
 
 	if err != nil {
@@ -455,7 +455,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		pm_opts.TileURL = protomaps_tile_url
 
 		pm_opts.LeafletOptions.EnableHash()
-		
+
 		editor_handler = protomaps.AppendResourcesHandler(editor_handler, pm_opts)
 
 	case "tangramjs":
@@ -477,7 +477,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		tangramjs_opts.NextzenOptions.TileURL = nextzen_tile_url
 
 		tangramjs_opts.LeafletOptions.EnableHash()
-		
+
 		editor_handler = tangramjs.AppendResourcesHandler(editor_handler, tangramjs_opts)
 
 	default:
