@@ -1,6 +1,7 @@
 var geotag = geotag || {};
+geotag.writer = geotag.writer || {};
 
-geotag.writer = (function(){
+geotag.writer.api = (function(){
 
     var ed = document.getElementById("editor");
     var wr_path = ed.getAttribute("data-writer-path");

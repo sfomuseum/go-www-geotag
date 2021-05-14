@@ -1,9 +1,4 @@
 window.addEventListener("load", function load(event){
-
-    var ed = document.getElementById("editor");
-    var wr_path = ed.getAttribute("data-writer-path");
-
-    // TO DO HANDLE EXIF STUFF HERE
     
     var save = document.getElementById("writer-save");
 
@@ -35,8 +30,9 @@ window.addEventListener("load", function load(event){
 	    console.log("WRITE ERROR", err);
 	};
 
-	geotag.writer.write_geotag(uri, f, on_success, on_error);
+	geotag.writer.api.write_geotag(uri, f, on_success, on_error);
 	return false;
     };
-    
+
+    save.removeAttribute("disabled");    
 });

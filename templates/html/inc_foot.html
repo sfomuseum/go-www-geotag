@@ -27,12 +27,13 @@
     {{ if .EnableWriter }}
     {{ if eq .WriterPath "exif" }}
     <script type="text/javascript" src="/javascript/wasm_exec.js"></script>
-    <!-- <script type="text/javascript" src="/javascript/geotag.writer.exif.init.js"></script> -->
+    <script type="text/javascript" src="/javascript/geotag.writer.exif.js"></script>    
+    <script type="text/javascript" src="/javascript/geotag.writer.exif.init.js"></script>
     {{ else }}
     <script type="text/javascript" src="/javascript/geotag.api.js"></script>
+    <script type="text/javascript" src="/javascript/geotag.writer.api.js"></script>
+    <script type="text/javascript" src="/javascript/geotag.writer.api.init.js"></script>    
     {{ end }}    
-    <script type="text/javascript" src="/javascript/geotag.writer.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.writer.init.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/writer.css" />
     {{ end }}
     <script type="text/javascript" src="/javascript/geotag.camera.init.js"></script>
