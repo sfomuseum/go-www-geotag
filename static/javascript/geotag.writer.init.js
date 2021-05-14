@@ -1,5 +1,10 @@
 window.addEventListener("load", function load(event){
 
+    var ed = document.getElementById("editor");
+    var wr_path = ed.getAttribute("data-writer-path");
+
+    // TO DO HANDLE EXIF STUFF HERE
+    
     var save = document.getElementById("writer-save");
 
     if (! save){

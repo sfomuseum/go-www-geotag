@@ -2,12 +2,15 @@ var geotag = geotag || {};
 
 geotag.writer = (function(){
 
+    var ed = document.getElementById("editor");
+    var wr_path = ed.getAttribute("data-writer-path");
+    
     var self = {
 
 	'write_geotag': function(id, f, on_success, on_error){
-
+	    
 	    var enc_id = encodeURIComponent(id);
-	    var endpoint = "/update?id=" + enc_id;	// FIX ME: read path from data attribute or... ?
+	    var endpoint = wr_path + "?id=" + enc_id;
 
 	    var crumb = document.body.getAttribute("data-crumb");
 	    

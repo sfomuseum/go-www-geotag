@@ -1,7 +1,7 @@
 {{ define "editor" }}
 {{ template "inc_head" . }}
 
-<div class="container" id="editor" {{ if .EnablePointInPolygon}}data-point-in-polygon="enabled" data-point-in-polygon-endpoint="{{ .PointInPolygonEndpoint }}" data-point-in-polygon-data-endpoint="{{ .PointInPolygonDataEndpoint }}"{{ end }}>
+<div class="container" id="editor" {{ if .EnablePointInPolygon}}data-point-in-polygon="enabled" data-point-in-polygon-endpoint="{{ .PointInPolygonEndpoint }}" data-point-in-polygon-data-endpoint="{{ .PointInPolygonDataEndpoint }}"{{ end }}{{ if .EnableWriter }} data-writer-path="{{ .WriterPath }}"{{ end }}>
 
 
     <div class="col" id="col-map">	
