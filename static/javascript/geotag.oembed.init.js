@@ -17,17 +17,17 @@ window.addEventListener("load", function load(event){
 	return;
     }
 
-    var i_el = document.getElementById("oembed-image");
+    var i_el = document.getElementById("image-wrapper");
 
     if (! i_el){
-	console.log("Missing oembed-image element.");
+	console.log("Missing image-wrapper element.");
 	return;
     }
 
-    var m_el = document.getElementById("oembed-meta");
+    var m_el = document.getElementById("image-meta");
 
     if (! m_el){
-	console.log("Missing oembed-meta element.");
+	console.log("Missing image-meta element.");
 	return;
     }
     
@@ -102,9 +102,6 @@ window.addEventListener("load", function load(event){
 
 	    m_el.appendChild(title);
 	    m_el.style.display = "block";
-
-	    var col = document.getElementById("col-oembed");
-	    col.style.display = "block";
 	    
 	    // 
 
@@ -124,10 +121,10 @@ window.addEventListener("load", function load(event){
 	};
 
 	geotag.oembed.fetch(url, on_success, on_error);
-
+	
 	i_el.style.display = "none";
 	m_el.style.display = "none";
-
+	
 	return false;
     };
 

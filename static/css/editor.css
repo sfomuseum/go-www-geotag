@@ -37,17 +37,24 @@ summary {
 	margin-bottom:1rem;
 }
 
+#image-wrapper {
+	display:none;
+}
+
+#image-wrapper img {
+	width: -moz-available;
+	height: -moz-available;	
+}
+
+#image-meta {
+	display:none;
+}
+
 #map {
 	border: solid thin;
 	width: 100%;
 	height: 80vh;
 }
-
-#oembed-image img {
-	width: -moz-available;
-	height: -moz-available;	
-}
-
 
 /* Classes */
 
@@ -67,7 +74,7 @@ summary {
 	vertical-align: top !important;
 }
 
-.oembed-form {
+.image-form {
 	padding:.5rem;
 }
 

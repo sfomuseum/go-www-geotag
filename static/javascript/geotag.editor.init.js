@@ -80,20 +80,32 @@ window.addEventListener("load", function load(event){
     document.addEventListener('file-attachment-accepted', function(event) {
 
 	var attachments = event.detail.attachments;
-	var first = attachments[0];
 
-	var im = document.getElementById("attachment-image");
+	// TO DO: https://getbootstrap.com/docs/5.0/components/carousel/
+
+	var first = attachments[0];
 
 	var reader = new FileReader();
 	
 	reader.addEventListener("load", function () {
-	    console.log("READ");
+	    
+	    var wrapper = document.getElementById("image-wrapper");
+	    wrapper.innerHTML = "";
+	    
+	    var im = document.createElement("img");
 	    im.src = reader.result;
-	    im.style.display = "block";
+
+	    wrapper.appendChild(im);
+	    wrapper.style.display = "block";
+	    
 	}, false);
 
 	var file = first.file
-	console.log("ATTACH", file);
+
+	if (! file.type.startsWith("image/")){
+	    alert("Unsupported file type");
+	    return false;
+	}
 	
 	reader.readAsDataURL(file);
       
