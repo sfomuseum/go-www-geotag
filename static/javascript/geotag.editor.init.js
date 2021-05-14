@@ -79,7 +79,24 @@ window.addEventListener("load", function load(event){
 
     document.addEventListener('file-attachment-accepted', function(event) {
 
-	console.log("ATTACH", event.detail);
+	var attachments = event.detail.attachments;
+	var first = attachments[0];
+
+	var im = document.getElementById("attachment-image");
+
+	var reader = new FileReader();
+	
+	reader.addEventListener("load", function () {
+	    console.log("READ");
+	    im.src = reader.result;
+	    im.style.display = "block";
+	}, false);
+
+	var file = first.file
+	console.log("ATTACH", file);
+	
+	reader.readAsDataURL(file);
+      
     })
 
     // END OF file-attachment stuff
