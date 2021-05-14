@@ -76,6 +76,7 @@ window.addEventListener("load", function load(event){
     }
 
     // START OF file-attachment stuff
+    // https://github.com/github/file-attachment-element
 
     document.addEventListener('file-attachment-accepted', function(event) {
 
