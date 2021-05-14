@@ -11,7 +11,7 @@ window.addEventListener("load", function load(event){
     const update_go = new Go();
     let update_mod, update_inst;
 
-    WebAssembly.instantiateStreaming(fetch("wasm/update_exif.wasm"), update_go.importObject).then(
+    WebAssembly.instantiateStreaming(fetch("/wasm/update_exif.wasm"), update_go.importObject).then(
 	
 	async result => {
 	    
