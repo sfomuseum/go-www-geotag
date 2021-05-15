@@ -319,6 +319,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	writer_uri, err := lookup.StringVar(fs, "writer-uri")
+
+	if err != nil {
+		return nil, err
+	}
+	
 	path_writer, err := lookup.StringVar(fs, "path-writer")
 
 	if err != nil {
@@ -380,6 +386,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if enable_writer {
 		editor_opts.EnableWriter = enable_writer
 		editor_opts.WriterPath = path_writer
+		editor_opts.WriterURI = writer_uri
 	}
 
 	if enable_placeholder {
@@ -565,6 +572,16 @@ func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 		return nil
 	}
 
+	writer_uri, err := lookup.StringVar(fs, "writer-uri")
+
+	if err != nil {
+		return err
+	}
+
+	if writer_uri == "exif://" {
+		return nil
+	}
+	
 	return AppendWriterHandler(ctx, fs, mux)
 }
 

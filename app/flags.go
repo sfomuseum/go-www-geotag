@@ -22,7 +22,7 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.String("oembed-endpoints", "", "A comma-separated list of valid oEmbed endpoints to query.")
 
 	fs.Bool("enable-writer", false, "Enable output of the leaflet-geotag plugin to be written to a go-www-geotag/writer.Writer instance.")
-	fs.String("writer-uri", "stdout://", "A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance.")
+	fs.String("writer-uri", "stdout://", "A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance OR 'exif://' which will enable embedding geotagging information in a downloadable JPEG representation of an image.")
 
 	fs.Bool("disable-writer-crumb", false, "Do not require a valid CSRF crumb for all writes.")
 

@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="/css/pointinpolygon.css" />
     {{ end }}    
     {{ if .EnableWriter }}
-    {{ if eq .WriterPath "exif" }}
+    {{ if eq .WriterURI "exif://" }}
     <script type="text/javascript" src="/javascript/wasm_exec.js"></script> 
     <script type="text/javascript" src="/javascript/FileSaver.min.js"></script>   
     <script type="text/javascript" src="/javascript/geotag.writer.exif.js"></script>    
