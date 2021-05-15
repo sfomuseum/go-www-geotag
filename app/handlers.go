@@ -324,7 +324,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if err != nil {
 		return nil, err
 	}
-	
+
 	path_writer, err := lookup.StringVar(fs, "path-writer")
 
 	if err != nil {
@@ -581,7 +581,7 @@ func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 	if writer_uri == "exif://" {
 		return nil
 	}
-	
+
 	return AppendWriterHandler(ctx, fs, mux)
 }
 
@@ -635,7 +635,11 @@ func NewWriterHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
-	handler, err := api.WriterHandler(wr)
+	// In anticipation of multiple writers
+
+	mw := writer.NewMultiWriter(wr)
+
+	handler, err := api.WriterHandler(mw)
 
 	if err != nil {
 		return nil, err

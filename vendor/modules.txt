@@ -34,6 +34,9 @@ github.com/aws/aws-lambda-go/lambda
 github.com/aws/aws-lambda-go/lambda/handlertrace
 github.com/aws/aws-lambda-go/lambda/messages
 github.com/aws/aws-lambda-go/lambdacontext
+# github.com/g8rswimmer/error-chain v1.0.0
+## explicit
+github.com/g8rswimmer/error-chain
 # github.com/hashicorp/errwrap v0.0.0-20141028054710-7554cd9344ce
 github.com/hashicorp/errwrap
 # github.com/hashicorp/go-multierror v0.0.0-20171204182908-b7773ae21874

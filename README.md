@@ -123,13 +123,13 @@ If you visit `http://localhost:8080` in your web browser you'll see something li
 
 In this configuration the `server` application a simple three-pane interface for geotagging images.
 
-* The left-hand panel contains a map a `Leaflet.GeotagPhoto` camera for defining a focal point and field of view.
+* The left-hand panel contains a map and a `Leaflet.GeotagPhoto` camera for defining a focal point and field of view.
 
 * The middle panel contains controls for loading images and for filtering and selecting reverse-geocoding results (that are updated as the camera's focal point changes).
 
 * The right-hand panels contains GeoJSON `Feature` data containing information about the camera's focal point and field of view as well as any reverse-geocoding data, if present, encoded in the `wof:parent_id` and `wof:hierarchy` properties. 
 
-The `server` application as configured does not have any way to publish data outside of copy-pasting the raw GeoJSON data in to another document. That will be addressed in subsequent examples.
+The `server` application as configured has a limited set of ways to publish data outside of copy-pasting the raw GeoJSON data in to another document. That will be addressed in subsequent examples.
 
 _Related: [Geotagging at SFO Museum, Part 3 – What Is the Simplest Thing?](https://millsfield.sfomuseum.org/blog/2020/04/27/geotagging-simple/), [Geotagging at SFO Museum, Part 6 – Writers](https://millsfield.sfomuseum.org/blog/2020/04/30/geotagging-writers/), [Geotagging at SFO Museum, Part 7 – Custom Writers](https://millsfield.sfomuseum.org/blog/2020/05/01/geotagging-custom-writers/) and [Geotagging at SFO Museum, part 9 – Publishing Data](https://millsfield.sfomuseum.org/blog/2020/05/07/geotagging-publishing/)._
 
@@ -151,7 +151,7 @@ The second set of options enable controls in the user interface for loading imag
 
 _Related: [Geotagging at SFO Museum, Part 5 – Images](https://millsfield.sfomuseum.org/blog/2020/04/29/geotagging-images/)_
 
-The final set of flags enabled "reverse geocoding" (sometimes called "point-in-polygon") lookups whenever you move the camera's focal point. These lookups are performed using the [go-whosonfirst-spatial](https://github.com/whosonfirst/go-whosonfirst-spatial) packages reading data stored in a SQLite database, specified by the `-spatial-database-uri`. flag
+The final set of flags enable "reverse geocoding" (sometimes called "point-in-polygon") lookups whenever you move the camera's focal point. These lookups are performed using the [go-whosonfirst-spatial](https://github.com/whosonfirst/go-whosonfirst-spatial) packages reading data stored in a SQLite database, specified by the `-spatial-database-uri`. flag
 
 ```
 	-enable-point-in-polygon \
@@ -196,7 +196,7 @@ There are two important differences in the left-hand panel containing the map. T
 	-nextzen-apikey {NEXTZEN_APIKEY} \
 ```
 
-Enabling the use of maps using Tangram and Nextzen is done using the `-map-renderer` and `-nextzen-apikey` flags respectively. In order to use Nextzen tiles you'll need to provide a valid Nextzen developer API key which can be done at [https://developers.nextzen.org/](https://developers.nextzen.org/).
+Enabling the use of maps using Tangram and Nextzen is done using the `-map-renderer` and `-nextzen-apikey` flags respectively. In order to use Nextzen tiles you'll need to provide a valid Nextzen developer API key which can be registered at [https://developers.nextzen.org/](https://developers.nextzen.org/).
 
 _Related: [Maps (and map tiles) at SFO Museum](https://millsfield.sfomuseum.org/blog/2018/07/31/maps/) and [More recent old maps (and the shapes in the details)](https://millsfield.sfomuseum.org/blog/2019/11/06/maps/)._
 
@@ -215,7 +215,7 @@ _Related: [Using the Placeholder Geocoder at SFO Museum](https://millsfield.sfom
 
 ![](docs/images/geotag-three-columns-placeholder.png)
 
-In this example we are searching for the [Gowanus](https://spelunker.whosonfirst.org/search/?q=Gowanus&is_current=1) neighbourhood in Brooklyn. In the first example we were using Protomaps and geocoding results for "Gowanus" would yield an empty map since the `sfo.pmtile` PMTiles database only contains data for the area around [SFO](https://millsfield.sfomuseum.org/map).
+In this example we are searching for the [Gowanus](https://spelunker.whosonfirst.org/search/?q=Gowanus&is_current=1) neighbourhood in Brooklyn. In the first example we were using Protomaps for map tiles and geocoding results for "Gowanus" would yield an empty map since the `sfo.pmtiles` PMTiles database only contains data for the area around [SFO](https://millsfield.sfomuseum.org/map).
 
 ![](docs/images/geotag-three-columns-gowanus.png)
 
