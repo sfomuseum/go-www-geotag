@@ -1,3 +1,4 @@
+// package writer defines a common interface for recording geotag.GeotagFeature instances.
 package writer
 
 import (

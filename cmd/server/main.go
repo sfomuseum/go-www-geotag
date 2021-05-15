@@ -1,3 +1,4 @@
+// server is an HTTP server that runs the go-www-geotag application.
 package main
 
 import (
