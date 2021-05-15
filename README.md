@@ -294,3 +294,4 @@ Now when we perform our geocoding query for "Gowanus" and the map jumps to Brook
 * https://github.com/aaronland/go-http-tangramjs
 * https://github.com/sfomuseum/go-http-protomaps
 * https://github.com/aaronland/go-http-bootstrap
+* https://github.com/sfomuseum/go-exif-update
