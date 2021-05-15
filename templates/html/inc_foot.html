@@ -26,7 +26,8 @@
     {{ end }}    
     {{ if .EnableWriter }}
     {{ if eq .WriterPath "exif" }}
-    <script type="text/javascript" src="/javascript/wasm_exec.js"></script>
+    <script type="text/javascript" src="/javascript/wasm_exec.js"></script> 
+    <script type="text/javascript" src="/javascript/FileSaver.min.js"></script>   
     <script type="text/javascript" src="/javascript/geotag.writer.exif.js"></script>    
     <script type="text/javascript" src="/javascript/geotag.writer.exif.init.js"></script>
     {{ else }}

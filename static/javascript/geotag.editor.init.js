@@ -94,6 +94,7 @@ window.addEventListener("load", function load(event){
 	    wrapper.innerHTML = "";
 	    
 	    var im = document.createElement("img");
+	    im.setAttribute("id", "image");
 	    im.src = reader.result;
 
 	    wrapper.appendChild(im);

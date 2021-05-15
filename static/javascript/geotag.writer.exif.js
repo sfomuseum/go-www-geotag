@@ -1,47 +1,52 @@
 var geotag = geotag || {};
 geotag.writer = geotag.writer || {};
 
-geotag.writer.exit = (function(){
+geotag.writer.exif = (function(){
 
     var self = {
-	'write_geotag': function(){
-
-	    /*
-
-	        var update = {};
-    var enc_update;
-    
-    try {
-	enc_update = JSON.stringify(update);
-    } catch(e){
-	console.log("Failed to marhsal update", update, e);
-	return false;
-    }
-    
-    var img = document.getElementById("image");
-    
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var b64_img = canvas.toDataURL("image/jpeg", 1.0);
-
-    update_exif(b64_img, enc_update).then(data => {
-
-	var blob = dataURLToBlob(data);
-
-	if (! blob){
-	    return false;
-	}
 	
-	saveAs(blob, "example.jpg");
-	
-    }).catch(err => {
-	console.log("Failed to update EXIF data", err);
-    });
-	    */
+	'write_geotag': function(f){
+
+	    var geoms = f.geometry.geometries;
+	    var pt = geoms[0];
 	    
+	    var update = {
+		"X-Latitude": pt.coordinates[0],
+		"X-Longitude": pt.coordinates[1],
+	    };
+	    
+	    var enc_update;
+	    
+	    try {
+		enc_update = JSON.stringify(update);
+	    } catch(e){
+		console.log("Failed to marhsal update", update, e);
+		return false;
+	    }
+    
+	    var img = document.getElementById("image");
+	    
+	    var canvas = document.createElement("canvas");
+	    canvas.width = img.width;
+	    canvas.height = img.height;
+	    var ctx = canvas.getContext("2d");
+	    ctx.drawImage(img, 0, 0);
+	    var b64_img = canvas.toDataURL("image/jpeg", 1.0);
+	    
+	    update_exif(b64_img, enc_update).then(data => {
+		
+		var blob = self.dataURLToBlob(data);
+		
+		if (! blob){
+		    return false;
+		}
+
+		var fname = "example.jpg";	// FIX ME
+		saveAs(blob, fname);
+	
+	    }).catch(err => {
+		console.log("Failed to update EXIF data", err);
+	    });
 	},
 
 	dataURLToBlob: function(dataURL){
