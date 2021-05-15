@@ -100,7 +100,7 @@ $> ./bin/server -h
   -writer-cors-allowed-origins string
     	A comma-separated list of origins to allow for CORS support. (default "*")
   -writer-uri string
-    	A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance OR 'exif://' which will enable embedding geotagging information in a downloadable JPEG representation of an image. (default "stdout://")	
+    	A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance OR 'exif://' which will enable embedding focal point but not field-of-view geotagging information as EXIF properties in a downloadable JPEG representation of an image. (default "stdout://")	
 ```
 
 For example:
