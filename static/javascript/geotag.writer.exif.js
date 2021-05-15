@@ -5,7 +5,7 @@ geotag.writer.exif = (function(){
 
     var self = {
 	
-	'write_geotag': function(f){
+	'write_geotag': function(uri, f){
 
 	    var geoms = f.geometry.geometries;
 	    var pt = geoms[0];
@@ -41,7 +41,9 @@ geotag.writer.exif = (function(){
 		    return false;
 		}
 
-		var fname = "example.jpg";	// FIX ME
+		var base = uri.split('.')[0];
+		var fname = "geotagged-" + base + ".jpg";
+		
 		saveAs(blob, fname);
 	
 	    }).catch(err => {

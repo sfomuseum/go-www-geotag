@@ -86,9 +86,19 @@ window.addEventListener("load", function load(event){
 
 	var first = attachments[0];
 
+	var file = first.file
+
+	if (! file.type.startsWith("image/")){
+	    alert("Unsupported file type");
+	    return false;
+	}
+	
 	var reader = new FileReader();
 	
 	reader.addEventListener("load", function () {
+
+	    var meta = document.getElementById("image-meta");
+	    meta.innerText = file.name;
 	    
 	    var wrapper = document.getElementById("image-wrapper");
 	    wrapper.innerHTML = "";
@@ -99,16 +109,11 @@ window.addEventListener("load", function load(event){
 
 	    wrapper.appendChild(im);
 	    wrapper.style.display = "block";
+	    meta.style.display = "block";
 	    
 	}, false);
 
-	var file = first.file
-
-	if (! file.type.startsWith("image/")){
-	    alert("Unsupported file type");
-	    return false;
-	}
-	
+	document.body.setAttribute("data-geotag-uri", "file:///" + file.name);
 	reader.readAsDataURL(file);
       
     })

@@ -47,10 +47,9 @@ window.addEventListener("load", function load(event){
 		// return false;
 	    }
 
-	    console.log("SAVE EXIF", uri);
-	    console.log("FEATURE", f);
-
-	    geotag.writer.exif.write_geotag(f);
+	    var base = uri.split('/').reverse()[0];
+	    
+	    geotag.writer.exif.write_geotag(base, f);
 	    return false;
 	};
 
