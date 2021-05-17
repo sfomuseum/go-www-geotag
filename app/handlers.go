@@ -577,6 +577,12 @@ func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 	if err != nil {
 		return err
 	}
+	
+	// Hey look. We have hardcoded and exception for the exif:// scheme
+	// which we use as a trigger to encode geotagging information using
+	// the update_exif.wasm web assembly binary. I am not convinced this
+	// is the best way to handle that split but it will do for now.
+	// (20210517/thisisaaronland)
 
 	if writer_uri == "exif://" {
 		return nil

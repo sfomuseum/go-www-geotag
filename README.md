@@ -109,8 +109,6 @@ For example:
 $> bin/server \
 	-map-renderer protomaps \
 	-protomaps-tile-url file:///usr/local/data/pmtiles/sfo.pmtiles \
-	-enable-oembed \
-	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
 	-enable-point-in-polygon \
 	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db'
 	
@@ -119,7 +117,7 @@ $> bin/server \
 
 If you visit `http://localhost:8080` in your web browser you'll see something like this:
 
-![](docs/images/geotag-three-columns.png)
+![](docs/images/20210517-geotag-init.png)
 
 In this configuration the `server` application a simple three-pane interface for geotagging images.
 
@@ -142,12 +140,20 @@ Walking through the parameters step-by-step the first being defined is the toolc
 
 _Related: [Protomaps: A new way to make maps with OpenStreetMap](https://protomaps.com/blog/new-way-to-make-maps/). To make your Protomaps database files try the [Protomaps bundle/download tool](https://protomaps.com/bundles)._
 
-The second set of options enable controls in the user interface for loading images from a remote OEmbed endpoint. The URI in the `-oembed-endpoints` is where the application will resolve image requests.
+By default the application includes a [file attachment control](https://github.com/github/file-attachment-element) to load local images by dragging-and-dropping them on the application or using the operating system's file browser. A scaled down thumbnail of the image will be displayed in the center panel:
+
+![](docs/images/20210517-geotag-local-image.png)
+
+It is also possible to load remote images using the application's support for OEmbed endpoings. To enable that support you need to include the `-enable` and `-oembed-endpoints`. For example:
 
 ```
 	-enable-oembed \
 	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
 ```
+
+Once enabled the application will display an OEmbed control beneath the default local file control:
+
+![](docs/images/20210517-geotag-oembed-image.png)
 
 _Related: [Geotagging at SFO Museum, Part 5 – Images](https://millsfield.sfomuseum.org/blog/2020/04/29/geotagging-images/)_
 
