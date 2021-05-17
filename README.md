@@ -183,8 +183,6 @@ Here's another example:
 $> bin/server \
 	-map-renderer tangramjs \
 	-nextzen-apikey {NEXTZEN_APIKEY} \
-	-enable-oembed \
-	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
 	-enable-point-in-polygon \
 	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db' \
 	-enable-placeholder \
@@ -280,8 +278,6 @@ Once created we can spin up the `server` tool again, specifying the new database
 $> bin/server \
 	-map-renderer tangramjs \
 	-nextzen-apikey {NEXTZEN_APIKEY} \
-	-enable-oembed \
-	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
 	-enable-point-in-polygon \
 	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/us-neighbourhoods-sfo.db' \
 	-enable-placeholder \
