@@ -11,39 +11,43 @@
     <div class="col" id="col-controls">
 
 	<div id="controls">
-	   
-	    <div>
+
+	<details class="control">
+		<summary>Image</summary>
+	    
 		<div>
-		    <!-- TO DO: https://getbootstrap.com/docs/5.0/components/carousel/ -->
-		    <!-- See also: geotag.editor.init.js -->
-		    <div id="image-wrapper"></div>
-		    <div id="image-meta"></div>
+		    <div>
+			<!-- TO DO: https://getbootstrap.com/docs/5.0/components/carousel/ -->
+			<!-- See also: geotag.editor.init.js -->
+			<div id="image-wrapper"></div>
+			<div id="image-meta"></div>
+		    </div>
+		    
+		    <div class="image-form">
+			<form class="form">
+			    
+			    <div class="form-group">
+				<label for="file-attachment">Load an image</label>
+				<!-- https://github.com/github/file-attachment-element -->
+				<file-attachment input="file" id="file-attachment">
+				    <input type="file" id="file" multiple class="form-control" />
+				</file-attachment>
+				<small id="file-attachment-help" class="form-text text-muted">Select or drop an image file here.</small>					    
+			    </div>
+			    
+			    {{ if .EnableOEmbed }}			
+			    <div class="form-group">
+				<label for="oembed-url">Fetch an image</label>					
+				<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" aria-describedby="oembed-url-help" />
+				<small id="oembed-url-help" class="form-text text-muted">A valid OEmbed URL for retrieving an image to display.</small>		
+			    </div>
+			    <button class="btn btn-primary pull-right" type="submit" id="oembed-fetch">Fetch</button>
+			    {{ end }}
+			    
+			</form>
+		    </div>
 		</div>
-		
-		<div class="image-form">
-		    <form class="form">
-
-			<div class="form-group">
-			    <label for="file-attachment">Load an image</label>
-			    <!-- https://github.com/github/file-attachment-element -->
-			    <file-attachment input="file" id="file-attachment">
-				<input type="file" id="file" multiple class="form-control" />
-			    </file-attachment>
-			    <small id="file-attachment-help" class="form-text text-muted">Select or drop an image file here.</small>					    
-			</div>
-
-			{{ if .EnableOEmbed }}			
-			<div class="form-group">
-			    <label for="oembed-url">Fetch an image</label>					
-			    <input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" aria-describedby="oembed-url-help" />
-			    <small id="oembed-url-help" class="form-text text-muted">A valid OEmbed URL for retrieving an image to display.</small>		
-			</div>
-			<button class="btn btn-primary pull-right" type="submit" id="oembed-fetch">Fetch</button>
-			{{ end }}
-			
-		    </form>
-		</div>
-	    </div>
+	</details>
 	
 	{{ if .EnablePointInPolygon }}
 
