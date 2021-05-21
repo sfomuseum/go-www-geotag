@@ -91,7 +91,7 @@ summary {
 	}
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
 	#editor {
 		grid-template-columns: 100% !important;
 	}
