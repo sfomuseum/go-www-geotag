@@ -8,4 +8,4 @@ debug-protomaps:
 	go run -mod vendor cmd/server/main.go -map-renderer protomaps -protomaps-tile-url $(TILES) -enable-oembed -oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' -enable-writer -writer-uri exif://
 
 docker:
-	docker build -t geotag .	
+	docker build -t geotag-www .	
