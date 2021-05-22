@@ -288,6 +288,24 @@ Now when we perform our geocoding query for "Gowanus" and the map jumps to Brook
  
 ![](docs/images/geotag-three-columns-gowanus-heights.png)
 
+## Docker
+
+To build the Docker container:
+
+```
+$> docker build -t geotag-www .
+```
+
+And then to run it (for example):
+
+```
+$> docker run -it -p 8080:8080 \
+	-e GEOTAG_MAP_RENDERER=protomaps \
+	-e GEOTAG_PROTOMAPS_TILE_URL=file:///usr/local/data/sfo.pmtiles \
+	-e GEOTAG_SERVER_URI=http://0.0.0.0:8080 \
+	geotag-www
+```
+
 ## See also
 
 * https://github.com/nypl-spacetime/Leaflet.GeotagPhoto
