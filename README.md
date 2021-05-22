@@ -303,8 +303,22 @@ $> docker run -it -p 8080:8080 \
 	-e GEOTAG_MAP_RENDERER=protomaps \
 	-e GEOTAG_PROTOMAPS_TILE_URL=file:///usr/local/data/sfo.pmtiles \
 	-e GEOTAG_SERVER_URI=http://0.0.0.0:8080 \
+	-e GEOTAG_ENABLE_POINT_IN_POLYGON=true \
+	-e GEOTAG_SPATIAL_DATABASE_URI sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db \
+	-e GEOTAG_ENABLE_WRITER=true \
+	-e GEOTAG_WRITER_URI=exif:// \
 	geotag-www
 ```
+
+## AWS
+
+### App Runner
+
+The `geotag-www` Docker container (see above) 
+
+If nothing else make sure you specify the `GEOTAG_SERVER_URI=http://0.0.0.0:8080` environment variable. Without the App Runner health checks will fail and your service will not be created.
+
+Note that at this time [it is not possible to update environment variables](https://github.com/aws/apprunner-roadmap/issues/18) for an App Runner service once created. If you need to update your environment variables you'll need to create a new service.
 
 ## See also
 
