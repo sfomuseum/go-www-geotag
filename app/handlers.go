@@ -19,6 +19,8 @@ import (
 	"github.com/sfomuseum/go-www-geotag/geo"
 	"github.com/sfomuseum/go-www-geotag/writer"
 	"github.com/sfomuseum/go-www-geotag/www"
+	tilepack_http "github.com/tilezen/go-tilepacks/http"
+	"github.com/tilezen/go-tilepacks/tilepack"
 	"github.com/whosonfirst/go-cache"
 	pip_api "github.com/whosonfirst/go-whosonfirst-spatial-pip/api"
 	spatial_www "github.com/whosonfirst/go-whosonfirst-spatial-www/http"
@@ -507,6 +509,57 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	return editor_handler, nil
 }
 
+func AppendTilezenTilepackHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	enable_tilezen_tilepacks, err := lookup.BoolVar(fs, "enable-tilezen-tilepacks")
+
+	if err != nil {
+		return err
+	}
+
+	if !enable_tilezen_tilepacks {
+		return nil
+	}
+
+	return AppendTilezenTilepackHandler(ctx, fs, mux)
+}
+
+func AppendTilezenTilepackHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	tilezen_url_tiles, err := lookup.StringVar(fs, "tilezen-url-tiles")
+
+	if err != nil {
+		return err
+	}
+
+	tilepack_handler, err := NewTilezenTilepackHandler(ctx, fs)
+
+	if err != nil {
+		return err
+	}
+
+	mux.Handle(tilezen_url_tiles, tilepack_handler)
+	return nil
+}
+
+func NewTilezenTilepackHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
+
+	tilezen_path_tilepack, err := lookup.StringVar(fs, "tilezen-path-tilepack")
+
+	if err != nil {
+		return nil, err
+	}
+
+	tilepack_reader, err := tilepack.NewMbtilesReader(tilezen_path_tilepack)
+
+	if err != nil {
+		return nil, fmt.Errorf("Failed to create tilepack reader, %w", err)
+	}
+
+	tilepack_handler := tilepack_http.MbtilesHandler(tilepack_reader)
+	return tilepack_handler, nil
+}
+
 // PROTOMAPS: this needs to stay in sync with code in NewEditorHandler
 // This takes a singular protomaps-tile-url and if it is a file:// URI
 // creates an http.Dir instance for its parent directory. The filename (for protomaps-tile-url)
@@ -577,7 +630,7 @@ func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 	if err != nil {
 		return err
 	}
-	
+
 	// Hey look. We have hardcoded and exception for the exif:// scheme
 	// which we use as a trigger to encode geotagging information using
 	// the update_exif.wasm web assembly binary. I am not convinced this
