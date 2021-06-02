@@ -36,11 +36,15 @@ func main() {
 		log.Fatalf("Failed to append asset handlers, %v", err)
 	}
 
+	// The core "geotagging" application
+
 	err = app.AppendEditorHandlerIfEnabled(ctx, fl, mux)
 
 	if err != nil {
 		log.Fatalf("Failed to append editor handler, %v", err)
 	}
+
+	// Support for point-in-polygon lookups (for things that have been geotagged)
 
 	err = app.AppendPointInPolygonHandlerIfEnabled(ctx, fl, mux)
 
@@ -48,11 +52,23 @@ func main() {
 		log.Fatalf("Failed to append point-in-polygon handler, %v", err)
 	}
 
+	// Local Tilezen proxy caching layer
+
 	err = app.AppendProxyTilesHandlerIfEnabled(ctx, fl, mux)
 
 	if err != nil {
 		log.Fatalf("Failed to append proxy tiles handler, %v", err)
 	}
+
+	// Local Tilezen "tilepack" tile-serving layer
+
+	err = app.AppendTilezenTilepackHandlerIfEnabled(ctx, fl, mux)
+
+	if err != nil {
+		log.Fatalf("Failed to append proxy tiles handler, %v", err)
+	}
+
+	// Local Protomaps tile-serving layer
 
 	err = app.AppendProtomapsTilesHandlerIfNecessary(ctx, fl, mux)
 
@@ -60,11 +76,15 @@ func main() {
 		log.Fatalf("Failed to append protomaps tiles handler, %v", err)
 	}
 
+	// Abstract writer interface(s)
+
 	err = app.AppendWriterHandlerIfEnabled(ctx, fl, mux)
 
 	if err != nil {
 		log.Fatalf("Failed to append writer handler, %v", err)
 	}
+
+	// Public-facing server
 
 	s, err := app.NewServer(ctx, fl)
 
