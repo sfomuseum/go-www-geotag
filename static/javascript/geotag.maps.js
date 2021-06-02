@@ -93,17 +93,32 @@ geotag.maps = (function(){
 	    }
 
 	    if (map_renderer == "tangramjs"){
+
+		// If we don't have an API key check to see if we're serving tiles locally
 		
 		if (! args["api_key"]){
-		    return null;
+
+		    var tile_url = args["tile_url"];
+		    
+		    var proto = location.protocol;
+		    var host = location.host;
+		    var test = proto + "//" + host;
+
+		    if (! tile_url.startsWith(test)){
+			console.log("Missing Nextzen API key and tile URL is not local server");
+			return null;
+		    }
+
+		    // Tangram.js expects an API key even if it's bunk
+		    args["api_key"] = "local";
 		}
-		
-		var api_key = args["api_key"];
 		
 		var tangram_opts = self.getTangramOptions(args);	   
 		var tangramLayer = Tangram.leafletLayer(tangram_opts);
 		
 		tangramLayer.addTo(map);
+
+		map.setMaxZoom(17);	// really?
 	    }
 
 	    var attribution = self.getAttribution(map_renderer);
@@ -144,7 +159,7 @@ geotag.maps = (function(){
 			    url_subdomains: ['a', 'b', 'c', 'd'],
 			    url_params: {api_key: api_key},
 			    tile_size: 512,
-			    max_zoom: 18
+			    max_zoom: 18, 
 			}
 		    }
 		}

@@ -133,7 +133,7 @@ func AppendTilezenFlags(fs *flag.FlagSet) error {
 
 	fs.Bool("enable-tilezen-tilepacks", false, "Enable to use of local Tilezen MBTiles database.")
 	fs.String("tilezen-path-tilepack", "", "A valid path for a local Tilezen MBTiles database.")
-	fs.String("tilezen-url-tiles", "/tilezen", "The URL (a relative path) for serving local Tilezen MBTiles database.")
+	fs.String("tilezen-url-tiles", "/tilezen/", "The URL (a relative path) for serving local Tilezen MBTiles database.")
 
 	// https://github.com/sfomuseum/go-http-tilezen
 
