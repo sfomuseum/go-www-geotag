@@ -19,6 +19,7 @@ require (
 	github.com/sfomuseum/go-http-leaflet-layers v0.0.4
 	github.com/sfomuseum/go-http-protomaps v0.0.9
 	github.com/sfomuseum/go-http-tilezen v0.0.4
+	github.com/tilezen/go-tilepacks v0.0.0-20210602151652-0147f7fb6fd7
 	github.com/whosonfirst/go-cache v0.2.0
 	github.com/whosonfirst/go-whosonfirst-spatial v0.0.56
 	github.com/whosonfirst/go-whosonfirst-spatial-pip v0.0.10

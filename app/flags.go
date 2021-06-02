@@ -129,6 +129,14 @@ func AppendNextzenFlags(fs *flag.FlagSet) error {
 
 func AppendTilezenFlags(fs *flag.FlagSet) error {
 
+	// https://github.com/tilezen/go-tilepacks
+
+	fs.Bool("enable-tilezen-tilepacks", false, "Enable to use of local Tilezen MBTiles database.")
+	fs.String("tilezen-path-tilepack", "", "A valid path for a local Tilezen MBTiles database.")
+	fs.String("tilezen-url-tiles", "/tilezen", "The URL (a relative path) for serving local Tilezen MBTiles database.")
+	
+	// https://github.com/sfomuseum/go-http-tilezen
+	
 	fs.Bool("enable-proxy-tiles", false, "Enable the use of a local tile proxy for Nextzen map tiles.")
 
 	fs.String("path-proxy-tiles", "/tiles/", "The URL (a relative path) for proxied tiles.")

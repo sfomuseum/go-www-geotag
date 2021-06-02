@@ -23,6 +23,8 @@ import (
 	pip_api "github.com/whosonfirst/go-whosonfirst-spatial-pip/api"
 	spatial_www "github.com/whosonfirst/go-whosonfirst-spatial-www/http"
 	spatial_app "github.com/whosonfirst/go-whosonfirst-spatial/app"
+	tilepack_http "github.com/tilezen/go-tilepacks/http"
+	"github.com/tilezen/go-tilepacks/tilepack"
 	"log"
 	"net/http"
 	"net/url"
@@ -312,7 +314,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if err != nil {
 		return nil, err
 	}
-
+	
 	enable_writer, err := lookup.BoolVar(fs, "enable-writer")
 
 	if err != nil {
@@ -466,7 +468,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		editor_handler = protomaps.AppendResourcesHandler(editor_handler, pm_opts)
 
 	case "tangramjs":
-
+		
 		if enable_proxy_tiles {
 
 			path_proxy_tiles, err := lookup.StringVar(fs, "path-proxy-tiles")
@@ -505,6 +507,57 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	}
 
 	return editor_handler, nil
+}
+
+func AppendTilezenTilepackHandlerIfNecessary(ctx context.Context,  fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	enable_tilezen_tilepacks, err := lookup.BoolVar(fs, "enable-tilezen-tilepacks")
+
+	if err != nil {
+		return err
+	}
+
+	if !enable_tilezen_tilepacks {
+		return nil
+	}
+	
+	return AppendTilezenTilepackHandler(ctx, fs, mux)
+}
+
+func AppendTilezenTilepackHandler(ctx context.Context,  fs *flag.FlagSet, mux *http.ServeMux) error {
+
+	tilezen_url_tiles, err := lookup.StringVar(fs, "tilezen-url-tiles")
+
+	if err != nil {
+		return err
+	}
+	
+	tilepack_handler, err := NewTilezenTilepackHandler(ctx, fs)
+
+	if err != nil {
+		return err
+	}
+	
+	mux.Handle(tilezen_url_tiles, tilepack_handler)
+	return nil
+}
+
+func NewTilezenTilepackHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error){
+
+	tilezen_path_tilepack, err := lookup.StringVar(fs, "tilezen-path-tilepack")
+
+	if err != nil {
+		return nil, err
+	}
+
+	tilepack_reader, err := tilepack.NewMbtilesReader(tilezen_path_tilepack)
+
+	if err != nil {
+		return nil, fmt.Errorf("Failed to create tilepack reader, %w", err)
+	}
+
+	tilepack_handler := tilepack_http.MbtilesHandler(tilepack_reader)
+	return tilepack_handler, nil
 }
 
 // PROTOMAPS: this needs to stay in sync with code in NewEditorHandler
