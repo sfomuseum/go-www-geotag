@@ -43,6 +43,8 @@ $> ./bin/server -h
     	Enable point-in-polygon lookups for results.
   -enable-proxy-tiles
     	Enable the use of a local tile proxy for Nextzen map tiles.
+  -enable-tilezen-tilepacks
+    	Enable to use of local Tilezen MBTiles database.	
   -enable-writer
     	Enable output of the leaflet-geotag plugin to be written to a go-www-geotag/writer.Writer instance.
   -enable-writer-cors
@@ -95,6 +97,10 @@ $> ./bin/server -h
     	A valid aaronland/go-http-server.Server URI for creating an application server. (default "http://localhost:8080")
   -spatial-database-uri string
     	A valid whosonfirst/go-whosonfirst-spatial/data.SpatialDatabase URI. options are: [sqlite://]
+  -tilezen-path-tilepack string
+    	A valid path for a local Tilezen MBTiles database.
+  -tilezen-url-tiles string
+    	The URL (a relative path) for serving local Tilezen MBTiles database. (default "/tilezen/")	
   -verbose
     	Be chatty.
   -writer-cors-allowed-origins string
