@@ -154,7 +154,7 @@ func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *htt
 	if err != nil {
 		return fmt.Errorf("Failed to create DataHandler handler - unable to lookup -path-point-in-polygon-data flag, %v", err)
 	}
-	
+
 	path_pip = EnsureRoot(path_pip, prefix)
 	path_pip_data = EnsureRoot(path_pip_data, prefix)
 
@@ -199,7 +199,7 @@ func AppendEditorHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 	}
 
 	// Note: We don't append prefix here... at least not by default
-	
+
 	path_editor, err := lookup.StringVar(fs, "path-editor")
 
 	if err != nil {
@@ -219,6 +219,12 @@ func AppendEditorHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, error) {
 
 	t, err := NewApplicationTemplates(ctx, fs)
+
+	if err != nil {
+		return nil, err
+	}
+
+	prefix, err := lookup.StringVar(fs, "prefix")
 
 	if err != nil {
 		return nil, err
@@ -489,7 +495,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	}
 
 	bootstrap_opts := bootstrap.DefaultBootstrapOptions()
-	editor_handler = bootstrap.AppendResourcesHandler(editor_handler, bootstrap_opts)
+	editor_handler = bootstrap.AppendResourcesHandlerWithPrefix(editor_handler, bootstrap_opts, prefix)
 
 	switch map_renderer {
 	case "protomaps":
@@ -499,7 +505,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 		pm_opts.LeafletOptions.EnableHash()
 
-		editor_handler = protomaps.AppendResourcesHandler(editor_handler, pm_opts)
+		editor_handler = protomaps.AppendResourcesHandlerWithPrefix(editor_handler, pm_opts, prefix)
 
 	case "tangramjs":
 
@@ -521,17 +527,17 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 
 		tangramjs_opts.LeafletOptions.EnableHash()
 
-		editor_handler = tangramjs.AppendResourcesHandler(editor_handler, tangramjs_opts)
+		editor_handler = tangramjs.AppendResourcesHandlerWithPrefix(editor_handler, tangramjs_opts, prefix)
 
 	default:
 		return nil, fmt.Errorf("Invalid or unsupported -map-renderer flag ('%s')", map_renderer)
 	}
 
-	editor_handler = geotag.AppendResourcesHandler(editor_handler, geotag_opts)
+	editor_handler = geotag.AppendResourcesHandlerWithPrefix(editor_handler, geotag_opts, prefix)
 
 	if enable_map_layers {
 		layers_opts := layers.DefaultLeafletLayersOptions()
-		editor_handler = layers.AppendResourcesHandler(editor_handler, layers_opts)
+		editor_handler = layers.AppendResourcesHandlerWithPrefix(editor_handler, layers_opts, prefix)
 	}
 
 	editor_handler, err = AppendCrumbHandler(ctx, fs, editor_handler)
