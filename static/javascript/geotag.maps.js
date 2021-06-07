@@ -98,16 +98,7 @@ geotag.maps = (function(){
 		
 		if (! args["api_key"]){
 
-		    var tile_url = args["tile_url"];
-		    
-		    var proto = location.protocol;
-		    var host = location.host;
-		    var test = proto + "//" + host;
-
-		    if (! tile_url.startsWith(test)){
-			console.log("Missing Nextzen API key and tile URL is not local server");
-			return null;
-		    }
+		    console.log("Missing Nextzen API key so assuming local tilepack tiles.");		    
 
 		    // Tangram.js expects an API key even if it's bunk
 		    args["api_key"] = "local";
@@ -118,7 +109,7 @@ geotag.maps = (function(){
 		
 		tangramLayer.addTo(map);
 
-		map.setMaxZoom(17);	// really?
+		map.setMaxZoom(17.99);	// really?
 	    }
 
 	    var attribution = self.getAttribution(map_renderer);

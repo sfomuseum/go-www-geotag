@@ -299,39 +299,6 @@ Now when we perform our geocoding query for "Gowanus" and the map jumps to Brook
  
 ![](docs/images/geotag-three-columns-gowanus-heights.png)
 
-<<<<<<< HEAD
-## Docker
-
-To build the Docker container:
-
-```
-$> docker build -t geotag-www .
-```
-
-And then to run it (for example):
-
-```
-$> docker run -it -p 8080:8080 \
-	-e GEOTAG_MAP_RENDERER=protomaps \
-	-e GEOTAG_PROTOMAPS_TILE_URL=file:///usr/local/data/sfo.pmtiles \
-	-e GEOTAG_SERVER_URI=http://0.0.0.0:8080 \
-	-e GEOTAG_ENABLE_POINT_IN_POLYGON=true \
-	-e GEOTAG_SPATIAL_DATABASE_URI sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db \
-	-e GEOTAG_ENABLE_WRITER=true \
-	-e GEOTAG_WRITER_URI=exif:// \
-	geotag-www
-```
-
-## AWS
-
-### App Runner
-
-The `geotag-www` Docker container (see above) 
-
-If nothing else make sure you specify the `GEOTAG_SERVER_URI=http://0.0.0.0:8080` environment variable. Without the App Runner health checks will fail and your service will not be created.
-
-Note that at this time [it is not possible to update environment variables](https://github.com/aws/apprunner-roadmap/issues/18) for an App Runner service once created. If you need to update your environment variables you'll need to create a new service.
-=======
 #### Example (Tangram.js and local "tilepacks")
 
 It is also possible to use Tangram.js with local Nextzen map tiles stored in a local Tilezen "tilepack" (SQLite or MBTiles) database. For example:
@@ -408,6 +375,39 @@ $> bin/server \
 ```
 
 _Related: [Mozilla Developer Network - Allowing cross-origin use of images and canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image)._
+
+## Docker
+
+To build the Docker container:
+
+```
+$> docker build -t geotag-www .
+```
+
+And then to run it (for example):
+
+```
+$> docker run -it -p 8080:8080 \
+	-e GEOTAG_ENABLE_POINT_IN_POLYGON=true \
+	-e GEOTAG_MAP_RENDERER=tangramjs \
+	-e GEOTAG_ENABLE_TILEZEN_TILEPACKS=true \
+	-e GEOTAG_TILEZEN_PATH_TILEPACK=/usr/local/data/sfo-tiles.db \
+	-e GEOTAG_NEXTZEN_TILE_URL='/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt'	\
+	-e GEOTAG_SERVER_URI=http://0.0.0.0:8080 \
+	-e GEOTAG_SPATIAL_DATABASE_URI='sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db' \
+	-e GEOTAG_ENABLE_EXIF_WRITER=true \
+	geotag-www
+```
+
+## AWS
+
+### App Runner
+
+The `geotag-www` Docker container (see above) 
+
+If nothing else make sure you specify the `GEOTAG_SERVER_URI=http://0.0.0.0:8080` environment variable. Without the App Runner health checks will fail and your service will not be created.
+
+Note that at this time [it is not possible to update environment variables](https://github.com/aws/apprunner-roadmap/issues/18) for an App Runner service once created. If you need to update your environment variables you'll need to create a new service.
 
 ## See also
 

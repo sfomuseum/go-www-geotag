@@ -17,8 +17,8 @@ RUN mkdir /usr/local/data
 
 # See notes in data/README.md
 
-COPY data/*.db /usr/local/data
-COPY data/*.pmtiles /usr/local/data
+COPY data/*.db /usr/local/data/
+COPY data/*.pmtiles /usr/local/data/
 
 RUN apk update && apk upgrade \
     && apk add ca-certificates
