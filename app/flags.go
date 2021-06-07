@@ -37,6 +37,8 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.String("path-editor", "/", "A relative path for the geotag editor application.")
 	fs.String("path-writer", "/update", "A relative path for sending write updates.")
 
+	fs.String("prefix", "", "A relative path to append to static assets.")
+		
 	fs.String("crumb-uri", "auto", "A valid aaronland/go-http-crumb.Crumb URI for generating (CSRF) crumbs. If the value is 'auto' then a random crumb URI will be generated.")
 
 	err := AppendMapFlags(fs)

@@ -53,6 +53,12 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 		return err
 	}
 
+	prefix, err := lookup.StringVar(fs, "prefix")
+
+	if err != nil {
+		return err
+	}
+	
 	// PROTOMAPS: this remains to be reconciled with the Tangram.js + Nextzen stuff
 	// In the end what you see below might just be the simplest way to "reconcile"
 	// things (20210423/thisisaaronland)
@@ -60,7 +66,7 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 	switch map_renderer {
 	case "protomaps":
 
-		err := protomaps.AppendAssetHandlers(mux)
+		err := protomaps.AppendAssetHandlersWithPrefix(mux, prefix)
 
 		if err != nil {
 			return err
@@ -68,7 +74,7 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 
 	case "tangramjs":
 
-		err := tangramjs.AppendAssetHandlers(mux)
+		err := tangramjs.AppendAssetHandlersWithPrefix(mux, prefix)
 
 		if err != nil {
 			return err
@@ -78,13 +84,13 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 		// pass
 	}
 
-	err = bootstrap.AppendAssetHandlers(mux)
+	err = bootstrap.AppendAssetHandlersWithPrefix(mux, prefix)
 
 	if err != nil {
 		return err
 	}
 
-	err = geotag.AppendAssetHandlers(mux)
+	err = geotag.AppendAssetHandlersWithPrefix(mux, prefix)
 
 	if err != nil {
 		return err
@@ -98,14 +104,14 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 
 	if enable_map_layers {
 
-		err = layers.AppendAssetHandlers(mux)
+		err = layers.AppendAssetHandlersWithPrefix(mux, prefix)
 
 		if err != nil {
 			return err
 		}
 	}
 
-	err = www.AppendStaticAssetHandlers(mux)
+	err = www.AppendStaticAssetHandlersWithPrefix(mux, prefix)
 
 	if err != nil {
 		return err
