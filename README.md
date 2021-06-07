@@ -294,6 +294,41 @@ Now when we perform our geocoding query for "Gowanus" and the map jumps to Brook
  
 ![](docs/images/geotag-three-columns-gowanus-heights.png)
 
+It is also possible to use Tangram.js with local Nextzen map tiles stored in a Tilezen "tilepack" (SQLite or MBTiles) database. For example:
+
+```
+$> bin/server \
+	-map-renderer tangramjs \
+	-enable-tilezen-tilepacks \
+	-tilezen-path-tilepack /usr/local/data/geotag-tiles.db \
+	-enable-point-in-polygon \
+	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db' \
+	-enable-placeholder \
+	-placeholder-endpoint http://localhost:3000
+```
+
+You can use the `build` and `merge` tools, which are part of the [tilezen/go-tilepacks](https://github.com/tilezen/go-tilepacks) package to create the tilepack database. For example, here is how you might build a tilepack database for the area around SFO and the neighbourhood of Gowanus in Brooklyn:
+
+```
+$> cd /usr/local/go-tilepacks
+$> make cli
+
+$> bin/build \
+	-dsn sfo.db -bounds '' \
+	-zooms 0-16 \
+	-url-template 'https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt?api_key={NEXTZEN_APIKEY}'
+
+$> bin/build \
+	-dsn gowanus.db -bounds '' \
+	-zooms 0-16 \
+	-url-template 'https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt?api_key={NEXTZEN_APIKEY}'
+
+
+$> bin/merge -output /usr/local/data/geotag-tiles.db sfo.db gowanus.db
+```
+
+Note that the `build` tool is not creating map tiles from scratch. It is fetching them from the Nextzen servers and, as such, you'll need to provide a valid [Nextzen API key](https://developers.nextzen.org/).
+
 ## See also
 
 * https://github.com/nypl-spacetime/Leaflet.GeotagPhoto
@@ -303,3 +338,5 @@ Now when we perform our geocoding query for "Gowanus" and the map jumps to Brook
 * https://github.com/sfomuseum/go-http-protomaps
 * https://github.com/aaronland/go-http-bootstrap
 * https://github.com/sfomuseum/go-exif-update
+* https://github.com/tilezen/go-tilepacks
+* https://developers.nextzen.org/
