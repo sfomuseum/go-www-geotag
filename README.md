@@ -407,9 +407,11 @@ $> docker run -it -p 8080:8080 \
 
 ### App Runner
 
-The `geotag-www` Docker container (see above) 
+The `geotag-www` Docker container (see above) can be inside of the [AWS AppRunner](https://aws.amazon.com/ru/apprunner/) service.
 
 If nothing else make sure you specify the `GEOTAG_SERVER_URI=http://0.0.0.0:8080` environment variable. Without the App Runner health checks will fail and your service will not be created.
+
+![](docs/images/geotag-apprunner-env.png)
 
 Note that at this time [it is not possible to update environment variables](https://github.com/aws/apprunner-roadmap/issues/18) for an App Runner service once created. If you need to update your environment variables you'll need to create a new service.
 
