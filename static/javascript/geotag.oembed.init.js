@@ -92,7 +92,12 @@ window.addEventListener("load", function load(event){
 	    img.setAttribute("id", "image");
 
 	    // https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
-	    img.crossOrigin = "Anonymous";
+
+	    var ed = document.getElementById("editor");
+
+	    if ((ed) && (ed.getAttribute("data-oembed-cors-image") == "enabled")){
+		img.crossOrigin = "Anonymous";
+	    }
 	    
 	    img.addEventListener("load", function(e){
 

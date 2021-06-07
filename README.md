@@ -337,8 +337,6 @@ Note that the `build` tool is not creating map tiles from scratch. It is fetchin
 $> bin/server \
 	-map-renderer protomaps \
 	-protomaps-tile-url file:///usr/local/data/pmtiles/sfo.pmtiles \
-	-enable-oembed \
-	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
 	-enable-exif-writer
 ```
 
@@ -352,6 +350,20 @@ Exif.GPSInfo.GPSLatitudeRef                  Ascii       2  South
 Exif.GPSInfo.GPSLongitude                    Rational    3  37deg 37' 25"
 Exif.GPSInfo.GPSLongitudeRef                 Ascii       2  East
 ```
+
+Note that if you want to use client-side EXIF encoding for geotagging information with images that you load from an OEmbed endpoint you will need to set the `-enable-oembed-cors-image` flag. This will append a `crossOrigin="Anonymous"` attribute to the `img` element used to load images from an OEmbed endpoint (allowing the image to be assigned to the `canvas` element used to encode EXIF data). For example:
+
+```
+$> bin/server \
+	-map-renderer protomaps \
+	-protomaps-tile-url file:///usr/local/data/pmtiles/sfo.pmtiles \
+	-enable-oembed \
+	-enable-oembed-cors-image \
+	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
+	-enable-exif-writer
+```
+
+Related: [Mozilla Developer Network - Allowing cross-origin use of images and canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image).
 
 ## See also
 

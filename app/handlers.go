@@ -303,6 +303,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	enable_oembed_cors_image, err := lookup.BoolVar(fs, "enable-oembed-cors-image")
+
+	if err != nil {
+		return nil, err
+	}
+
 	oembed_endpoints, err := lookup.StringVar(fs, "oembed-endpoints")
 
 	if err != nil {
@@ -338,7 +344,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if err != nil {
 		return nil, err
 	}
-		
+
 	enable_map_layers, err := lookup.BoolVar(fs, "enable-map-layers")
 
 	if err != nil {
@@ -400,7 +406,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if enable_exif_writer {
 		editor_opts.EnableExifWriter = enable_exif_writer
 	}
-	
+
 	if enable_placeholder {
 
 		_, err := url.Parse(placeholder_endpoint)
@@ -423,6 +429,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if enable_oembed {
 
 		editor_opts.EnableOEmbed = enable_oembed
+		editor_opts.EnableOEmbedCORSImage = enable_oembed_cors_image
 
 		urls := strings.Split(oembed_endpoints, ",")
 
