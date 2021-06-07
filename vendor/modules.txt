@@ -8,7 +8,7 @@ github.com/aaronland/go-http-crumb
 # github.com/aaronland/go-http-leaflet v0.1.0
 github.com/aaronland/go-http-leaflet
 github.com/aaronland/go-http-leaflet/static
-# github.com/aaronland/go-http-rewrite v0.0.6
+# github.com/aaronland/go-http-rewrite v0.0.7
 ## explicit
 github.com/aaronland/go-http-rewrite
 # github.com/aaronland/go-http-sanitize v0.0.5
@@ -143,11 +143,11 @@ github.com/sfomuseum/go-http-leaflet-geotag/static
 # github.com/sfomuseum/go-http-leaflet-layers v0.0.4
 ## explicit
 github.com/sfomuseum/go-http-leaflet-layers
-# github.com/sfomuseum/go-http-protomaps v0.0.9
+# github.com/sfomuseum/go-http-protomaps v0.0.11
 ## explicit
 github.com/sfomuseum/go-http-protomaps
 github.com/sfomuseum/go-http-protomaps/static
-# github.com/sfomuseum/go-http-tilezen v0.0.4
+# github.com/sfomuseum/go-http-tilezen v0.0.5
 ## explicit
 github.com/sfomuseum/go-http-tilezen/http
 # github.com/sfomuseum/go-tilezen v0.0.3
@@ -177,7 +177,7 @@ github.com/whosonfirst/go-bindata-assetfs
 # github.com/whosonfirst/go-cache v0.2.0
 ## explicit
 github.com/whosonfirst/go-cache
-# github.com/whosonfirst/go-ioutil v0.0.1
+# github.com/whosonfirst/go-ioutil v1.0.0
 github.com/whosonfirst/go-ioutil
 # github.com/whosonfirst/go-reader v0.5.0
 github.com/whosonfirst/go-reader
@@ -232,7 +232,7 @@ github.com/whosonfirst/go-whosonfirst-spatial/timer
 ## explicit
 github.com/whosonfirst/go-whosonfirst-spatial-pip
 github.com/whosonfirst/go-whosonfirst-spatial-pip/api
-# github.com/whosonfirst/go-whosonfirst-spatial-sqlite v0.0.38
+# github.com/whosonfirst/go-whosonfirst-spatial-sqlite v0.0.39
 ## explicit
 github.com/whosonfirst/go-whosonfirst-spatial-sqlite
 # github.com/whosonfirst/go-whosonfirst-spatial-www v0.0.30
@@ -252,7 +252,7 @@ github.com/whosonfirst/go-whosonfirst-sqlite-features
 github.com/whosonfirst/go-whosonfirst-sqlite-features/tables
 # github.com/whosonfirst/go-whosonfirst-sqlite-spr v0.0.6
 github.com/whosonfirst/go-whosonfirst-sqlite-spr
-# github.com/whosonfirst/go-whosonfirst-uri v0.2.0
+# github.com/whosonfirst/go-whosonfirst-uri v1.0.1
 github.com/whosonfirst/go-whosonfirst-uri
 # github.com/whosonfirst/go-writer v0.4.1
 github.com/whosonfirst/go-writer
@@ -262,6 +262,6 @@ github.com/whosonfirst/go-writer-featurecollection
 github.com/whosonfirst/walk
 # github.com/whosonfirst/warning v0.1.1
 github.com/whosonfirst/warning
-# golang.org/x/net v0.0.0-20210316092652-d523dce5a7f4
+# golang.org/x/net v0.0.0-20210525063256-abc453219eb5
 golang.org/x/net/html
 golang.org/x/net/html/atom

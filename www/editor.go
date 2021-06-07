@@ -21,6 +21,7 @@ type EditorHandlerOptions struct {
 	WriterPath string
 	// The whosonfirst/go-writer.Writer URI for publishing geotag information
 	WriterURI                  string
+	EnableExifWriter bool
 	MapRenderer                string
 	EnablePointInPolygon       bool
 	PointInPolygonEndpoint     string
@@ -39,6 +40,7 @@ type EditorHandlerVars struct {
 	EnableWriter               bool
 	WriterPath                 string
 	WriterURI                  string
+	EnableExifWriter               bool	
 	MapRenderer                string
 	EnablePointInPolygon       bool
 	PointInPolygonEndpoint     string
@@ -72,6 +74,7 @@ func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 			EnableWriter:               opts.EnableWriter,
 			WriterPath:                 opts.WriterPath,
 			WriterURI:                  opts.WriterURI,
+			EnableExifWriter: opts.EnableExifWriter,
 			MapRenderer:                opts.MapRenderer,
 		}
 

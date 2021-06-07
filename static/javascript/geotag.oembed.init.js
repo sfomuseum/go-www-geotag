@@ -89,6 +89,7 @@ window.addEventListener("load", function load(event){
 	    m_el.innerHTML = "";	
 	    
 	    var img = document.createElement("img");
+	    img.setAttribute("id", "image");
 	    img.setAttribute("src", rsp["url"]);
 
 	    i_el.appendChild(img);

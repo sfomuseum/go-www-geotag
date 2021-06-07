@@ -314,12 +314,12 @@ $> cd /usr/local/go-tilepacks
 $> make cli
 
 $> bin/build \
-	-dsn sfo.db -bounds '' \
+	-dsn sfo.db -bounds '37.604481,-122.405228,37.645194,-122.355044' \
 	-zooms 0-16 \
 	-url-template 'https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt?api_key={NEXTZEN_APIKEY}'
 
 $> bin/build \
-	-dsn gowanus.db -bounds '' \
+	-dsn gowanus.db -bounds '40.665526517,-73.99896,40.685224,-73.9800505512' \
 	-zooms 0-16 \
 	-url-template 'https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt?api_key={NEXTZEN_APIKEY}'
 
@@ -328,6 +328,30 @@ $> bin/merge -output /usr/local/data/geotag-tiles.db sfo.db gowanus.db
 ```
 
 Note that the `build` tool is not creating map tiles from scratch. It is fetching them from the Nextzen servers and, as such, you'll need to provide a valid [Nextzen API key](https://developers.nextzen.org/).
+
+## Client-side EXIF
+
+...
+
+```
+$> bin/server \
+	-map-renderer protomaps \
+	-protomaps-tile-url file:///usr/local/data/pmtiles/sfo.pmtiles \
+	-enable-oembed \
+	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
+	-enable-exif-writer
+```
+
+![](docs/images/go-www-geotag-710-exif.png)
+
+```
+$> exiv2 -pa ~/Downloads/geotagged-710.jpg 
+Exif.Image.GPSTag                            Long        1  26
+Exif.GPSInfo.GPSLatitude                     Rational    3  122deg 24' 0"
+Exif.GPSInfo.GPSLatitudeRef                  Ascii       2  South
+Exif.GPSInfo.GPSLongitude                    Rational    3  37deg 37' 25"
+Exif.GPSInfo.GPSLongitudeRef                 Ascii       2  East
+```
 
 ## See also
 

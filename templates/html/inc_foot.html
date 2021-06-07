@@ -25,16 +25,17 @@
     <link rel="stylesheet" type="text/css" href="/css/pointinpolygon.css" />
     {{ end }}    
     {{ if .EnableWriter }}
-    {{ if eq .WriterURI "exif://" }}
+    <script type="text/javascript" src="/javascript/geotag.api.js"></script>
+    <script type="text/javascript" src="/javascript/geotag.writer.api.js"></script>
+    <script type="text/javascript" src="/javascript/geotag.writer.api.init.js"></script>    
+    {{ end }}
+    {{ if .EnableExifWriter }}
     <script type="text/javascript" src="/javascript/wasm_exec.js"></script> 
     <script type="text/javascript" src="/javascript/FileSaver.min.js"></script>   
     <script type="text/javascript" src="/javascript/geotag.writer.exif.js"></script>    
     <script type="text/javascript" src="/javascript/geotag.writer.exif.init.js"></script>
-    {{ else }}
-    <script type="text/javascript" src="/javascript/geotag.api.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.writer.api.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.writer.api.init.js"></script>    
-    {{ end }}    
+    {{ end }}
+    {{ if or .EnableWriter .EnableExifWriter }}
     <link rel="stylesheet" type="text/css" href="/css/writer.css" />
     {{ end }}
     <script type="text/javascript" src="/javascript/geotag.camera.init.js"></script>
