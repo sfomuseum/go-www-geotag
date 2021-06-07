@@ -303,6 +303,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		return nil, err
 	}
 
+	enable_oembed_cors_image, err := lookup.BoolVar(fs, "enable-oembed-cors-image")
+
+	if err != nil {
+		return nil, err
+	}
+
 	oembed_endpoints, err := lookup.StringVar(fs, "oembed-endpoints")
 
 	if err != nil {
@@ -328,6 +334,12 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	}
 
 	path_writer, err := lookup.StringVar(fs, "path-writer")
+
+	if err != nil {
+		return nil, err
+	}
+
+	enable_exif_writer, err := lookup.BoolVar(fs, "enable-exif-writer")
 
 	if err != nil {
 		return nil, err
@@ -391,6 +403,10 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 		editor_opts.WriterURI = writer_uri
 	}
 
+	if enable_exif_writer {
+		editor_opts.EnableExifWriter = enable_exif_writer
+	}
+
 	if enable_placeholder {
 
 		_, err := url.Parse(placeholder_endpoint)
@@ -413,6 +429,7 @@ func NewEditorHandler(ctx context.Context, fs *flag.FlagSet) (http.Handler, erro
 	if enable_oembed {
 
 		editor_opts.EnableOEmbed = enable_oembed
+		editor_opts.EnableOEmbedCORSImage = enable_oembed_cors_image
 
 		urls := strings.Split(oembed_endpoints, ",")
 
@@ -622,22 +639,6 @@ func AppendWriterHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 	}
 
 	if !enable_writer {
-		return nil
-	}
-
-	writer_uri, err := lookup.StringVar(fs, "writer-uri")
-
-	if err != nil {
-		return err
-	}
-
-	// Hey look. We have hardcoded and exception for the exif:// scheme
-	// which we use as a trigger to encode geotagging information using
-	// the update_exif.wasm web assembly binary. I am not convinced this
-	// is the best way to handle that split but it will do for now.
-	// (20210517/thisisaaronland)
-
-	if writer_uri == "exif://" {
 		return nil
 	}
 

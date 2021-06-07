@@ -13,23 +13,6 @@ window.addEventListener("load", function load(event){
     var api_key = document.body.getAttribute("data-nextzen-api-key");
     var style_url = document.body.getAttribute("data-nextzen-style-url");
     var tile_url = document.body.getAttribute("data-nextzen-tile-url");    
-
-    /*
-    if (! api_key){
-	console.log("Missing API key");
-	return;
-    }
-    
-    if (! style_url){
-	console.log("Missing style URL");
-	return;
-    }
-    
-    if (! tile_url){
-	console.log("Missing tile URL");
-	return;
-    }
-     */
     
     var init_lat = document.body.getAttribute("data-initial-latitude");
 

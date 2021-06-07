@@ -1,7 +1,7 @@
 {{ define "editor" }}
 {{ template "inc_head" . }}
 
-<div class="container" id="editor" {{ if .EnablePointInPolygon}}data-point-in-polygon="enabled" data-point-in-polygon-endpoint="{{ .PointInPolygonEndpoint }}" data-point-in-polygon-data-endpoint="{{ .PointInPolygonDataEndpoint }}"{{ end }}{{ if .EnableWriter }} data-writer-path="{{ .WriterPath }}"{{ end }}>
+<div class="container" id="editor" {{ if .EnablePointInPolygon}}data-point-in-polygon="enabled" data-point-in-polygon-endpoint="{{ .PointInPolygonEndpoint }}" data-point-in-polygon-data-endpoint="{{ .PointInPolygonDataEndpoint }}"{{ end }}{{ if .EnableWriter }} data-writer-path="{{ .WriterPath }}"{{ end }}{{ if .EnableOEmbedCORSImage }} data-oembed-cors-image="enabled"{{ end }}>
 
 
     <div class="col" id="col-map">	
@@ -32,7 +32,7 @@
 				<file-attachment input="file" id="file-attachment">
 				    <input type="file" id="file" multiple class="form-control" />
 				</file-attachment>
-				<small id="file-attachment-help" class="form-text text-muted">Select or drop an image file here.</small>					    
+
 			    </div>
 			    
 			    {{ if .EnableOEmbed }}			
@@ -80,7 +80,7 @@
     <div class="col" id="col-output">    
 	<div id="feature"></div>
 	
-    	{{ if .EnableWriter }}
+    	{{ if or .EnableWriter .EnableExifWriter }}
 	<button id="writer-save" class="btn btn-primary">Save</button>
 	{{ end }}
 	

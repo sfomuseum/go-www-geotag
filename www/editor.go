@@ -8,19 +8,21 @@ import (
 )
 
 type EditorHandlerOptions struct {
-	Templates           *template.Template
-	InitialLatitude     float64
-	InitialLongitude    float64
-	InitialZoom         int
-	EnablePlaceholder   bool
-	PlaceholderEndpoint string
-	EnableOEmbed        bool
-	OEmbedEndpoints     []string
-	EnableWriter        bool
+	Templates             *template.Template
+	InitialLatitude       float64
+	InitialLongitude      float64
+	InitialZoom           int
+	EnablePlaceholder     bool
+	PlaceholderEndpoint   string
+	EnableOEmbed          bool
+	EnableOEmbedCORSImage bool
+	OEmbedEndpoints       []string
+	EnableWriter          bool
 	// The local URI for invoking the application's write API
 	WriterPath string
 	// The whosonfirst/go-writer.Writer URI for publishing geotag information
 	WriterURI                  string
+	EnableExifWriter           bool
 	MapRenderer                string
 	EnablePointInPolygon       bool
 	PointInPolygonEndpoint     string
@@ -35,10 +37,12 @@ type EditorHandlerVars struct {
 	EnablePlaceholder          bool
 	PlaceholderEndpoint        string
 	EnableOEmbed               bool
+	EnableOEmbedCORSImage      bool
 	OEmbedEndpoints            string
 	EnableWriter               bool
 	WriterPath                 string
 	WriterURI                  string
+	EnableExifWriter           bool
 	MapRenderer                string
 	EnablePointInPolygon       bool
 	PointInPolygonEndpoint     string
@@ -65,6 +69,7 @@ func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 			EnablePlaceholder:          opts.EnablePlaceholder,
 			PlaceholderEndpoint:        opts.PlaceholderEndpoint,
 			EnableOEmbed:               opts.EnableOEmbed,
+			EnableOEmbedCORSImage:      opts.EnableOEmbedCORSImage,
 			OEmbedEndpoints:            oembed_endpoints,
 			EnablePointInPolygon:       opts.EnablePointInPolygon,
 			PointInPolygonEndpoint:     opts.PointInPolygonEndpoint,
@@ -72,6 +77,7 @@ func EditorHandler(opts *EditorHandlerOptions) (http.Handler, error) {
 			EnableWriter:               opts.EnableWriter,
 			WriterPath:                 opts.WriterPath,
 			WriterURI:                  opts.WriterURI,
+			EnableExifWriter:           opts.EnableExifWriter,
 			MapRenderer:                opts.MapRenderer,
 		}
 

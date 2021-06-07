@@ -88,20 +88,34 @@ window.addEventListener("load", function load(event){
 	    i_el.innerHTML = "";
 	    m_el.innerHTML = "";	
 	    
-	    var img = document.createElement("img");
-	    img.setAttribute("src", rsp["url"]);
+	    var img = new Image;
+	    img.setAttribute("id", "image");
 
-	    i_el.appendChild(img);
-	    i_el.style.display = "block";
+	    // https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
+
+	    var ed = document.getElementById("editor");
+
+	    if ((ed) && (ed.getAttribute("data-oembed-cors-image") == "enabled")){
+		img.crossOrigin = "Anonymous";
+	    }
 	    
-	    var title = rsp["title"];
+	    img.addEventListener("load", function(e){
 
-	    var title = document.createElement("a");
-	    title.setAttribute("href", rsp["author_url"]);
-	    title.appendChild(document.createTextNode(rsp["title"]));
-
-	    m_el.appendChild(title);
-	    m_el.style.display = "block";
+		i_el.appendChild(img);
+		i_el.style.display = "block";
+		
+		var title = rsp["title"];
+		
+		var title = document.createElement("a");
+		title.setAttribute("href", rsp["author_url"]);
+		title.appendChild(document.createTextNode(rsp["title"]));
+		
+		m_el.appendChild(title);
+		m_el.style.display = "block";
+		
+	    }, false);
+	    
+	    img.src = rsp["url"];
 	    
 	    // 
 

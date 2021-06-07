@@ -19,10 +19,13 @@ func CommonFlags() (*flag.FlagSet, error) {
 	fs.String("placeholder-endpoint", "", "A valid Placeholder API endpoint to query.")
 
 	fs.Bool("enable-oembed", false, "Enable oEmbed lookups for images.")
+	fs.Bool("enable-oembed-cors-image", false, "Enable the crossOrigin attribute on oEmbed images.")
 	fs.String("oembed-endpoints", "", "A comma-separated list of valid oEmbed endpoints to query.")
 
 	fs.Bool("enable-writer", false, "Enable output of the leaflet-geotag plugin to be written to a go-www-geotag/writer.Writer instance.")
-	fs.String("writer-uri", "stdout://", "A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance OR 'exif://' which will enable embedding focal point but not field-of-view geotagging information focal point but not field-of-view in a downloadable JPEG representation of an image.")
+	fs.String("writer-uri", "stdout://", "A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance.")
+
+	fs.Bool("enable-exif-writer", false, "Enable client-side (WebAssembly) EXIF writer which will enable embedding focal point but not field-of-view geotagging information focal point but not field-of-view in a downloadable JPEG representation of an image.")
 
 	fs.Bool("disable-writer-crumb", false, "Do not require a valid CSRF crumb for all writes.")
 

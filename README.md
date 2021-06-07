@@ -33,10 +33,14 @@ $> ./bin/server -h
     	Enable wof:placetype values that are not explicitly defined in the whosonfirst/go-whosonfirst-placetypes repository.
   -enable-editor
     	Enable the geotagging editor interface. (default true)
+  -enable-exif-writer
+    	Enable client-side (WebAssembly) EXIF writer which will enable embedding focal point but not field-of-view geotagging information focal point but not field-of-view in a downloadable JPEG representation of an image.
   -enable-map-layers
     	Enable use of the leaflet-layers-control Leaflet control element for custom custom map overlays.
   -enable-oembed
     	Enable oEmbed lookups for images.
+  -enable-oembed-cors-image
+    	Enable the crossOrigin attribute on oEmbed images.
   -enable-placeholder
     	Enable use of the Placeholder API for location searches.
   -enable-point-in-polygon
@@ -46,6 +50,7 @@ $> ./bin/server -h
   -enable-tilezen-tilepacks
     	Enable to use of local Tilezen MBTiles database for tile-serving.
    -enable-writer
+  -enable-writer
     	Enable output of the leaflet-geotag plugin to be written to a go-www-geotag/writer.Writer instance.
   -enable-writer-cors
     	Enable CORS support for the writer endpoint.
@@ -100,16 +105,16 @@ $> ./bin/server -h
   -tilezen-path-tilepack string
     	A valid path for a local Tilezen MBTiles database.
   -tilezen-url-tiles string
-    	The URL (a relative path) for serving local Tilezen MBTiles database. (default "/tilezen/")	
+    	The URL (a relative path) for serving local Tilezen MBTiles database. (default "/tilezen/")
   -verbose
     	Be chatty.
   -writer-cors-allowed-origins string
     	A comma-separated list of origins to allow for CORS support. (default "*")
   -writer-uri string
-    	A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance OR 'exif://' which will enable embedding focal point but not field-of-view geotagging information as EXIF properties in a downloadable JPEG representation of an image. (default "stdout://")	
+    	A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance. (default "stdout://")
 ```
 
-For example:
+#### Example (Protomaps)
 
 ```
 $> bin/server \
@@ -183,7 +188,7 @@ $> ./bin/wof-sqlite-index-features \
 
 _Related: [Reverse-Geocoding in Time at SFO Museum](https://millsfield.sfomuseum.org/blog/2021/03/26/spatial/)_
 
-Here's another example:
+#### Example (Tangram.js)
 
 ```
 $> bin/server \
@@ -294,6 +299,7 @@ Now when we perform our geocoding query for "Gowanus" and the map jumps to Brook
  
 ![](docs/images/geotag-three-columns-gowanus-heights.png)
 
+<<<<<<< HEAD
 ## Docker
 
 To build the Docker container:
@@ -325,6 +331,83 @@ The `geotag-www` Docker container (see above)
 If nothing else make sure you specify the `GEOTAG_SERVER_URI=http://0.0.0.0:8080` environment variable. Without the App Runner health checks will fail and your service will not be created.
 
 Note that at this time [it is not possible to update environment variables](https://github.com/aws/apprunner-roadmap/issues/18) for an App Runner service once created. If you need to update your environment variables you'll need to create a new service.
+=======
+#### Example (Tangram.js and local "tilepacks")
+
+It is also possible to use Tangram.js with local Nextzen map tiles stored in a local Tilezen "tilepack" (SQLite or MBTiles) database. For example:
+
+```
+$> bin/server \
+	-map-renderer tangramjs \
+	-enable-tilezen-tilepacks \
+	-tilezen-path-tilepack /usr/local/data/geotag-tiles.db \
+	-enable-point-in-polygon \
+	-spatial-database-uri 'sqlite://?dsn=/usr/local/data/sfomuseum-architecture.db' \
+	-enable-placeholder \
+	-placeholder-endpoint http://localhost:3000
+```
+
+You can use the `build` and `merge` tools, which are part of the [tilezen/go-tilepacks](https://github.com/tilezen/go-tilepacks) package to create the tilepack database. For example, here is how you might build a tilepack database for the area around SFO and the neighbourhood of Gowanus in Brooklyn:
+
+```
+$> cd /usr/local/go-tilepacks
+$> make cli
+
+$> bin/build \
+	-dsn sfo.db -bounds '37.604481,-122.405228,37.645194,-122.355044' \
+	-zooms 0-16 \
+	-url-template 'https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt?api_key={NEXTZEN_APIKEY}'
+
+$> bin/build \
+	-dsn gowanus.db -bounds '40.665526517,-73.99896,40.685224,-73.9800505512' \
+	-zooms 0-16 \
+	-url-template 'https://tile.nextzen.org/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt?api_key={NEXTZEN_APIKEY}'
+
+
+$> bin/merge -output /usr/local/data/geotag-tiles.db sfo.db gowanus.db
+```
+
+Note that the `build` tool is not creating map tiles from scratch. It is fetching them from the Nextzen servers and, as such, you'll need to provide a valid [Nextzen API key](https://developers.nextzen.org/).
+
+## Example (Client-side EXIF encoding)
+
+If the `-enable-exif-writer` flag is set then geocoding information will be written to a new downloaded image which can be downloaded to your computer. Client-side EXIF encoding uses the [go-exif-update](https://github.com/sfomuseum/go-exif-update) WebAssembly binary which will enable embedding focal point but not field-of-view geotagging information focal point but not field-of-view in a downloadable JPEG representation of an image. For example:
+
+```
+$> bin/server \
+	-map-renderer protomaps \
+	-protomaps-tile-url file:///usr/local/data/pmtiles/sfo.pmtiles \
+	-enable-exif-writer
+```
+
+Clicking the "Save" button will prompt you to save a new image to your computer.
+
+![](docs/images/go-www-geotag-710-exif.png)
+
+Inspecting it, using a tool like `exiv2`, shows that the geotagging information has been written to the image's `GPS` EXIF tags:
+
+```
+$> exiv2 -pa ~/Downloads/geotagged-710.jpg 
+Exif.Image.GPSTag                            Long        1  26
+Exif.GPSInfo.GPSLatitude                     Rational    3  122deg 24' 0"
+Exif.GPSInfo.GPSLatitudeRef                  Ascii       2  South
+Exif.GPSInfo.GPSLongitude                    Rational    3  37deg 37' 25"
+Exif.GPSInfo.GPSLongitudeRef                 Ascii       2  East
+```
+
+Note that if you want to use client-side EXIF encoding for geotagging information with images that you load from an OEmbed endpoint you will need to set the `-enable-oembed-cors-image` flag. This will append a `crossOrigin="Anonymous"` attribute to the `img` element used to load images from an OEmbed endpoint (allowing the image to be assigned to the `canvas` element used to encode EXIF data). For example:
+
+```
+$> bin/server \
+	-map-renderer protomaps \
+	-protomaps-tile-url file:///usr/local/data/pmtiles/sfo.pmtiles \
+	-enable-oembed \
+	-enable-oembed-cors-image \
+	-oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' \
+	-enable-exif-writer
+```
+
+_Related: [Mozilla Developer Network - Allowing cross-origin use of images and canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image)._
 
 ## See also
 
@@ -335,3 +418,5 @@ Note that at this time [it is not possible to update environment variables](http
 * https://github.com/sfomuseum/go-http-protomaps
 * https://github.com/aaronland/go-http-bootstrap
 * https://github.com/sfomuseum/go-exif-update
+* https://github.com/tilezen/go-tilepacks
+* https://developers.nextzen.org/
