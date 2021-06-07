@@ -33,10 +33,14 @@ $> ./bin/server -h
     	Enable wof:placetype values that are not explicitly defined in the whosonfirst/go-whosonfirst-placetypes repository.
   -enable-editor
     	Enable the geotagging editor interface. (default true)
+  -enable-exif-writer
+    	Enable client-side (WebAssembly) EXIF writer which will enable embedding focal point but not field-of-view geotagging information focal point but not field-of-view in a downloadable JPEG representation of an image.
   -enable-map-layers
     	Enable use of the leaflet-layers-control Leaflet control element for custom custom map overlays.
   -enable-oembed
     	Enable oEmbed lookups for images.
+  -enable-oembed-cors-image
+    	Enable the crossOrigin attribute on oEmbed images.
   -enable-placeholder
     	Enable use of the Placeholder API for location searches.
   -enable-point-in-polygon
@@ -44,7 +48,7 @@ $> ./bin/server -h
   -enable-proxy-tiles
     	Enable the use of a local tile proxy for Nextzen map tiles.
   -enable-tilezen-tilepacks
-    	Enable to use of local Tilezen MBTiles database.	
+    	Enable to use of local Tilezen MBTiles database.
   -enable-writer
     	Enable output of the leaflet-geotag plugin to be written to a go-www-geotag/writer.Writer instance.
   -enable-writer-cors
@@ -100,13 +104,13 @@ $> ./bin/server -h
   -tilezen-path-tilepack string
     	A valid path for a local Tilezen MBTiles database.
   -tilezen-url-tiles string
-    	The URL (a relative path) for serving local Tilezen MBTiles database. (default "/tilezen/")	
+    	The URL (a relative path) for serving local Tilezen MBTiles database. (default "/tilezen/")
   -verbose
     	Be chatty.
   -writer-cors-allowed-origins string
     	A comma-separated list of origins to allow for CORS support. (default "*")
   -writer-uri string
-    	A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance OR 'exif://' which will enable embedding focal point but not field-of-view geotagging information as EXIF properties in a downloadable JPEG representation of an image. (default "stdout://")	
+    	A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance. (default "stdout://")
 ```
 
 #### Example (Protomaps)
