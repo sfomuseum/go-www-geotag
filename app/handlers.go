@@ -58,7 +58,7 @@ func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeM
 	if err != nil {
 		return err
 	}
-	
+
 	// PROTOMAPS: this remains to be reconciled with the Tangram.js + Nextzen stuff
 	// In the end what you see below might just be the simplest way to "reconcile"
 	// things (20210423/thisisaaronland)
@@ -137,6 +137,27 @@ func AppendPointInPolygonHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet,
 
 func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
+	prefix, err := lookup.StringVar(fs, "prefix")
+
+	if err != nil {
+		return err
+	}
+
+	path_pip, err := lookup.StringVar(fs, "path-point-in-polygon")
+
+	if err != nil {
+		return fmt.Errorf("Failed to create PointInPolygonHandler handler - unable to lookup -path-point-in-polygon flag, %v", err)
+	}
+
+	path_pip_data, err := lookup.StringVar(fs, "path-point-in-polygon-data")
+
+	if err != nil {
+		return fmt.Errorf("Failed to create DataHandler handler - unable to lookup -path-point-in-polygon-data flag, %v", err)
+	}
+	
+	path_pip = EnsureRoot(path_pip, prefix)
+	path_pip_data = EnsureRoot(path_pip_data, prefix)
+
 	app, err := spatial_app.NewSpatialApplicationWithFlagSet(ctx, fs)
 
 	if err != nil {
@@ -153,24 +174,12 @@ func AppendPointInPolygonHandler(ctx context.Context, fs *flag.FlagSet, mux *htt
 		return fmt.Errorf("Failed to create PointInPolygonHandler handler, %v", err)
 	}
 
-	path_pip, err := lookup.StringVar(fs, "path-point-in-polygon")
-
-	if err != nil {
-		return fmt.Errorf("Failed to create PointInPolygonHandler handler - unable to lookup -path-point-in-polygon flag, %v", err)
-	}
-
 	mux.Handle(path_pip, pip_handler)
 
 	data_handler, err := spatial_www.NewDataHandler(app.SpatialDatabase)
 
 	if err != nil {
 		return fmt.Errorf("Failed to create DataHandler, %v", err)
-	}
-
-	path_pip_data, err := lookup.StringVar(fs, "path-point-in-polygon-data")
-
-	if err != nil {
-		return fmt.Errorf("Failed to create DataHandler handler - unable to lookup -path-point-in-polygon-data flag, %v", err)
 	}
 
 	mux.Handle(path_pip_data, data_handler)
@@ -189,7 +198,9 @@ func AppendEditorHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 		return nil
 	}
 
-	path, err := lookup.StringVar(fs, "path-editor")
+	// Note: We don't append prefix here... at least not by default
+	
+	path_editor, err := lookup.StringVar(fs, "path-editor")
 
 	if err != nil {
 		return err
@@ -201,7 +212,7 @@ func AppendEditorHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet, mux *ht
 		return err
 	}
 
-	mux.Handle(path, handler)
+	mux.Handle(path_editor, handler)
 	return nil
 }
 

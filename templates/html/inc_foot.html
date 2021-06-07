@@ -1,45 +1,45 @@
 {{ define "inc_foot" }}
   </body>
-    <script type="text/javascript" src="/javascript/attachment.js"></script>
-    <script type="text/javascript" src="/javascript/whosonfirst.net.js"></script>  
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/attachment.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/whosonfirst.net.js" }}"></script>  
     {{ if eq .PageContext "Editor" }}
-    <script type="text/javascript" src="/javascript/geotag.maps.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.camera.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/editor.css" />
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.maps.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.camera.js" }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ EnsureRoot "/css/editor.css" }}" />
     {{ if .EnableOEmbed }}
-    <script type="text/javascript" src="/javascript/geotag.oembed.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.oembed.init.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/oembed.css" />
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.oembed.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.oembed.init.js" }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ EnsureRoot "/css/oembed.css" }}" />
     {{ end }}
     {{ if .EnablePlaceholder }}
-    <script type="text/javascript" src="/javascript/leaflet.control.geocoder.js"></script>
-    <script type="text/javascript" src="/javascript/leaflet.control.geocoder.placeholder.js"></script>
-    <script type="text/javascript" src="/javascript/leaflet.control.geocoder.placeholder.init.js"></script>    
-    <link rel="stylesheet" type="text/css" href="/css/leaflet.control.geocoder.css" />
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/leaflet.control.geocoder.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/leaflet.control.geocoder.placeholder.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/leaflet.control.geocoder.placeholder.init.js" }}"></script>    
+    <link rel="stylesheet" type="text/css" href="{{ EnsureRoot "/css/leaflet.control.geocoder.css" }}" />
     {{ end }}
     {{ if .EnablePointInPolygon }}
-    <script type="text/javascript" src="/javascript/geotag.pointinpolygon.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.pointinpolygon.init.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.data.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.data.init.js"></script>    
-    <link rel="stylesheet" type="text/css" href="/css/pointinpolygon.css" />
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.pointinpolygon.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.pointinpolygon.init.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.data.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.data.init.js" }}"></script>    
+    <link rel="stylesheet" type="text/css" href="{{ EnsureRoot "/css/pointinpolygon.css" }}" />
     {{ end }}    
     {{ if .EnableWriter }}
-    <script type="text/javascript" src="/javascript/geotag.api.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.writer.api.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.writer.api.init.js"></script>    
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.api.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.writer.api.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.writer.api.init.js" }}"></script>    
     {{ end }}
     {{ if .EnableExifWriter }}
-    <script type="text/javascript" src="/javascript/wasm_exec.js"></script> 
-    <script type="text/javascript" src="/javascript/FileSaver.min.js"></script>   
-    <script type="text/javascript" src="/javascript/geotag.writer.exif.js"></script>    
-    <script type="text/javascript" src="/javascript/geotag.writer.exif.init.js"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/wasm_exec.js" }}"></script> 
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/FileSaver.min.js" }}"></script>   
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.writer.exif.js" }}"></script>    
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.writer.exif.init.js" }}"></script>
     {{ end }}
     {{ if or .EnableWriter .EnableExifWriter }}
-    <link rel="stylesheet" type="text/css" href="/css/writer.css" />
+    <link rel="stylesheet" type="text/css" href="{{ EnsureRoot "/css/writer.css" }}" />
     {{ end }}
-    <script type="text/javascript" src="/javascript/geotag.camera.init.js"></script>
-    <script type="text/javascript" src="/javascript/geotag.editor.init.js"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.camera.init.js" }}"></script>
+    <script type="text/javascript" src="{{ EnsureRoot "/javascript/geotag.editor.init.js" }}"></script>
     {{ end }}  
 </html>
 {{ end }}
