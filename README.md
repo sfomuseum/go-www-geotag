@@ -109,7 +109,7 @@ $> ./bin/server -h
     	A valid go-www-geotag/writer.Writer URI for creating a writer.Writer instance OR 'exif://' which will enable embedding focal point but not field-of-view geotagging information as EXIF properties in a downloadable JPEG representation of an image. (default "stdout://")	
 ```
 
-For example:
+#### Example (Protomaps)
 
 ```
 $> bin/server \
@@ -183,7 +183,7 @@ $> ./bin/wof-sqlite-index-features \
 
 _Related: [Reverse-Geocoding in Time at SFO Museum](https://millsfield.sfomuseum.org/blog/2021/03/26/spatial/)_
 
-Here's another example:
+#### Example (Tangram.js)
 
 ```
 $> bin/server \
@@ -294,7 +294,9 @@ Now when we perform our geocoding query for "Gowanus" and the map jumps to Brook
  
 ![](docs/images/geotag-three-columns-gowanus-heights.png)
 
-It is also possible to use Tangram.js with local Nextzen map tiles stored in a Tilezen "tilepack" (SQLite or MBTiles) database. For example:
+#### Example (Tangram.js and local "tilepacks")
+
+It is also possible to use Tangram.js with local Nextzen map tiles stored in a local Tilezen "tilepack" (SQLite or MBTiles) database. For example:
 
 ```
 $> bin/server \
@@ -329,9 +331,9 @@ $> bin/merge -output /usr/local/data/geotag-tiles.db sfo.db gowanus.db
 
 Note that the `build` tool is not creating map tiles from scratch. It is fetching them from the Nextzen servers and, as such, you'll need to provide a valid [Nextzen API key](https://developers.nextzen.org/).
 
-## Client-side EXIF
+## Example (Client-side EXIF encoding)
 
-...
+If the `-enable-exif-writer` flag is set then geocoding information will be written to a new downloaded image which can be downloaded to your computer. Client-side EXIF encoding uses the [go-exif-update](https://github.com/sfomuseum/go-exif-update) WebAssembly binary which will enable embedding focal point but not field-of-view geotagging information focal point but not field-of-view in a downloadable JPEG representation of an image. For example:
 
 ```
 $> bin/server \
@@ -340,7 +342,11 @@ $> bin/server \
 	-enable-exif-writer
 ```
 
+Clicking the "Save" button will prompt you to save a new image to your computer.
+
 ![](docs/images/go-www-geotag-710-exif.png)
+
+Inspecting it, using a tool like `exiv2`, shows that the geotagging information has been written to the image's `GPS` EXIF tags:
 
 ```
 $> exiv2 -pa ~/Downloads/geotagged-710.jpg 
