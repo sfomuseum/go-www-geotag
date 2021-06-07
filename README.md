@@ -369,7 +369,7 @@ $> bin/server \
 	-enable-exif-writer
 ```
 
-Related: [Mozilla Developer Network - Allowing cross-origin use of images and canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image).
+_Related: [Mozilla Developer Network - Allowing cross-origin use of images and canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image)._
 
 ## See also
 
