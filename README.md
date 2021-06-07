@@ -384,6 +384,10 @@ To build the Docker container:
 $> docker build -t geotag-www .
 ```
 
+Note that the container copies files in this repository's `data` directory to the container's `/usr/local/data` folder. Specifically, any files ending in `.db` or `.pmtiles`. These are SQLite or Protomaps database files that are used by the geotagging application.
+
+This repository _does not ship with any default SQLite or Protomaps database files._ You will need to create these files tailor-fit to your application and copy them in to the `data` directory before building your container. Importantly, files in the `data` directory are explicitly excluded from being commited to Git.
+
 And then to run it (for example):
 
 ```
