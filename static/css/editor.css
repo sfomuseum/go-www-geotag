@@ -15,6 +15,11 @@ summary {
 
 /* IDs */
 
+#col-controls {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
 #controls {
 	max-height: 80vh;
 	overflow:auto;
