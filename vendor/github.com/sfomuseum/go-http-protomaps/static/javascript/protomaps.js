@@ -2914,7 +2914,7 @@ var protomaps = (() => {
         ctx.rotate(Math.atan2(dy, dx));
         if (dx < 0)
           ctx.scale(0, -1);
-        ctx.font = this.font;
+        ctx.font = font;
         if (this.stroke > 0) {
           ctx.strokeStyle = this.stroke;
           ctx.lineWidth = this.width;
@@ -3272,12 +3272,6 @@ var protomaps = (() => {
         symbolizer: new PolygonLabelSymbolizer({
           fill: params.naturalLabel,
           font: "italic 400 12px sans-serif"
-        })
-      },
-      {
-        dataLayer: "roads",
-        symbolizer: new LineLabelSymbolizer({
-          fill: params.roadsLabel
         })
       },
       {
@@ -3751,10 +3745,18 @@ var protomaps = (() => {
     return new Promise((resolve, reject) => {
       let img = new Image();
       img.onload = () => resolve(img);
-      img.onerror = reject;
+      img.onerror = () => reject("Invalid SVG");
       img.src = src;
     });
   };
+  var MISSING = `
+<svg width="20px" height="20px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <rect width="50" height="50" fill="#cccccc"/>
+    <g transform="translate(5,5)">
+        <path fill="none" stroke="#666666" stroke-width="7" d="m11,12a8.5,8 0 1,1 17,0q0,4-4,6t-4.5,4.5-.4,4v.2m0,3v7"/>
+    </g>
+</svg>
+`;
   var Protosprites = class {
     constructor(src) {
       this.src = src;
@@ -3771,9 +3773,13 @@ var protomaps = (() => {
         let tree = new window.DOMParser().parseFromString(src, "text/html");
         let icons = tree.body.children;
         this.mapping = {};
-        let boxes = [];
+        let missingImg = yield mkimg("data:image/svg+xml;base64," + btoa(MISSING));
+        let boxes = [
+          {w: missingImg.width * scale, h: missingImg.height * scale, img: missingImg}
+        ];
+        let serializer = new XMLSerializer();
         for (let ps of icons) {
-          var svg64 = btoa(new XMLSerializer().serializeToString(ps));
+          var svg64 = btoa(serializer.serializeToString(ps));
           var image64 = "data:image/svg+xml;base64," + svg64;
           let img = yield mkimg(image64);
           boxes.push({w: img.width * scale, h: img.height * scale, img, id: ps.id});
@@ -3785,7 +3791,10 @@ var protomaps = (() => {
         let ctx = this.canvas.getContext("2d");
         for (let box of boxes) {
           ctx.drawImage(box.img, box.x, box.y, box.w, box.h);
-          this.mapping[box.id] = {x: box.x, y: box.y, w: box.w, h: box.h};
+          if (box.id)
+            this.mapping[box.id] = {x: box.x, y: box.y, w: box.w, h: box.h};
+          else
+            this.missingBox = {x: box.x, y: box.y, w: box.w, h: box.h};
         }
         return this;
       });
@@ -3793,7 +3802,7 @@ var protomaps = (() => {
     get(name) {
       let result = this.mapping[name];
       if (!result)
-        throw new Error(name + " not found");
+        result = this.missingBox;
       result.canvas = this.canvas;
       return result;
     }

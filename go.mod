@@ -15,9 +15,9 @@ require (
 	github.com/rs/cors v1.7.0
 	github.com/sfomuseum/go-flags v0.8.2
 	github.com/sfomuseum/go-geojson-geotag v0.0.4
-	github.com/sfomuseum/go-http-leaflet-geotag v1.1.0
-	github.com/sfomuseum/go-http-leaflet-layers v0.0.4
-	github.com/sfomuseum/go-http-protomaps v0.0.11
+	github.com/sfomuseum/go-http-leaflet-geotag v1.2.0
+	github.com/sfomuseum/go-http-leaflet-layers v0.1.0
+	github.com/sfomuseum/go-http-protomaps v0.0.12
 	github.com/sfomuseum/go-http-tilezen v0.0.5
 	github.com/tilezen/go-tilepacks v0.0.0-20210602151652-0147f7fb6fd7
 	github.com/whosonfirst/go-cache v0.2.0

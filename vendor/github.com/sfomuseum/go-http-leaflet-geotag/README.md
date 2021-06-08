@@ -49,6 +49,12 @@ func main() {
 
 For a complete example please consult [cmd/example/main.go](cmd/example/main.go). The (Javascript) code for the web application itself is contained in the HTML files in the [templates/html](templates/html) directory.
 
+## Changes
+
+### Leaflet.GeotagPhoto.js
+
+This package uses a modified version of the `Leaflet.GeotagPhoto.js` file that is part of the original [Leaflet.GeotagPhoto](https://github.com/sfomuseum/Leaflet.GeotagPhoto). It encodes all the static assets (icons and markers) as base64-encoded data URIs rather than linking to the resources themselves. This is to account for situations where an application may be run inside or behind one or more load balancers or proxies and where keeping track of URL rewriting rules becomes a burden.
+
 ## See also
 
 * https://github.com/sfomuseum/Leaflet.GeotagPhoto

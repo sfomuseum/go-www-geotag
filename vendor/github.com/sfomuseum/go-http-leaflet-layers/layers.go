@@ -1,21 +1,30 @@
 package layers
 
 import (
+	"fmt"
 	"github.com/aaronland/go-http-leaflet"
 	"github.com/aaronland/go-http-rewrite"
+	"github.com/sfomuseum/go-http-leaflet-layers/static"
+	"io/fs"
 	_ "log"
 	"net/http"
 	"path/filepath"
 	"strings"
 )
 
-var INCLUDE_LEAFLET = true
+// By default the go-http-protomaps package will also include and reference Leaflet.js resources using the aaronland/go-http-leaflet package. If you want or need to disable this behaviour set this variable to false.
+var APPEND_LEAFLET_RESOURCES = true
 
+// By default the go-http-protomaps package will also include and reference Leaflet.js assets using the aaronland/go-http-leaflet package. If you want or need to disable this behaviour set this variable to false.
+var APPEND_LEAFLET_ASSETS = true
+
+// LeafletLayersOptions provides a list of JavaScript and CSS link to include with HTML output.
 type LeafletLayersOptions struct {
 	JS  []string
 	CSS []string
 }
 
+// Return a *LeafletLayersOptions struct with default paths and URIs.
 func DefaultLeafletLayersOptions() *LeafletLayersOptions {
 
 	opts := &LeafletLayersOptions{
@@ -23,16 +32,17 @@ func DefaultLeafletLayersOptions() *LeafletLayersOptions {
 			"/css/leaflet.layers.control.css",
 		},
 		JS: []string{
-			"/javascript/leaflet.layers.control.js",			
+			"/javascript/leaflet.layers.control.js",
 		},
 	}
 
 	return opts
 }
 
+// AppendResourcesHandler will rewrite any HTML produced by previous handler to include the necessary markup to load LeafletLayers JavaScript files and related assets.
 func AppendResourcesHandler(next http.Handler, opts *LeafletLayersOptions) http.Handler {
 
-	if INCLUDE_LEAFLET {
+	if APPEND_LEAFLET_RESOURCES {
 		leaflet_opts := leaflet.DefaultLeafletOptions()
 		next = leaflet.AppendResourcesHandler(next, leaflet_opts)
 	}
@@ -40,9 +50,10 @@ func AppendResourcesHandler(next http.Handler, opts *LeafletLayersOptions) http.
 	return AppendResourcesHandlerWithPrefix(next, opts, "")
 }
 
+// AppendResourcesHandlerWithPrefix will rewrite any HTML produced by previous handler to include the necessary markup to load LeafletLayers JavaScript files and related assets ensuring that all URIs are prepended with a prefix.
 func AppendResourcesHandlerWithPrefix(next http.Handler, opts *LeafletLayersOptions, prefix string) http.Handler {
 
-	if INCLUDE_LEAFLET {
+	if APPEND_LEAFLET_RESOURCES {
 		leaflet_opts := leaflet.DefaultLeafletOptions()
 		next = leaflet.AppendResourcesHandlerWithPrefix(next, leaflet_opts, prefix)
 	}
@@ -69,12 +80,13 @@ func AppendResourcesHandlerWithPrefix(next http.Handler, opts *LeafletLayersOpti
 	return rewrite.AppendResourcesHandler(next, ext_opts)
 }
 
+// AssetsHandler returns a net/http FS instance containing the embedded LeafletLayers assets that are included with this package.
 func AssetsHandler() (http.Handler, error) {
-
-	fs := assetFS()
-	return http.FileServer(fs), nil
+	http_fs := http.FS(static.FS)
+	return http.FileServer(http_fs), nil
 }
 
+// AssetsHandler returns a net/http FS instance containing the embedded LeafletLayers assets that are included with this package ensuring that all URLs are stripped of prefix.
 func AssetsHandlerWithPrefix(prefix string) (http.Handler, error) {
 
 	fs_handler, err := AssetsHandler()
@@ -98,13 +110,15 @@ func AssetsHandlerWithPrefix(prefix string) (http.Handler, error) {
 	return rewrite_handler, nil
 }
 
+// Append all the files in the net/http FS instance containing the embedded LeafletLayers assets to an *http.ServeMux instance.
 func AppendAssetHandlers(mux *http.ServeMux) error {
 	return AppendAssetHandlersWithPrefix(mux, "")
 }
 
+// Append all the files in the net/http FS instance containing the embedded LeafletLayers assets to an *http.ServeMux instance ensuring that all URLs are prepended with prefix.
 func AppendAssetHandlersWithPrefix(mux *http.ServeMux, prefix string) error {
 
-	if INCLUDE_LEAFLET {
+	if APPEND_LEAFLET_ASSETS {
 
 		err := leaflet.AppendAssetHandlersWithPrefix(mux, prefix)
 
@@ -119,18 +133,31 @@ func AppendAssetHandlersWithPrefix(mux *http.ServeMux, prefix string) error {
 		return nil
 	}
 
-	for _, path := range AssetNames() {
+	walk_func := func(path string, info fs.DirEntry, err error) error {
 
-		path := strings.Replace(path, "static", "", 1)
+		if path == "." {
+			return nil
+		}
+
+		if info.IsDir() {
+			return nil
+		}
 
 		if prefix != "" {
 			path = appendPrefix(prefix, path)
 		}
 
+		if !strings.HasPrefix(path, "/") {
+			path = fmt.Sprintf("/%s", path)
+		}
+
+		// log.Println("APPEND", path)
+
 		mux.Handle(path, asset_handler)
+		return nil
 	}
 
-	return nil
+	return fs.WalkDir(static.FS, ".", walk_func)
 }
 
 func appendPrefix(prefix string, path string) string {

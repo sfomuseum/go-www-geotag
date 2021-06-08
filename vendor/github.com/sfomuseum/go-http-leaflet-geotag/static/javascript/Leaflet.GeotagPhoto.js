@@ -1,12 +1,32 @@
 (function (L) {
-'use strict';
+    
+    'use strict';
 
-L = 'default' in L ? L['default'] : L;
+    L = 'default' in L ? L['default'] : L;
 
+    // The source data for each of these SVG elements is in static/images.
+    // We're encoding them as data URIs so that we don't need to worry about
+    // paths for web applications that might be run as stand-alone services
+    // but "fronted" by something like CloudFront and exposed as a "leaf" of
+    // another domain. Basically, using paths or URIs to reference these elements
+    // results in headaches so we just "bake" all our assets in to the JavaScript
+    // proper. (20210608/thisisaaronland)
+    
+    var crosshair_icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTYgMjU2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojN0RBN0M2O2ZpbGwtb3BhY2l0eTowLjQ7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjE2O3N0cm9rZS1taXRlcmxpbWl0OjEwO30NCjwvc3R5bGU+DQo8Y2lyY2xlIGNsYXNzPSJzdDAiIGN4PSIxMjgiIGN5PSIxMjgiIHI9IjExNCIvPg0KPGNpcmNsZSBjeD0iMTI4IiBjeT0iMTI4IiByPSIyMi4zIi8+DQo8L3N2Zz4NCg==';
+    
+    var camera_icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTYgMjU2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7b3BhY2l0eTowLjQ7ZmlsbDojN0RBN0M2O3N0cm9rZTojODNDMUZGO3N0cm9rZS1taXRlcmxpbWl0OjEwO30NCgkuc3Qxe2ZpbGw6bm9uZTtzdHJva2U6IzZENkQ2RDtzdHJva2Utd2lkdGg6MjA7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEwO30NCgkuc3Qye2ZpbGw6IzFBMUExQTt9DQo8L3N0eWxlPg0KPGc+DQoJPGc+DQoJCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMjM5LDEyNS42IDY0LjYsMTkxLjQgMTMwLjQsMTcgCQkiLz4NCgkJPHBvbHlsaW5lIGNsYXNzPSJzdDEiIHBvaW50cz0iMjM5LDEyNS42IDY0LjYsMTkxLjQgMTMwLjQsMTcgCQkiLz4NCgk8L2c+DQoJPHJlY3QgeD0iMjAuNiIgeT0iMTU1LjkiIHRyYW5zZm9ybT0ibWF0cml4KDAuNzA3MSAwLjcwNzEgLTAuNzA3MSAwLjcwNzEgMTU0LjI2NzQgMTAuMzk1OCkiIGNsYXNzPSJzdDIiIHdpZHRoPSI4OCIgaGVpZ2h0PSI3MSIvPg0KPC9nPg0KPC9zdmc+DQo=';
+
+    var crosshair_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9Ii0yNTUgMzQ3IDEwMCAxMDAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgLTI1NSAzNDcgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MztzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQ0KPC9zdHlsZT4NCjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9Ii0yMDUiIGN5PSIzOTciIHI9IjQ3Ii8+DQo8Y2lyY2xlIGN4PSItMjA1IiBjeT0iMzk3IiByPSI0LjgiLz4NCjwvc3ZnPg0K';
+
+    var camera_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSINCgkgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9Ii0yNDUgMzY1IDY0IDY0Ig0KCSBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IC0yNDUgMzY1IDY0IDY0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojNEE0QTRBO30NCjwvc3R5bGU+DQo8cGF0aCBpZD0iUmVjdGFuZ2xlLTIiIGNsYXNzPSJzdDAiIGQ9Ik0tMjI3LjUsMzg1LjZoLTE0LjV2MjkuMWg1OC4xdi0yOS4xaC0xNC41di03LjNoLTI5LjFWMzg1LjZ6Ii8+DQo8L3N2Zz4NCg==';    
+
+    var marker_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiDQoJIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSItMjExLjIgMzcyLjkgNDguMiA0OC4yIg0KCSBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IC0yMTEuMiAzNzIuOSA0OC4yIDQ4LjI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiM0QTRBNEE7fQ0KCS5zdDF7b3BhY2l0eTowLjI7fQ0KPC9zdHlsZT4NCjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9Ii0xODcuMSIgY3k9IjM5NyIgcj0iOC4zIi8+DQo8Y2lyY2xlIGNsYXNzPSJzdDEiIGN4PSItMTg3LjEiIGN5PSIzOTciIHI9IjIyIi8+DQo8L3N2Zz4NCg==';
+
+    
 var GeotagPhotoCrosshair = L.Evented.extend({
-  options: {
-    controlCrosshairImg: '../images/crosshair-icon.svg',
-    crosshairHTML: '<img alt="Center of the map; crosshair location" title="Crosshair" src="/images/crosshair.svg" width="100px" />'
+  options: {      
+      controlCrosshairImg: crosshair_icon_svg,
+      crosshairHTML: '<img alt="Center of the map; crosshair location" title="Crosshair" src="' + crosshair_svg + '" width="100px" />'
   },
 
   initialize: function initialize(options) {
@@ -1764,23 +1784,23 @@ var GeotagPhotoCamera = L.FeatureGroup.extend({
     maxAngle: 120,
 
     // Control button images
-    controlCameraImg: '../images/camera-icon.svg',
-    controlCrosshairImg: '../images/crosshair-icon.svg',
+    controlCameraImg: camera_icon_svg,
+    controlCrosshairImg: crosshair_icon_svg,
 
     cameraIcon: L.icon({
-      iconUrl: '../images/camera.svg',
+      iconUrl: camera_svg,
       iconSize: [38, 38],
       iconAnchor: [19, 19]
     }),
 
     targetIcon: L.icon({
-      iconUrl: '../images/marker.svg',
+      iconUrl: marker_svg,
       iconSize: [32, 32],
       iconAnchor: [16, 16]
     }),
 
     angleIcon: L.icon({
-      iconUrl: '../images/marker.svg',
+      iconUrl: marker_svg,	
       iconSize: [32, 32],
       iconAnchor: [16, 16]
     }),

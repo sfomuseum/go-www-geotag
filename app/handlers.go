@@ -42,7 +42,8 @@ var crumb_err error
 func init() {
 	// because the tangramjs or the protomaps stuff will add it
 	geotag.INCLUDE_LEAFLET = false
-	layers.INCLUDE_LEAFLET = false
+	layers.APPEND_LEAFLET_ASSETS = false
+	layers.APPEND_LEAFLET_RESOURCES = false	
 }
 
 func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {

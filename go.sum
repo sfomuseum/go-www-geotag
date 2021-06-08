@@ -211,6 +211,8 @@ github.com/sfomuseum/go-http-leaflet-geotag v1.0.0 h1:LGW8CpUhwkQ7+4DewziLI5ueF1
 github.com/sfomuseum/go-http-leaflet-geotag v1.0.0/go.mod h1:R56pMAP2OHurz+bDFkYL3RgISj/SQw2mbgTmL9FZ8WQ=
 github.com/sfomuseum/go-http-leaflet-geotag v1.1.0 h1:57iyTPPtNt39loDjvxzb9VY4DSsrPB8B9U/PfLdu5gs=
 github.com/sfomuseum/go-http-leaflet-geotag v1.1.0/go.mod h1:A8HoBbj7lnU2MItW5vEIT+fdObmpLoGUNeE3Er7vePg=
+github.com/sfomuseum/go-http-leaflet-geotag v1.2.0 h1:RYz+dWXS191t/PZB9GGiu9bWkuF1PTnVM7UOfBulOWc=
+github.com/sfomuseum/go-http-leaflet-geotag v1.2.0/go.mod h1:j6p7nMb9afDRW4ablo/X/Bev4f2zbE0fmC635mRyPm8=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414201802-5fda66c75776 h1:9ChL0DMbVvTX1MhZcJz5TkoeNXgQaUQYsx8P4js3RI4=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414201802-5fda66c75776/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.0-20200414205627-552b259c074e h1:7Ea9zUKqNrvkQN+0Xx+R66kKR5CShFjtIbZ6QW6Szvc=
@@ -225,6 +227,8 @@ github.com/sfomuseum/go-http-leaflet-layers v0.0.3 h1:uJpVjLLk/zA8pCiM1VguMRltFl
 github.com/sfomuseum/go-http-leaflet-layers v0.0.3/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.4 h1:okXQg4lK81Y1inORI8TDCpaaxVSua1ANuiSEwIEcOKg=
 github.com/sfomuseum/go-http-leaflet-layers v0.0.4/go.mod h1:y44/bRbzZikkm26+0exD2nkJ8SGsOpQmXT1NM/R58iE=
+github.com/sfomuseum/go-http-leaflet-layers v0.1.0 h1:Mt8dm855UMOvJw+4g+T+tp9ardz3cyE2zrij8zPWP8Y=
+github.com/sfomuseum/go-http-leaflet-layers v0.1.0/go.mod h1:M5rL5CFBMelobcXDnvoizwVwpN/ClfNNvdyPmbwTFqc=
 github.com/sfomuseum/go-http-leaflet-protomaps v0.0.1 h1:oIuTb3pxm0qW/TPmaQdVaJfEzFKlYeALTwrR3eejC2g=
 github.com/sfomuseum/go-http-leaflet-protomaps v0.0.1/go.mod h1:4RyOsZCWiwBUA2s+LFzrCC8HiQy3l94PQNZLCeSasDE=
 github.com/sfomuseum/go-http-protomaps v0.0.3 h1:x6wItqmXONhTGMaUks/SthpRkaGA7S0sldpjDuraSBw=
@@ -241,6 +245,8 @@ github.com/sfomuseum/go-http-protomaps v0.0.10 h1:hKt3GvoyOxAPc7rHxzZSMVEB8yZu2j
 github.com/sfomuseum/go-http-protomaps v0.0.10/go.mod h1:jMeHqPpNoO30nMX3PaHuI2D+n2vXQScUZ3v9SeRv0/I=
 github.com/sfomuseum/go-http-protomaps v0.0.11 h1:8nt8LdqUF41YM4xvhL2fWh9dn9ILxyb1g2z4lxzq1RE=
 github.com/sfomuseum/go-http-protomaps v0.0.11/go.mod h1:jMeHqPpNoO30nMX3PaHuI2D+n2vXQScUZ3v9SeRv0/I=
+github.com/sfomuseum/go-http-protomaps v0.0.12 h1:F5u8bdXfaXxXX+VgQjBBayqykARdv423X5uSUzu6w4c=
+github.com/sfomuseum/go-http-protomaps v0.0.12/go.mod h1:jMeHqPpNoO30nMX3PaHuI2D+n2vXQScUZ3v9SeRv0/I=
 github.com/sfomuseum/go-http-tilezen v0.0.2 h1:pKqyTtA2v9wZkfWt/L8aXyihi7upSwtbwTMxKF6Ey7U=
 github.com/sfomuseum/go-http-tilezen v0.0.2/go.mod h1:SpWQAUmPnJhjaQuwAT0qbsxBFMUjDhaxsvALFO9IGg0=
 github.com/sfomuseum/go-http-tilezen v0.0.3 h1:rV7V0xlu5qfaUPJIV3oQ39bpk7yzVu7D0YGTK+li2Ds=

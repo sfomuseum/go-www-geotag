@@ -136,14 +136,15 @@ github.com/sfomuseum/go-flags/multi
 # github.com/sfomuseum/go-geojson-geotag v0.0.4
 ## explicit
 github.com/sfomuseum/go-geojson-geotag
-# github.com/sfomuseum/go-http-leaflet-geotag v1.1.0
+# github.com/sfomuseum/go-http-leaflet-geotag v1.2.0
 ## explicit
 github.com/sfomuseum/go-http-leaflet-geotag
 github.com/sfomuseum/go-http-leaflet-geotag/static
-# github.com/sfomuseum/go-http-leaflet-layers v0.0.4
+# github.com/sfomuseum/go-http-leaflet-layers v0.1.0
 ## explicit
 github.com/sfomuseum/go-http-leaflet-layers
-# github.com/sfomuseum/go-http-protomaps v0.0.11
+github.com/sfomuseum/go-http-leaflet-layers/static
+# github.com/sfomuseum/go-http-protomaps v0.0.12
 ## explicit
 github.com/sfomuseum/go-http-protomaps
 github.com/sfomuseum/go-http-protomaps/static
@@ -172,8 +173,6 @@ github.com/twpayne/go-geom/encoding/geojson
 github.com/twpayne/go-geom/encoding/wkt
 # github.com/whosonfirst/algnhsa v0.1.0
 github.com/whosonfirst/algnhsa
-# github.com/whosonfirst/go-bindata-assetfs v1.0.1
-github.com/whosonfirst/go-bindata-assetfs
 # github.com/whosonfirst/go-cache v0.2.0
 ## explicit
 github.com/whosonfirst/go-cache
