@@ -43,7 +43,7 @@ func init() {
 	// because the tangramjs or the protomaps stuff will add it
 	geotag.INCLUDE_LEAFLET = false
 	layers.APPEND_LEAFLET_ASSETS = false
-	layers.APPEND_LEAFLET_RESOURCES = false	
+	layers.APPEND_LEAFLET_RESOURCES = false
 }
 
 func AppendAssetHandlers(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
@@ -572,7 +572,7 @@ func AppendTilezenTilepackHandler(ctx context.Context, fs *flag.FlagSet, mux *ht
 	if err != nil {
 		return err
 	}
-	
+
 	tilezen_url_tiles, err := lookup.StringVar(fs, "tilezen-url-tiles")
 
 	if err != nil {
@@ -587,12 +587,10 @@ func AppendTilezenTilepackHandler(ctx context.Context, fs *flag.FlagSet, mux *ht
 
 	tilezen_url_tiles = EnsureRoot(tilezen_url_tiles, prefix)
 
-	if !strings.HasSuffix(tilezen_url_tiles, "/"){
+	if !strings.HasSuffix(tilezen_url_tiles, "/") {
 		tilezen_url_tiles = fmt.Sprintf("%s/", tilezen_url_tiles)
 	}
-	
-	log.Println("TILES", tilezen_url_tiles)
-	
+
 	mux.Handle(tilezen_url_tiles, tilepack_handler)
 	return nil
 }
