@@ -11,7 +11,21 @@ window.addEventListener("load", function load(event){
     const update_go = new Go();
     let update_mod, update_inst;
 
-    WebAssembly.instantiateStreaming(fetch("/wasm/update_exif.wasm"), update_go.importObject).then(
+    var ed = document.getElementById("editor");
+
+    if (! ed){
+	console.log("Missing #editor element.");
+	return;
+    }
+    
+    var uri_wasm = ed.getAttribute("data-update-exif-uri");
+
+    if (! uri_wasm){
+	console.log("Missing data-update-exif-uri attribute");
+	return;
+    }
+
+    WebAssembly.instantiateStreaming(fetch(uri_wasm), update_go.importObject).then(
 	
 	async result => {
 	    
