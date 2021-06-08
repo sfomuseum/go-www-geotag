@@ -23,6 +23,7 @@ summary {
 #controls {
 	max-height: 80vh;
 	overflow:auto;
+	padding-right:.5rem;
 }
 
 #editor {
@@ -47,8 +48,14 @@ summary {
 }
 
 #image-wrapper img {
-	width: -moz-available;
-	height: -moz-available;	
+	// these don't work in safari
+	// width: -moz-available;
+	// height: -moz-available;
+
+	// this works in safari
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
 }
 
 #image-meta {
