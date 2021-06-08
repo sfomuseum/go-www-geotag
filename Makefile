@@ -8,7 +8,7 @@ debug:
 	go run -mod vendor cmd/server/main.go -nextzen-apikey $(APIKEY) -enable-placeholder -placeholder-endpoint $(SEARCH) -enable-oembed -oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' -enable-writer
 
 debug-tilepack:
-	go run -mod vendor cmd/server/main.go -enable-tilezen-tilepacks -tilezen-path-tilepack $(TILEPACK) -nextzen-tile-url '/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt' -enable-oembed -oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' -enable-exif-writer -enable-oembed-cors-image -prefix /demo/geotag
+	go run -mod vendor cmd/server/main.go -enable-tilezen-tilepacks -tilezen-path-tilepack $(TILEPACK) -nextzen-tile-url '/tilezen/vector/v1/512/all/{z}/{x}/{y}.mvt' -enable-oembed -oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' -enable-exif-writer -enable-oembed-cors-image -enable-point-in-polygon -spatial-database-uri 'sqlite://?dsn=data/sfomuseum-architecture.db' -prefix /demo/geotag
 
 debug-protomaps:
 	go run -mod vendor cmd/server/main.go -map-renderer protomaps -protomaps-tile-url $(TILES) -enable-oembed -oembed-endpoints 'https://millsfield.sfomuseum.org/oembed/?url={url}&format=json' -enable-exif-writer -enable-oembed-cors-image
