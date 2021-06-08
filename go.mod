@@ -26,3 +26,6 @@ require (
 	github.com/whosonfirst/go-whosonfirst-spatial-sqlite v0.0.39
 	github.com/whosonfirst/go-whosonfirst-spatial-www v0.0.30
 )
+
+// https://github.com/tilezen/go-tilepacks/pull/18
+replace github.com/tilezen/go-tilepacks v0.0.0-20210602151652-0147f7fb6fd7 => github.com/sfomuseum/go-tilepacks v0.0.0-20210608004736-b39af25ff900

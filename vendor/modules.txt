@@ -163,7 +163,7 @@ github.com/tidwall/match
 github.com/tidwall/pretty
 # github.com/tidwall/sjson v1.1.6
 github.com/tidwall/sjson
-# github.com/tilezen/go-tilepacks v0.0.0-20210602151652-0147f7fb6fd7
+# github.com/tilezen/go-tilepacks v0.0.0-20210602151652-0147f7fb6fd7 => github.com/sfomuseum/go-tilepacks v0.0.0-20210608004736-b39af25ff900
 ## explicit
 github.com/tilezen/go-tilepacks/http
 github.com/tilezen/go-tilepacks/tilepack
