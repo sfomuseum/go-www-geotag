@@ -566,6 +566,12 @@ func AppendTilezenTilepackHandlerIfEnabled(ctx context.Context, fs *flag.FlagSet
 
 func AppendTilezenTilepackHandler(ctx context.Context, fs *flag.FlagSet, mux *http.ServeMux) error {
 
+	prefix, err := lookup.StringVar(fs, "prefix")
+
+	if err != nil {
+		return err
+	}
+	
 	tilezen_url_tiles, err := lookup.StringVar(fs, "tilezen-url-tiles")
 
 	if err != nil {
@@ -578,6 +584,14 @@ func AppendTilezenTilepackHandler(ctx context.Context, fs *flag.FlagSet, mux *ht
 		return err
 	}
 
+	tilezen_url_tiles = EnsureRoot(tilezen_url_tiles, prefix)
+
+	if !strings.HasSuffix(tilezen_url_tiles, "/"){
+		tilezen_url_tiles = fmt.Sprintf("%s/", tilezen_url_tiles)
+	}
+	
+	log.Println("TILES", tilezen_url_tiles)
+	
 	mux.Handle(tilezen_url_tiles, tilepack_handler)
 	return nil
 }
