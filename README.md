@@ -413,7 +413,11 @@ If nothing else make sure you specify the `GEOTAG_SERVER_URI=http://0.0.0.0:8080
 
 ![](docs/images/geotag-apprunner-env.png)
 
-Note that at this time [it is not possible to update environment variables](https://github.com/aws/apprunner-roadmap/issues/18) for an App Runner service once created. If you need to update your environment variables you'll need to create a new service.
+#### Notes
+
+* At this time [it is not possible to update environment variables](https://github.com/aws/apprunner-roadmap/issues/18) for an App Runner service once created. If you need to update your environment variables you'll need to create a new service.
+
+* If you are running your AppRunner instance behind a CloudFront distribution as a "leaf" node, that is with a URL that is not `/`, you will also need to include a `GEOTAG_PREFIX` environment variable which maps to the "behaviour" URL you've defined in your CF setup.
 
 ## See also
 
