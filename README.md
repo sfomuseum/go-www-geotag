@@ -419,6 +419,10 @@ If nothing else make sure you specify the `GEOTAG_SERVER_URI=http://0.0.0.0:8080
 
 * If you are running your AppRunner instance behind a CloudFront distribution as a "leaf" node, that is with a URL that is not `/`, you will also need to include a `GEOTAG_PREFIX` environment variable which maps to the "behaviour" URL you've defined in your CF setup.
 
+### CloudFront
+
+Note that if you are running this application behind a CloudFront (CF) distribution _and_ you have point-in-polygon support enabled you'll need to make sure that your CF distribution allows HTTP `POST` requests.
+
 ## See also
 
 * https://github.com/nypl-spacetime/Leaflet.GeotagPhoto
