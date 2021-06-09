@@ -93,6 +93,8 @@ window.addEventListener("load", function load(event){
 	    wrapper.appendChild(im);
 	    wrapper.style.display = "block";
 	    meta.style.display = "block";
+
+	    render_save_button();
 	    
 	}, false);
 
@@ -379,25 +381,40 @@ window.addEventListener("load", function load(event){
 	    out.style.display = "block";
 	}
 
-	var save = document.getElementById("writer-save");
-
-	var ed = document.getElementById("editor");	
-	var im = document.getElementById("image");
-	
-	if (save){
-
-	    var display = "block";
-
-	    if ((ed) && (ed.getAttribute("data-update-exif-uri") != "")){
-
-		console.log("DEBUG", im);
-	    }
-	    
-	    save.style.display = "block";
-	}
-	
+	render_save_button();	
     };
 
+    var render_save_button = function(){
+
+	var wrapper = document.getElementById("writer-save-wrapper");
+		
+	if (! wrapper){
+	    return;
+	}
+
+	var ed = document.getElementById("editor");
+	var body = document.getElementById("feature-body");	
+	var im = document.getElementById("image");
+
+	var display = "none";
+
+	if (body.innerText != ""){
+	    display = "block";
+	}
+
+	// If we are using the client-side EXIF writer ensure that
+	// there is an image to write to.
+	
+	if ((ed) && (ed.getAttribute("data-update-exif-uri") != "")){
+	    
+	    if (! im){
+		display = "none";
+	    }
+	}
+	
+	wrapper.style.display = display;	
+    };
+    
     var render_feature = function(f){
 
 	var enc = JSON.stringify(f, null, 2);

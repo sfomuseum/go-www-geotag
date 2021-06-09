@@ -1,4 +1,14 @@
 #writer-save {
-	float:right;
+}
+
+#writer-save-wrapper {
+	float:right;	
 	display:none;
+	text-align:right;
+}
+
+.writer-save-caveat {
+	display: block;
+	font-style:italic;
+	margin-bottom:.75rem;
 }

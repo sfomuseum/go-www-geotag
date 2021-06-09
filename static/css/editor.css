@@ -78,6 +78,10 @@ summary {
 	margin-bottom: 1rem;
 }
 
+.form-group {
+	margin-bottom:.75rem;
+}
+
 .leaflet-control-geotag-photo-camera img {
 	vertical-align: top !important;
 }

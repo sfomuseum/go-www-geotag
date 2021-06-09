@@ -39,7 +39,7 @@
 			    <div class="form-group">
 				<label for="oembed-url">Fetch an image</label>					
 				<input class="form-control mr-sm-2" type="search" name="oembed-url" id="oembed-url" placeholder="Enter a URL to retrieve" value="" aria-label="Fetch" aria-describedby="oembed-url-help" />
-				<small id="oembed-url-help" class="form-text text-muted">A valid OEmbed URL for retrieving an image to display.</small>		
+				<small id="oembed-url-help" class="form-text text-muted">A valid OEmbed URL for retrieving an image to display. <span id="valid-oembed-endpoints"></span></small>		
 			    </div>
 			    <button class="btn btn-primary pull-right" type="submit" id="oembed-fetch">Fetch</button>
 			    {{ end }}
@@ -82,13 +82,15 @@
 	<div id="feature"></div>
 	
     	{{ if or .EnableWriter .EnableExifWriter }}
-	{{ if .EnableExifWriter }}
-	<button id="writer-save" class="btn btn-primary">Save to EXIF</button>
+	<div id="writer-save-wrapper">
+	    {{ if .EnableExifWriter }}
+	    <small class="writer-save-caveat">Note: Only the camera's focal point will be saved as <code>GPSLatitude</code> and <code>GPSLongitude</code> EXIF properties.</small>	    
+	    <button id="writer-save" class="btn btn-primary">Save to EXIF</button>
 	{{ else }}
 	<button id="writer-save" class="btn btn-primary">Save</button>
 	{{ end }}
+	</div>	
 	{{ end }}
-	
     </div>
 
 </div>
