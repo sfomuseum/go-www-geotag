@@ -8,6 +8,8 @@ window.addEventListener("load", function load(event){
 	return;
     }
 
+    console.log("HELLO", endpoints_map);
+    
     geotag.oembed.set_endpoints_map(endpoints_map);
     
     var q_el = document.getElementById("oembed-url");
@@ -38,6 +40,24 @@ window.addEventListener("load", function load(event){
 	return;
     }
 
+    var valid_el = document.getElementById("oembed-valid-endpoints");
+
+    if (valid_el){
+
+	var oembed_hosts = [];
+
+	for (var host in endpoints_map){
+	    oembed_hosts.push(host);
+	}
+
+	if (oembed_hosts.length){
+
+	    var str_hosts = oembed_hosts.join(", ");
+	    var str_valid = "Supported OEmbed hosts are: " + str_hosts;
+	    valid_el.innerText = str_valid;
+	}
+    }
+    
     var handle_geotag_props = function(props){
 
 	var camera = geotag.camera.getCamera();
