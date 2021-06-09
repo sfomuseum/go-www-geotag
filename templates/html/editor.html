@@ -69,6 +69,7 @@
 			    <small id="cessation-help" class="form-text text-muted">A valid EDTF string to filter result's cessation date with.</small>			
 			</div>
 		    </details>
+		    
 		</form>
 	</details>
 	{{ end }}
@@ -81,7 +82,11 @@
 	<div id="feature"></div>
 	
     	{{ if or .EnableWriter .EnableExifWriter }}
+	{{ if .EnableExifWriter }}
+	<button id="writer-save" class="btn btn-primary">Save to EXIF</button>
+	{{ else }}
 	<button id="writer-save" class="btn btn-primary">Save</button>
+	{{ end }}
 	{{ end }}
 	
     </div>
