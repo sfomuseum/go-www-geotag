@@ -381,7 +381,18 @@ window.addEventListener("load", function load(event){
 
 	var save = document.getElementById("writer-save");
 
+	var ed = document.getElementById("editor");	
+	var im = document.getElementById("image");
+	
 	if (save){
+
+	    var display = "block";
+
+	    if ((ed) && (ed.getAttribute("data-update-exif-uri") != "")){
+
+		console.log("DEBUG", im);
+	    }
+	    
 	    save.style.display = "block";
 	}
 	
