@@ -26,6 +26,14 @@ summary {
 	padding-right:.5rem;
 }
 
+#demo-notice {
+	font-size: small;
+	font-style: italic;
+	margin-left: 2rem;
+	margin-right: 2rem;
+	margin-top: 1.5rem;	
+}
+
 #editor {
 	display:grid;
 	grid-template-columns:33% 33% 33%;
