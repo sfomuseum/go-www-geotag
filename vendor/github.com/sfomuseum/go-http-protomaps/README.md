@@ -2,7 +2,7 @@
 
 ![](docs/images/go-http-leaflet-protomaps-sfo.png)
 
-`go-http-protomaps` is an HTTP middleware package for including Protomaps.js (v0.3.5) assets in web applications.
+`go-http-protomaps` is an HTTP middleware package for including Protomaps.js (v0.15.0) assets in web applications.
 
 ## Documentation
 
